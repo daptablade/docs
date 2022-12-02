@@ -3,8 +3,9 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: markdown
-- file: notebooks
-- file: markdown-notebooks
-- file: mymarkdownfile
+parts:
+  - caption: Tutorials
+    chapters:
+    - file: Tutorials/Parametric FEA analysis
+    - file: Tutorials/Automated parametric study
+    - file: Tutorials/Optimisation of an analytical function
