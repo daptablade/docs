@@ -1,3 +1,0 @@
-# Automated parametric study
-
-## Overview

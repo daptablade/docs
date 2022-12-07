@@ -6,6 +6,7 @@ root: intro
 parts:
   - caption: Tutorials
     chapters:
-    - file: Tutorials/Parametric FEA analysis
-    - file: Tutorials/Automated parametric study
-    - file: Tutorials/Optimisation of an analytical function
+    - file: Tutorials/Simple component analysis
+    - file: Tutorials/Simple optimisation problem
+    - file: Tutorials/Chaining component analyses
+    - file: Tutorials/Automating parametric studies

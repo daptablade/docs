@@ -1,3 +1,0 @@
-# Parametric FEA analysis
-
-## Overview
