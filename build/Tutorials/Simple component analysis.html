@@ -1,0 +1,724 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Simple component analysis &#8212; dapta docs</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Simple component analysis.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Simple optimisation problem" href="Simple%20optimisation%20problem.html" />
+    <link rel="prev" title="Overview" href="../intro.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">dapta docs</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Overview
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Simple component analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Simple%20optimisation%20problem.html">
+   Simple optimisation problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chaining%20component%20analyses.html">
+   Chaining component analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20parametric%20studies.html">
+   Automating parametric studies
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  User Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../User%20Guide/Troubleshooting.html">
+   Troubleshooting
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Tutorials/Simple component analysis.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#component-description">
+   Component description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-component">
+   Create the component
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#properties">
+     Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inputs-and-outputs">
+     Inputs and Outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#component-analysis">
+   Component analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-run-log">
+     The Run Log
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-component-log">
+     The Component Log
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#editing-and-clean-up">
+   Editing and clean-up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Simple component analysis</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#component-description">
+   Component description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-component">
+   Create the component
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#properties">
+     Properties
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#parameters">
+     Parameters
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#inputs-and-outputs">
+     Inputs and Outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#component-analysis">
+   Component analysis
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-run-log">
+     The Run Log
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#the-component-log">
+     The Component Log
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#editing-and-clean-up">
+   Editing and clean-up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="simple-component-analysis">
+<h1>Simple component analysis<a class="headerlink" href="#simple-component-analysis" title="Permalink to this headline">#</a></h1>
+<p><strong>Duration: 10 min</strong></p>
+<p>In our first example we explore the creation and analysis of a simple analytical function component.</p>
+<p>You don’t need to install or download anything to get started! We use python for all our examples, so a basic understanding of python syntax will be beneficial.</p>
+<section id="component-description">
+<h2>Component description<a class="headerlink" href="#component-description" title="Permalink to this headline">#</a></h2>
+<p>The paraboloid component solves the function</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x,y) = (x-3.0)^2 + x y + (y + 4.0)^2 -3.0 
+\]</div>
+<p>where x and y are the component inputs and f(x,y) is the output.
+The minimum of this function is located at</p>
+<div class="math notranslate nohighlight">
+\[
+  x = \frac{20}{3} \quad , \quad y = -\frac{22}{3}
+\]</div>
+</section>
+<section id="create-the-component">
+<h2>Create the component<a class="headerlink" href="#create-the-component" title="Permalink to this headline">#</a></h2>
+<p>Navigate to the <a class="reference external" href="https://app.daptaflow.com/Interface">dashboard</a> and create a blank workspace by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> (if required).</p>
+<p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>.
+This creates an empty template component in your workspace.</p>
+<p>Select the component to edit it.</p>
+<section id="properties">
+<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">#</a></h3>
+<p>The component interface opens on the Properties tab. This is where you define the core properties of your component.
+Fill in a component name, <code class="docutils literal notranslate"><span class="pre">paraboloid</span></code>, and select the <code class="docutils literal notranslate"><span class="pre">generic-python3-comp:latest</span></code> component API.</p>
+<p>Press the tab key or click within the component interface to validate the selected API. This triggers the display of a list of API input files, as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_1.png"><img alt="properties-tab-empty" class="bg-primary mb-1 align-center" src="../_images/paraboloid_1.png" style="width: 400px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Component Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Clicking outside the component interface closes the component without saving changes.</p>
+</div>
+<p>We can see that the <code class="docutils literal notranslate"><span class="pre">generic-python3-comp</span></code> API has three input files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compute.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></li>
+</ul>
+<p>The first two files are required and the last one is optional. You can inspect the paraboloid example file contents below.
+The <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is not required here as the python code doesn’t import any third-party python packages. We will use it in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> to import openMDAO classes and functions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the params (<a class="reference internal" href="#parameters"><span class="std std-ref">Parameters</span></a>) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="cd17c44c-58dc-45ac-a140-2cd1cee3b3c0" name="717be86e-2085-4f06-8156-3c0ff8c8ef24" type="radio">
+</input><label class="sd-tab-label" for="cd17c44c-58dc-45ac-a140-2cd1cee3b3c0">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
+
+    <span class="c1"># initalise setup_data keys - none for paraboloid</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># set default inputs</span>
+    <span class="k">if</span> <span class="n">inputs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">input_key</span><span class="p">,</span> <span class="n">input_value</span> <span class="ow">in</span> <span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">input_value</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">inputs</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">input_key</span><span class="p">])</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">input_key</span><span class="si">}</span><span class="s2"> in the input parameters.&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span>
+
+    <span class="c1"># initialise outputs - required for OpenMDAO</span>
+    <span class="k">if</span> <span class="n">outputs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">output_key</span><span class="p">,</span> <span class="n">output_value</span> <span class="ow">in</span> <span class="n">outputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">output_value</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">outputs</span><span class="p">[</span><span class="n">output_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">output_key</span><span class="p">])</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">output_key</span><span class="si">}</span><span class="s2"> in the input parameters.&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outputs</span>
+
+    <span class="c1"># initialise partials - required for OpenMDAO gradient-based optimisation</span>
+    <span class="n">response</span><span class="p">[</span><span class="s2">&quot;partials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;f_xy&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;val&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;exact&quot;</span><span class="p">},</span>
+            <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;val&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="s2">&quot;method&quot;</span><span class="p">:</span> <span class="s2">&quot;exact&quot;</span><span class="p">},</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1"># optional</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<input id="374b5570-20de-4db3-aead-188ee960f5cf" name="717be86e-2085-4f06-8156-3c0ff8c8ef24" type="radio">
+</input><label class="sd-tab-label" for="374b5570-20de-4db3-aead-188ee960f5cf">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">setup_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Evaluates the equation f(x,y) = (x-3)^2 + xy + (y+4)^2 - 3.</span>
+<span class="sd">    Minimum at: x = 6.6667; y = -7.3333</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">3.0</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outputs</span>
+
+    <span class="k">if</span> <span class="n">options</span><span class="p">[</span><span class="s2">&quot;get_grads&quot;</span><span class="p">]:</span>
+        <span class="n">partials</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">][</span><span class="s2">&quot;x&quot;</span><span class="p">][</span><span class="s2">&quot;val&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">+</span> <span class="n">y</span><span class="p">]</span>
+        <span class="n">partials</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">][</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="s2">&quot;val&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)]</span>
+        <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;partials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partials</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute paraboloid f(x:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">,y:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;f_xy&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> with options: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">resp</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each file, copy the contents above into a text editor and save it locally. Make sure you include the ‘.py’ extension in the file name.</p>
+<p>Next, select <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> in the component interface to upload the corresponding file. A green tick and a file upload time stamp should appear to confirm that the upload was successful. Repeat for the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> file.</p>
+<p>Check the boxes next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options (since we only have one component in this Run), as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_2.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_images/paraboloid_2.png" style="width: 400px;" /></a>
+<p>Finally, select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close the component interface.</p>
+<p>In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid. However, if you tried to run it now, you would get error messages as we haven’t actually defined the python function Parameter inputs and design Inputs yet - see below.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Although you have just ‘saved’ the component, the contents of your workspace have not actually been saved anywhere and you would lose your work if you refreshed the webpage or closed the web browser now. To avoid this situation you should save your edited components regularly and then select the workspace <code class="docutils literal notranslate"><span class="pre">Download</span></code> button to save an a JSON formatted version of your session (see the related sections in the User Manual).</p>
+</div>
+</section>
+<section id="parameters">
+<span id="id1"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
+<p>Select the component again to edit it, then select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the following JSON object into the text box. Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the edits.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+  <span class="s2">&quot;f_xy&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We define Parameters as values that the component needs to execute, but that are not design Inputs as such. For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example <a class="reference internal" href="Chaining%20component%20analyses.html"><span class="doc std std-doc">Chaining component analyses</span></a>.</p>
+</section>
+<section id="inputs-and-outputs">
+<h3>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">#</a></h3>
+<p>Open the component to edit it and add the following JSON objects into the text boxes in the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs.</p>
+<p>Input Handles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
+  <span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output Handles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;f_xy&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We will look at the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab in the next section.</p>
+<p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close it. You should now be able to see some input and output handles appear on the left and right of the component in the workspace. Hover over the handles with your mouse cursor to view the names of the variables.</p>
+</section>
+</section>
+<section id="component-analysis">
+<h2>Component analysis<a class="headerlink" href="#component-analysis" title="Permalink to this headline">#</a></h2>
+<p>All being well, you should now be able to launch a Run by clicking on the play symbol ▶ in the workspace interface. The symbol will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time. Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that ‘The Run has completed successfully’. If you don’t get any messages, try to refresh your web browser page, or consult the User Guide’s <a class="reference internal" href="../User%20Guide/Troubleshooting.html"><span class="doc std std-doc">Troubleshooting</span></a> section.</p>
+<p>We can now inspect the outputs of the Run.</p>
+<section id="the-run-log">
+<h3>The Run Log<a class="headerlink" href="#the-run-log" title="Permalink to this headline">#</a></h3>
+<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the workspace interface to view a summary of the Run as a nested JSON text object as shown below.</p>
+<p>The ‘time’ entry corresponds to the time the Run Log file was generated, while the time stamps in the messages that appear in the ‘run_output’ and ‘paraboloid’ relate to the paraboloid compute function execution time. The inputs and outputs of the paraboloid component are available under the corresponding ‘paraboloid’ entries.</p>
+<p>To save a copy of the Run Log, select <code class="docutils literal notranslate"><span class="pre">Close</span></code> to return to the workspace view and then select <code class="docutils literal notranslate"><span class="pre">Download</span></code>. This should download two JSON files: the Run Log as ‘runlog.json’ and the copy of your work session as ‘dapta_input.json’.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_3.png"><img alt="run-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_3.png" style="width: 400px;" /></a>
+</section>
+<section id="the-component-log">
+<h3>The Component Log<a class="headerlink" href="#the-component-log" title="Permalink to this headline">#</a></h3>
+<p>Select the component again and navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab as shown below.</p>
+<p>Both the Run Log and the Component Log are updated as the Run executes, which allows us to monitor progress and view intermediary results.
+The Component Log lists events related to the component in order of time of occurrence. A ‘SETUP’ event corresponds to the execution of the component’s setup function and a ‘COMPUTE’ event corresponds to the execution of the compute function, as defined in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current Run. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page.</p>
+<p>The Component Log has another important function: if errors occur during the execution of the component, the Log will list an ‘ERROR’ event with a description of the error message and traceback information.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab also includes a ‘download files snapshot’ link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace. Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the Run Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_4.png"><img alt="component-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_4.png" style="width: 400px;" /></a>
+</section>
+</section>
+<section id="editing-and-clean-up">
+<h2>Editing and clean-up<a class="headerlink" href="#editing-and-clean-up" title="Permalink to this headline">#</a></h2>
+<p>Once you have successfully started a Run, the session and all associated data will be saved in the Cloud until you decide to overwrite or delete it.</p>
+<p>A Run can only be edited once it has been stopped (using the stop symbol ⏹) or once it has completed successfully. The second time a Run is started it will execute much faster since the processes are already set up in the Cloud, except if you renamed, added or removed components, in which case the existing Run will need to be deleted first. Try this by editing the x and y values in the paraboloid component Parameters and starting the Run again.</p>
+<p>You can delete a session by creating a new session (select <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface) or by loading a JSON session file from your machine (select <code class="docutils literal notranslate"><span class="pre">Open</span></code>).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted.</p>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://openmdao.org/newdocs/versions/latest/basic_user_guide/single_disciplinary_optimization/first_analysis.html">‘Paraboloid - A Single-Discipline Model’</a> example from the openMDAO user guide using the Dapta dashboard.</p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../intro.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Overview</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="Simple%20optimisation%20problem.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Simple optimisation problem</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dapta Ltd<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
