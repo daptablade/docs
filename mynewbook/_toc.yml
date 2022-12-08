@@ -10,3 +10,6 @@ parts:
     - file: Tutorials/Simple optimisation problem
     - file: Tutorials/Chaining component analyses
     - file: Tutorials/Automating parametric studies
+  - caption: User Guide
+    chapters:
+    - file: User Guide/Troubleshooting
