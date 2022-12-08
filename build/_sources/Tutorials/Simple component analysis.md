@@ -36,12 +36,7 @@ Fill in a component name, `paraboloid`, and select the `generic-python3-comp:lat
 
 Press the tab key or click within the component interface to validate the selected API. This triggers the display of a list of API input files, as shown below.
 
-```{image} media/paraboloid_1.png
-:alt: properties-tab-empty
-:class: bg-primary mb-1
-:width: 400px
-:align: center
-```
+<img src="../_static/paraboloid_1.png" alt="properties-in-progress" class="bg-primary" width="600px">
 
 ```{note}
 Component Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces. 
@@ -83,7 +78,7 @@ Next, select `setup.py` in the component interface to upload the corresponding f
 
 Check the boxes next to the `Start Node` and `End Node` options (since we only have one component in this Run), as shown below. 
 
-```{image} media/paraboloid_2.png
+```{image} ../_static/paraboloid_2.png
 :alt: properties-tab-completed
 :class: bg-primary mb-1
 :width: 400px
