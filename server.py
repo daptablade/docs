@@ -5,14 +5,14 @@ from datetime import timedelta
 
 from authlib.integrations.flask_client import OAuth
 from dotenv import find_dotenv, load_dotenv
-from flask import Flask, redirect, render_template, session, url_for, Response
+from flask import Flask, redirect, session, url_for, Response
 from markupsafe import escape
 
 ENV_FILE = find_dotenv()
 if ENV_FILE:
     load_dotenv(ENV_FILE)
 
-app = Flask(__name__, template_folder="build", static_folder="build/_static")
+app = Flask(__name__, static_folder="build/")
 app.config["PERMANENT_SESSION_LIFETIME"] = timedelta(seconds=10)
 app.secret_key = env.get("APP_SECRET_KEY")
 
@@ -68,15 +68,12 @@ def load_html(subpath):
     if subpath == "callback":
         # occurs on first login
         subpath = "intro.html"
-    return render_template(
-        escape(subpath),
-        session=session.get("user"),
-        pretty=json.dumps(session.get("user"), indent=4),
-    )
+    return app.send_static_file(subpath)
 
 
+@app.route("/")
 @app.route("/<path:subpath>", methods=["GET", "POST"])
-def home(subpath):
+def home(subpath="index.html"):
 
     if subpath == "logout":
         print(f"logout")
