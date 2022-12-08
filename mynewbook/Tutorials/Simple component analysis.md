@@ -138,7 +138,10 @@ Select `Save data` to save the component and close it. You should now be able to
 
 ## Component analysis 
 
-All being well, you should now be able to launch a Run by clicking on the play symbol ▶ in the workspace interface. The symbol will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time. Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that 'The Run has completed successfully'. If you don't get any messages, try to refresh your web browser page, or consult the User Guide's [Troubleshooting](../User%20Guide/Troubleshooting.md) section. 
+All being well, you should now be able to launch a Run by clicking on the play symbol ▶ in the workspace interface. 
+The symbol will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time. 
+Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that 'The Run has completed successfully'. 
+If you don't get any messages, try to refresh your web browser page, or consult the [FAQ](../Reference/FAQs.md) section for troubleshooting suggestions. 
 
 We can now inspect the outputs of the Run. 
 
