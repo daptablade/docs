@@ -39,7 +39,7 @@ Press the tab key or click within the component interface to validate the select
 ```{image} media/paraboloid_1.png
 :alt: properties-tab-empty
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 
@@ -86,7 +86,7 @@ Check the boxes next to the `Start Node` and `End Node` options (since we only h
 ```{image} media/paraboloid_2.png
 :alt: properties-tab-completed
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 
@@ -153,7 +153,7 @@ To save a copy of the Run Log, select `Close` to return to the workspace view an
 ```{image} media/paraboloid_3.png
 :alt: run-log
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 
@@ -171,7 +171,7 @@ The `Log` tab also includes a 'download files snapshot' link. Select this to dow
 ```{image} media/paraboloid_4.png
 :alt: component-log
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 
