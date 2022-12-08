@@ -36,7 +36,12 @@ Fill in a component name, `paraboloid`, and select the `generic-python3-comp:lat
 
 Press the tab key or click within the component interface to validate the selected API. This triggers the display of a list of API input files, as shown below.
 
-<img src="../_static/paraboloid_1.png" alt="properties-in-progress" class="bg-primary" width="600px">
+```{image} ../_static/paraboloid_1.png
+:alt: properties-tab-empty
+:class: bg-primary mb-1
+:width: 700px
+:align: center
+```
 
 ```{note}
 Component Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces. 
@@ -81,7 +86,7 @@ Check the boxes next to the `Start Node` and `End Node` options (since we only h
 ```{image} ../_static/paraboloid_2.png
 :alt: properties-tab-completed
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 
@@ -145,10 +150,10 @@ The 'time' entry corresponds to the time the Run Log file was generated, while t
 
 To save a copy of the Run Log, select `Close` to return to the workspace view and then select `Download`. This should download two JSON files: the Run Log as 'runlog.json' and the copy of your work session as 'dapta_input.json'. 
 
-```{image} media/paraboloid_3.png
+```{image} ../_static/paraboloid_3.png
 :alt: run-log
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 
@@ -163,10 +168,10 @@ The Component Log has another important function: if errors occur during the exe
 
 The `Log` tab also includes a 'download files snapshot' link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace. Save this data, along with the JSON formatted version of your session ('dapta_input.json') and a copy of the Run Log ('runlog.json'), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs. 
 
-```{image} media/paraboloid_4.png
+```{image} ../_static/paraboloid_4.png
 :alt: component-log
 :class: bg-primary mb-1
-:width: 400px
+:width: 700px
 :align: center
 ```
 

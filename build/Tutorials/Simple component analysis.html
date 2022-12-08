@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Simple component analysis.html" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -430,14 +432,16 @@ title="Print to PDF"
 <section id="component-description">
 <h2>Component description<a class="headerlink" href="#component-description" title="Permalink to this headline">#</a></h2>
 <p>The paraboloid component solves the function</p>
-<p>$$
-f(x,y) = (x-3.0)^2 + x y + (y + 4.0)^2 -3.0
-$$</p>
+<div class="math notranslate nohighlight">
+\[
+  f(x,y) = (x-3.0)^2 + x y + (y + 4.0)^2 -3.0 
+\]</div>
 <p>where x and y are the component inputs and f(x,y) is the output.
 The minimum of this function is located at</p>
-<p>$$
-x = \frac{20}{3} \quad , \quad y = -\frac{22}{3}
-$$</p>
+<div class="math notranslate nohighlight">
+\[
+  x = \frac{20}{3} \quad , \quad y = -\frac{22}{3}
+\]</div>
 </section>
 <section id="create-the-component">
 <h2>Create the component<a class="headerlink" href="#create-the-component" title="Permalink to this headline">#</a></h2>
@@ -450,7 +454,7 @@ This creates an empty template component in your workspace.</p>
 <p>The component interface opens on the Properties tab. This is where you define the core properties of your component.
 Fill in a component name, <code class="docutils literal notranslate"><span class="pre">paraboloid</span></code>, and select the <code class="docutils literal notranslate"><span class="pre">generic-python3-comp:latest</span></code> component API.</p>
 <p>Press the tab key or click within the component interface to validate the selected API. This triggers the display of a list of API input files, as shown below.</p>
-<a class="bg-primary reference internal image-reference" href="../_static/paraboloid_1.png"><img alt="properties-in-progress" class="bg-primary" src="../_static/paraboloid_1.png" style="width: 600px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_1.png"><img alt="properties-tab-empty" class="bg-primary mb-1 align-center" src="../_images/paraboloid_1.png" style="width: 700px;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Component Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces.</p>
@@ -470,8 +474,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the params (<a class="reference internal" href="#parameters"><span class="std std-ref">Parameters</span></a>) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="305004cb-c8f1-428b-861f-36742e60b2a5" name="37dbe019-3d3e-4129-8951-d5b0bc5114aa" type="radio">
-</input><label class="sd-tab-label" for="305004cb-c8f1-428b-861f-36742e60b2a5">
+<input checked="checked" id="9165eb42-15f8-420d-8131-8d12933b47fb" name="5891260f-dc2b-418d-9f01-8e78fab3ebb0" type="radio">
+</input><label class="sd-tab-label" for="9165eb42-15f8-420d-8131-8d12933b47fb">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -526,8 +530,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="5e727b53-6e68-4216-ad6b-5a4d601e89b8" name="37dbe019-3d3e-4129-8951-d5b0bc5114aa" type="radio">
-</input><label class="sd-tab-label" for="5e727b53-6e68-4216-ad6b-5a4d601e89b8">
+<input id="91d32aaa-aa97-4017-a5f1-e42bb4513946" name="5891260f-dc2b-418d-9f01-8e78fab3ebb0" type="radio">
+</input><label class="sd-tab-label" for="91d32aaa-aa97-4017-a5f1-e42bb4513946">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -572,7 +576,7 @@ compute</label><div class="sd-tab-content docutils">
 <p>For each file, copy the contents above into a text editor and save it locally. Make sure you include the ‘.py’ extension in the file name.</p>
 <p>Next, select <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> in the component interface to upload the corresponding file. A green tick and a file upload time stamp should appear to confirm that the upload was successful. Repeat for the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> file.</p>
 <p>Check the boxes next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options (since we only have one component in this Run), as shown below.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_static/paraboloid_2.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_static/paraboloid_2.png" style="width: 400px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_2.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_images/paraboloid_2.png" style="width: 700px;" /></a>
 <p>Finally, select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close the component interface.</p>
 <p>In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid. However, if you tried to run it now, you would get error messages as we haven’t actually defined the python function Parameter inputs and design Inputs yet - see below.</p>
 <div class="admonition warning">
@@ -621,7 +625,7 @@ compute</label><div class="sd-tab-content docutils">
 <p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the workspace interface to view a summary of the Run as a nested JSON text object as shown below.</p>
 <p>The ‘time’ entry corresponds to the time the Run Log file was generated, while the time stamps in the messages that appear in the ‘run_output’ and ‘paraboloid’ relate to the paraboloid compute function execution time. The inputs and outputs of the paraboloid component are available under the corresponding ‘paraboloid’ entries.</p>
 <p>To save a copy of the Run Log, select <code class="docutils literal notranslate"><span class="pre">Close</span></code> to return to the workspace view and then select <code class="docutils literal notranslate"><span class="pre">Download</span></code>. This should download two JSON files: the Run Log as ‘runlog.json’ and the copy of your work session as ‘dapta_input.json’.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_static/paraboloid_3.png"><img alt="run-log" class="bg-primary mb-1 align-center" src="../_static/paraboloid_3.png" style="width: 400px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_3.png"><img alt="run-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_3.png" style="width: 700px;" /></a>
 </section>
 <section id="the-component-log">
 <h3>The Component Log<a class="headerlink" href="#the-component-log" title="Permalink to this headline">#</a></h3>
@@ -630,7 +634,7 @@ compute</label><div class="sd-tab-content docutils">
 The Component Log lists events related to the component in order of time of occurrence. A ‘SETUP’ event corresponds to the execution of the component’s setup function and a ‘COMPUTE’ event corresponds to the execution of the compute function, as defined in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current Run. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page.</p>
 <p>The Component Log has another important function: if errors occur during the execution of the component, the Log will list an ‘ERROR’ event with a description of the error message and traceback information.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab also includes a ‘download files snapshot’ link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace. Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the Run Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_static/paraboloid_4.png"><img alt="component-log" class="bg-primary mb-1 align-center" src="../_static/paraboloid_4.png" style="width: 400px;" /></a>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_4.png"><img alt="component-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_4.png" style="width: 700px;" /></a>
 </section>
 </section>
 <section id="editing-and-clean-up">
