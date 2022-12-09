@@ -146,13 +146,23 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
-  User Guide
+  Reference Guide
  </span>
 </p>
 <ul class="nav bd-sidenav">
  <li class="toctree-l1">
-  <a class="reference internal" href="../User%20Guide/Troubleshooting.html">
-   Troubleshooting
+  <a class="reference internal" href="../Reference/The%20dashboard.html">
+   The dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/FAQs.html">
+   FAQs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/Glossary.html">
+   Glossary
   </a>
  </li>
 </ul>
@@ -332,8 +342,13 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#editing-and-clean-up">
-   Editing and clean-up
+  <a class="reference internal nav-link" href="#editing-a-run">
+   Editing a Run
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -405,8 +420,13 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#editing-and-clean-up">
-   Editing and clean-up
+  <a class="reference internal nav-link" href="#editing-a-run">
+   Editing a Run
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -471,11 +491,11 @@ Fill in a component name, <code class="docutils literal notranslate"><span class
 </ul>
 <p>The first two files are required and the last one is optional. You can inspect the paraboloid example file contents below.
 The <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is not required here as the python code doesn’t import any third-party python packages. We will use it in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> to import openMDAO classes and functions.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the params (<a class="reference internal" href="#parameters"><span class="std std-ref">Parameters</span></a>) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the params (<a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a>) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="9165eb42-15f8-420d-8131-8d12933b47fb" name="5891260f-dc2b-418d-9f01-8e78fab3ebb0" type="radio">
-</input><label class="sd-tab-label" for="9165eb42-15f8-420d-8131-8d12933b47fb">
+<div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
+<input checked="checked" id="2df7357f-5bb1-4c62-9757-9788d733d429" name="8e722783-0cc1-4df4-aeb1-f9cf5bc82782" type="radio">
+</input><label class="sd-tab-label" for="2df7357f-5bb1-4c62-9757-9788d733d429">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -530,8 +550,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="91d32aaa-aa97-4017-a5f1-e42bb4513946" name="5891260f-dc2b-418d-9f01-8e78fab3ebb0" type="radio">
-</input><label class="sd-tab-label" for="91d32aaa-aa97-4017-a5f1-e42bb4513946">
+<input id="6331da4b-4ffd-4ac6-91e8-d1b0c32f1899" name="8e722783-0cc1-4df4-aeb1-f9cf5bc82782" type="radio">
+</input><label class="sd-tab-label" for="6331da4b-4ffd-4ac6-91e8-d1b0c32f1899">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -585,7 +605,7 @@ compute</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="parameters">
-<span id="id1"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
+<span id="tutorials-paraboloid-parameters"></span><h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
 <p>Select the component again to edit it, then select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the following JSON object into the text box. Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the edits.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
@@ -618,7 +638,10 @@ compute</label><div class="sd-tab-content docutils">
 </section>
 <section id="component-analysis">
 <h2>Component analysis<a class="headerlink" href="#component-analysis" title="Permalink to this headline">#</a></h2>
-<p>All being well, you should now be able to launch a Run by clicking on the play symbol ▶ in the workspace interface. The symbol will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time. Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that ‘The Run has completed successfully’. If you don’t get any messages, try to refresh your web browser page, or consult the User Guide’s <a class="reference internal" href="../User%20Guide/Troubleshooting.html"><span class="doc std std-doc">Troubleshooting</span></a> section.</p>
+<p>All being well, you should now be able to launch a Run by selecting the play symbol ▶ in the Run controls interface.
+The control symbols will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time.
+Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that ‘The Run has completed successfully’.
+If you don’t get any messages, try to refresh your web browser page, or consult the <a class="reference internal" href="../Reference/FAQs.html"><span class="doc std std-doc">FAQ</span></a> section for troubleshooting suggestions.</p>
 <p>We can now inspect the outputs of the Run.</p>
 <section id="the-run-log">
 <h3>The Run Log<a class="headerlink" href="#the-run-log" title="Permalink to this headline">#</a></h3>
@@ -633,15 +656,19 @@ compute</label><div class="sd-tab-content docutils">
 <p>Both the Run Log and the Component Log are updated as the Run executes, which allows us to monitor progress and view intermediary results.
 The Component Log lists events related to the component in order of time of occurrence. A ‘SETUP’ event corresponds to the execution of the component’s setup function and a ‘COMPUTE’ event corresponds to the execution of the compute function, as defined in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current Run. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page.</p>
 <p>The Component Log has another important function: if errors occur during the execution of the component, the Log will list an ‘ERROR’ event with a description of the error message and traceback information.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab also includes a ‘download files snapshot’ link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace. Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the Run Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab also includes a <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code> link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace for this component.
+Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the Run Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_4.png"><img alt="component-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_4.png" style="width: 700px;" /></a>
 </section>
 </section>
-<section id="editing-and-clean-up">
-<h2>Editing and clean-up<a class="headerlink" href="#editing-and-clean-up" title="Permalink to this headline">#</a></h2>
+<section id="editing-a-run">
+<h2>Editing a Run<a class="headerlink" href="#editing-a-run" title="Permalink to this headline">#</a></h2>
 <p>Once you have successfully started a Run, the session and all associated data will be saved in the Cloud until you decide to overwrite or delete it.</p>
 <p>A Run can only be edited once it has been stopped (using the stop symbol ⏹) or once it has completed successfully. The second time a Run is started it will execute much faster since the processes are already set up in the Cloud, except if you renamed, added or removed components, in which case the existing Run will need to be deleted first. Try this by editing the x and y values in the paraboloid component Parameters and starting the Run again.</p>
-<p>You can delete a session by creating a new session (select <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface) or by loading a JSON session file from your machine (select <code class="docutils literal notranslate"><span class="pre">Open</span></code>).</p>
+</section>
+<section id="clean-up">
+<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<p>You can delete a session by creating a new session (select <code class="docutils literal notranslate"><span class="pre">New</span></code> in from the interface controls) or by loading a JSON session file from your machine (select <code class="docutils literal notranslate"><span class="pre">Open</span></code>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted.</p>
@@ -650,7 +677,7 @@ The Component Log lists events related to the component in order of time of occu
 <section id="references">
 <h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
-<li><p><a class="reference external" href="https://openmdao.org/newdocs/versions/latest/basic_user_guide/single_disciplinary_optimization/first_analysis.html">‘Paraboloid - A Single-Discipline Model’</a> example from the openMDAO user guide using the Dapta dashboard.</p></li>
+<li><p><a class="reference external" href="https://openmdao.org/newdocs/versions/latest/basic_user_guide/single_disciplinary_optimization/first_analysis.html">‘Paraboloid - A Single-Discipline Model’</a> example from the openMDAO user guide.</p></li>
 </ol>
 </section>
 </section>
