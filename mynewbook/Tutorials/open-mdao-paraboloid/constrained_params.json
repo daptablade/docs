@@ -1,0 +1,71 @@
+{
+    "optimizer": "SLSQP",
+    "max_iter": 20,
+    "tol": 1e-8,
+    "disp": true,
+    "debug_print": [
+        "desvars",
+        "ln_cons",
+        "nl_cons",
+        "objs",
+        "totals"
+    ],
+    "approx_totals": false,
+    "ExplicitComponents": [
+        {
+            "name": "paraboloid",
+            "kwargs": {
+                "promotes_inputs": [
+                    "x",
+                    "y"
+                ]
+            }
+        }
+    ],
+    "ExecComps": [
+        {
+            "name": "constraint",
+            "exprs": "g = x + y",
+            "kwargs": {
+                "promotes_inputs": [
+                    "x",
+                    "y"
+                ]
+            }
+        }
+    ],
+    "input_variables": [
+        {
+            "name": "x",
+            "lower": -50,
+            "upper": 50,
+            "value": 5.0
+        },
+        {
+            "name": "y",
+            "lower": -50,
+            "upper": 50,
+            "value": 5.0
+        }
+    ],
+    "output_variables": [
+        {
+            "component": "paraboloid",
+            "type": "objective",
+            "name": "f_xy"
+        },
+        {
+            "component": "constraint",
+            "type": "constraint",
+            "name": "g",
+            "lower": 0.0,
+            "upper": 10.0
+        }
+    ],
+    "driver": {
+        "type": "optimisation"
+    },
+    "visualise": [
+        "n2_diagram"
+    ]
+}

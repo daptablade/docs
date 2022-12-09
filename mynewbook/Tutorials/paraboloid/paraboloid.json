@@ -1,0 +1,27 @@
+{
+    "components": [
+        {
+            "name": "paraboloid",
+            "api": "generic-python3-comp:latest",
+            "options": {},
+            "parameters": {
+                "user_input_files": [],
+                "x": 5.0,
+                "y": 5.0,
+                "f_xy": 0.0
+            },
+            "inputs": {
+                "x": "default",
+                "y": "default"
+            },
+            "outputs": {
+                "f_xy": "default"
+            }
+        }
+    ],
+    "connections": [],
+    "workflow": {
+        "start": "paraboloid",
+        "end": "paraboloid"
+    }
+}

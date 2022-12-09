@@ -1,0 +1,42 @@
+{
+    "optimizer": "SLSQP",
+    "max_iter": 20,
+    "tol": 1e-8,
+    "disp": true,
+    "debug_print": [
+        "desvars",
+        "ln_cons",
+        "nl_cons",
+        "objs",
+        "totals"
+    ],
+    "approx_totals": true,
+    "fd_step": 0.0001,
+    "input_variables": [
+        {
+            "component": "paraboloid",
+            "name": "x",
+            "lower": -50,
+            "upper": 50
+        },
+        {
+            "component": "paraboloid",
+            "name": "y",
+            "lower": -50,
+            "upper": 50
+        }
+    ],
+    "output_variables": [
+        {
+            "component": "paraboloid",
+            "type": "objective",
+            "name": "f_xy"
+        }
+    ],
+    "driver": {
+        "type": "optimisation"
+    },
+    "visualise": [
+        "n2_diagram"
+    ]
+}
