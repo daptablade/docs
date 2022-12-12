@@ -382,12 +382,30 @@ Then log in with your user credentials and click on the ‘Dashboard’ button t
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/dashboard-overview.png"><img alt="dashboard-overview" class="bg-primary mb-1 align-center" src="../_images/dashboard-overview.png" style="width: 700px;" /></a>
 <section id="interface-controls">
 <h2>Interface controls<a class="headerlink" href="#interface-controls" title="Permalink to this headline">#</a></h2>
+<p><strong>New</strong> : Reset the workspace. Also use this to delete your session from the Cloud after completing a Run.</p>
+<p><strong>Open</strong> : Open a saved workspace session by uploading a JSON formatted session definition file.</p>
+<p><strong>Download</strong> : Download a JSON-formatted version of your current session (dapta_input.json) and of the current Run Log (if available).</p>
+<p><strong>View Log</strong> : View the current Run Log (is available).</p>
+<p><strong>…</strong> : Secondary controls and useful links (this menu will evolve over time).</p>
 </section>
 <section id="the-workspace">
 <h2>The workspace<a class="headerlink" href="#the-workspace" title="Permalink to this headline">#</a></h2>
+<p>The workspace provides a visual representation of the components and connections currently defined in your session.</p>
+<p><strong>Right-click</strong> in the workspace to open a workspace context menu. Select the ‘Add Empty Node’ option to add an empty template component to the session.</p>
+<p><strong>Left-click</strong> components or connections to edit or delete them.</p>
+<p><strong>Left-click and hold</strong> to drag components or connections across the workspace.</p>
+<p><strong>Scroll</strong> to zoom-in or out.</p>
+<p>You can also use the workspace controls <strong>+</strong> and <strong>-</strong> to zoom in and out, or the <strong>◻</strong> to fit all components into the current view.</p>
 </section>
 <section id="components">
 <h2>Components<a class="headerlink" href="#components" title="Permalink to this headline">#</a></h2>
+<p>Components appear as boxes in the workspace.
+Select a component to edit it.</p>
+<p>Each component has a name that is displayed at the top of the component box in the workspace view.
+A symbol appearing next to the name indicates the validity status of the component:</p>
+<p><strong>?</strong> : Pending : Some inputs are missing.</p>
+<p><strong>🗸</strong> : Valid : All necessary inputs have been defined.</p>
+<p><strong>!</strong> : Invalid : Some inputs are erroneous.</p>
 </section>
 <section id="connections">
 <h2>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">#</a></h2>

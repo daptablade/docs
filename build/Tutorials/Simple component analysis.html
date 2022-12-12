@@ -491,11 +491,11 @@ Fill in a component name, <code class="docutils literal notranslate"><span class
 </ul>
 <p>The first two files are required and the last one is optional. You can inspect the paraboloid example file contents below.
 The <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is not required here as the python code doesn’t import any third-party python packages. We will use it in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> to import openMDAO classes and functions.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the params (<a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a>) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="2df7357f-5bb1-4c62-9757-9788d733d429" name="8e722783-0cc1-4df4-aeb1-f9cf5bc82782" type="radio">
-</input><label class="sd-tab-label" for="2df7357f-5bb1-4c62-9757-9788d733d429">
+<input checked="checked" id="5aa6c62b-2b82-451b-89b9-f3f0c9946242" name="b56654f5-085b-42a1-95e2-98920bc028f6" type="radio">
+</input><label class="sd-tab-label" for="5aa6c62b-2b82-451b-89b9-f3f0c9946242">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -505,9 +505,7 @@ setup</label><div class="sd-tab-content docutils">
     <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">run_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">inputs_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
@@ -516,20 +514,20 @@ setup</label><div class="sd-tab-content docutils">
 
     <span class="c1"># set default inputs</span>
     <span class="k">if</span> <span class="n">inputs</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">input_key</span><span class="p">,</span> <span class="n">input_value</span> <span class="ow">in</span> <span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">input_key</span><span class="p">,</span> <span class="n">input_value</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">input_value</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">inputs</span><span class="p">[</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">input_key</span><span class="p">])</span>
+                    <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">input_key</span><span class="p">])</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">input_key</span><span class="si">}</span><span class="s2"> in the input parameters.&quot;</span><span class="p">)</span>
         <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span>
 
     <span class="c1"># initialise outputs - required for OpenMDAO</span>
     <span class="k">if</span> <span class="n">outputs</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">output_key</span><span class="p">,</span> <span class="n">output_value</span> <span class="ow">in</span> <span class="n">outputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">output_key</span><span class="p">,</span> <span class="n">output_value</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="n">output_value</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
-                    <span class="n">outputs</span><span class="p">[</span><span class="n">output_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">params</span><span class="p">[</span><span class="n">output_key</span><span class="p">])</span>
+                    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">output_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">output_key</span><span class="p">])</span>
                 <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">output_key</span><span class="si">}</span><span class="s2"> in the input parameters.&quot;</span><span class="p">)</span>
         <span class="n">response</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outputs</span>
@@ -550,22 +548,19 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="6331da4b-4ffd-4ac6-91e8-d1b0c32f1899" name="8e722783-0cc1-4df4-aeb1-f9cf5bc82782" type="radio">
-</input><label class="sd-tab-label" for="6331da4b-4ffd-4ac6-91e8-d1b0c32f1899">
+<input id="647d370e-7a14-42ee-8452-0189d5cf1745" name="b56654f5-085b-42a1-95e2-98920bc028f6" type="radio">
+</input><label class="sd-tab-label" for="647d370e-7a14-42ee-8452-0189d5cf1745">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="n">setup_data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">run_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">inputs_folder</span><span class="p">:</span> <span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
@@ -573,9 +568,9 @@ compute</label><div class="sd-tab-content docutils">
 <span class="sd">    Minimum at: x = 6.6667; y = -7.3333</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">x</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
-    <span class="n">y</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
-    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">3.0</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;f_xy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">3.0</span>
 
     <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outputs</span>
@@ -585,7 +580,7 @@ compute</label><div class="sd-tab-content docutils">
         <span class="n">partials</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">][</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="s2">&quot;val&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)]</span>
         <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;partials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partials</span>
 
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute paraboloid f(x:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">,y:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;f_xy&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> with options: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute paraboloid f(x:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">,y:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;design&#39;</span><span class="p">][</span><span class="s1">&#39;f_xy&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> with options: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
 
     <span class="k">return</span> <span class="n">resp</span>
@@ -598,10 +593,12 @@ compute</label><div class="sd-tab-content docutils">
 <p>Check the boxes next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options (since we only have one component in this Run), as shown below.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_2.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_images/paraboloid_2.png" style="width: 700px;" /></a>
 <p>Finally, select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close the component interface.</p>
-<p>In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid. However, if you tried to run it now, you would get error messages as we haven’t actually defined the python function Parameter inputs and design Inputs yet - see below.</p>
+<p>In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid.
+However, if you tried to run it now, you would get error messages as we haven’t actually defined the python function Parameters and Inputs yet - see below.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>Although you have just ‘saved’ the component, the contents of your workspace have not actually been saved anywhere and you would lose your work if you refreshed the webpage or closed the web browser now. To avoid this situation you should save your edited components regularly and then select the workspace <code class="docutils literal notranslate"><span class="pre">Download</span></code> button to save an a JSON formatted version of your session (see the related sections in the User Manual).</p>
+<p>Although you have just ‘saved’ the component, the contents of your workspace have not actually been saved anywhere and you would lose your work if you refreshed the webpage or closed the web browser now.
+To avoid this situation you should save your edited components regularly and then select the workspace <code class="docutils literal notranslate"><span class="pre">Download</span></code> button to save an a JSON formatted version of your session (see the related sections in the User Manual).</p>
 </div>
 </section>
 <section id="parameters">
@@ -614,11 +611,14 @@ compute</label><div class="sd-tab-content docutils">
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>We define Parameters as values that the component needs to execute, but that are not design Inputs as such. For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example <a class="reference internal" href="Chaining%20component%20analyses.html"><span class="doc std std-doc">Chaining component analyses</span></a>.</p>
+<p>We define Parameters as values that the component needs to execute, but that are not Inputs from other Components.
+For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example <a class="reference internal" href="Chaining%20component%20analyses.html"><span class="doc std std-doc">Chaining component analyses</span></a>.</p>
 </section>
 <section id="inputs-and-outputs">
 <h3>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">#</a></h3>
-<p>Open the component to edit it and add the following JSON objects into the text boxes in the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs.</p>
+<p>Open the component to edit it and add the following JSON objects into the text boxes in the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs.
+By defining the paraboloid function inputs and outputs as Component Inputs and Outputs respectively, we can expose these values to other Run components, such as drivers.
+We will explore this in the next tutorial <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a>.</p>
 <p>Input Handles:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -668,7 +668,8 @@ Save this data, along with the JSON formatted version of your session (‘dapta_
 </section>
 <section id="clean-up">
 <h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
-<p>You can delete a session by creating a new session (select <code class="docutils literal notranslate"><span class="pre">New</span></code> in from the interface controls) or by loading a JSON session file from your machine (select <code class="docutils literal notranslate"><span class="pre">Open</span></code>).</p>
+<p>You can delete a session by creating a new session (select <code class="docutils literal notranslate"><span class="pre">New</span></code> in from the interface controls) or by loading a JSON session file from your machine (select <code class="docutils literal notranslate"><span class="pre">Open</span></code>).
+It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted.</p>
