@@ -98,8 +98,9 @@ Copy the contents of the ['om_component' tab above](tutorials-open-mdao-parabolo
 Select the `upload user input files` link at the bottom of the `Parameters` tab to upload the file. 
 The upload was successful if a corresponding entry appears under the 'user_input_files' section of the JSON object in the `Parameters` text box. 
 
-By extracting parameters from the python code and defining them in the `Parameters` tab instead, we can change the optimisation setup on the fly without having to view or modify the python code. 
-This makes the components more general, robust and re-usable. 
+By extracting parameters from the python code and defining them in the `Parameters` tab instead, we can change the optimisation setup without having to view or modify the python code. 
+This makes it easier to track input changes and to compare Runs (e.g. via the session file). 
+The component also becomes more general, robust and re-usable. 
 We will demonstrate the benefits of this approach in the next section by replacing the 'unconstrained' parameters with the 'constrained' ones.  
 
 Select `Save data` to save the edits and close the component interface. 

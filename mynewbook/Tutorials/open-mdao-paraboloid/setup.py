@@ -6,16 +6,16 @@ def setup(
     inputs: dict = None,
     outputs: dict = None,
     partials: dict = None,
-    params: dict = None,
-    run_folder: Path = None,
-    inputs_folder: Path = None,
+    parameters: dict = None,
 ):
     """Editable setup function."""
 
-    if "driver" not in params:
+    if "driver" not in parameters:
         # assume we want to run an optimisation with default settings
-        params["driver"] = {"type": "optimisation"}
+        driver = {"type": "optimisation"}
+    else:
+        driver = parameters["driver"]
 
     message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Setup completed."
 
-    return {"message": message, **params}
+    return {"message": message, "driver": driver}

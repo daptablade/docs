@@ -10,30 +10,28 @@ from om_component import OMexplicitComp  # type: ignore
 
 
 def compute(
-    setup_data: dict = None,
-    params: dict = None,
     inputs: dict = None,
     outputs: dict = None,
     partials: dict = None,
     options: dict = None,
-    run_folder: Path = None,
-    inputs_folder: Path = None,
+    parameters: dict = None,
 ):
 
     """Editable compute function."""
 
     print("OpenMDAO problem setup started.")
 
-    workflow = setup_data["workflow"]
-    all_connections = setup_data["all_connections"]
+    workflow = parameters["workflow"]
+    all_connections = parameters["all_connections"]
+    run_folder = Path(parameters["outputs_folder_path"])
 
     # 1) define the simulation components
     prob = om.Problem()
     for component in workflow:
-        if "ExplicitComponents" in setup_data:
+        if "ExplicitComponents" in parameters:
             kwargs = [
                 comp["kwargs"]
-                for comp in setup_data["ExplicitComponents"]
+                for comp in parameters["ExplicitComponents"]
                 if comp["name"] == component
             ][0]
         else:
@@ -41,8 +39,8 @@ def compute(
         prob.model.add_subsystem(
             component, OMexplicitComp(name=component, run_number=0), **kwargs
         )
-    if "ExecComps" in setup_data and setup_data["ExecComps"]:
-        for component in setup_data["ExecComps"]:
+    if "ExecComps" in parameters and parameters["ExecComps"]:
+        for component in parameters["ExecComps"]:
             prob.model.add_subsystem(
                 component["name"],
                 om.ExecComp(component["exprs"]),
@@ -64,29 +62,29 @@ def compute(
                 + connection["name_target"].replace(".", "-"),
             )
 
-    if setup_data["driver"]["type"] == "optimisation":
+    if parameters["driver"]["type"] == "optimisation":
         # 3) setup the optimisation driver options
         prob.driver = om.ScipyOptimizeDriver()
-        prob.driver.options["optimizer"] = setup_data["optimizer"]
-        prob.driver.options["maxiter"] = setup_data["max_iter"]
-        prob.driver.options["tol"] = setup_data["tol"]
-        prob.driver.opt_settings["disp"] = setup_data["disp"]
-        prob.driver.options["debug_print"] = setup_data["debug_print"]
+        prob.driver.options["optimizer"] = parameters["optimizer"]
+        prob.driver.options["maxiter"] = parameters["max_iter"]
+        prob.driver.options["tol"] = parameters["tol"]
+        prob.driver.opt_settings["disp"] = parameters["disp"]
+        prob.driver.options["debug_print"] = parameters["debug_print"]
 
-        if "approx_totals" in setup_data and setup_data["approx_totals"]:
+        if "approx_totals" in parameters and parameters["approx_totals"]:
             # ensure FD gradients are used
             prob.model.approx_totals(
-                method="fd", step=setup_data["fd_step"], form=None, step_calc=None
+                method="fd", step=parameters["fd_step"], form=None, step_calc=None
             )
 
-    elif setup_data["driver"]["type"] == "doe":
+    elif parameters["driver"]["type"] == "doe":
         # 3) alternative: setup a design of experiments
         prob.driver = om.DOEDriver(
-            om.UniformGenerator(num_samples=setup_data["driver"]["samples"])
+            om.UniformGenerator(num_samples=parameters["driver"]["samples"])
         )
 
     # 4) add design variables
-    for var in setup_data["input_variables"]:
+    for var in parameters["input_variables"]:
         upper = var["upper"]
         lower = var["lower"]
         if "component" in var:
@@ -103,7 +101,7 @@ def compute(
             prob.model.set_input_defaults(var["name"].replace(".", "-"), var["value"])
 
     # 5) add an objective and constraints
-    for var in setup_data["output_variables"]:
+    for var in parameters["output_variables"]:
         comp = var["component"]
         name = f"{comp}.{var['name'].replace('.', '-')}"
 
@@ -135,7 +133,7 @@ def compute(
     prob.setup()  # required to generate the n2 diagram
     print("OpenMDAO problem setup completed.")
 
-    if "visualise" in setup_data and "n2_diagram" in setup_data["visualise"]:
+    if "visualise" in parameters and "n2_diagram" in parameters["visualise"]:
         # save n2 diagram in html format
         om.n2(
             prob,
@@ -143,23 +141,37 @@ def compute(
             show_browser=False,
         )
 
-    # 6) run the optimisation
-    if setup_data["driver"]["type"] == "optimisation":
-        dict_out = run_optimisation(prob, setup_data, run_folder)
+    if parameters["driver"]["type"] == "optimisation":
+        dict_out = run_optimisation(prob, parameters, run_folder)
+
+    # elif parameters["driver"]["type"] == "check_partials":
+    #     dict_out = run_check_partials(prob, parameters)
+
+    # elif parameters["driver"]["type"] == "check_totals":
+    #     dict_out = run_check_totals(prob, parameters)
+
+    # elif parameters["driver"]["type"] == "doe":
+    #     dict_out = run_doe(prob, parameters)
+
+    # elif parameters["driver"]["type"] == "post":
+    #     dict_out = run_post(prob, parameters)
+
     else:
         raise ValueError(
-            f"driver {setup_data['driver']['type']} is not a valid component driver type."
+            f"driver {parameters['driver']['type']} is not a valid component driver type."
         )
 
     message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: OpenMDAO compute completed."
     print(message)
 
-    return {"message": message, "outputs": dict_out["outputs"]}
+    outputs["design"] = dict_out
+
+    return {"message": message, "outputs": outputs}
 
 
-def run_optimisation(prob, setup_data, run_folder):
+def run_optimisation(prob, parameters, run_folder):
 
-    # add a data recorder to the optimisation problem
+    # 6) add a data recorder to the optimisation problem
     r_name = str(
         run_folder
         / (
@@ -175,7 +187,18 @@ def run_optimisation(prob, setup_data, run_folder):
     # setup the problem again
     prob.setup()
 
-    # execute the optimisation and capture the print output in a log file
+    if "visualise" in parameters and "scaling_report" in parameters["visualise"]:
+        with open(run_folder / "scaling_report.log", "w") as f:
+            with redirect_stdout(f):
+                prob.run_model()
+                prob.driver.scaling_report(
+                    outfile=str(run_folder / "driver_scaling_report.html"),
+                    title=None,
+                    show_browser=False,
+                    jac=True,
+                )
+
+    # 7) execute the optimisation
     try:
         with open(run_folder / "run_driver.log", "w") as f:
             with redirect_stdout(f):
@@ -187,7 +210,7 @@ def run_optimisation(prob, setup_data, run_folder):
 
     opt_output = {}
     # print("Completed model optimisation - solution is: \n inputs= (")
-    for var in setup_data["input_variables"]:
+    for var in parameters["input_variables"]:
         name = var["name"]
         # print(
         #     f"{comp}.{name}: "
@@ -202,7 +225,7 @@ def run_optimisation(prob, setup_data, run_folder):
         else:
             opt_output[name] = prob.get_val(name.replace(".", "-")).tolist()
     # print("), \n outputs = (")
-    for var in setup_data["output_variables"]:
+    for var in parameters["output_variables"]:
         comp = var["component"]
         name = var["name"]
         # print(
@@ -217,4 +240,4 @@ def run_optimisation(prob, setup_data, run_folder):
 
     print(opt_output)
 
-    return {"outputs": opt_output}
+    return opt_output

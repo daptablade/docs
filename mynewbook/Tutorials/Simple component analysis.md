@@ -60,7 +60,7 @@ We can see that the `generic-python3-comp` API has three input files:
 The first two files are required and the last one is optional. You can inspect the paraboloid example file contents below. 
 The `requirements.txt` file is not required here as the python code doesn't import any third-party python packages. We will use it in the [Simple optimisation problem](./Simple%20optimisation%20problem.md) to import openMDAO classes and functions.  
 
-The `setup.py` module has to include a **setup** function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the params ([](tutorials-paraboloid-parameters)) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example. 
+The `setup.py` module has to include a **setup** function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the [Parameters](tutorials-paraboloid-parameters) input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example. 
 
 The `compute.py` module has to include a **compute** function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.      
 
@@ -93,10 +93,12 @@ Check the boxes next to the `Start Node` and `End Node` options (since we only h
 
 Finally, select `Save data` to save the component and close the component interface. 
 
-In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid. However, if you tried to run it now, you would get error messages as we haven't actually defined the python function Parameter inputs and design Inputs yet - see below. 
+In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid. 
+However, if you tried to run it now, you would get error messages as we haven't actually defined the python function Parameters and Inputs yet - see below. 
 
 ```{warning}
-Although you have just 'saved' the component, the contents of your workspace have not actually been saved anywhere and you would lose your work if you refreshed the webpage or closed the web browser now. To avoid this situation you should save your edited components regularly and then select the workspace `Download` button to save an a JSON formatted version of your session (see the related sections in the User Manual). 
+Although you have just 'saved' the component, the contents of your workspace have not actually been saved anywhere and you would lose your work if you refreshed the webpage or closed the web browser now. 
+To avoid this situation you should save your edited components regularly and then select the workspace `Download` button to save an a JSON formatted version of your session (see the related sections in the User Manual). 
 ```
 
 (tutorials-paraboloid-parameters)=
@@ -112,11 +114,14 @@ Select the component again to edit it, then select the `Parameters` tab and copy
 }
 ```
 
-We define Parameters as values that the component needs to execute, but that are not design Inputs as such. For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the `Parameters` tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example [Chaining component analyses](./Chaining%20component%20analyses.md). 
+We define Parameters as values that the component needs to execute, but that are not Inputs from other Components. 
+For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the `Parameters` tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example [Chaining component analyses](./Chaining%20component%20analyses.md). 
 
 ### Inputs and Outputs
 
 Open the component to edit it and add the following JSON objects into the text boxes in the `Inputs` and `Outputs` tabs.
+By defining the paraboloid function inputs and outputs as Component Inputs and Outputs respectively, we can expose these values to other Run components, such as drivers. 
+We will explore this in the next tutorial [Simple optimisation problem](./Simple%20optimisation%20problem.md).  
 
 Input Handles:
 ```{code}
