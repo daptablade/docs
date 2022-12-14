@@ -1,5 +1,12 @@
 # Simple component analysis
 
+```{image} media/paraboloid_rotation.gif
+:alt: paraboloid-surface
+:class: bg-primary mb-1
+:width: 400px
+:align: right
+```
+
 **Duration: 10 min**
 
 In our first example we explore the creation and analysis of a simple analytical function component.  

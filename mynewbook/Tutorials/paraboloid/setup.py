@@ -7,7 +7,7 @@ def setup(
     outputs: dict = None,
     partials: dict = None,
     parameters: dict = None,
-):
+) -> dict:
     """Editable setup function."""
 
     # initalise setup_data keys - none for paraboloid

@@ -8,7 +8,7 @@ def compute(
     partials: dict = None,
     options: dict = None,
     parameters: dict = None,
-):
+) -> dict:
 
     """
     Evaluates the equation f(x,y) = (x-3)^2 + xy + (y+4)^2 - 3.

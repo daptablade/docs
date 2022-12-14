@@ -7,7 +7,7 @@ def setup(
     outputs: dict = None,
     partials: dict = None,
     parameters: dict = None,
-):
+) -> dict:
     """Editable setup function."""
 
     if "driver" not in parameters:
