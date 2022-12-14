@@ -449,7 +449,9 @@ title="Print to PDF"
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_rotation.gif"><img alt="paraboloid-surface" class="bg-primary mb-1 align-right" src="../_images/paraboloid_rotation.gif" style="width: 400px;" /></a>
 <p><strong>Duration: 10 min</strong></p>
 <p>In our first example we explore the creation and analysis of a simple analytical function component.</p>
-<p>You don’t need to install or download anything to get started! We use python for all our examples, so a basic understanding of python syntax will be beneficial.</p>
+<p>All you need to get started is a text editor and your web browser.
+No need to download or install anything!
+However, as We will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).</p>
 <section id="component-description">
 <h2>Component description<a class="headerlink" href="#component-description" title="Permalink to this headline">#</a></h2>
 <p>The paraboloid component solves the function</p>
@@ -495,8 +497,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="59466faf-ca1a-4ac1-ac9a-98d34bbc9074" name="650e8322-a98a-4526-9c04-25702a702455" type="radio">
-</input><label class="sd-tab-label" for="59466faf-ca1a-4ac1-ac9a-98d34bbc9074">
+<input checked="checked" id="2ac9ffbf-322d-4af4-8c73-85f7a1367e21" name="23559b5c-a75a-4c72-b889-5ff4b80fef0a" type="radio">
+</input><label class="sd-tab-label" for="2ac9ffbf-322d-4af4-8c73-85f7a1367e21">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -549,8 +551,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="3f78d071-d913-4cba-a6ba-f4c24f3f849a" name="650e8322-a98a-4526-9c04-25702a702455" type="radio">
-</input><label class="sd-tab-label" for="3f78d071-d913-4cba-a6ba-f4c24f3f849a">
+<input id="cc0af450-424a-4ccf-9be1-ff4a60ab834e" name="23559b5c-a75a-4c72-b889-5ff4b80fef0a" type="radio">
+</input><label class="sd-tab-label" for="cc0af450-424a-4ccf-9be1-ff4a60ab834e">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -646,7 +648,7 @@ If you don’t get any messages, try to refresh your web browser page, or consul
 <p>We can now inspect the outputs of the Run.</p>
 <section id="the-run-log">
 <h3>The Run Log<a class="headerlink" href="#the-run-log" title="Permalink to this headline">#</a></h3>
-<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the workspace interface to view a summary of the Run as a nested JSON text object as shown below.</p>
+<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls to view a summary of the Run as a nested JSON text object as shown below.</p>
 <p>The ‘time’ entry corresponds to the time the Run Log file was generated, while the time stamps in the messages that appear in the ‘run_output’ and ‘paraboloid’ relate to the paraboloid compute function execution time. The inputs and outputs of the paraboloid component are available under the corresponding ‘paraboloid’ entries.</p>
 <p>To save a copy of the Run Log, select <code class="docutils literal notranslate"><span class="pre">Close</span></code> to return to the workspace view and then select <code class="docutils literal notranslate"><span class="pre">Download</span></code>. This should download two JSON files: the Run Log as ‘runlog.json’ and the copy of your work session as ‘dapta_input.json’.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_3.png"><img alt="run-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_3.png" style="width: 700px;" /></a>
