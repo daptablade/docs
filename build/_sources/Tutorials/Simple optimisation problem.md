@@ -1,5 +1,12 @@
 # Simple optimisation problem
 
+```{image} media/paraboloid_optimisation.gif
+:alt: paraboloid-surface
+:class: bg-primary mb-1
+:width: 400px
+:align: right
+```
+
 **Duration: 15 min**
 
 In this example we solve a simple analytical function minimisation problem. 

@@ -446,6 +446,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="simple-component-analysis">
 <h1>Simple component analysis<a class="headerlink" href="#simple-component-analysis" title="Permalink to this headline">#</a></h1>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_rotation.gif"><img alt="paraboloid-surface" class="bg-primary mb-1 align-right" src="../_images/paraboloid_rotation.gif" style="width: 400px;" /></a>
 <p><strong>Duration: 10 min</strong></p>
 <p>In our first example we explore the creation and analysis of a simple analytical function component.</p>
 <p>You don’t need to install or download anything to get started! We use python for all our examples, so a basic understanding of python syntax will be beneficial.</p>
@@ -494,8 +495,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="5aa6c62b-2b82-451b-89b9-f3f0c9946242" name="b56654f5-085b-42a1-95e2-98920bc028f6" type="radio">
-</input><label class="sd-tab-label" for="5aa6c62b-2b82-451b-89b9-f3f0c9946242">
+<input checked="checked" id="59466faf-ca1a-4ac1-ac9a-98d34bbc9074" name="650e8322-a98a-4526-9c04-25702a702455" type="radio">
+</input><label class="sd-tab-label" for="59466faf-ca1a-4ac1-ac9a-98d34bbc9074">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -506,7 +507,7 @@ setup</label><div class="sd-tab-content docutils">
     <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
     <span class="c1"># initalise setup_data keys - none for paraboloid</span>
@@ -548,8 +549,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="647d370e-7a14-42ee-8452-0189d5cf1745" name="b56654f5-085b-42a1-95e2-98920bc028f6" type="radio">
-</input><label class="sd-tab-label" for="647d370e-7a14-42ee-8452-0189d5cf1745">
+<input id="3f78d071-d913-4cba-a6ba-f4c24f3f849a" name="650e8322-a98a-4526-9c04-25702a702455" type="radio">
+</input><label class="sd-tab-label" for="3f78d071-d913-4cba-a6ba-f4c24f3f849a">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -561,7 +562,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Evaluates the equation f(x,y) = (x-3)^2 + xy + (y+4)^2 - 3.</span>
