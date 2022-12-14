@@ -11,7 +11,9 @@
 
 In our first example we explore the creation and analysis of a simple analytical function component.  
 
-You don't need to install or download anything to get started! We use python for all our examples, so a basic understanding of python syntax will be beneficial.
+All you need to get started is a text editor and your web browser. 
+No need to download or install anything! 
+However, as we will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).
 
 ## Component description 
 The paraboloid component solves the function
@@ -160,7 +162,7 @@ We can now inspect the outputs of the Run.
 
 ### The Run Log
 
-Select `View Log` in the workspace interface to view a summary of the Run as a nested JSON text object as shown below. 
+Select `View Log` in the interface controls to view a summary of the Run as a nested JSON text object as shown below. 
 
 The 'time' entry corresponds to the time the Run Log file was generated, while the time stamps in the messages that appear in the 'run_output' and 'paraboloid' relate to the paraboloid compute function execution time. The inputs and outputs of the paraboloid component are available under the corresponding 'paraboloid' entries.   
 

@@ -1,7 +1,7 @@
 # Simple optimisation problem
 
 ```{image} media/paraboloid_optimisation.gif
-:alt: paraboloid-surface
+:alt: paraboloid-optimisation 
 :class: bg-primary mb-1
 :width: 400px
 :align: right
@@ -43,7 +43,7 @@ In addition, we also upload a `requirements.txt` file, so that we can access the
 You can inspect the contents of the files below. 
 
 In the `compute.py` file, we can see that the imports include the 'numpy' and 'openmdao' packages that we listed in the `requirements.txt` file. 
-In addition, we import a `call_compute` function from the `component_api2.py` module that is specific to the `generic-python3-driver` API and allows the driver to execute other components. 
+In addition, we import a `call_compute` function from the `component_api2.py` module that is specific to the `generic-python3-driver` API and allows the driver to execute other components (this is the main difference with the `generic-python3-comp` API!). 
 
 The last import in the `compute.py` module (`from om_component import ...`) is specific to our component and provides a custom implementation of the openMDAO ExplicitComponent class. The contents of the `om_component.py` module are shown below and we will upload this as a Parameter input file in the next section.   
 

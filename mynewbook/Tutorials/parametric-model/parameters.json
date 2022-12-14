@@ -1,0 +1,24 @@
+{
+    "span": 2.0,
+    "chord": 0.2,
+    "filled_sections_flags": false,
+    "airfoil_csv_file": "naca0012.csv",
+    "nele_foil": [
+        10,
+        10
+    ],
+    "nele_span": 40,
+    "node_merge_tol": 0.002,
+    "cgx_ele_type": 10,
+    "cgx_solver": "abq",
+    "boundary_conditions": {
+        "fix_lines": [
+            0,
+            1
+        ],
+        "loaded_lines": [
+            5,
+            6
+        ]
+    }
+}

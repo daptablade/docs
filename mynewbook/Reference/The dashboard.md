@@ -52,5 +52,9 @@ A symbol appearing next to the name indicates the validity status of the compone
 
 ## Connections
 
+There are three types of connections....
+
+The data transferred through a Connection can be a JSON serialisable python object (this includes most python data types) or a file reference. 
+
 ## Run Controls
 
