@@ -10,11 +10,15 @@ from om_component import OMexplicitComp  # type: ignore
 
 
 def compute(
-    inputs: dict = None,
-    outputs: dict = None,
-    partials: dict = None,
-    options: dict = None,
-    parameters: dict = None,
+    inputs: dict = {"design": {}, "implicit": {}, "setup": {}},
+    outputs: dict = {"design": {}, "implicit": {}, "setup": {}},
+    partials: dict = {},
+    options: dict = {},
+    parameters: dict = {
+        "user_input_files": [],
+        "inputs_folder_path": "",
+        "outputs_folder_path": "",
+    },
 ) -> dict:
 
     """Editable compute function."""
@@ -188,6 +192,9 @@ def run_optimisation(prob, parameters, run_folder):
     prob.setup()
 
     if "visualise" in parameters and "scaling_report" in parameters["visualise"]:
+        # NOTE: running the model can generate large large amounts of stored data in orchestrator, which
+        # can cause prob.setup() to fail if it is called again, so only execute
+        # prob.run_model() after all setup has been completed
         with open(run_folder / "scaling_report.log", "w") as f:
             with redirect_stdout(f):
                 prob.run_model()

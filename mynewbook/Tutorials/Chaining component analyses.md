@@ -1,7 +1,8 @@
 # Chaining component analyses
 
+# TODO: remove the setup data keys from the setup.py files and check runs
 
-**Duration: 30 min**
+**Duration: 45 min**
 
 In this tutorial we explore the usage of Connections to chain the execution of Components. 
 The example also introduces a finite element analysis specific 'calculix-fea-comp' component API.  
@@ -15,10 +16,11 @@ The example also introduces a finite element analysis specific 'calculix-fea-com
 
 ## Create the Components
 
-This example replicates the chained analyses described in Parts 1 and 2 of our [Parametric wing model series](https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ) that make use of python and the open source finite element analysis software [CalculiX GraphiX and CrunchiX](http://www.dhondt.de/) to create and analyse a parametric composite wing model. 
+This example replicates the chained analyses described in Parts 1 and 2 of the [Parametric wing model series](https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ). 
+We make use of python and the open source software [CalculiX GraphiX](http://www.dhondt.de/) to create a parametric finite element model of a composite wing subject to a static tip load, which is then analysed using [CalculiX CrunchiX](http://www.dhondt.de/).
 
-This tutorial doesn't go into the details of the python code, since this was already covered in the videos and associated blog posts (see [References]{tutorials-Chaining_component_analyses-references}). 
-Our main focus here is to show how the previously monolithic python code can be split into discrete and potentially re-usable Components.   
+We show how the previously monolithic python code can be split into discrete and potentially re-usable Components.   
+This tutorial doesn't go into the details of the python code, which were previously covered in the videos and associated blog posts (see [references 1 and 2](tutorials-chaining-component-analyses-references)). 
 
 We group the parametric model analysis processes into three distinct Components as shown in the figure below. 
 
@@ -295,7 +297,7 @@ It may take a minute or so for the Cloud session to be reset.
 You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted. 
 ```
 
-(tutorials-Chaining_component_analyses-references)=
+(tutorials-chaining-component-analyses-references)=
 ## References:
 
 1. [Parametric FEM model creation with Python and CalculiX GraphiX (cgx)](https://www.dapta.com/parametric-fem-model-creation-with-python-and-calculix-graphix-cgx/)

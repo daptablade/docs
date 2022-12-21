@@ -4,11 +4,15 @@ import numpy as np
 
 
 def compute(
-    inputs: dict = None,
-    outputs: dict = None,
-    partials: dict = None,
-    options: dict = None,
-    parameters: dict = None,
+    inputs: dict = {"design": {}, "implicit": {}, "setup": {}},
+    outputs: dict = {"design": {}, "implicit": {}, "setup": {}},
+    partials: dict = {},
+    options: dict = {},
+    parameters: dict = {
+        "user_input_files": [],
+        "inputs_folder_path": "",
+        "outputs_folder_path": "",
+    },
 ) -> dict:
 
     """Editable compute function."""

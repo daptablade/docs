@@ -3,19 +3,20 @@ from pathlib import Path
 
 
 def setup(
-    inputs: dict = None,
-    outputs: dict = None,
-    partials: dict = None,
-    parameters: dict = None,
+    inputs: dict = {"design": {}, "implicit": {}, "setup": {}},
+    outputs: dict = {"design": {}, "implicit": {}, "setup": {}},
+    parameters: dict = {
+        "user_input_files": [],
+        "inputs_folder_path": "",
+        "outputs_folder_path": "",
+    },
 ) -> dict:
     """Editable setup function."""
 
     if "driver" not in parameters:
         # assume we want to run an optimisation with default settings
-        driver = {"type": "optimisation"}
-    else:
-        driver = parameters["driver"]
+        parameters["driver"] = {"type": "optimisation"}
 
     message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Setup completed."
 
-    return {"message": message, "driver": driver}
+    return {"message": message, "parameters": parameters}
