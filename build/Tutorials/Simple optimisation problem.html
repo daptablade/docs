@@ -484,35 +484,36 @@ In addition, we import a <code class="docutils literal notranslate"><span class=
 <p>The last import in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">om_component</span> <span class="pre">import</span> <span class="pre">...</span></code>) is specific to our component and provides a custom implementation of the openMDAO ExplicitComponent class. The contents of the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module are shown below and we will upload this as a Parameter input file in the next section.</p>
 <p>Finally, check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option as shown below.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-files">
-<input checked="checked" id="0c47fc5d-d46a-4dd2-b17c-03f45fbe27be" name="698e3971-4343-42d9-ac56-ae5479dba494" type="radio">
-</input><label class="sd-tab-label" for="0c47fc5d-d46a-4dd2-b17c-03f45fbe27be">
+<input checked="checked" id="f31625e7-0cc6-48d8-b959-228afd5df596" name="cec6c3fb-2c81-4c80-b46c-956e98b3d18a" type="radio">
+</input><label class="sd-tab-label" for="f31625e7-0cc6-48d8-b959-228afd5df596">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="s2">&quot;driver&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
         <span class="c1"># assume we want to run an optimisation with default settings</span>
-        <span class="n">driver</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;optimisation&quot;</span><span class="p">}</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">driver</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;driver&quot;</span><span class="p">]</span>
+        <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;driver&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;optimisation&quot;</span><span class="p">}</span>
 
     <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
 
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="n">driver</span><span class="p">}</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;parameters&quot;</span><span class="p">:</span> <span class="n">parameters</span><span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<input id="2ab3d147-af4e-44b3-90d6-bb19ae8a6c41" name="698e3971-4343-42d9-ac56-ae5479dba494" type="radio">
-</input><label class="sd-tab-label" for="2ab3d147-af4e-44b3-90d6-bb19ae8a6c41">
+<input id="2f3d5577-0003-4ac7-899a-03b4e6d856ae" name="cec6c3fb-2c81-4c80-b46c-956e98b3d18a" type="radio">
+</input><label class="sd-tab-label" for="2f3d5577-0003-4ac7-899a-03b4e6d856ae">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -526,11 +527,15 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
@@ -704,6 +709,9 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">prob</span><span class="o">.</span><span class="n">setup</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="s2">&quot;visualise&quot;</span> <span class="ow">in</span> <span class="n">parameters</span> <span class="ow">and</span> <span class="s2">&quot;scaling_report&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;visualise&quot;</span><span class="p">]:</span>
+        <span class="c1"># NOTE: running the model can generate large large amounts of stored data in orchestrator, which</span>
+        <span class="c1"># can cause prob.setup() to fail if it is called again, so only execute</span>
+        <span class="c1"># prob.run_model() after all setup has been completed</span>
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;scaling_report.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
                 <span class="n">prob</span><span class="o">.</span><span class="n">run_model</span><span class="p">()</span>
@@ -760,16 +768,16 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cec947bb-320f-4045-b6ce-b7528119918a" name="698e3971-4343-42d9-ac56-ae5479dba494" type="radio">
-</input><label class="sd-tab-label" for="cec947bb-320f-4045-b6ce-b7528119918a">
+<input id="2d144467-2589-4b2b-af7a-d63819d6c257" name="cec6c3fb-2c81-4c80-b46c-956e98b3d18a" type="radio">
+</input><label class="sd-tab-label" for="2d144467-2589-4b2b-af7a-d63819d6c257">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 openmdao == 3.16.0
 </pre></div>
 </div>
 </div>
-<input id="b004bcfc-7969-4b1c-b36a-70a75178942b" name="698e3971-4343-42d9-ac56-ae5479dba494" type="radio">
-</input><label class="sd-tab-label" for="b004bcfc-7969-4b1c-b36a-70a75178942b">
+<input id="57e4afc2-e8d5-4b93-9538-74cebd8b0fef" name="cec6c3fb-2c81-4c80-b46c-956e98b3d18a" type="radio">
+</input><label class="sd-tab-label" for="57e4afc2-e8d5-4b93-9538-74cebd8b0fef">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -916,8 +924,8 @@ om_component</label><div class="sd-tab-content docutils">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the ‘unconstrained’ parameters JSON object into the text box.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-parameters">
-<input checked="checked" id="08a708e3-0199-49f8-965f-e0a9d4d6bd4f" name="12369793-857d-4bcf-89f7-2f7ec3e497ff" type="radio">
-</input><label class="sd-tab-label" for="08a708e3-0199-49f8-965f-e0a9d4d6bd4f">
+<input checked="checked" id="01b30fd1-5733-4d83-bd25-121709201e55" name="06c2eaaa-8ee4-46b7-a897-808cbb47d8ca" type="radio">
+</input><label class="sd-tab-label" for="01b30fd1-5733-4d83-bd25-121709201e55">
 unconstrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -964,8 +972,8 @@ unconstrained</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cd501f2f-4373-4554-8a78-79d2674a5853" name="12369793-857d-4bcf-89f7-2f7ec3e497ff" type="radio">
-</input><label class="sd-tab-label" for="cd501f2f-4373-4554-8a78-79d2674a5853">
+<input id="0daa6c00-4376-4492-84d5-a7870e1b6cda" name="06c2eaaa-8ee4-46b7-a897-808cbb47d8ca" type="radio">
+</input><label class="sd-tab-label" for="0daa6c00-4376-4492-84d5-a7870e1b6cda">
 constrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1057,13 +1065,13 @@ We will demonstrate the benefits of this approach in the next section by replaci
 </section>
 <section id="executing-the-driver">
 <h2>Executing the driver<a class="headerlink" href="#executing-the-driver" title="Permalink to this headline">#</a></h2>
-<p>We should now have a valid Run with two components: the paraboloid analysis and the open-mdao driver.</p>
-<p>Execute the Run by selecting the play symbol ▶ in the Run controls interface and wait for it to complete.
-As before, this may take a few minutes as your Run is being processed in the Cloud.
-If you don’t get a message saying that the Run was successful, try to refresh your web browser page or consult the <a class="reference internal" href="../Reference/FAQs.html"><span class="doc std std-doc">FAQ</span></a> section for troubleshooting suggestions.</p>
+<p>We should now have a valid <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> with two components: the paraboloid analysis and the open-mdao driver.</p>
+<p>Execute the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> controls interface and wait for it to complete.
+As before, this may take a few minutes as your <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> is being processed in the Cloud.
+If you don’t get a message saying that the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> was successful, try to refresh your web browser page or consult the <a class="reference internal" href="../Reference/FAQs.html"><span class="doc std std-doc">FAQ</span></a> section for troubleshooting suggestions.</p>
 <section id="the-unconstrained-optimisation-problem">
 <h3>The unconstrained optimisation problem<a class="headerlink" href="#the-unconstrained-optimisation-problem" title="Permalink to this headline">#</a></h3>
-<p>We can now inspect the outputs of the unconstrained optimisation Run.</p>
+<p>We can now inspect the outputs of the unconstrained optimisation <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
 <p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> to view the Run log as shown below.
 The optimisation outcome is summarised in the ‘open-mdao’ entry, which indicates that the optimisation completed successfully.
 The optimisation input values (x, y) converged to the known analytical solution within a few decimals (<span class="math notranslate nohighlight">\(x=\frac{20}{3}\)</span>, <span class="math notranslate nohighlight">\(y=-\frac{22}{3}\)</span>).
@@ -1093,7 +1101,7 @@ This file provides some interesting insights into the optimisation process.</p>
 <p>It appears that the SLSQP optimisation converged to an optimum after 4 iterations, which included 5 ‘Function evaluations’ to calculate the function outputs and 4 ‘Gradient evaluations’ to calculate the derivatives (gradient) of the paraboloid function with respect to the design variables x and y.</p>
 <p>Looking at the frequency of the ‘Calling compute’ message in the last iteration, we can see that the ‘Function evaluation’ executed the paraboloid component once and that the ‘Gradient computation’ executed it twice (once for each design variable).
 This is because we requested the finite difference gradient calculation method by setting <code class="docutils literal notranslate"><span class="pre">&quot;approx_totals&quot;:</span> <span class="pre">true</span></code> in the in the Parameters (with the ‘fd_step’ parameter setting the size of the step).</p>
-<p>The paraboloid component was therefore executed a total of 13 times, which matches the Run log output.</p>
+<p>The paraboloid component was therefore executed a total of 13 times, which matches the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log output.</p>
 <p>Save the session data and Run log by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Driver</span> <span class="n">debug</span> <span class="nb">print</span> <span class="k">for</span> <span class="nb">iter</span> <span class="n">coord</span><span class="p">:</span> <span class="n">rank0</span><span class="p">:</span><span class="n">ScipyOptimize_SLSQP</span><span class="o">|</span><span class="mi">5</span>
 <span class="o">--------------------------------------------------------------</span>
@@ -1143,7 +1151,7 @@ This is because we requested the finite difference gradient calculation method b
 \[ 
   0.0 \leq g(x,y) \leq 10.0  \quad , \quad g(x,y) = x + y  . 
 \]</div>
-<p>Instead of adding another component to the Run, we can implement this simple constraint using an openMDAO <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/features/building_blocks/components/exec_comp.html">ExecComp</a> component.</p>
+<p>Instead of adding another component to the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>, we can implement this simple constraint using an openMDAO <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/features/building_blocks/components/exec_comp.html">ExecComp</a> component.</p>
 <p>Select the open-mdao component in the workspace to edit it, navigate to the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab, and copy and paste the <a class="reference internal" href="#tutorials-open-mdao-paraboloid-parameters"><span class="std std-ref">constrained</span></a> Parameter values.</p>
 <p>A few changes have been made compared to the unconstrained problem Parameters:</p>
 <ul class="simple">
@@ -1155,13 +1163,13 @@ This is because we requested the finite difference gradient calculation method b
 <p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p>
 <p>Note that it is not necessary to upload the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module again.
 To verify this, you can open the open-mdao component <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and the file entry should appear again under ‘user_input_files’, just as before.</p>
-<p>Create a new Run by selecting the play symbol ▶ in the Run controls interface.
+<p>Create a new <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> controls interface.
 This should execute very quickly.</p>
 <p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> to view the Run log as shown below.
 The open-mdao component entry lists optimal x and y values for the constrained problem, which have converged within a few decimals of the analytical solution (<span class="math notranslate nohighlight">\(x=7\)</span>, <span class="math notranslate nohighlight">\(y=-7\)</span>).</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-paraboloid-3.png"><img alt="run-log-open-mdao-paraboloid-constrained" class="bg-primary mb-1 align-center" src="../_images/open-mdao-paraboloid-3.png" style="width: 700px;" /></a>
 <p>Select the open-mdao component in the workspace, open the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and select <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.</p>
-<p>Visually compare the N2 diagram (n2.html) shown below with that from the previous Run.<br />
+<p>Visually compare the N2 diagram (n2.html) shown below with that from the previous <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.<br />
 The new constraint component appears as another Explicit Component under the paraboloid component.</p>
 <p>Next, inspect the ‘run_driver.log’ output file.
 Only 2 iterations, with 2 ‘Function evaluations’ and 2 ‘Gradient evaluations’ were required to reach convergence.
@@ -1178,7 +1186,7 @@ With one paraboloid component evaluation yielding derivatives with respect to al
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted.</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> data (session data, inputs and outputs) will be permanently deleted.</p>
 </div>
 </section>
 <section id="references">

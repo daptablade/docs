@@ -451,7 +451,7 @@ title="Print to PDF"
 <p>In our first example we explore the creation and analysis of a simple analytical function component.</p>
 <p>All you need to get started is a text editor and your web browser.
 No need to download or install anything!
-However, as We will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).</p>
+However, as we will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).</p>
 <section id="component-description">
 <h2>Component description<a class="headerlink" href="#component-description" title="Permalink to this headline">#</a></h2>
 <p>The paraboloid component solves the function</p>
@@ -480,7 +480,7 @@ Fill in a component name, <code class="docutils literal notranslate"><span class
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_1.png"><img alt="properties-tab-empty" class="bg-primary mb-1 align-center" src="../_images/paraboloid_1.png" style="width: 700px;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Component Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces.</p>
+<p><a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces.</p>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
@@ -497,22 +497,57 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="2ac9ffbf-322d-4af4-8c73-85f7a1367e21" name="23559b5c-a75a-4c72-b889-5ff4b80fef0a" type="radio">
-</input><label class="sd-tab-label" for="2ac9ffbf-322d-4af4-8c73-85f7a1367e21">
+<input checked="checked" id="7ec28ba0-434a-4c09-9a6e-5b518556bc52" name="a16ed673-95d9-4d52-94c6-b3711e9d5465" type="radio">
+</input><label class="sd-tab-label" for="7ec28ba0-434a-4c09-9a6e-5b518556bc52">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.</span>
 
-    <span class="c1"># initalise setup_data keys - none for paraboloid</span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs: dict</span>
+<span class="sd">        The component Inputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    outputs: dict</span>
+<span class="sd">        The component Outputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The component Parameters as defined in the component &#39;Parameters&#39; tab.</span>
+<span class="sd">        Includes the following special keys:</span>
+<span class="sd">        &#39;user_input_files&#39;: list of user-uploaded input file filenames</span>
+<span class="sd">        &#39;inputs_folder_path&#39;: path to all user and connection input files (str)</span>
+<span class="sd">        &#39;outputs_folder_path&#39;: path to component outputs folder (str)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dictionary of JSON-serialisable keys and values, including:</span>
+<span class="sd">        inputs: dict, optional</span>
+<span class="sd">            The setup function can assign values to input keys, but the inputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        outputs: dict, optional</span>
+<span class="sd">            The setup function can assign values to output keys, but the outputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        parameters: dict, optional</span>
+<span class="sd">            The setup function can add key/value pairs to the parameters dict,</span>
+<span class="sd">            but the existing key/value pairs cannot be modified.</span>
+<span class="sd">        partials: dict, optional</span>
+<span class="sd">            The derivatives of the component&#39;s &quot;design&quot; outputs with respect to its</span>
+<span class="sd">            &quot;design&quot; inputs, used for gradient-based design optimisation Runs.</span>
+<span class="sd">        message: str, optional</span>
+<span class="sd">            A setup message that will appear in the Run log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="c1"># set default inputs</span>
@@ -551,24 +586,57 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cc0af450-424a-4ccf-9be1-ff4a60ab834e" name="23559b5c-a75a-4c72-b889-5ff4b80fef0a" type="radio">
-</input><label class="sd-tab-label" for="cc0af450-424a-4ccf-9be1-ff4a60ab834e">
+<input id="c9b92b75-db54-4f6c-940a-2f4660bc82d2" name="a16ed673-95d9-4d52-94c6-b3711e9d5465" type="radio">
+</input><label class="sd-tab-label" for="c9b92b75-db54-4f6c-940a-2f4660bc82d2">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable compute function.</span>
 
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Evaluates the equation f(x,y) = (x-3)^2 + xy + (y+4)^2 - 3.</span>
-<span class="sd">    Minimum at: x = 6.6667; y = -7.3333</span>
+<span class="sd">    Here the compute function evaluates the equation</span>
+<span class="sd">    f(x,y) = (x-3)^2 + xy + (y+4)^2 - 3.</span>
+<span class="sd">    with function minimum at: x = 20/3; y = -22/3</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs: dict</span>
+<span class="sd">        The component Inputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    outputs: dict</span>
+<span class="sd">        The component Outputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    partials: dict, optional</span>
+<span class="sd">        The derivatives of the component&#39;s &quot;design&quot; outputs with respect to its</span>
+<span class="sd">        &quot;design&quot; inputs, used for gradient-based design optimisation Runs.</span>
+<span class="sd">    options: dict, optional</span>
+<span class="sd">        component data processing options and flags, inc. : &quot;stream_call&quot;,</span>
+<span class="sd">        &quot;get_outputs&quot;, &quot;get_grads&quot;</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The component Parameters as returned by the setup function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dictionary of JSON-serialisable keys and values, including:</span>
+<span class="sd">        outputs: dict, optional</span>
+<span class="sd">            The compute function can assign values to output keys, but the outputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        partials: dict, optional</span>
+<span class="sd">            The compute function can assign values to partials keys, but the</span>
+<span class="sd">            partials keys should not be modified.</span>
+<span class="sd">        message: str, optional</span>
+<span class="sd">            A compute message that will appear in the Run log.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">x</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;x&quot;</span><span class="p">]</span>
@@ -593,7 +661,7 @@ compute</label><div class="sd-tab-content docutils">
 </div>
 <p>For each file, copy the contents above into a text editor and save it locally. Make sure you include the ‘.py’ extension in the file name.</p>
 <p>Next, select <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> in the component interface to upload the corresponding file. A green tick and a file upload time stamp should appear to confirm that the upload was successful. Repeat for the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> file.</p>
-<p>Check the boxes next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options (since we only have one component in this Run), as shown below.</p>
+<p>Check the boxes next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options (since we only have one component in this <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>), as shown below.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_2.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_images/paraboloid_2.png" style="width: 700px;" /></a>
 <p>Finally, select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close the component interface.</p>
 <p>In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid.
@@ -614,13 +682,13 @@ To avoid this situation you should save your edited components regularly and the
 <span class="p">}</span>
 </pre></div>
 </div>
-<p>We define Parameters as values that the component needs to execute, but that are not Inputs from other Components.
+<p>We define Parameters as values that the component needs to execute, but that are not Inputs from other <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
 For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example <a class="reference internal" href="Chaining%20component%20analyses.html"><span class="doc std std-doc">Chaining component analyses</span></a>.</p>
 </section>
 <section id="inputs-and-outputs">
 <h3>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Permalink to this headline">#</a></h3>
 <p>Open the component to edit it and add the following JSON objects into the text boxes in the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs.
-By defining the paraboloid function inputs and outputs as Component Inputs and Outputs respectively, we can expose these values to other Run components, such as drivers.
+By defining the paraboloid function inputs and outputs as <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> Inputs and Outputs respectively, we can expose these values to other <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> components, such as drivers.
 We will explore this in the next tutorial <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a>.</p>
 <p>Input Handles:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
@@ -641,14 +709,14 @@ We will explore this in the next tutorial <a class="reference internal" href="Si
 </section>
 <section id="component-analysis">
 <h2>Component analysis<a class="headerlink" href="#component-analysis" title="Permalink to this headline">#</a></h2>
-<p>All being well, you should now be able to launch a Run by selecting the play symbol ▶ in the Run controls interface.
-The control symbols will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time.
-Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that ‘The Run has completed successfully’.
+<p>All being well, you should now be able to launch a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> controls interface.
+The control symbols will start to fade in and out as your <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> is sent for analysis in the Cloud, this may take a few minutes the first time.
+Eventually, the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should execute (this will happen very quickly) and you should see an alert window confirming that ‘The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> has completed successfully’.
 If you don’t get any messages, try to refresh your web browser page, or consult the <a class="reference internal" href="../Reference/FAQs.html"><span class="doc std std-doc">FAQ</span></a> section for troubleshooting suggestions.</p>
-<p>We can now inspect the outputs of the Run.</p>
+<p>We can now inspect the outputs of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
 <section id="the-run-log">
 <h3>The Run Log<a class="headerlink" href="#the-run-log" title="Permalink to this headline">#</a></h3>
-<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls to view a summary of the Run as a nested JSON text object as shown below.</p>
+<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls to view a summary of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> as a nested JSON text object as shown below.</p>
 <p>The ‘time’ entry corresponds to the time the Run Log file was generated, while the time stamps in the messages that appear in the ‘run_output’ and ‘paraboloid’ relate to the paraboloid compute function execution time. The inputs and outputs of the paraboloid component are available under the corresponding ‘paraboloid’ entries.</p>
 <p>To save a copy of the Run Log, select <code class="docutils literal notranslate"><span class="pre">Close</span></code> to return to the workspace view and then select <code class="docutils literal notranslate"><span class="pre">Download</span></code>. This should download two JSON files: the Run Log as ‘runlog.json’ and the copy of your work session as ‘dapta_input.json’.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_3.png"><img alt="run-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_3.png" style="width: 700px;" /></a>
@@ -656,18 +724,18 @@ If you don’t get any messages, try to refresh your web browser page, or consul
 <section id="the-component-log">
 <h3>The Component Log<a class="headerlink" href="#the-component-log" title="Permalink to this headline">#</a></h3>
 <p>Select the component again and navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab as shown below.</p>
-<p>Both the Run Log and the Component Log are updated as the Run executes, which allows us to monitor progress and view intermediary results.
-The Component Log lists events related to the component in order of time of occurrence. A ‘SETUP’ event corresponds to the execution of the component’s setup function and a ‘COMPUTE’ event corresponds to the execution of the compute function, as defined in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current Run. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page.</p>
+<p>Both the Run Log and the Component Log are updated as the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> executes, which allows us to monitor progress and view intermediary results.
+The Component Log lists events related to the component in order of time of occurrence. A ‘SETUP’ event corresponds to the execution of the component’s setup function and a ‘COMPUTE’ event corresponds to the execution of the compute function, as defined in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page.</p>
 <p>The Component Log has another important function: if errors occur during the execution of the component, the Log will list an ‘ERROR’ event with a description of the error message and traceback information.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab also includes a <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code> link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace for this component.
-Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the Run Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
+Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_4.png"><img alt="component-log" class="bg-primary mb-1 align-center" src="../_images/paraboloid_4.png" style="width: 700px;" /></a>
 </section>
 </section>
 <section id="editing-a-run">
 <h2>Editing a Run<a class="headerlink" href="#editing-a-run" title="Permalink to this headline">#</a></h2>
-<p>Once you have successfully started a Run, the session and all associated data will be saved in the Cloud until you decide to overwrite or delete it.</p>
-<p>A Run can only be edited once it has been stopped (using the stop symbol ⏹) or once it has completed successfully. The second time a Run is started it will execute much faster since the processes are already set up in the Cloud, except if you renamed, added or removed components, in which case the existing Run will need to be deleted first. Try this by editing the x and y values in the paraboloid component Parameters and starting the Run again.</p>
+<p>Once you have successfully started a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>, the session and all associated data will be saved in the Cloud until you decide to overwrite or delete it.</p>
+<p>A <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> can only be edited once it has been stopped (using the stop symbol ⏹) or once it has completed successfully. The second time a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> is started it will execute much faster since the processes are already set up in the Cloud, except if you renamed, added or removed components, in which case the existing <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> will need to be deleted first. Try this by editing the x and y values in the paraboloid component Parameters and starting the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> again.</p>
 </section>
 <section id="clean-up">
 <h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
@@ -675,7 +743,7 @@ Save this data, along with the JSON formatted version of your session (‘dapta_
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted.</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> data (session data, inputs and outputs) will be permanently deleted.</p>
 </div>
 </section>
 <section id="references">

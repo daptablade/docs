@@ -306,13 +306,30 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#is-my-data-secure">
-   Is my data secure?
+  <a class="reference internal nav-link" href="#who-can-see-my-data">
+   Who can see my data?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#something-is-broken-what-should-i-do">
-   Something is broken - what should I do?
+  <a class="reference internal nav-link" href="#troubleshooting">
+   Troubleshooting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#is-it-a-component-error">
+     Is it a component error?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#something-else-is-broken-what-can-i-do">
+     Something else is broken - what can I do?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contact-support">
+   Contact support
   </a>
  </li>
 </ul>
@@ -345,13 +362,30 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#is-my-data-secure">
-   Is my data secure?
+  <a class="reference internal nav-link" href="#who-can-see-my-data">
+   Who can see my data?
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#something-is-broken-what-should-i-do">
-   Something is broken - what should I do?
+  <a class="reference internal nav-link" href="#troubleshooting">
+   Troubleshooting
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#is-it-a-component-error">
+     Is it a component error?
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#something-else-is-broken-what-can-i-do">
+     Something else is broken - what can I do?
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#contact-support">
+   Contact support
   </a>
  </li>
 </ul>
@@ -372,12 +406,47 @@ title="Print to PDF"
 </section>
 <section id="how-big-a-job-can-i-run">
 <h2>How big a job can I run?<a class="headerlink" href="#how-big-a-job-can-i-run" title="Permalink to this headline">#</a></h2>
+<p>Current maximum user resource limits for the trial version are:</p>
+<ul class="simple">
+<li><p><strong>5 components</strong> including a driver.</p></li>
+<li><p><strong>1 Giga byte (Gi) Memory</strong> per component</p></li>
+<li><p><strong>1 CPU</strong> per component</p></li>
+<li><p><strong>1 Mega byte (Mi)</strong> storage per uploaded file</p></li>
+<li><p><strong>5 user input files</strong> per component (not including API files)</p></li>
+<li><p><strong>24 hours</strong> per <a class="reference internal" href="Glossary.html#term-Run"><span class="xref std std-term">Run</span></a></p></li>
+</ul>
+<p>You may encounter component resource error messages when these limits are exceeded.</p>
 </section>
-<section id="is-my-data-secure">
-<h2>Is my data secure?<a class="headerlink" href="#is-my-data-secure" title="Permalink to this headline">#</a></h2>
+<section id="who-can-see-my-data">
+<h2>Who can see my data?<a class="headerlink" href="#who-can-see-my-data" title="Permalink to this headline">#</a></h2>
+<p>Your <a class="reference internal" href="Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> data is saved on cloud resources managed by our cloud service provider <a class="reference external" href="https://www.digitalocean.com/legal/terms-of-service-agreement">DigitalOcean</a>.
+Although your data is password controlled, we recommend that you do not upload any sensitive data to the Dapta platform at this time.<br />
+We may also need to access your data for support and system maintenance purposes.</p>
 </section>
-<section id="something-is-broken-what-should-i-do">
-<h2>Something is broken - what should I do?<a class="headerlink" href="#something-is-broken-what-should-i-do" title="Permalink to this headline">#</a></h2>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this headline">#</a></h2>
+<section id="is-it-a-component-error">
+<h3>Is it a component error?<a class="headerlink" href="#is-it-a-component-error" title="Permalink to this headline">#</a></h3>
+<p>Sometimes you will encounter bugs and execution errors related to the user-defined component code.
+In the workspace view, a component with a warning triangle signals a component error.
+You can view the error message and traceback information in the component Log.
+To resolve a component error, modify the affected component input file and upload it again. Then restart the <a class="reference internal" href="Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
+</section>
+<section id="something-else-is-broken-what-can-i-do">
+<h3>Something else is broken - what can I do?<a class="headerlink" href="#something-else-is-broken-what-can-i-do" title="Permalink to this headline">#</a></h3>
+<p>Refresh your browser to see if this resolves the problem. Wait a few minutes between refresh attempts, as cloud processes can take some time to complete. This is particularly the case when you are starting a new <a class="reference internal" href="Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> for the first time or clearing your session.</p>
+<p>You can force terminate a session (stop a run and delete everything) by selecting the <code class="docutils literal notranslate"><span class="pre">Terminate</span></code> option from the <code class="docutils literal notranslate"><span class="pre">Interface</span> <span class="pre">Controls</span> <span class="pre">&gt;</span> <span class="pre">...</span> <span class="pre">&gt;</span> <span class="pre">Run</span> <span class="pre">Management</span></code> Menu.</p>
+</section>
+</section>
+<section id="contact-support">
+<h2>Contact support<a class="headerlink" href="#contact-support" title="Permalink to this headline">#</a></h2>
+<p>You can reach our support team via email or via our website chat option.
+For bug reports, please include screenshots and other details in your message.<br />
+We will review your support request and get back to you as soon as possible.</p>
+<ul class="simple">
+<li><p><strong>website chat</strong>: navigate to <a class="reference external" href="https://www.dapta.com">www.dapta.com</a> and click the “chat” button in the bottom right of the window.</p></li>
+<li><p><strong>email</strong>: <a class="reference external" href="mailto:support&#37;&#52;&#48;dapta&#46;com">support<span>&#64;</span>dapta<span>&#46;</span>com</a></p></li>
+</ul>
 </section>
 </section>
 

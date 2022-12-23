@@ -1,9 +1,9 @@
 # Chaining component analyses
 
 
-**Duration: 30 min**
+**Duration: 45 min**
 
-In this tutorial we explore the usage of Connections to chain the execution of Components. 
+In this tutorial we explore the usage of {term}`Connection`s to chain the execution of {term}`Component`s. 
 The example also introduces a finite element analysis specific 'calculix-fea-comp' component API.  
 
 ```{image} media/parametric-model-1.png
@@ -15,12 +15,13 @@ The example also introduces a finite element analysis specific 'calculix-fea-com
 
 ## Create the Components
 
-This example replicates the chained analyses described in Parts 1 and 2 of our [Parametric wing model series](https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ) that make use of python and the open source finite element analysis software [CalculiX GraphiX and CrunchiX](http://www.dhondt.de/) to create and analyse a parametric composite wing model. 
+This example replicates the chained analyses described in Parts 1 and 2 of the [Parametric wing model series](https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ). 
+We make use of python and the open source software [CalculiX GraphiX](http://www.dhondt.de/) to create a parametric finite element model of a composite wing subject to a static tip load, which is then analysed using [CalculiX CrunchiX](http://www.dhondt.de/).
 
-This tutorial doesn't go into the details of the python code, since this was already covered in the videos and associated blog posts (see [References]{tutorials-Chaining_component_analyses-references}). 
-Our main focus here is to show how the previously monolithic python code can be split into discrete and potentially re-usable Components.   
+We show how the previously monolithic python code can be split into discrete and potentially re-usable {term}`Component`s.
+The details of the python code were previously covered in the videos and associated blog posts (see [references 1 and 2](tutorials-chaining-component-analyses-references)). 
 
-We group the parametric model analysis processes into three distinct Components as shown in the figure below. 
+We group the parametric model analysis processes into three distinct {term}`Component`s as shown in the figure below. 
 
 ```{image} media/parametric-model-2.png
 :alt: chained-process-components
@@ -222,17 +223,17 @@ Remember to save the session data now by selecting `Download` from the interface
 
 ## Create the Connections
 
-We can now connect the Components we created to ensure that outputs and inputs are passed between them as expected. A Connection is defined as a data link from a Component output handle to another Component input handle. 
+We can now connect the {term}`Component`s we created to ensure that outputs and inputs are passed between them as expected. A {term}`Connection` is defined as a data link from a {term}`Component` output handle to another {term}`Component` input handle. 
 
 ### First connection 
 
 Create a first connection by selecting the output handle of the parametric-model component and dragging a line to the 'files.cgx_file' input handle of the calculix-fea component. 
 Hover the mouse pointer over a handle to see the name of the associated input or output data appear below the component.   
 
-By default, a new connection is a 'Design variable' type connection (black line), that is not valid for transferring files (see the TODO Reference entry for details).  
+By default, a new connection is a 'Design variable' type connection (black line), that is not valid for transferring files (see the dashboard Reference section for details).  
 
-Edit the Connection by selecting it in the workspace. 
-In the `Properties` tab change the Connection Type option from the default 'Design variable' to the 'Implicit variable or file' option by selecting the corresponding radio button.
+Edit the {term}`Connection` by selecting it in the workspace. 
+In the `Properties` tab change the {term}`Connection` Type option from the default 'Design variable' to the 'Implicit variable or file' option by selecting the corresponding radio button.
 
 Select `Save data` to save the change and close the connection interface.
 Verify that the connection line colour has become green, which indicates an 'implicit' type data connection. 
@@ -258,23 +259,23 @@ The four connection objects should appear under the 'connections' key in the ses
 
 ## Execute the workflow
 
-We can now execute the chained component analysis Run by selecting the play symbol ▶ in the Run controls interface. 
+We can now execute the chained component analysis {term}`Run` by selecting the play symbol ▶ in the Run controls interface. 
 
 Once the run has started, each component with setup and then execute one at a time. 
-The setup order is arbitrary, but the compute functions will always be executed from the 'Start Node' to the 'End Node' (see TODO Reference manual section on valid workflows).
+The setup order is arbitrary, but the compute functions will always be executed from the 'Start Node' to the 'End Node' (see dashboard Reference section for details).
 
-The Run should complete once the fea-results-component compute has completed.
+The {term}`Run` should complete once the fea-results-component compute has completed.
 
 ## Inspect the outputs
 
-The Run log summarises the output of the components. Open the log by selecting `View Log` in the interface controls. 
+The {term}`Run` log summarises the output of the components. Open the log by selecting `View Log` in the interface controls. 
 
 Scroll down to the "run_output" section to see that this contains the compute function output messages from all three components in the order of execution as shown below. 
 The last message contains the wing tip deflection and rotation data as expected.
 
 Also inspect the `Log` tab of all 3 components and download the file snapshots to view the input, connection and output files of all components. 
 
-Save the session data and the Run log now by selecting `Download` from the interface controls. 
+Save the session data and the {term}`Run` log now by selecting `Download` from the interface controls. 
 
 ```{note}
 The 'connections' folder that appears in the 'files snapshot' zip folder contains any incoming connection files. This is to differentiate them from parametric and API input files in the user file storage system, where these files exist as symbolic links to the upstream component file to improve efficiency. However, the connection files are copied into the `parameters["inputs_folder_path"]` before the compute function starts.    
@@ -292,10 +293,10 @@ Delete your session by selecting `New` in the interface.
 It may take a minute or so for the Cloud session to be reset. 
 
 ```{warning}
-You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted. 
+You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` data (session data, inputs and outputs) will be permanently deleted. 
 ```
 
-(tutorials-Chaining_component_analyses-references)=
+(tutorials-chaining-component-analyses-references)=
 ## References:
 
 1. [Parametric FEM model creation with Python and CalculiX GraphiX (cgx)](https://www.dapta.com/parametric-fem-model-creation-with-python-and-calculix-graphix-cgx/)

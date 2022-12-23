@@ -444,16 +444,17 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="chaining-component-analyses">
 <h1>Chaining component analyses<a class="headerlink" href="#chaining-component-analyses" title="Permalink to this headline">#</a></h1>
-<p><strong>Duration: 30 min</strong></p>
-<p>In this tutorial we explore the usage of Connections to chain the execution of Components.
+<p><strong>Duration: 45 min</strong></p>
+<p>In this tutorial we explore the usage of <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a>s to chain the execution of <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
 The example also introduces a finite element analysis specific ‘calculix-fea-comp’ component API.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-model-1.png"><img alt="chained process" class="bg-primary mb-1 align-center" src="../_images/parametric-model-1.png" style="width: 700px;" /></a>
 <section id="create-the-components">
 <h2>Create the Components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
-<p>This example replicates the chained analyses described in Parts 1 and 2 of our <a class="reference external" href="https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ">Parametric wing model series</a> that make use of python and the open source finite element analysis software <a class="reference external" href="http://www.dhondt.de/">CalculiX GraphiX and CrunchiX</a> to create and analyse a parametric composite wing model.</p>
-<p>This tutorial doesn’t go into the details of the python code, since this was already covered in the videos and associated blog posts (see [References]{tutorials-Chaining_component_analyses-references}).
-Our main focus here is to show how the previously monolithic python code can be split into discrete and potentially re-usable Components.</p>
-<p>We group the parametric model analysis processes into three distinct Components as shown in the figure below.</p>
+<p>This example replicates the chained analyses described in Parts 1 and 2 of the <a class="reference external" href="https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ">Parametric wing model series</a>.
+We make use of python and the open source software <a class="reference external" href="http://www.dhondt.de/">CalculiX GraphiX</a> to create a parametric finite element model of a composite wing subject to a static tip load, which is then analysed using <a class="reference external" href="http://www.dhondt.de/">CalculiX CrunchiX</a>.</p>
+<p>We show how the previously monolithic python code can be split into discrete and potentially re-usable <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
+The details of the python code were previously covered in the videos and associated blog posts (see <a class="reference internal" href="#tutorials-chaining-component-analyses-references"><span class="std std-ref">references 1 and 2</span></a>).</p>
+<p>We group the parametric model analysis processes into three distinct <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s as shown in the figure below.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-model-2.png"><img alt="chained-process-components" class="bg-primary mb-1 align-center" src="../_images/parametric-model-2.png" style="width: 700px;" /></a>
 <section id="parametric-model-component">
 <h3>Parametric-model component<a class="headerlink" href="#parametric-model-component" title="Permalink to this headline">#</a></h3>
@@ -478,23 +479,25 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="f1ab9f07-c4f2-4fb1-aa1d-e4828a48c30b" name="18093d11-a75a-4d98-8c44-600006960ca4" type="radio">
-</input><label class="sd-tab-label" for="f1ab9f07-c4f2-4fb1-aa1d-e4828a48c30b">
+<input checked="checked" id="20ff0512-a680-4ca5-8358-a11751b4579d" name="f6129626-18bb-40a1-bb23-9c62b95148cd" type="radio">
+</input><label class="sd-tab-label" for="20ff0512-a680-4ca5-8358-a11751b4579d">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.&quot;&quot;&quot;</span>
 
-    <span class="c1"># initalise setup_data keys</span>
-    <span class="n">response</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;output_files.cgx_file&quot;</span><span class="p">:</span> <span class="kc">None</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="c1"># set default inputs</span>
     <span class="k">if</span> <span class="n">inputs</span><span class="p">:</span>
@@ -514,8 +517,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="9f53d72d-52ea-4e38-8d27-559ac85a9534" name="18093d11-a75a-4d98-8c44-600006960ca4" type="radio">
-</input><label class="sd-tab-label" for="9f53d72d-52ea-4e38-8d27-559ac85a9534">
+<input id="2ee173f3-b571-4225-874f-3a772124fc64" name="f6129626-18bb-40a1-bb23-9c62b95148cd" type="radio">
+</input><label class="sd-tab-label" for="2ee173f3-b571-4225-874f-3a772124fc64">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -528,11 +531,15 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
@@ -1140,8 +1147,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="49cf55ac-8a07-4d08-ad69-4d0d7713e5be" name="18093d11-a75a-4d98-8c44-600006960ca4" type="radio">
-</input><label class="sd-tab-label" for="49cf55ac-8a07-4d08-ad69-4d0d7713e5be">
+<input id="58081cd8-3066-419d-a3e6-15d278962728" name="f6129626-18bb-40a1-bb23-9c62b95148cd" type="radio">
+</input><label class="sd-tab-label" for="58081cd8-3066-419d-a3e6-15d278962728">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 numpy == 1.21.5
@@ -1149,8 +1156,8 @@ scipy == 1.7.3
 </pre></div>
 </div>
 </div>
-<input id="dbdd299d-8d6d-4941-95d5-ad5a5501025f" name="18093d11-a75a-4d98-8c44-600006960ca4" type="radio">
-</input><label class="sd-tab-label" for="dbdd299d-8d6d-4941-95d5-ad5a5501025f">
+<input id="7af363ad-270f-4b5b-9359-86912cf0c2c6" name="f6129626-18bb-40a1-bb23-9c62b95148cd" type="radio">
+</input><label class="sd-tab-label" for="7af363ad-270f-4b5b-9359-86912cf0c2c6">
 naca0012</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># NACA 0012 from http://airfoiltools.com/
   1.000000  0.001260
@@ -1287,8 +1294,8 @@ naca0012</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="02365dae-576c-4e22-be32-3c420992db88" name="18093d11-a75a-4d98-8c44-600006960ca4" type="radio">
-</input><label class="sd-tab-label" for="02365dae-576c-4e22-be32-3c420992db88">
+<input id="a783c683-fb17-40c9-8d51-992dd500d029" name="f6129626-18bb-40a1-bb23-9c62b95148cd" type="radio">
+</input><label class="sd-tab-label" for="a783c683-fb17-40c9-8d51-992dd500d029">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;span&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"></span>
@@ -1356,18 +1363,21 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="3ee42579-e816-4103-9dc0-7d22f5dc7667" name="8b6f5ad7-9dca-484f-807c-738ee29e70f3" type="radio">
-</input><label class="sd-tab-label" for="3ee42579-e816-4103-9dc0-7d22f5dc7667">
+<input checked="checked" id="766b9e47-b693-48e8-b10b-7a043b2ea107" name="c3b7a62a-73de-4be3-b7f4-aa97d3692d2b" type="radio">
+</input><label class="sd-tab-label" for="766b9e47-b693-48e8-b10b-7a043b2ea107">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
@@ -1390,8 +1400,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="83329f17-36c7-4f43-8b2e-10148a5dbe10" name="8b6f5ad7-9dca-484f-807c-738ee29e70f3" type="radio">
-</input><label class="sd-tab-label" for="83329f17-36c7-4f43-8b2e-10148a5dbe10">
+<input id="7bd9d8d8-13b5-4821-aa54-8bcc6c4554c1" name="c3b7a62a-73de-4be3-b7f4-aa97d3692d2b" type="radio">
+</input><label class="sd-tab-label" for="7bd9d8d8-13b5-4821-aa54-8bcc6c4554c1">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -1407,11 +1417,15 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
@@ -1607,8 +1621,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="61c0cd85-7962-4c70-8d3a-b55c7bc46782" name="8b6f5ad7-9dca-484f-807c-738ee29e70f3" type="radio">
-</input><label class="sd-tab-label" for="61c0cd85-7962-4c70-8d3a-b55c7bc46782">
+<input id="b976b5d2-e129-4dd7-97ee-a404e91068f1" name="c3b7a62a-73de-4be3-b7f4-aa97d3692d2b" type="radio">
+</input><label class="sd-tab-label" for="b976b5d2-e129-4dd7-97ee-a404e91068f1">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 numpy == 1.21.5
@@ -1616,8 +1630,8 @@ scipy == 1.7.3
 </pre></div>
 </div>
 </div>
-<input id="c50093a1-e863-4347-adb3-b6fcb266e7e1" name="8b6f5ad7-9dca-484f-807c-738ee29e70f3" type="radio">
-</input><label class="sd-tab-label" for="c50093a1-e863-4347-adb3-b6fcb266e7e1">
+<input id="edf952e4-00c5-4dba-866e-5f995a13b242" name="c3b7a62a-73de-4be3-b7f4-aa97d3692d2b" type="radio">
+</input><label class="sd-tab-label" for="edf952e4-00c5-4dba-866e-5f995a13b242">
 ccx_static_tip_shear</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*HEADING
 Model: Cantilevered composite box with tip shear
@@ -1651,8 +1665,8 @@ U
 </pre></div>
 </div>
 </div>
-<input id="4ed3a820-99bb-4cf2-a88b-e54d10a2ea1f" name="8b6f5ad7-9dca-484f-807c-738ee29e70f3" type="radio">
-</input><label class="sd-tab-label" for="4ed3a820-99bb-4cf2-a88b-e54d10a2ea1f">
+<input id="9da65b3f-853e-4736-b12d-8363f9c2cb23" name="c3b7a62a-73de-4be3-b7f4-aa97d3692d2b" type="radio">
+</input><label class="sd-tab-label" for="9da65b3f-853e-4736-b12d-8363f9c2cb23">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;analysis_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ccx_static_tip_shear.inp&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1765,18 +1779,21 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <p>Remember to save the session data now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 </div>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="81c57321-484a-4891-8275-7eeefda45469" name="27256940-5b60-4a72-b251-0cde4f488988" type="radio">
-</input><label class="sd-tab-label" for="81c57321-484a-4891-8275-7eeefda45469">
+<input checked="checked" id="da4c7b0b-0562-448c-a9b1-f825c0981cff" name="b2703029-4836-414b-ae29-e211b69f81d4" type="radio">
+</input><label class="sd-tab-label" for="da4c7b0b-0562-448c-a9b1-f825c0981cff">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
 
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
@@ -1804,8 +1821,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="64bca59d-161d-4b24-96f8-0ddf7b3cbc04" name="27256940-5b60-4a72-b251-0cde4f488988" type="radio">
-</input><label class="sd-tab-label" for="64bca59d-161d-4b24-96f8-0ddf7b3cbc04">
+<input id="07d581d9-1a59-4d72-adaa-5c4849bbcdfe" name="b2703029-4836-414b-ae29-e211b69f81d4" type="radio">
+</input><label class="sd-tab-label" for="07d581d9-1a59-4d72-adaa-5c4849bbcdfe">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1813,11 +1830,15 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
-    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
@@ -2021,8 +2042,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="9d911e45-774e-4f61-85cd-35bdd40bb9f5" name="27256940-5b60-4a72-b251-0cde4f488988" type="radio">
-</input><label class="sd-tab-label" for="9d911e45-774e-4f61-85cd-35bdd40bb9f5">
+<input id="815839cf-8423-434e-bb62-c7e2c3e8f12f" name="b2703029-4836-414b-ae29-e211b69f81d4" type="radio">
+</input><label class="sd-tab-label" for="815839cf-8423-434e-bb62-c7e2c3e8f12f">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 </pre></div>
@@ -2033,14 +2054,14 @@ requirements</label><div class="sd-tab-content docutils">
 </section>
 <section id="create-the-connections">
 <h2>Create the Connections<a class="headerlink" href="#create-the-connections" title="Permalink to this headline">#</a></h2>
-<p>We can now connect the Components we created to ensure that outputs and inputs are passed between them as expected. A Connection is defined as a data link from a Component output handle to another Component input handle.</p>
+<p>We can now connect the <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s we created to ensure that outputs and inputs are passed between them as expected. A <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a> is defined as a data link from a <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> output handle to another <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> input handle.</p>
 <section id="first-connection">
 <h3>First connection<a class="headerlink" href="#first-connection" title="Permalink to this headline">#</a></h3>
 <p>Create a first connection by selecting the output handle of the parametric-model component and dragging a line to the ‘files.cgx_file’ input handle of the calculix-fea component.
 Hover the mouse pointer over a handle to see the name of the associated input or output data appear below the component.</p>
-<p>By default, a new connection is a ‘Design variable’ type connection (black line), that is not valid for transferring files (see the TODO Reference entry for details).</p>
-<p>Edit the Connection by selecting it in the workspace.
-In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab change the Connection Type option from the default ‘Design variable’ to the ‘Implicit variable or file’ option by selecting the corresponding radio button.</p>
+<p>By default, a new connection is a ‘Design variable’ type connection (black line), that is not valid for transferring files (see the dashboard Reference section for details).</p>
+<p>Edit the <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a> by selecting it in the workspace.
+In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab change the <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a> Type option from the default ‘Design variable’ to the ‘Implicit variable or file’ option by selecting the corresponding radio button.</p>
 <p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the change and close the connection interface.
 Verify that the connection line colour has become green, which indicates an ‘implicit’ type data connection.</p>
 <div class="admonition note">
@@ -2063,18 +2084,18 @@ Indeed, there is no requirement for the input and output data names to match - s
 </section>
 <section id="execute-the-workflow">
 <h2>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
-<p>We can now execute the chained component analysis Run by selecting the play symbol ▶ in the Run controls interface.</p>
+<p>We can now execute the chained component analysis <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.</p>
 <p>Once the run has started, each component with setup and then execute one at a time.
-The setup order is arbitrary, but the compute functions will always be executed from the ‘Start Node’ to the ‘End Node’ (see TODO Reference manual section on valid workflows).</p>
-<p>The Run should complete once the fea-results-component compute has completed.</p>
+The setup order is arbitrary, but the compute functions will always be executed from the ‘Start Node’ to the ‘End Node’ (see dashboard Reference section for details).</p>
+<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete once the fea-results-component compute has completed.</p>
 </section>
 <section id="inspect-the-outputs">
 <h2>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
-<p>The Run log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.</p>
+<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.</p>
 <p>Scroll down to the “run_output” section to see that this contains the compute function output messages from all three components in the order of execution as shown below.
 The last message contains the wing tip deflection and rotation data as expected.</p>
 <p>Also inspect the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab of all 3 components and download the file snapshots to view the input, connection and output files of all components.</p>
-<p>Save the session data and the Run log now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
+<p>Save the session data and the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The ‘connections’ folder that appears in the ‘files snapshot’ zip folder contains any incoming connection files. This is to differentiate them from parametric and API input files in the user file storage system, where these files exist as symbolic links to the upstream component file to improve efficiency. However, the connection files are copied into the <code class="docutils literal notranslate"><span class="pre">parameters[&quot;inputs_folder_path&quot;]</span></code> before the compute function starts.</p>
@@ -2087,7 +2108,7 @@ The last message contains the wing tip deflection and rotation data as expected.
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted.</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> data (session data, inputs and outputs) will be permanently deleted.</p>
 </div>
 </section>
 <section id="references">
