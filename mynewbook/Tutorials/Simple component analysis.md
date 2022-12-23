@@ -53,7 +53,7 @@ Press the tab key or click within the component interface to validate the select
 ```
 
 ```{note}
-Component Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces. 
+{term}`Component` Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces. 
 ```
 
 ```{warning}
@@ -91,7 +91,7 @@ For each file, copy the contents above into a text editor and save it locally. M
 
 Next, select `setup.py` in the component interface to upload the corresponding file. A green tick and a file upload time stamp should appear to confirm that the upload was successful. Repeat for the `compute.py` file.  
 
-Check the boxes next to the `Start Node` and `End Node` options (since we only have one component in this Run), as shown below. 
+Check the boxes next to the `Start Node` and `End Node` options (since we only have one component in this {term}`Run`), as shown below. 
 
 ```{image} media/paraboloid_2.png
 :alt: properties-tab-completed
@@ -123,13 +123,13 @@ Select the component again to edit it, then select the `Parameters` tab and copy
 }
 ```
 
-We define Parameters as values that the component needs to execute, but that are not Inputs from other Components. 
+We define Parameters as values that the component needs to execute, but that are not Inputs from other {term}`Component`s. 
 For example, Parameters could be constant values or application related input files. For this paraboloid example, we use the `Parameters` tab to define some default component input and output values, which are used to initialise the component in the setup function. For a more comprehensive use of Parameters see the example [Chaining component analyses](./Chaining%20component%20analyses.md). 
 
 ### Inputs and Outputs
 
 Open the component to edit it and add the following JSON objects into the text boxes in the `Inputs` and `Outputs` tabs.
-By defining the paraboloid function inputs and outputs as Component Inputs and Outputs respectively, we can expose these values to other Run components, such as drivers. 
+By defining the paraboloid function inputs and outputs as {term}`Component` Inputs and Outputs respectively, we can expose these values to other {term}`Run` components, such as drivers. 
 We will explore this in the next tutorial [Simple optimisation problem](./Simple%20optimisation%20problem.md).  
 
 Input Handles:
@@ -153,16 +153,16 @@ Select `Save data` to save the component and close it. You should now be able to
 
 ## Component analysis 
 
-All being well, you should now be able to launch a Run by selecting the play symbol ▶ in the Run controls interface. 
-The control symbols will start to fade in and out as your Run is sent for analysis in the Cloud, this may take a few minutes the first time. 
-Eventually, the Run should execute (this will happen very quickly) and you should see an alert window confirming that 'The Run has completed successfully'. 
+All being well, you should now be able to launch a {term}`Run` by selecting the play symbol ▶ in the {term}`Run` controls interface. 
+The control symbols will start to fade in and out as your {term}`Run` is sent for analysis in the Cloud, this may take a few minutes the first time. 
+Eventually, the {term}`Run` should execute (this will happen very quickly) and you should see an alert window confirming that 'The {term}`Run` has completed successfully'. 
 If you don't get any messages, try to refresh your web browser page, or consult the [FAQ](../Reference/FAQs.md) section for troubleshooting suggestions. 
 
-We can now inspect the outputs of the Run. 
+We can now inspect the outputs of the {term}`Run`. 
 
 ### The Run Log
 
-Select `View Log` in the interface controls to view a summary of the Run as a nested JSON text object as shown below. 
+Select `View Log` in the interface controls to view a summary of the {term}`Run` as a nested JSON text object as shown below. 
 
 The 'time' entry corresponds to the time the Run Log file was generated, while the time stamps in the messages that appear in the 'run_output' and 'paraboloid' relate to the paraboloid compute function execution time. The inputs and outputs of the paraboloid component are available under the corresponding 'paraboloid' entries.   
 
@@ -179,13 +179,13 @@ To save a copy of the Run Log, select `Close` to return to the workspace view an
 
 Select the component again and navigate to the `Log` tab as shown below. 
 
-Both the Run Log and the Component Log are updated as the Run executes, which allows us to monitor progress and view intermediary results.
-The Component Log lists events related to the component in order of time of occurrence. A 'SETUP' event corresponds to the execution of the component's setup function and a 'COMPUTE' event corresponds to the execution of the compute function, as defined in the `setup.py` and `compute.py` modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current Run. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page. 
+Both the Run Log and the Component Log are updated as the {term}`Run` executes, which allows us to monitor progress and view intermediary results.
+The Component Log lists events related to the component in order of time of occurrence. A 'SETUP' event corresponds to the execution of the component's setup function and a 'COMPUTE' event corresponds to the execution of the compute function, as defined in the `setup.py` and `compute.py` modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current {term}`Run`. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page. 
 
 The Component Log has another important function: if errors occur during the execution of the component, the Log will list an 'ERROR' event with a description of the error message and traceback information.  
 
 The `Log` tab also includes a `download files snapshot` link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace for this component. 
-Save this data, along with the JSON formatted version of your session ('dapta_input.json') and a copy of the Run Log ('runlog.json'), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs. 
+Save this data, along with the JSON formatted version of your session ('dapta_input.json') and a copy of the {term}`Run` Log ('runlog.json'), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs. 
 
 ```{image} media/paraboloid_4.png
 :alt: component-log
@@ -196,9 +196,9 @@ Save this data, along with the JSON formatted version of your session ('dapta_in
 
 ## Editing a Run
 
-Once you have successfully started a Run, the session and all associated data will be saved in the Cloud until you decide to overwrite or delete it. 
+Once you have successfully started a {term}`Run`, the session and all associated data will be saved in the Cloud until you decide to overwrite or delete it. 
 
-A Run can only be edited once it has been stopped (using the stop symbol ⏹) or once it has completed successfully. The second time a Run is started it will execute much faster since the processes are already set up in the Cloud, except if you renamed, added or removed components, in which case the existing Run will need to be deleted first. Try this by editing the x and y values in the paraboloid component Parameters and starting the Run again.    
+A {term}`Run` can only be edited once it has been stopped (using the stop symbol ⏹) or once it has completed successfully. The second time a {term}`Run` is started it will execute much faster since the processes are already set up in the Cloud, except if you renamed, added or removed components, in which case the existing {term}`Run` will need to be deleted first. Try this by editing the x and y values in the paraboloid component Parameters and starting the {term}`Run` again.    
 
 ## Clean-up
 
@@ -206,7 +206,7 @@ You can delete a session by creating a new session (select `New` in from the int
 It may take a minute or so for the Cloud session to be reset. 
 
 ```{warning}
-You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted. 
+You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` data (session data, inputs and outputs) will be permanently deleted. 
 ```
 
 ## References

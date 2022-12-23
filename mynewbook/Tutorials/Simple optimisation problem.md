@@ -116,15 +116,15 @@ Select `Download` from the interface controls to save the current session as a l
 
 ## Executing the driver
 
-We should now have a valid Run with two components: the paraboloid analysis and the open-mdao driver.
+We should now have a valid {term}`Run` with two components: the paraboloid analysis and the open-mdao driver.
 
-Execute the Run by selecting the play symbol ▶ in the Run controls interface and wait for it to complete. 
-As before, this may take a few minutes as your Run is being processed in the Cloud. 
-If you don't get a message saying that the Run was successful, try to refresh your web browser page or consult the [FAQ](../Reference/FAQs.md) section for troubleshooting suggestions. 
+Execute the {term}`Run` by selecting the play symbol ▶ in the {term}`Run` controls interface and wait for it to complete. 
+As before, this may take a few minutes as your {term}`Run` is being processed in the Cloud. 
+If you don't get a message saying that the {term}`Run` was successful, try to refresh your web browser page or consult the [FAQ](../Reference/FAQs.md) section for troubleshooting suggestions. 
 
 ### The unconstrained optimisation problem 
 
-We can now inspect the outputs of the unconstrained optimisation Run.
+We can now inspect the outputs of the unconstrained optimisation {term}`Run`.
 
 Select `View Log` to view the Run log as shown below.
 The optimisation outcome is summarised in the 'open-mdao' entry, which indicates that the optimisation completed successfully. 
@@ -166,7 +166,7 @@ It appears that the SLSQP optimisation converged to an optimum after 4 iteration
 Looking at the frequency of the 'Calling compute' message in the last iteration, we can see that the 'Function evaluation' executed the paraboloid component once and that the 'Gradient computation' executed it twice (once for each design variable). 
 This is because we requested the finite difference gradient calculation method by setting `"approx_totals": true` in the in the Parameters (with the 'fd_step' parameter setting the size of the step). 
 
-The paraboloid component was therefore executed a total of 13 times, which matches the Run log output. 
+The paraboloid component was therefore executed a total of 13 times, which matches the {term}`Run` log output. 
 
 Save the session data and Run log by selecting `Download` from the interface controls. 
 
@@ -219,7 +219,7 @@ $$
   0.0 \leq g(x,y) \leq 10.0  \quad , \quad g(x,y) = x + y  . 
 $$
 
-Instead of adding another component to the Run, we can implement this simple constraint using an openMDAO [ExecComp](https://openmdao.org/newdocs/versions/latest/features/building_blocks/components/exec_comp.html) component. 
+Instead of adding another component to the {term}`Run`, we can implement this simple constraint using an openMDAO [ExecComp](https://openmdao.org/newdocs/versions/latest/features/building_blocks/components/exec_comp.html) component. 
 
 Select the open-mdao component in the workspace to edit it, navigate to the `Parameters` tab, and copy and paste the [constrained](tutorials-open-mdao-paraboloid-parameters) Parameter values. 
 
@@ -235,7 +235,7 @@ Select `Save data` to save and close the component.
 Note that it is not necessary to upload the `om_component.py` module again. 
 To verify this, you can open the open-mdao component `Parameters` tab and the file entry should appear again under 'user_input_files', just as before.   
 
-Create a new Run by selecting the play symbol ▶ in the Run controls interface. 
+Create a new {term}`Run` by selecting the play symbol ▶ in the {term}`Run` controls interface. 
 This should execute very quickly. 
 
 Select `View Log` to view the Run log as shown below. 
@@ -250,7 +250,7 @@ The open-mdao component entry lists optimal x and y values for the constrained p
 
 Select the open-mdao component in the workspace, open the `Log` tab and select `download files snapshot`. 
 
-Visually compare the N2 diagram (n2.html) shown below with that from the previous Run.  
+Visually compare the N2 diagram (n2.html) shown below with that from the previous {term}`Run`.  
 The new constraint component appears as another Explicit Component under the paraboloid component. 
 
 Next, inspect the 'run_driver.log' output file. 
@@ -275,7 +275,7 @@ Delete your session by selecting `New` in the interface.
 It may take a minute or so for the Cloud session to be reset. 
 
 ```{warning}
-You should see a warning message whenever you are about to delete a Run. If you select to continue, then all the Run data (session data, inputs and outputs) will be permanently deleted. 
+You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` data (session data, inputs and outputs) will be permanently deleted. 
 ```
 
 ## References:
