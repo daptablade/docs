@@ -20,9 +20,25 @@ You may encounter component resource error messages when these limits are exceed
 
 ## Who can see my data?
 
-Your {term}`Run` data is saved on cloud resources managed by our cloud service provider [DigitalOcean](https://www.digitalocean.com/legal/terms-of-service-agreement). 
+Your {term}`Run` data is saved on shared cloud resources managed by our cloud service provider [DigitalOcean](https://www.digitalocean.com/legal/terms-of-service-agreement). 
 Although your data is password controlled, we recommend that you do not upload any sensitive data to the Dapta platform at this time.   
 We may also need to access your data for support and system maintenance purposes.
+
+## What software can I run in a component?
+
+The following table provides an overview of currently available software APIs. 
+[Contact support](../Support.md) to get your own OS or commercial software tools added to the list.  
+
+| API name                 | Github folder            | Software available |
+| --------                 | ---------                | ---------                    |
+| calculix-fea-comp        | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, Calculix GraphiX (cgx_2.20), Calculix CrunchiX (ccx_2.20)| 
+| generic-python3-comp     | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
+| generic-python3-driver    | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
+
+## What python packages can I use?
+
+Current package lists:
+[Python 3.8 packages](Packages%20list%20for%20python%203.8.md)
 
 ## Troubleshooting
 
@@ -39,11 +55,6 @@ Refresh your browser to see if this resolves the problem. Wait a few minutes bet
 
 You can force terminate a session (stop a run and delete everything) by selecting the `Terminate` option from the `Interface Controls > ... > Run Management` Menu.  
 
-## Contact support
+### Ask for help
 
-You can reach our support team via email or via our website chat option. 
-For bug reports, please include screenshots and other details in your message.  
-We will review your support request and get back to you as soon as possible. 
-
-* **website chat**: navigate to [www.dapta.com](https://www.dapta.com) and click the "chat" button in the bottom right of the window.   
-* **email**: support@dapta.com
+Check our [support](../Support.md) options. 

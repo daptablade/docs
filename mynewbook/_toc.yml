@@ -15,3 +15,4 @@ parts:
     - file: Reference/The dashboard
     - file: Reference/FAQs
     - file: Reference/Glossary
+    - file: Support
