@@ -59,6 +59,7 @@ Then upload the first 3 files under the `Properties` tab and upload the `naca001
 
 * Select `Save data` to save and close the component. 
 
+(tutorials-chained_components-parametric_model-files)=
 `````{tab-set}
 ````{tab-item} setup
 ```{literalinclude} ./parametric-model/setup.py
@@ -130,6 +131,7 @@ Then upload the first 3 files under the `Properties` tab and upload the last one
 
 * Select `Save data` to save and close the component. 
 
+(tutorials-chained_components-calculix_fea-files)=
 `````{tab-set}
 ````{tab-item} setup
 ```{literalinclude} ./calculix-fea/setup.py
@@ -203,6 +205,7 @@ Then upload them under the `Properties` tab.
 Remember to save the session data now by selecting `Download` from the interface controls. 
 ```
 
+(tutorials-chained_components-results_processor-files)=
 `````{tab-set}
 ````{tab-item} setup
 ```{literalinclude} ./fea-results-processor/setup.py
@@ -261,7 +264,7 @@ The four connection objects should appear under the 'connections' key in the ses
 
 We can now execute the chained component analysis {term}`Run` by selecting the play symbol ▶ in the Run controls interface. 
 
-Once the run has started, each component with setup and then execute one at a time. 
+Once the run has started, each component will setup and then execute one at a time. 
 The setup order is arbitrary, but the compute functions will always be executed from the 'Start Node' to the 'End Node' (see dashboard Reference section for details).
 
 The {term}`Run` should complete once the fea-results-component compute has completed.
@@ -297,7 +300,7 @@ You should see a warning message whenever you are about to delete a {term}`Run`.
 ```
 
 (tutorials-chaining-component-analyses-references)=
-## References:
+## References
 
 1. [Parametric FEM model creation with Python and CalculiX GraphiX (cgx)](https://www.dapta.com/parametric-fem-model-creation-with-python-and-calculix-graphix-cgx/)
 2. [Automated FEM analysis and output processing with Python and CalculiX CrunchiX (ccx)](https://www.dapta.com/automated-fem-analysis-and-output-processing-with-python-and-calculix-crunchix-ccx/)

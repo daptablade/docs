@@ -9,7 +9,7 @@ parts:
     - file: Tutorials/Simple component analysis
     - file: Tutorials/Simple optimisation problem
     - file: Tutorials/Chaining component analyses
-    - file: Tutorials/Automating parametric studies
+    - file: Tutorials/Automating parametric studies and design optimisations
   - caption: Reference Guide
     chapters:
     - file: Reference/The dashboard
