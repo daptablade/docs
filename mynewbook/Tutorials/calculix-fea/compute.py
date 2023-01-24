@@ -113,7 +113,8 @@ def compute(
     outputs["implicit"]["files.nodeset_file"] = "LAST.nam"
 
     # increase dummy variable to ensure the next component executes
-    outputs["design"]["output_1"] += 1
+    if "output_1" in outputs["design"]:
+        outputs["design"]["output_1"] += 1
 
     return {"message": message, "outputs": outputs}
 

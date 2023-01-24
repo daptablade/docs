@@ -1,0 +1,47 @@
+{
+  "optimizer": "SLSQP",
+  "max_iter": 20,
+  "tol": 1e-8,
+  "disp": true,
+  "debug_print": [
+    "desvars",
+    "ln_cons",
+    "nl_cons",
+    "objs",
+    "totals"
+  ],
+  "approx_totals": true,
+  "fd_step": 1.0,
+  "input_variables": [
+    {
+      "component": "calculix-fea",
+      "name": "fibre_rotation_angle.ORI_0.1",
+      "lower": -50,
+      "upper": 50,
+      "value": 5.0
+    }
+  ],
+  "output_variables": [
+    {
+      "component": "fea-results-processor",
+      "type": "objective",
+      "name": "Ry",
+      "value": 0.0
+    },
+    {
+      "component": "fea-results-processor",
+      "type": "constraint",
+      "name": "Uz",
+      "value": 0.0,
+      "lower": -0.06,
+      "upper": 0.06
+    }
+  ],
+  "driver": {
+    "type": "optimisation"
+  },
+  "visualise": [
+    "n2_diagram",
+    "plot_history"
+  ]
+}

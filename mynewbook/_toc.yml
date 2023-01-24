@@ -6,13 +6,14 @@ root: intro
 parts:
   - caption: Tutorials
     chapters:
-    - file: Tutorials/Simple component analysis
-    - file: Tutorials/Simple optimisation problem
-    - file: Tutorials/Chaining component analyses
-    - file: Tutorials/Automating parametric studies and design optimisations
+      - file: Tutorials/Simple component analysis
+      - file: Tutorials/Simple optimisation problem
+      - file: Tutorials/Chaining component analyses
+      - file: Tutorials/Automating parametric studies
+      - file: Tutorials/Automating design optimisations
   - caption: Reference Guide
     chapters:
-    - file: Reference/The dashboard
-    - file: Reference/FAQs
-    - file: Reference/Glossary
-    - file: Support
+      - file: Reference/The dashboard
+      - file: Reference/FAQs
+      - file: Reference/Glossary
+      - file: Support

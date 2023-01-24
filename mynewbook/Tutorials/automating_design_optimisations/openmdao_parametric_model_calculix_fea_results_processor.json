@@ -29,8 +29,12 @@
                     ]
                 }
             },
+            "inputs": {
+                "input_0": 0.1
+            },
             "outputs": {
-                "files.cgx_file": "default"
+                "files.cgx_file": "default",
+                "output_0": 1.1
             }
         },
         {
@@ -105,12 +109,14 @@
             },
             "inputs": {
                 "files.cgx_file": "default",
-                "fibre_rotation_angle.ORI_0.1": 0.0
+                "fibre_rotation_angle.ORI_0.1": 0.0,
+                "output_0": 1.1
             },
             "outputs": {
                 "files.analysis_output_file": "default",
                 "files.mesh_file": "default",
-                "files.nodeset_file": "default"
+                "files.nodeset_file": "default",
+                "output_1": 1.1
             }
         },
         {
@@ -129,7 +135,8 @@
             "inputs": {
                 "files.analysis_output_file": "default",
                 "files.mesh_file": "default",
-                "files.nodeset_file": "default"
+                "files.nodeset_file": "default",
+                "output_1": 1.1
             },
             "outputs": {
                 "Ux": "default",
@@ -138,6 +145,59 @@
                 "Rx": "default",
                 "Ry": "default",
                 "Rz": "default"
+            }
+        },
+        {
+            "name": "open-mdao",
+            "api": "generic-python3-driver:latest",
+            "options": {},
+            "parameters": {
+                "user_input_files": [],
+                "optimizer": "SLSQP",
+                "max_iter": 20,
+                "tol": 1e-8,
+                "disp": true,
+                "debug_print": [
+                    "desvars",
+                    "ln_cons",
+                    "nl_cons",
+                    "objs",
+                    "totals"
+                ],
+                "approx_totals": true,
+                "fd_step": 1.0,
+                "input_variables": [
+                    {
+                        "component": "calculix-fea",
+                        "name": "fibre_rotation_angle.ORI_0.1",
+                        "lower": -50,
+                        "upper": 50,
+                        "value": 5.0
+                    }
+                ],
+                "output_variables": [
+                    {
+                        "component": "fea-results-processor",
+                        "type": "objective",
+                        "name": "Ry",
+                        "value": 0.0
+                    },
+                    {
+                        "component": "fea-results-processor",
+                        "type": "constraint",
+                        "name": "Uz",
+                        "value": 0.0,
+                        "lower": -0.06,
+                        "upper": 0.06
+                    }
+                ],
+                "driver": {
+                    "type": "optimisation"
+                },
+                "visualise": [
+                    "n2_diagram",
+                    "plot_history"
+                ]
             }
         }
     ],
@@ -169,10 +229,25 @@
             "target": "fea-results-processor",
             "name_target": "files.nodeset_file",
             "type": "implicit"
+        },
+        {
+            "origin": "parametric-model",
+            "name_origin": "output_0",
+            "target": "calculix-fea",
+            "name_target": "output_0",
+            "type": "design"
+        },
+        {
+            "origin": "calculix-fea",
+            "name_origin": "output_1",
+            "target": "fea-results-processor",
+            "name_target": "output_1",
+            "type": "design"
         }
     ],
     "workflow": {
         "start": "parametric-model",
-        "end": "fea-results-processor"
+        "end": "fea-results-processor",
+        "driver": "open-mdao"
     }
 }
