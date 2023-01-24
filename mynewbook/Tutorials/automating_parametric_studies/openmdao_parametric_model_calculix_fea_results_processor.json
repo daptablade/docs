@@ -1,7 +1,7 @@
 {
   "components": [
     {
-      "name": "parametricmodel",
+      "name": "parametric-model",
       "api": "generic-python3-comp:latest",
       "options": {},
       "parameters": {
@@ -38,7 +38,7 @@
       }
     },
     {
-      "name": "calculixfea",
+      "name": "calculix-fea",
       "api": "calculix-fea-comp:latest",
       "options": {},
       "parameters": {
@@ -120,7 +120,7 @@
       }
     },
     {
-      "name": "fearesultsprocessor",
+      "name": "fea-results-processor",
       "api": "generic-python3-comp:latest",
       "options": {},
       "parameters": {
@@ -168,7 +168,7 @@
         "fd_step": 1.0,
         "input_variables": [
           {
-            "component": "calculixfea",
+            "component": "calculix-fea",
             "name": "fibre_rotation_angle.ORI_0.1",
             "lower": -50,
             "upper": 50,
@@ -177,13 +177,13 @@
         ],
         "output_variables": [
           {
-            "component": "fearesultsprocessor",
+            "component": "fea-results-processor",
             "type": "objective",
             "name": "Ry",
             "value": 0.0
           },
           {
-            "component": "fearesultsprocessor",
+            "component": "fea-results-processor",
             "type": "constraint",
             "name": "Uz",
             "value": 0.0,
@@ -195,58 +195,59 @@
           "type": "optimisation"
         },
         "visualise": [
-          "n2_diagram"
+          "n2_diagram",
+          "plot_history"
         ]
       }
     }
   ],
   "connections": [
     {
-      "origin": "parametricmodel",
+      "origin": "parametric-model",
       "name_origin": "files.cgx_file",
-      "target": "calculixfea",
+      "target": "calculix-fea",
       "name_target": "files.cgx_file",
       "type": "implicit"
     },
     {
-      "origin": "calculixfea",
+      "origin": "calculix-fea",
       "name_origin": "files.analysis_output_file",
-      "target": "fearesultsprocessor",
+      "target": "fea-results-processor",
       "name_target": "files.analysis_output_file",
       "type": "implicit"
     },
     {
-      "origin": "calculixfea",
+      "origin": "calculix-fea",
       "name_origin": "files.mesh_file",
-      "target": "fearesultsprocessor",
+      "target": "fea-results-processor",
       "name_target": "files.mesh_file",
       "type": "implicit"
     },
     {
-      "origin": "calculixfea",
+      "origin": "calculix-fea",
       "name_origin": "files.nodeset_file",
-      "target": "fearesultsprocessor",
+      "target": "fea-results-processor",
       "name_target": "files.nodeset_file",
       "type": "implicit"
     },
     {
-      "origin": "parametricmodel",
+      "origin": "parametric-model",
       "name_origin": "output_0",
-      "target": "calculixfea",
+      "target": "calculix-fea",
       "name_target": "output_0",
       "type": "design"
     },
     {
-      "origin": "calculixfea",
+      "origin": "calculix-fea",
       "name_origin": "output_1",
-      "target": "fearesultsprocessor",
+      "target": "fea-results-processor",
       "name_target": "output_1",
       "type": "design"
     }
   ],
   "workflow": {
-    "start": "parametricmodel",
-    "end": "fearesultsprocessor",
+    "start": "parametric-model",
+    "end": "fea-results-processor",
     "driver": "open-mdao"
   }
 }

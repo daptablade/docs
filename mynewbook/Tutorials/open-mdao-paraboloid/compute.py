@@ -4,6 +4,7 @@ import traceback
 from contextlib import redirect_stdout
 import numpy as np
 import openmdao.api as om
+from matplotlib import pyplot as plt  # type: ignore
 
 from component_api2 import call_compute
 from om_component import OMexplicitComp  # type: ignore
@@ -41,27 +42,26 @@ def compute(
         else:
             kwargs = {}
         prob.model.add_subsystem(
-            component, OMexplicitComp(name=component, run_number=0), **kwargs
+            reformat_compname(component),
+            OMexplicitComp(compname=component, run_number=0),
+            **kwargs,
         )
     if "ExecComps" in parameters and parameters["ExecComps"]:
         for component in parameters["ExecComps"]:
             prob.model.add_subsystem(
-                component["name"],
+                reformat_compname(component["name"]),
                 om.ExecComp(component["exprs"]),
                 **component["kwargs"],
             )
-            if "connections" in component:
-                for c in component["connections"]:
-                    prob.model.connect(c["src"], c["target"])
 
     # 2) define the component connections
     for connection in all_connections:
         if connection["type"] == "design":
             prob.model.connect(
-                connection["origin"]
+                reformat_compname(connection["origin"])
                 + "."
                 + connection["name_origin"].replace(".", "-"),
-                connection["target"]
+                reformat_compname(connection["target"])
                 + "."
                 + connection["name_target"].replace(".", "-"),
             )
@@ -92,7 +92,7 @@ def compute(
         upper = var["upper"]
         lower = var["lower"]
         if "component" in var:
-            comp = var["component"]
+            comp = reformat_compname(var["component"])
             prob.model.add_design_var(
                 f"{comp}.{var['name'].replace('.', '-')}",
                 lower=lower,
@@ -106,7 +106,7 @@ def compute(
 
     # 5) add an objective and constraints
     for var in parameters["output_variables"]:
-        comp = var["component"]
+        comp = reformat_compname(var["component"])
         name = f"{comp}.{var['name'].replace('.', '-')}"
 
         # set scaling from parameter input file
@@ -227,7 +227,7 @@ def run_optimisation(prob, parameters, run_folder):
         if "component" in var:
             comp = var["component"]
             opt_output[f"{comp}.{name}"] = prob.get_val(
-                f"{comp}.{name.replace('.', '-')}"
+                f"{reformat_compname(comp)}.{name.replace('.', '-')}"
             ).tolist()
         else:
             opt_output[name] = prob.get_val(name.replace(".", "-")).tolist()
@@ -241,10 +241,90 @@ def run_optimisation(prob, parameters, run_folder):
         #     + " "
         # )
         opt_output[f"{comp}.{name}"] = prob.get_val(
-            f"{comp}.{name.replace('.', '-')}"
+            f"{reformat_compname(comp)}.{name.replace('.', '-')}"
         ).tolist()
     # print(")")
 
     print(opt_output)
 
+    if "visualise" in parameters and "plot_history" in parameters["visualise"]:
+        post_process(parameters, run_folder, r_name)
+
     return opt_output
+
+
+def reformat_compname(name):
+    # openmdao doesn't allow "-" character in component names
+    return name.replace("-", "_")
+
+
+def post_process(parameters, run_folder, r_name, only_plot_major_iter=True):
+    # read database
+    # Instantiate your CaseReader
+    cr = om.CaseReader(r_name)
+    # Isolate "problem" as your source
+    driver_cases = cr.list_cases("driver", out_stream=None)
+
+    # plot the iteration history from the recorder data
+    inputs_history = {
+        key: []
+        for key in [
+            f"{reformat_compname(var['component'])}.{var['name'].replace('.', '-')}"
+            for var in parameters["input_variables"]
+        ]
+    }
+    outputs_history = {
+        key: []
+        for key in [
+            f"{reformat_compname(var['component'])}.{var['name'].replace('.', '-')}"
+            for var in parameters["output_variables"]
+        ]
+    }
+    for key in driver_cases:
+        case = cr.get_case(key)
+        if (only_plot_major_iter and case.derivatives) or not only_plot_major_iter:
+            # get history of inputs
+            for key in inputs_history:
+                inputs_history[key].append(case.outputs[key])
+            # get history of outputs
+            for key in outputs_history:
+                outputs_history[key].append(case.outputs[key])
+
+    # plot output in userfriendly fashion
+    _plot_iteration_histories(
+        inputs_history=inputs_history,
+        outputs_history=outputs_history,
+        run_folder=run_folder,
+    )
+
+
+def _plot_iteration_histories(
+    inputs_history=None, outputs_history=None, run_folder=None
+):
+    # plot input histories
+    for key in inputs_history:
+        input_data = inputs_history[key]
+        input_data = np.array(input_data)
+        iterations = range(input_data.shape[0])
+
+        plt.figure()
+        for data_series in input_data.T:
+            plt.plot(iterations, data_series, "-o")
+            plt.grid(True)
+            plt.title(key)
+        plt.savefig(str(run_folder / (key + ".png")))
+
+    # plot output histories
+    for key in outputs_history:
+        output_data = outputs_history[key]
+        output_data = np.array(output_data)
+        iterations = range(output_data.shape[0])
+
+        plt.figure()
+        for data_series in output_data.T:
+            plt.plot(iterations, data_series, "-o")
+            plt.grid(True)
+            plt.title(key)
+        plt.savefig(str(run_folder / (key + ".png")))
+
+    plt.show()

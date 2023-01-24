@@ -10,8 +10,8 @@ import traceback
 class OMexplicitComp(om.ExplicitComponent):
     """standard component that follows the OM conventions"""
 
-    def __init__(self, name, run_number):
-        self.name = name
+    def __init__(self, compname, run_number):
+        self.compname = compname
         self.run_number = run_number
         self.get_grads = False
         self.iter = 0
@@ -20,7 +20,7 @@ class OMexplicitComp(om.ExplicitComponent):
 
     def setup(self):
 
-        message = {"component": self.name}
+        message = {"component": self.compname}
         _, component_dict = call_setup(message)
         inputs = component_dict["input_data"]["design"]
         outputs = component_dict["output_data"]["design"]
@@ -38,7 +38,7 @@ class OMexplicitComp(om.ExplicitComponent):
     def setup_partials(self):
         # Get the component partial derivative information
 
-        message = {"component": self.name}
+        message = {"component": self.compname}
         _, component_dict = call_setup(message)
 
         if "partials" in component_dict and component_dict["partials"]:
@@ -60,7 +60,7 @@ class OMexplicitComp(om.ExplicitComponent):
         input_dict = {"design": reformat_inputs(inputs._copy_views())}
 
         message = {
-            "component": self.name,
+            "component": self.compname,
             "inputs": input_dict,
             "get_grads": False,
             "get_outputs": True,
@@ -72,10 +72,12 @@ class OMexplicitComp(om.ExplicitComponent):
             if not "outputs" in data:
                 raise ValueError(f"Error: Compute output missing - output was: {data}.")
         except Exception as e:
-            print(f"Compute of {self.name} failed, input data was: {str(message)}")
+            print(f"Compute of {self.compname} failed, input data was: {str(message)}")
             tb = traceback.format_exc()
             print(tb)
-            raise ValueError(f"OM Explicit component {self.name} compute error: " + tb)
+            raise ValueError(
+                f"OM Explicit component {self.compname} compute error: " + tb
+            )
 
         val_outputs = data["outputs"]["design"]
 
@@ -93,7 +95,7 @@ class OMexplicitComp(om.ExplicitComponent):
         input_dict = reformat_inputs(inputs._copy_views())
 
         message = {
-            "component": self.name,
+            "component": self.compname,
             "inputs": input_dict,
             "get_grads": True,
             "get_outputs": False,
@@ -109,11 +111,13 @@ class OMexplicitComp(om.ExplicitComponent):
             self.partial_dict = data["partials"]
         except Exception as e:
             print(
-                f"Compute partials of {self.name} failed, input data was: {str(message)}"
+                f"Compute partials of {self.compname} failed, input data was: {str(message)}"
             )
             tb = traceback.format_exc()
             print(tb)
-            raise ValueError(f"OM Explicit component {self.name} compute error: " + tb)
+            raise ValueError(
+                f"OM Explicit component {self.compname} compute error: " + tb
+            )
 
         if self.partial_dict:
             for resp, vars in self.partial_dict.items():
@@ -122,7 +126,7 @@ class OMexplicitComp(om.ExplicitComponent):
                         J[resp.replace(".", "-"), var.replace(".", "-")] = vals["val"]
             # print(dict(J))
         else:
-            raise ValueError(f"Component {self.name} has no Jacobian defined.")
+            raise ValueError(f"Component {self.compname} has no Jacobian defined.")
 
 
 def reformat_inputs(inputs):
