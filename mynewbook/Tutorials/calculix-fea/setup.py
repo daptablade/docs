@@ -26,6 +26,8 @@ def setup(
         # set to float
         inputs["design"][angle] = float(inputs["design"][angle])
 
+    outputs["design"]["output_1"] = 1.0
+
     message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Setup completed."
 
-    return {"message": message, "inputs": inputs}
+    return {"message": message, "inputs": inputs, "outputs": outputs}

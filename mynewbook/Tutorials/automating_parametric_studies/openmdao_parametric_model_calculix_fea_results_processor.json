@@ -1,0 +1,252 @@
+{
+  "components": [
+    {
+      "name": "parametricmodel",
+      "api": "generic-python3-comp:latest",
+      "options": {},
+      "parameters": {
+        "user_input_files": [],
+        "span": 2.0,
+        "chord": 0.2,
+        "filled_sections_flags": false,
+        "airfoil_csv_file": "naca0012.csv",
+        "nele_foil": [
+          10,
+          10
+        ],
+        "nele_span": 40,
+        "node_merge_tol": 0.002,
+        "cgx_ele_type": 10,
+        "cgx_solver": "abq",
+        "boundary_conditions": {
+          "fix_lines": [
+            0,
+            1
+          ],
+          "loaded_lines": [
+            5,
+            6
+          ]
+        }
+      },
+      "inputs": {
+        "input_0": 0.1
+      },
+      "outputs": {
+        "files.cgx_file": "default",
+        "output_0": 1.1
+      }
+    },
+    {
+      "name": "calculixfea",
+      "api": "calculix-fea-comp:latest",
+      "options": {},
+      "parameters": {
+        "user_input_files": [],
+        "analysis_file": "ccx_static_tip_shear.inp",
+        "mesh_file": "all.msh",
+        "filled_sections_flags": false,
+        "shell_set_name": {
+          "aero": "Eall"
+        },
+        "composite_plies": [
+          {
+            "id": "p_0",
+            "thickness": 0.0002,
+            "material": "EL",
+            "orientation": "ORI_0"
+          },
+          {
+            "id": "p_90",
+            "thickness": 0.0002,
+            "material": "EL",
+            "orientation": "ORI_90"
+          }
+        ],
+        "orientations": [
+          {
+            "id": "ORI_0",
+            "1": [
+              0.0,
+              1.0,
+              0.0
+            ],
+            "2": [
+              -1.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "id": "ORI_90",
+            "1": [
+              1.0,
+              0.0,
+              0.0
+            ],
+            "2": [
+              0.0,
+              1.0,
+              0.0
+            ]
+          }
+        ],
+        "composite_layup": {
+          "aero": [
+            "p_90",
+            "p_0",
+            "p_0",
+            "p_0",
+            "p_90",
+            "p_90",
+            "p_0",
+            "p_0",
+            "p_0",
+            "p_90"
+          ]
+        },
+        "composite_props_file": "composite_shell.inp"
+      },
+      "inputs": {
+        "files.cgx_file": "default",
+        "fibre_rotation_angle.ORI_0.1": 0.0,
+        "output_0": 1.1
+      },
+      "outputs": {
+        "files.analysis_output_file": "default",
+        "files.mesh_file": "default",
+        "files.nodeset_file": "default",
+        "output_1": 1.1
+      }
+    },
+    {
+      "name": "fearesultsprocessor",
+      "api": "generic-python3-comp:latest",
+      "options": {},
+      "parameters": {
+        "user_input_files": [],
+        "Ux": 0.0,
+        "Uy": 0.0,
+        "Uz": 0.0,
+        "Rx": 0.0,
+        "Ry": 0.0,
+        "Rz": 0.0
+      },
+      "inputs": {
+        "files.analysis_output_file": "default",
+        "files.mesh_file": "default",
+        "files.nodeset_file": "default",
+        "output_1": 1.1
+      },
+      "outputs": {
+        "Ux": "default",
+        "Uy": "default",
+        "Uz": "default",
+        "Rx": "default",
+        "Ry": "default",
+        "Rz": "default"
+      }
+    },
+    {
+      "name": "open-mdao",
+      "api": "generic-python3-driver:latest",
+      "options": {},
+      "parameters": {
+        "user_input_files": [],
+        "optimizer": "SLSQP",
+        "max_iter": 20,
+        "tol": 1e-8,
+        "disp": true,
+        "debug_print": [
+          "desvars",
+          "ln_cons",
+          "nl_cons",
+          "objs",
+          "totals"
+        ],
+        "approx_totals": true,
+        "fd_step": 1.0,
+        "input_variables": [
+          {
+            "component": "calculixfea",
+            "name": "fibre_rotation_angle.ORI_0.1",
+            "lower": -50,
+            "upper": 50,
+            "value": 5.0
+          }
+        ],
+        "output_variables": [
+          {
+            "component": "fearesultsprocessor",
+            "type": "objective",
+            "name": "Ry",
+            "value": 0.0
+          },
+          {
+            "component": "fearesultsprocessor",
+            "type": "constraint",
+            "name": "Uz",
+            "value": 0.0,
+            "lower": -0.06,
+            "upper": 0.06
+          }
+        ],
+        "driver": {
+          "type": "optimisation"
+        },
+        "visualise": [
+          "n2_diagram"
+        ]
+      }
+    }
+  ],
+  "connections": [
+    {
+      "origin": "parametricmodel",
+      "name_origin": "files.cgx_file",
+      "target": "calculixfea",
+      "name_target": "files.cgx_file",
+      "type": "implicit"
+    },
+    {
+      "origin": "calculixfea",
+      "name_origin": "files.analysis_output_file",
+      "target": "fearesultsprocessor",
+      "name_target": "files.analysis_output_file",
+      "type": "implicit"
+    },
+    {
+      "origin": "calculixfea",
+      "name_origin": "files.mesh_file",
+      "target": "fearesultsprocessor",
+      "name_target": "files.mesh_file",
+      "type": "implicit"
+    },
+    {
+      "origin": "calculixfea",
+      "name_origin": "files.nodeset_file",
+      "target": "fearesultsprocessor",
+      "name_target": "files.nodeset_file",
+      "type": "implicit"
+    },
+    {
+      "origin": "parametricmodel",
+      "name_origin": "output_0",
+      "target": "calculixfea",
+      "name_target": "output_0",
+      "type": "design"
+    },
+    {
+      "origin": "calculixfea",
+      "name_origin": "output_1",
+      "target": "fearesultsprocessor",
+      "name_target": "output_1",
+      "type": "design"
+    }
+  ],
+  "workflow": {
+    "start": "parametricmodel",
+    "end": "fearesultsprocessor",
+    "driver": "open-mdao"
+  }
+}

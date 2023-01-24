@@ -46,7 +46,11 @@ def compute(
     )
     resp = execute_cgx(infile.name, run_folder=run_folder)
     with open(run_folder / "cgx.log", "w") as f:
-        f.write(resp)
+        f.write(resp["stdout"])
+    if not resp["returncode"] == 0:
+        raise ChildProcessError(
+            f'cgx returned non-zero exit status {resp["returncode"]}'
+        )
 
     # check output has been saved
     mesh_file_path = run_folder / parameters["mesh_file"]
@@ -87,7 +91,11 @@ def compute(
     )
     resp = execute_fea(infile.stem, run_folder=run_folder)
     with open(run_folder / "ccx.log", "w") as f:
-        f.write(resp)
+        f.write(resp["stdout"])
+    if not resp["returncode"] == 0:
+        raise ChildProcessError(
+            f'ccx returned non-zero exit status {resp["returncode"]}'
+        )
 
     # check output has been saved
     outfile = run_folder / (infile.stem + ".dat")
@@ -103,6 +111,9 @@ def compute(
     outputs["implicit"]["files.analysis_output_file"] = outfile.name
     outputs["implicit"]["files.mesh_file"] = "all.msh"
     outputs["implicit"]["files.nodeset_file"] = "LAST.nam"
+
+    # increase dummy variable to ensure the next component executes
+    outputs["design"]["output_1"] += 1
 
     return {"message": message, "outputs": outputs}
 
@@ -193,7 +204,9 @@ def _get_ccx_composite_shell_props(
     # orientation cards
     for ori in orientations:
         commands.append(f"*ORIENTATION,NAME={ori['id']}\n")
-        commands.append(", ".join(str(x) for x in [*ori["1"], *ori["2"]]) + "\n")
+        commands.append(
+            ", ".join("{0:.6f}".format(x) for x in [*ori["1"], *ori["2"]]) + "\n"
+        )
 
     commands.append("** =============== \n")
     # shell property

@@ -1,0 +1,14 @@
+{
+    "component_inputs": {
+        "calculix-fea": {
+            "fibre_rotation_angle.ORI_0.1": 0
+        }
+    },
+    "driver": {
+        "type": "custom"
+    },
+    "rotation_inc": 5,
+    "rotation_max": 10,
+    "rotation_min": -10,
+    "user_input_files": []
+}

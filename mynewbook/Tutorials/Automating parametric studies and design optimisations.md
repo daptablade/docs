@@ -16,11 +16,11 @@ Then, we optimise the model parameters by replacing the parametric driver compon
 
 ## Opening a saved session
 
-We will load the session file from the previous example to speed things up.
+Start by loading the session file from the previous example.
 
 Select `Open` from the interface controls to load the JSON formatted version of our previous session (dapta_input.json). 
 Alternatively, copy the object below into a text editor and save it locally, then select `Open` to load it. 
-The three connected components should appear in the workspace. 
+Three connected components should appear in the workspace. 
 
 ````{dropdown} dapta_input.json
 ```{literalinclude} ./automating_parametric_studies/dapta_input.json   
@@ -48,7 +48,21 @@ What is the effect of changing the composite material properties on the deflecti
 To answer this question, we can perform a parametric study. 
 We execute the chained analyses for a range of composite property inputs and record the output average wing tip deflections and rotations.   
 
-### Create the driver component 
+### The driver component 
+
+The variable of interest is the `calculix-fea` input variable `fibre_rotation_angle.ORI_0.1`, which was previously set to a zero value. 
+The driver `compute.py` function performs the following tasks:
+
+1. the `while` loop iterates over a range of variable values, defined it the component `Parameters` tab as a range from `rotation_min` (-10 degrees) to `rotation_max` (10 degrees), with increments of `rotation_inc` (5 degrees);
+2. in each iteration, the `run_workflow` function is called to execute the chained component analyses with the current fibre rotation angle;
+3. finally, the plotting function (`_plot_study_results`) generates a line plot of the wing tip deflections as a function of the fibre rotation angle.  
+
+```{note}
+You may notice that the `parametric-model` component executes in each workflow iteration, even though it's inputs do not change. 
+To reduce the overhead associated with this component, we could move the `parametric-model` compute function logic into the setup function, which is only executed once.  
+```
+
+To create the driver component:
 
 * Right-click in the workspace and select `Add Empty Node`. Select the empty component to edit it.
 
@@ -77,13 +91,40 @@ Then upload them under the `Properties` tab.
 :language: text
 ```
 ````
+````{tab-item} parameters
+```{literalinclude} ./driver-calculix-fea/parameters.json
+:language: json
+```
+````
 `````
 
 ### Execute the workflow
 
+We can now execute the parametric study by selecting the play symbol ▶ in the Run controls interface. 
+
+Once the run has started, each component will setup and then execute one at a time. 
+The setup order is arbitrary, but the compute functions will always be executed from the 'Start Node' to the 'End Node' (see dashboard Reference section for details).
+
+The {term}`Run` should complete after 5 iterations of the connected components (1 iteration of the `parametric-study-driver` component). 
 
 ### Inspect the outputs
 
+The {term}`Run` log summarises the output of the components. Open the log by selecting `View Log` in the interface controls. 
+
+We can see that the each component's compute function was executed 5 times. 
+The "run_output" (at the end of the log) lists the compute output messages for the 5th workflow iteration only.  
+
+Next, close the {term}`Run` log and select the `parametric-study-driver` component.
+Then select the `Log` tab and click on `download files snapshot`.
+
+The parametric study outputs are summarised in the 'results_plot.png' and 'results_plot.png' plots in the 'outputs' folder.
+
+```{image} media/driver-parametric-model-2.png
+:alt: results-plot
+:class: bg-primary mb-1
+:width: 400px
+:align: center
+```
 
 ## Automating a design optimisation
 
