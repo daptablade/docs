@@ -140,7 +140,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20parametric%20studies.html">
-   Automating parametric studies
+   Automating the composite wing model parametric study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20design%20optimisations.html">
+   Automating the design optimisation of the composite wing model
   </a>
  </li>
 </ul>
@@ -502,8 +507,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="fcde583c-9462-4954-b0e8-adeb094d455f" name="78e93ec4-cd5c-499d-b44f-d23f0d05cb05" type="radio">
-</input><label class="sd-tab-label" for="fcde583c-9462-4954-b0e8-adeb094d455f">
+<input checked="checked" id="b79ee96c-1e74-499e-8a96-c9df58e68219" name="301b8193-804a-427f-a2c6-8c16a5a4ef76" type="radio">
+</input><label class="sd-tab-label" for="b79ee96c-1e74-499e-8a96-c9df58e68219">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -591,8 +596,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="51ed5789-7e9e-4afb-8d44-2383709885f3" name="78e93ec4-cd5c-499d-b44f-d23f0d05cb05" type="radio">
-</input><label class="sd-tab-label" for="51ed5789-7e9e-4afb-8d44-2383709885f3">
+<input id="61738afb-33e3-4454-b674-b08465b60401" name="301b8193-804a-427f-a2c6-8c16a5a4ef76" type="radio">
+</input><label class="sd-tab-label" for="61738afb-33e3-4454-b674-b08465b60401">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>

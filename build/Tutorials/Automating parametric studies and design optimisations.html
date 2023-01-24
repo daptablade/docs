@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Automating the composite wing model parametric study &#8212; dapta docs</title>
+    <title>Automating parametric studies and design optimisations &#8212; dapta docs</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,11 +50,11 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Automating parametric studies.html" />
+    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Automating parametric studies and design optimisations.html" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Automating the design optimisation of the composite wing model" href="Automating%20design%20optimisations.html" />
+    <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
     <link rel="prev" title="Chaining component analyses" href="Chaining%20component%20analyses.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -138,12 +138,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Automating the composite wing model parametric study
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Automating%20design%20optimisations.html">
-   Automating the design optimisation of the composite wing model
+   Automating parametric studies and design optimisations
   </a>
  </li>
 </ul>
@@ -246,7 +241,7 @@ title="Fullscreen mode"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/Tutorials/Automating parametric studies.md"
+        <a href="../_sources/Tutorials/Automating parametric studies and design optimisations.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -333,6 +328,28 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automating-a-design-optimisation">
+   Automating a design optimisation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#update-the-driver-component">
+     Update the driver component
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Execute the workflow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Inspect the outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
    Clean-up
   </a>
@@ -351,7 +368,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Automating the composite wing model parametric study</h1>
+                <h1>Automating parametric studies and design optimisations</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -389,6 +406,28 @@ title="Print to PDF"
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#automating-a-design-optimisation">
+   Automating a design optimisation
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#update-the-driver-component">
+     Update the driver component
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Execute the workflow
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     Inspect the outputs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
    Clean-up
   </a>
@@ -408,17 +447,18 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="automating-the-composite-wing-model-parametric-study">
-<h1>Automating the composite wing model parametric study<a class="headerlink" href="#automating-the-composite-wing-model-parametric-study" title="Permalink to this headline">#</a></h1>
-<p><strong>Duration: 15 min</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="automating-parametric-studies-and-design-optimisations">
+<h1>Automating parametric studies and design optimisations<a class="headerlink" href="#automating-parametric-studies-and-design-optimisations" title="Permalink to this headline">#</a></h1>
+<p><strong>Duration: 45 min</strong></p>
 <p>Driver components can be used to automate complex analysis workflows.</p>
-<p>In this tutorial, we automate the execution of a parametric study using the chained component analyses from the previous example.</p>
+<p>In this tutorial, we first automate the execution of a parametric study using the chained component analyses from the previous example.
+Then, we optimise the model parameters by replacing the parametric driver component with the OpenMDAO optimisation component from the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/driver-parametric-model-1.png"><img alt="chained process" class="bg-primary mb-1 align-center" src="../_images/driver-parametric-model-1.png" style="width: 700px;" /></a>
 <section id="opening-a-saved-session">
-<span id="tutorials-automating-parametric-studies-opening-a-saved-session"></span><h2>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
+<h2>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
 <p>Start by loading the session file from the previous example.</p>
 <p>Select <code class="docutils literal notranslate"><span class="pre">Open</span></code> from the interface controls to load the JSON formatted version of our previous session (dapta_input.json).
-Alternatively, copy the JSON object below into a text editor and save it locally, then select <code class="docutils literal notranslate"><span class="pre">Open</span></code> to load it.
+Alternatively, copy the object below into a text editor and save it locally, then select <code class="docutils literal notranslate"><span class="pre">Open</span></code> to load it.
 Three connected components should appear in the workspace.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
@@ -547,13 +587,7 @@ dapta_input.json<div class="sd-summary-down docutils">
 <span class="w">            </span><span class="nt">&quot;api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;generic-python3-comp:latest&quot;</span><span class="p">,</span><span class="w"></span>
 <span class="w">            </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
 <span class="w">            </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;user_input_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;Ux&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;Uy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;Uz&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;Rx&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;Ry&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;Rz&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="w">                </span><span class="nt">&quot;user_input_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w"></span>
 <span class="w">            </span><span class="p">},</span><span class="w"></span>
 <span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">                </span><span class="nt">&quot;files.analysis_output_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
@@ -623,20 +657,19 @@ There should be green tick marks next to the component names in the workspace vi
 <h2>Automating a parametric study<a class="headerlink" href="#automating-a-parametric-study" title="Permalink to this headline">#</a></h2>
 <p>What is the effect of changing the composite material properties on the deflections at the tip of the wing?</p>
 <p>To answer this question, we can perform a parametric study.
-We execute the chained analyses for a range of composite property inputs and record the output average wing tip deflections and rotations.<br />
-This example is based on the pure python implementation in <a class="reference internal" href="#tutorials-automating-parametric-studies-references"><span class="std std-ref">Reference 1</span></a>.</p>
+We execute the chained analyses for a range of composite property inputs and record the output average wing tip deflections and rotations.</p>
 <section id="the-driver-component">
 <h3>The driver component<a class="headerlink" href="#the-driver-component" title="Permalink to this headline">#</a></h3>
-<p>The design variable of interest is the <code class="docutils literal notranslate"><span class="pre">calculix-fea</span></code> input variable <code class="docutils literal notranslate"><span class="pre">fibre_rotation_angle.ORI_0.1</span></code>, which was previously set to zero (fibres aligned with the wing span direction).
-The driver <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> function has to perform the following tasks:</p>
+<p>The variable of interest is the <code class="docutils literal notranslate"><span class="pre">calculix-fea</span></code> input variable <code class="docutils literal notranslate"><span class="pre">fibre_rotation_angle.ORI_0.1</span></code>, which was previously set to a zero value.
+The driver <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> function performs the following tasks:</p>
 <ol class="simple">
-<li><p>iterate over a range of variable values, where the range is defined through the component <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab values <code class="docutils literal notranslate"><span class="pre">rotation_min</span></code> (-10 degrees) to <code class="docutils literal notranslate"><span class="pre">rotation_max</span></code> (10 degrees), with increments of <code class="docutils literal notranslate"><span class="pre">rotation_inc</span></code> (5 degrees);</p></li>
-<li><p>in each iteration, the <code class="docutils literal notranslate"><span class="pre">run_workflow</span></code> function is called to execute the chained component analyses with the current variable value;</p></li>
-<li><p>finally, the plotting function (<code class="docutils literal notranslate"><span class="pre">_plot_study_results</span></code>) generates a line plot of the wing tip deflections as a function of variable value.</p></li>
+<li><p>the <code class="docutils literal notranslate"><span class="pre">while</span></code> loop iterates over a range of variable values, defined it the component <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab as a range from <code class="docutils literal notranslate"><span class="pre">rotation_min</span></code> (-10 degrees) to <code class="docutils literal notranslate"><span class="pre">rotation_max</span></code> (10 degrees), with increments of <code class="docutils literal notranslate"><span class="pre">rotation_inc</span></code> (5 degrees);</p></li>
+<li><p>in each iteration, the <code class="docutils literal notranslate"><span class="pre">run_workflow</span></code> function is called to execute the chained component analyses with the current fibre rotation angle;</p></li>
+<li><p>finally, the plotting function (<code class="docutils literal notranslate"><span class="pre">_plot_study_results</span></code>) generates a line plot of the wing tip deflections as a function of the fibre rotation angle.</p></li>
 </ol>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Note that the <code class="docutils literal notranslate"><span class="pre">parametric-model</span></code> component executes in each workflow iteration, even though it’s inputs do not change.
+<p>You may notice that the <code class="docutils literal notranslate"><span class="pre">parametric-model</span></code> component executes in each workflow iteration, even though it’s inputs do not change.
 To reduce the overhead associated with this component, we could move the <code class="docutils literal notranslate"><span class="pre">parametric-model</span></code> compute function logic into the setup function, which is only executed once.</p>
 </div>
 <p>To create the driver component:</p>
@@ -646,12 +679,11 @@ To reduce the overhead associated with this component, we could move the <code c
 <li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compute.py</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> files from below into a text editor, save them locally.
 Then upload them under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab.</p></li>
 <li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option.</p></li>
-<li><p>Copy the contents of the parameters JSON object below into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box.</p></li>
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="b4674f6f-1ba1-44e4-be9f-e3530383217f" name="a60a32a6-3efa-4518-81af-56ba369fedd1" type="radio">
-</input><label class="sd-tab-label" for="b4674f6f-1ba1-44e4-be9f-e3530383217f">
+<input checked="checked" id="ca21ae37-1538-4f81-9e36-4a72afbb0f0a" name="290bb05c-f285-4d53-9feb-12286572f54c" type="radio">
+</input><label class="sd-tab-label" for="ca21ae37-1538-4f81-9e36-4a72afbb0f0a">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -674,8 +706,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="abf2f923-f14f-46d5-a338-971111f94eb4" name="a60a32a6-3efa-4518-81af-56ba369fedd1" type="radio">
-</input><label class="sd-tab-label" for="abf2f923-f14f-46d5-a338-971111f94eb4">
+<input id="0e91b211-e5c8-4cb8-84f8-8e9f2c08027b" name="290bb05c-f285-4d53-9feb-12286572f54c" type="radio">
+</input><label class="sd-tab-label" for="0e91b211-e5c8-4cb8-84f8-8e9f2c08027b">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -806,15 +838,15 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="b0add129-649f-4210-8aca-df139efc03fe" name="a60a32a6-3efa-4518-81af-56ba369fedd1" type="radio">
-</input><label class="sd-tab-label" for="b0add129-649f-4210-8aca-df139efc03fe">
+<input id="7115e1a7-3178-4bd0-adf7-b29fb6294a06" name="290bb05c-f285-4d53-9feb-12286572f54c" type="radio">
+</input><label class="sd-tab-label" for="7115e1a7-3178-4bd0-adf7-b29fb6294a06">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 </pre></div>
 </div>
 </div>
-<input id="b4862113-9cf1-4e7b-8f48-0cd688c8f68e" name="a60a32a6-3efa-4518-81af-56ba369fedd1" type="radio">
-</input><label class="sd-tab-label" for="b4862113-9cf1-4e7b-8f48-0cd688c8f68e">
+<input id="22c94a45-25fe-4396-b1bd-60d4331590dd" name="290bb05c-f285-4d53-9feb-12286572f54c" type="radio">
+</input><label class="sd-tab-label" for="22c94a45-25fe-4396-b1bd-60d4331590dd">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;component_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -840,17 +872,31 @@ parameters</label><div class="sd-tab-content docutils">
 <p>We can now execute the parametric study by selecting the play symbol ▶ in the Run controls interface.</p>
 <p>Once the run has started, each component will setup and then execute one at a time.
 The setup order is arbitrary, but the compute functions will always be executed from the ‘Start Node’ to the ‘End Node’ (see dashboard Reference section for details).</p>
-<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete after 5 iterations of the connected components (or 1 iteration of the <code class="docutils literal notranslate"><span class="pre">parametric-study-driver</span></code> component).</p>
+<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete after 5 iterations of the connected components (1 iteration of the <code class="docutils literal notranslate"><span class="pre">parametric-study-driver</span></code> component).</p>
 </section>
 <section id="inspect-the-outputs">
 <h3>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h3>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.</p>
-<p>We can see that each component’s compute function was executed 5 times.
+<p>We can see that the each component’s compute function was executed 5 times.
 The “run_output” (at the end of the log) lists the compute output messages for the 5th workflow iteration only.</p>
 <p>Next, close the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log and select the <code class="docutils literal notranslate"><span class="pre">parametric-study-driver</span></code> component.
 Then select the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and click on <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.</p>
-<p>The parametric study outputs are visibly summarised in the ‘results_plot.png’ and ‘results_plot.png’ plots in the ‘outputs’ folder.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/driver-parametric-model-2.png"><img alt="results-plot" class="bg-primary mb-1 align-center" src="../_images/driver-parametric-model-2.png" style="width: 500px;" /></a>
+<p>The parametric study outputs are summarised in the ‘results_plot.png’ and ‘results_plot.png’ plots in the ‘outputs’ folder.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/driver-parametric-model-2.png"><img alt="results-plot" class="bg-primary mb-1 align-center" src="../_images/driver-parametric-model-2.png" style="width: 400px;" /></a>
+</section>
+</section>
+<section id="automating-a-design-optimisation">
+<h2>Automating a design optimisation<a class="headerlink" href="#automating-a-design-optimisation" title="Permalink to this headline">#</a></h2>
+<p>Question</p>
+<p>Approach</p>
+<section id="update-the-driver-component">
+<h3>Update the driver component<a class="headerlink" href="#update-the-driver-component" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="id1">
+<h3>Execute the workflow<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="id2">
+<h3>Inspect the outputs<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 <section id="clean-up">
@@ -863,10 +909,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
 </div>
 </section>
 <section id="references">
-<span id="tutorials-automating-parametric-studies-references"></span><h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://www.dapta.com/automated-fem-analysis-and-output-processing-with-python-and-calculix-crunchix-ccx/">Automated FEM analysis and output processing with Python and CalculiX CrunchiX (ccx)</a></p></li>
-</ol>
+<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -904,10 +947,10 @@ It may take a minute or so for the Cloud session to be reset.</p>
             <p class="prev-next-title">Chaining component analyses</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Automating%20design%20optimisations.html" title="next page">
+    <a class='right-next' id="next-link" href="../Reference/The%20dashboard.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Automating the design optimisation of the composite wing model</p>
+        <p class="prev-next-title">The dashboard</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

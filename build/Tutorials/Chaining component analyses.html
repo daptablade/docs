@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Automating parametric studies" href="Automating%20parametric%20studies.html" />
+    <link rel="next" title="Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
     <link rel="prev" title="Simple optimisation problem" href="Simple%20optimisation%20problem.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -138,7 +138,12 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20parametric%20studies.html">
-   Automating parametric studies
+   Automating the composite wing model parametric study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20design%20optimisations.html">
+   Automating the design optimisation of the composite wing model
   </a>
  </li>
 </ul>
@@ -356,7 +361,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References:
+   References
   </a>
  </li>
 </ul>
@@ -434,7 +439,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References:
+   References
   </a>
  </li>
 </ul>
@@ -483,9 +488,9 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <ul class="simple">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="a8cf05d8-598f-4a0b-a379-7b2c0d6e6bdb" name="e5a35503-c953-488d-ba96-85b29509d41e" type="radio">
-</input><label class="sd-tab-label" for="a8cf05d8-598f-4a0b-a379-7b2c0d6e6bdb">
+<div class="sd-tab-set docutils" id="tutorials-chained-components-parametric-model-files">
+<input checked="checked" id="6110074f-b4d7-4936-9826-1278a0b80450" name="279cf91a-4526-4a5d-929b-8d959b887244" type="radio">
+</input><label class="sd-tab-label" for="6110074f-b4d7-4936-9826-1278a0b80450">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -522,8 +527,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="d3dc8f30-969a-41aa-a044-bb7968c82b30" name="e5a35503-c953-488d-ba96-85b29509d41e" type="radio">
-</input><label class="sd-tab-label" for="d3dc8f30-969a-41aa-a044-bb7968c82b30">
+<input id="3f0cfdab-4bdb-46f3-bb83-c7b6eb9e8221" name="279cf91a-4526-4a5d-929b-8d959b887244" type="radio">
+</input><label class="sd-tab-label" for="3f0cfdab-4bdb-46f3-bb83-c7b6eb9e8221">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1152,8 +1157,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cbf7bc77-f238-4af6-924e-9400dd538396" name="e5a35503-c953-488d-ba96-85b29509d41e" type="radio">
-</input><label class="sd-tab-label" for="cbf7bc77-f238-4af6-924e-9400dd538396">
+<input id="3e76f573-cecd-4eb7-b3ca-b5fde195ead1" name="279cf91a-4526-4a5d-929b-8d959b887244" type="radio">
+</input><label class="sd-tab-label" for="3e76f573-cecd-4eb7-b3ca-b5fde195ead1">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 numpy == 1.21.5
@@ -1161,8 +1166,8 @@ scipy == 1.7.3
 </pre></div>
 </div>
 </div>
-<input id="9cf3ae27-3155-4735-88b0-189f81733cf3" name="e5a35503-c953-488d-ba96-85b29509d41e" type="radio">
-</input><label class="sd-tab-label" for="9cf3ae27-3155-4735-88b0-189f81733cf3">
+<input id="913d60f7-0e7b-40ed-b1f1-767853bfd126" name="279cf91a-4526-4a5d-929b-8d959b887244" type="radio">
+</input><label class="sd-tab-label" for="913d60f7-0e7b-40ed-b1f1-767853bfd126">
 naca0012</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># NACA 0012 from http://airfoiltools.com/
   1.000000  0.001260
@@ -1299,8 +1304,8 @@ naca0012</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ac710f50-3ff0-458b-b228-fb9c15c608e7" name="e5a35503-c953-488d-ba96-85b29509d41e" type="radio">
-</input><label class="sd-tab-label" for="ac710f50-3ff0-458b-b228-fb9c15c608e7">
+<input id="5c39a38c-ab2e-4ed3-a664-bd398829456a" name="279cf91a-4526-4a5d-929b-8d959b887244" type="radio">
+</input><label class="sd-tab-label" for="5c39a38c-ab2e-4ed3-a664-bd398829456a">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;span&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"></span>
@@ -1367,9 +1372,9 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <ul class="simple">
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="9d17e066-0e4b-458c-9e42-f192b8128f3b" name="14c5f586-35a4-453e-8862-3c58c267f9f3" type="radio">
-</input><label class="sd-tab-label" for="9d17e066-0e4b-458c-9e42-f192b8128f3b">
+<div class="sd-tab-set docutils" id="tutorials-chained-components-calculix-fea-files">
+<input checked="checked" id="e82e7223-2386-4e47-be63-f9731c4dd1ff" name="e2e656c6-b220-4eed-a844-508b310262c3" type="radio">
+</input><label class="sd-tab-label" for="e82e7223-2386-4e47-be63-f9731c4dd1ff">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1405,8 +1410,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="8fc86651-9ddc-446f-a94e-f2c53307c693" name="14c5f586-35a4-453e-8862-3c58c267f9f3" type="radio">
-</input><label class="sd-tab-label" for="8fc86651-9ddc-446f-a94e-f2c53307c693">
+<input id="4c72df69-8224-4f55-8bda-74cc4f139bf1" name="e2e656c6-b220-4eed-a844-508b310262c3" type="radio">
+</input><label class="sd-tab-label" for="4c72df69-8224-4f55-8bda-74cc4f139bf1">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -1456,7 +1461,11 @@ compute</label><div class="sd-tab-content docutils">
     <span class="p">)</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">execute_cgx</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">run_folder</span><span class="o">=</span><span class="n">run_folder</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;cgx.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ChildProcessError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;cgx returned non-zero exit status </span><span class="si">{</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
 
     <span class="c1"># check output has been saved</span>
     <span class="n">mesh_file_path</span> <span class="o">=</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;mesh_file&quot;</span><span class="p">]</span>
@@ -1497,7 +1506,11 @@ compute</label><div class="sd-tab-content docutils">
     <span class="p">)</span>
     <span class="n">resp</span> <span class="o">=</span> <span class="n">execute_fea</span><span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">stem</span><span class="p">,</span> <span class="n">run_folder</span><span class="o">=</span><span class="n">run_folder</span><span class="p">)</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;ccx.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ChildProcessError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;ccx returned non-zero exit status </span><span class="si">{</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
 
     <span class="c1"># check output has been saved</span>
     <span class="n">outfile</span> <span class="o">=</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="p">(</span><span class="n">infile</span><span class="o">.</span><span class="n">stem</span> <span class="o">+</span> <span class="s2">&quot;.dat&quot;</span><span class="p">)</span>
@@ -1513,6 +1526,10 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outfile</span><span class="o">.</span><span class="n">name</span>
     <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.mesh_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;all.msh&quot;</span>
     <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.nodeset_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;LAST.nam&quot;</span>
+
+    <span class="c1"># increase dummy variable to ensure the next component executes</span>
+    <span class="k">if</span> <span class="s2">&quot;output_1&quot;</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]:</span>
+        <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;output_1&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
 
@@ -1603,7 +1620,9 @@ compute</label><div class="sd-tab-content docutils">
     <span class="c1"># orientation cards</span>
     <span class="k">for</span> <span class="n">ori</span> <span class="ow">in</span> <span class="n">orientations</span><span class="p">:</span>
         <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*ORIENTATION,NAME=</span><span class="si">{</span><span class="n">ori</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="o">*</span><span class="n">ori</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="o">*</span><span class="n">ori</span><span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">]])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="s2">&quot;, &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:.6f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="p">[</span><span class="o">*</span><span class="n">ori</span><span class="p">[</span><span class="s2">&quot;1&quot;</span><span class="p">],</span> <span class="o">*</span><span class="n">ori</span><span class="p">[</span><span class="s2">&quot;2&quot;</span><span class="p">]])</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
 
     <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;** =============== </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># shell property</span>
@@ -1626,8 +1645,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="33b888d2-62e9-4be4-a309-c17ab48aa338" name="14c5f586-35a4-453e-8862-3c58c267f9f3" type="radio">
-</input><label class="sd-tab-label" for="33b888d2-62e9-4be4-a309-c17ab48aa338">
+<input id="0c350dac-6b8c-4b6c-83e2-1703c0c05aa4" name="e2e656c6-b220-4eed-a844-508b310262c3" type="radio">
+</input><label class="sd-tab-label" for="0c350dac-6b8c-4b6c-83e2-1703c0c05aa4">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 numpy == 1.21.5
@@ -1635,8 +1654,8 @@ scipy == 1.7.3
 </pre></div>
 </div>
 </div>
-<input id="ae8a06cf-eb38-444e-a496-aa2dcf110f22" name="14c5f586-35a4-453e-8862-3c58c267f9f3" type="radio">
-</input><label class="sd-tab-label" for="ae8a06cf-eb38-444e-a496-aa2dcf110f22">
+<input id="0a07d79c-cdbb-4a20-9ca1-325f811cfcc9" name="e2e656c6-b220-4eed-a844-508b310262c3" type="radio">
+</input><label class="sd-tab-label" for="0a07d79c-cdbb-4a20-9ca1-325f811cfcc9">
 ccx_static_tip_shear</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*HEADING
 Model: Cantilevered composite box with tip shear
@@ -1670,8 +1689,8 @@ U
 </pre></div>
 </div>
 </div>
-<input id="6a5fe293-b964-418d-8958-02b3cd143377" name="14c5f586-35a4-453e-8862-3c58c267f9f3" type="radio">
-</input><label class="sd-tab-label" for="6a5fe293-b964-418d-8958-02b3cd143377">
+<input id="5f5006e2-c9c3-4018-93b8-5327bebe3892" name="e2e656c6-b220-4eed-a844-508b310262c3" type="radio">
+</input><label class="sd-tab-label" for="5f5006e2-c9c3-4018-93b8-5327bebe3892">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;analysis_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ccx_static_tip_shear.inp&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1783,9 +1802,9 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <p class="admonition-title">Note</p>
 <p>Remember to save the session data now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 </div>
-<div class="sd-tab-set docutils">
-<input checked="checked" id="e2e77b2e-ad6e-466d-b57c-015fa957d1d8" name="efd72153-9336-4853-a83a-f450af4716d1" type="radio">
-</input><label class="sd-tab-label" for="e2e77b2e-ad6e-466d-b57c-015fa957d1d8">
+<div class="sd-tab-set docutils" id="tutorials-chained-components-results-processor-files">
+<input checked="checked" id="a93462e3-c192-46ba-ab94-63cf1814d66c" name="5c57d0a3-6f44-4660-8bdb-dbf70bc5f443" type="radio">
+</input><label class="sd-tab-label" for="a93462e3-c192-46ba-ab94-63cf1814d66c">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1802,32 +1821,60 @@ setup</label><div class="sd-tab-content docutils">
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># set default inputs</span>
+    <span class="k">if</span> <span class="n">inputs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">input_key</span><span class="p">,</span> <span class="n">input_value</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">input_value</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">input_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">input_key</span><span class="p">])</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">input_key</span><span class="si">}</span><span class="s2"> in the input parameters.&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span>
+
+    <span class="c1"># initialise outputs - required for OpenMDAO</span>
+    <span class="k">if</span> <span class="n">outputs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">output_key</span><span class="p">,</span> <span class="n">output_value</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">output_value</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">output_key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="n">output_key</span><span class="p">])</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not find </span><span class="si">{</span><span class="n">output_key</span><span class="si">}</span><span class="s2"> in the input parameters.&quot;</span><span class="p">)</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;outputs&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">outputs</span>
+
     <span class="c1"># declare default parameter inputs - overriden by connection data if available</span>
     <span class="k">if</span> <span class="s2">&quot;files.analysis_output_file&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span>
             <span class="s2">&quot;files.analysis_output_file&quot;</span>
         <span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 
     <span class="k">if</span> <span class="s2">&quot;files.mesh_file&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.mesh_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;files.mesh_file&quot;</span><span class="p">]</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.mesh_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span>
+            <span class="s2">&quot;files.mesh_file&quot;</span>
+        <span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.mesh_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.mesh_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 
     <span class="k">if</span> <span class="s2">&quot;files.nodeset_file&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.nodeset_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;files.nodeset_file&quot;</span><span class="p">]</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.nodeset_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span>
+            <span class="s2">&quot;files.nodeset_file&quot;</span>
+        <span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.nodeset_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
+        <span class="n">response</span><span class="p">[</span><span class="s2">&quot;inputs&quot;</span><span class="p">][</span><span class="s2">&quot;implicit&quot;</span><span class="p">][</span><span class="s2">&quot;files.nodeset_file&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span>
 
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="n">response</span><span class="p">[</span>
+        <span class="s2">&quot;message&quot;</span>
+    <span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
 
-    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="n">inputs</span><span class="p">}</span>
+    <span class="k">return</span> <span class="n">response</span>
 </pre></div>
 </div>
 </div>
-<input id="624b8bd4-07df-4808-b631-06d345743ccd" name="efd72153-9336-4853-a83a-f450af4716d1" type="radio">
-</input><label class="sd-tab-label" for="624b8bd4-07df-4808-b631-06d345743ccd">
+<input id="db147c37-222e-490d-bf53-67f49f373332" name="5c57d0a3-6f44-4660-8bdb-dbf70bc5f443" type="radio">
+</input><label class="sd-tab-label" for="db147c37-222e-490d-bf53-67f49f373332">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -2047,8 +2094,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="afe1b2de-fc16-4409-9279-2596a9a014d8" name="efd72153-9336-4853-a83a-f450af4716d1" type="radio">
-</input><label class="sd-tab-label" for="afe1b2de-fc16-4409-9279-2596a9a014d8">
+<input id="d40c8b0c-8645-44bf-a50c-18f6ad846b43" name="5c57d0a3-6f44-4660-8bdb-dbf70bc5f443" type="radio">
+</input><label class="sd-tab-label" for="d40c8b0c-8645-44bf-a50c-18f6ad846b43">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 </pre></div>
@@ -2090,7 +2137,7 @@ Indeed, there is no requirement for the input and output data names to match - s
 <section id="execute-the-workflow">
 <h2>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
 <p>We can now execute the chained component analysis <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.</p>
-<p>Once the run has started, each component with setup and then execute one at a time.
+<p>Once the run has started, each component will setup and then execute one at a time.
 The setup order is arbitrary, but the compute functions will always be executed from the ‘Start Node’ to the ‘End Node’ (see dashboard Reference section for details).</p>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete once the fea-results-component compute has completed.</p>
 </section>
@@ -2117,7 +2164,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
 </div>
 </section>
 <section id="references">
-<span id="tutorials-chaining-component-analyses-references"></span><h2>References:<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<span id="tutorials-chaining-component-analyses-references"></span><h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p><a class="reference external" href="https://www.dapta.com/parametric-fem-model-creation-with-python-and-calculix-graphix-cgx/">Parametric FEM model creation with Python and CalculiX GraphiX (cgx)</a></p></li>
 <li><p><a class="reference external" href="https://www.dapta.com/automated-fem-analysis-and-output-processing-with-python-and-calculix-crunchix-ccx/">Automated FEM analysis and output processing with Python and CalculiX CrunchiX (ccx)</a></p></li>
@@ -2162,7 +2209,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
     <a class='right-next' id="next-link" href="Automating%20parametric%20studies.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Automating parametric studies</p>
+        <p class="prev-next-title">Automating the composite wing model parametric study</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
