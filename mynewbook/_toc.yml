@@ -11,9 +11,10 @@ parts:
       - file: Tutorials/Chaining component analyses
       - file: Tutorials/Automating parametric studies
       - file: Tutorials/Automating design optimisations
+      - file: Tutorials/Working with spreadsheets
   - caption: Reference Guide
     chapters:
       - file: Reference/The dashboard
       - file: Reference/FAQs
       - file: Reference/Glossary
-      - file: Support
+      - file: Reference/Support
