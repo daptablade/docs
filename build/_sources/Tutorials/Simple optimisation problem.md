@@ -278,7 +278,7 @@ It may take a minute or so for the Cloud session to be reset.
 You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` data (session data, inputs and outputs) will be permanently deleted. 
 ```
 
-## References:
+## References
 
 1. [Simple Optimization](https://openmdao.org/newdocs/versions/latest/examples/paraboloid.html?highlight=unconstrained) example from the openMDAO user guide.
 2. [Optimization of Paraboloid](https://openmdao.org/newdocs/versions/latest/basic_user_guide/single_disciplinary_optimization/first_optimization.html) section of the openMDAO user guide.

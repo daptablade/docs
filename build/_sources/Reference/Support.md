@@ -2,7 +2,7 @@
 
 ## Troubleshooting
 
-Check the [Troubleshooting](reference-FAQ-troubleshooting) section for advice on how to debug your Runs. 
+Check the [Troubleshooting](reference-FAQ-troubleshooting) section of the FAQ for advice on how to debug your Runs. 
 
 ## User community forum
 

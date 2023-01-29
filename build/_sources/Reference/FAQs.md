@@ -21,25 +21,28 @@ You may encounter component resource error messages when these limits are exceed
 ## Who can see my data?
 
 Your {term}`Run` data is saved on shared cloud resources managed by our cloud service provider [DigitalOcean](https://www.digitalocean.com/legal/terms-of-service-agreement). 
-Although your data is password controlled, we recommend that you do not upload any sensitive data to the Dapta platform at this time.   
+Although your data is password controlled, we recommend that you do not upload any sensitive data to the dapta platform at this time.   
 We may also need to access your data for support and system maintenance purposes.
 
 ## What software can I run in a component?
 
 The following table provides an overview of currently available software APIs. 
-[Contact support](../Support.md) to get your own OS or commercial software tools added to the list.  
+[Contact support](./Support.md) to get your own OS or commercial software tools added to the list.  
 
 | API name                 | Github folder            | Software available |
 | --------                 | ---------                | ---------                    |
 | calculix-fea-comp        | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, Calculix GraphiX (cgx_2.20), Calculix CrunchiX (ccx_2.20)| 
 | generic-python3-comp     | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
-| generic-python3-driver    | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
+| generic-python3-driver   | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
+| libreoffice-comp         | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, LibreOffice (Version: 7.0.4.2)|
+
 
 ## What python packages can I use?
 
 Current package lists:
 [Python 3.8 packages](Packages%20list%20for%20python%203.8.md)
 
+(reference-FAQ-troubleshooting)=
 ## Troubleshooting
 
 ### Is it a component error?
@@ -57,4 +60,4 @@ You can force terminate a session (stop a run and delete everything) by selectin
 
 ### Ask for help
 
-Check our [support](../Support.md) options. 
+Check our [support](./Support.md) options. 

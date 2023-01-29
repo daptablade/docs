@@ -148,6 +148,11 @@ const thebe_selector_output = ".output, .cell_output"
    Automating the design optimisation of the composite wing model
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Working%20with%20spreadsheets.html">
+   Working with spreadsheets
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -171,7 +176,7 @@ const thebe_selector_output = ".output, .cell_output"
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="../Support.html">
+  <a class="reference internal" href="../Reference/Support.html">
    Support
   </a>
  </li>
@@ -507,8 +512,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="b79ee96c-1e74-499e-8a96-c9df58e68219" name="301b8193-804a-427f-a2c6-8c16a5a4ef76" type="radio">
-</input><label class="sd-tab-label" for="b79ee96c-1e74-499e-8a96-c9df58e68219">
+<input checked="checked" id="a0d7eae4-ad99-497f-a1a6-4a091617e442" name="61d45475-708e-464c-9574-5fa693958a5d" type="radio">
+</input><label class="sd-tab-label" for="a0d7eae4-ad99-497f-a1a6-4a091617e442">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -596,8 +601,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="61738afb-33e3-4454-b674-b08465b60401" name="301b8193-804a-427f-a2c6-8c16a5a4ef76" type="radio">
-</input><label class="sd-tab-label" for="61738afb-33e3-4454-b674-b08465b60401">
+<input id="54ed75df-fad4-4b63-996f-8edb8b9dd1fb" name="61d45475-708e-464c-9574-5fa693958a5d" type="radio">
+</input><label class="sd-tab-label" for="54ed75df-fad4-4b63-996f-8edb8b9dd1fb">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -814,7 +819,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
   
     By Dapta Ltd<br/>
   
-      &copy; Copyright 2022.<br/>
+      &copy; Copyright 2023.<br/>
 </p>
         </footer>
     </div>
