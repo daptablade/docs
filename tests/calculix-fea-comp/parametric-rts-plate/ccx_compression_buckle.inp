@@ -1,0 +1,24 @@
+*HEADING
+Model: Unsuported composite box normal modes
+**********************
+** NODES AND ELEMENTS
+*INCLUDE,INPUT=solid_mesh.inp
+**********************
+** COMPOSITE PROPERTIES
+*INCLUDE,INPUT=element_sets.inp
+*INCLUDE,INPUT=materials.inp
+*INCLUDE,INPUT=solid_sections.inp
+**********************
+** CONSTRAINTS
+*INCLUDE,INPUT=node_sets.inp
+*INCLUDE,INPUT=surfaces.inp
+*INCLUDE,INPUT=constraints.inp
+*STEP
+*BUCKLE, SOLVER=SPOOLES
+10
+*INCLUDE,INPUT=loads.inp
+*NODE OUTPUT 
+U
+*ELEMENT OUTPUT
+S
+*END STEP

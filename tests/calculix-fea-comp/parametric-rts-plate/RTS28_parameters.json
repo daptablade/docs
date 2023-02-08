@@ -1,0 +1,238 @@
+{
+  "length_x": 1.250,
+  "width_y": 0.75,
+  "split_at_x": [
+    0.25,
+    1.0
+  ],
+  "split_at_y": [
+    0.25,
+    0.5
+  ],
+  "boundary_conditions": {
+    "fixed_y0": {
+      "lines": [
+        0,
+        1,
+        2
+      ],
+      "SPC": "23"
+    },
+    "fixed_x0": {
+      "lines": [
+        9,
+        10,
+        11
+      ],
+      "SPC": "13"
+    },
+    "support_z": {
+      "lines": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23
+      ],
+      "SPC": "3"
+    },
+    "support_ymax": {
+      "lines": [
+        6,
+        7,
+        8
+      ],
+      "kinematic": "23",
+      "ref_node_SPC": "34",
+      "surface_vector": [
+        0.0,
+        1.0,
+        0.0
+      ]
+    },
+    "loaded_xmax": {
+      "lines": [
+        3,
+        4,
+        5
+      ],
+      "kinematic": "13",
+      "ref_node_SPC": "35",
+      "surface_vector": [
+        1.0,
+        0.0,
+        0.0
+      ],
+      "ref_node_forces": [
+        -750000.0,
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "edge_length": 0.025,
+  "material": {
+    "E1": 163.0e9,
+    "E2": 12.0e9,
+    "nu12": 0.3,
+    "G12": 5.0e9,
+    "thickness": 0.000125,
+    "density": 1571.0,
+    "tape_width": 0.100,
+    "stress_allowables": {},
+    "name": "IM7_8552",
+    "description": " Units are: kg, m; data from Groh_2015."
+  },
+  "plies": [
+    {
+      "path_start": [
+        0,
+        0,
+        0
+      ],
+      "path_end": [
+        0,
+        0.750,
+        0
+      ],
+      "ply_ref_angle": 90.0,
+      "ply_ref_thickness_multiplier": 10,
+      "combine_plus_minus_plies": true,
+      "control_pts": [
+        {
+          "d": -0.01,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.000,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.125,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.250,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.375,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.500,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.625,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.750,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.760,
+          "inc_angle": 69.0
+        }
+      ]
+    },
+    {
+      "path_start": [
+        0,
+        0,
+        0
+      ],
+      "path_end": [
+        0,
+        0.750,
+        0
+      ],
+      "ply_ref_angle": 90.0,
+      "ply_ref_thickness_multiplier": 8,
+      "combine_plus_minus_plies": true,
+      "control_pts": [
+        {
+          "d": -0.01,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.760,
+          "inc_angle": 0.0
+        }
+      ]
+    },
+    {
+      "path_start": [
+        0,
+        0,
+        0
+      ],
+      "path_end": [
+        0,
+        0.750,
+        0
+      ],
+      "ply_ref_angle": 90.0,
+      "ply_ref_thickness_multiplier": 10,
+      "combine_plus_minus_plies": true,
+      "control_pts": [
+        {
+          "d": -0.01,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.000,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.125,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.250,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.375,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.500,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.625,
+          "inc_angle": 0.0
+        },
+        {
+          "d": 0.750,
+          "inc_angle": 69.0
+        },
+        {
+          "d": 0.760,
+          "inc_angle": 69.0
+        }
+      ]
+    }
+  ],
+  "mesh_files": {
+    "mesh": "all.msh",
+    "solid_mesh": "solid_mesh.inp",
+    "materials": "materials.inp",
+    "element_sets": "element_sets.inp",
+    "solid_sections": "solid_sections.inp",
+    "node_sets": "node_sets.inp",
+    "surfaces": "surfaces.inp",
+    "constraints": "constraints.inp",
+    "loads": "loads.inp"
+  },
+  "analysis_file": "ccx_compression_buckle.inp"
+}
