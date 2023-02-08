@@ -108,11 +108,13 @@
       "control_pts": [
         {
           "d": -0.01,
-          "inc_angle": 45.0
+          "inc_angle": 45.0,
+          "id": "T0"
         },
         {
           "d": 0.760,
-          "inc_angle": 45.0
+          "inc_angle": 45.0,
+          "id": "T1"
         }
       ]
     }
@@ -128,5 +130,6 @@
     "constraints": "constraints.inp",
     "loads": "loads.inp"
   },
-  "analysis_file": "ccx_compression_buckle.inp"
+  "analysis_file": "ccx_compression_buckle.inp",
+  "number_of_modes": 10
 }

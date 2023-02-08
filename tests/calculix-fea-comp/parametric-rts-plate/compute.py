@@ -60,8 +60,8 @@ PARAMS = {
             "ply_ref_thickness_multiplier": 33.941125496954285,
             "combine_plus_minus_plies": True,
             "control_pts": [
-                {"d": -0.01, "inc_angle": 45.0},
-                {"d": 0.760, "inc_angle": 45.0},
+                {"d": -0.01, "inc_angle": 45.0, "id": "T0"},
+                {"d": 0.760, "inc_angle": 45.0, "id": "T1"},
             ],
         }
     ],
@@ -77,6 +77,7 @@ PARAMS = {
         "loads": "loads.inp",
     },
     "analysis_file": "ccx_compression_buckle.inp",
+    "number_of_modes": 10,
     "user_input_files": [],
     "inputs_folder_path": Path(__file__).parent,
     "outputs_folder_path": Path(__file__).parent / "outputs",
@@ -146,6 +147,19 @@ def main(
     print("Starting user function evaluation.")
 
     run_folder = Path(parameters["outputs_folder_path"])
+
+    # set design variables
+    if inputs["design"]:
+        input_data = inputs["design"]  # ["ply-ctrl_pt_id-inc_angle": value, ]
+        for key, value in input_data.items():
+            k = key.strip().split("-")
+            ply = int(k[0])
+            ctrl_pt_id = k[1]
+            var_key = k[2]
+            for pt in parameters["plies"][ply]["control_pts"]:
+                if pt["id"] == ctrl_pt_id:
+                    pt[var_key] = value
+        print("Applied design inputs.")
 
     # 1) Define a 2D mould surfaces in CGX and generate the 2D mesh
     cgx_input_file = get_geometry(
@@ -271,13 +285,15 @@ def main(
         FileNotFoundError(f"{str(outfile)} is not a file.")
     print("Executed CCX FEM analysis.")
 
-    # TODO read the lowest buckling modes data from the .dat file
+    buckling_factors = get_buckling_factors(
+        outfile, number_modes=parameters["number_of_modes"]
+    )
 
-    outputs = {"mass": mass, "buckling_factors": 0.0}
+    outputs = {"mass": mass, "buckling_factors": buckling_factors}
     message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Executed Calculix finite element analysis."
     print(message)
 
-    return {"message": message}
+    return {"message": message, "outputs": outputs}
 
 
 @timeit
@@ -1126,11 +1142,35 @@ def write_loading(constraints, run_folder=None, file="loads.inp"):
         f.write("".join(lines))
 
 
+def get_buckling_factors(outfile, number_modes):
+
+    with open(outfile, "r", encoding="utf-8") as f:
+        data = f.readlines()
+
+    index = 1
+    factors = []
+    for line in data[6 : 7 + number_modes]:
+        output = line.strip().split()
+        mode_no = int(output[0])
+        factor = float(output[1])
+        if not mode_no == index:
+            raise ValueError(
+                "Mode number doesn't match expected index. Check dat file."
+            )
+        index += 1
+        factors.append(factor)
+
+    return factors
+
+
 if __name__ == "__main__":
-    main(
-        inputs={"design": {}, "implicit": {}, "setup": {}},
+    design = {"0-T0-inc_angle": 45.0}
+    resp = main(
+        inputs={"design": design, "implicit": {}, "setup": {}},
         outputs={"design": {}, "implicit": {}, "setup": {}},
         partials={},
         options={},
         parameters=PARAMS,
     )
+    assert np.isclose(resp["outputs"]["mass"], 8.836875, rtol=1e-6)
+    assert np.isclose(resp["outputs"]["buckling_factors"][0], 1.126453, rtol=1e-6)

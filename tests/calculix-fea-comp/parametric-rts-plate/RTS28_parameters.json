@@ -108,39 +108,48 @@
       "control_pts": [
         {
           "d": -0.01,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.000,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.125,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.250,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.375,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.500,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.625,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.750,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.760,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         }
       ]
     },
@@ -161,11 +170,13 @@
       "control_pts": [
         {
           "d": -0.01,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.760,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T1"
         }
       ]
     },
@@ -186,39 +197,48 @@
       "control_pts": [
         {
           "d": -0.01,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.000,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.125,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.250,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.375,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.500,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.625,
-          "inc_angle": 0.0
+          "inc_angle": 0.0,
+          "id": "T0"
         },
         {
           "d": 0.750,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         },
         {
           "d": 0.760,
-          "inc_angle": 69.0
+          "inc_angle": 69.0,
+          "id": "T1"
         }
       ]
     }
@@ -234,5 +254,6 @@
     "constraints": "constraints.inp",
     "loads": "loads.inp"
   },
-  "analysis_file": "ccx_compression_buckle.inp"
+  "analysis_file": "ccx_compression_buckle.inp",
+  "number_of_modes": 10
 }
