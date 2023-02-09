@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -57,11 +57,19 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
     <link rel="prev" title="Simple optimisation problem" href="Simple%20optimisation%20problem.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
     
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -242,6 +250,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Chaining component analyses.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -462,6 +515,7 @@ title="Print to PDF"
 <p><strong>Duration: 45 min</strong></p>
 <p>In this tutorial we explore the usage of <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a>s to chain the execution of <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
 The example also introduces a finite element analysis specific ‘calculix-fea-comp’ component API.</p>
+<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model">Github</a>.</strong></p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-model-1.png"><img alt="chained process" class="bg-primary mb-1 align-center" src="../_images/parametric-model-1.png" style="width: 700px;" /></a>
 <section id="create-the-components">
 <h2>Create the Components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
@@ -494,8 +548,8 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-parametric-model-files">
-<input checked="checked" id="5f6cfea2-f315-4699-bc6f-5515aa87021f" name="d29bbb17-fc79-4645-865c-72dd8d1965b9" type="radio">
-</input><label class="sd-tab-label" for="5f6cfea2-f315-4699-bc6f-5515aa87021f">
+<input checked="checked" id="da8c7618-95d3-4a6d-9732-a77c874eb842" name="a51e240d-a911-4303-9bdb-77b6eb03f6fd" type="radio">
+</input><label class="sd-tab-label" for="da8c7618-95d3-4a6d-9732-a77c874eb842">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -532,8 +586,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c5ae203d-5337-4c98-94aa-0e06757aa5b2" name="d29bbb17-fc79-4645-865c-72dd8d1965b9" type="radio">
-</input><label class="sd-tab-label" for="c5ae203d-5337-4c98-94aa-0e06757aa5b2">
+<input id="06b91742-0afb-4799-8ac4-0883bd1fc9e9" name="a51e240d-a911-4303-9bdb-77b6eb03f6fd" type="radio">
+</input><label class="sd-tab-label" for="06b91742-0afb-4799-8ac4-0883bd1fc9e9">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1162,8 +1216,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="138477c8-bb02-4556-a7db-0d791ad4da47" name="d29bbb17-fc79-4645-865c-72dd8d1965b9" type="radio">
-</input><label class="sd-tab-label" for="138477c8-bb02-4556-a7db-0d791ad4da47">
+<input id="7e7f46aa-4810-422b-9b44-177ac946f1cb" name="a51e240d-a911-4303-9bdb-77b6eb03f6fd" type="radio">
+</input><label class="sd-tab-label" for="7e7f46aa-4810-422b-9b44-177ac946f1cb">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 numpy == 1.21.5
@@ -1171,8 +1225,8 @@ scipy == 1.7.3
 </pre></div>
 </div>
 </div>
-<input id="1748e763-6574-4053-a578-85eba4558af1" name="d29bbb17-fc79-4645-865c-72dd8d1965b9" type="radio">
-</input><label class="sd-tab-label" for="1748e763-6574-4053-a578-85eba4558af1">
+<input id="0a8e01c0-fd49-4e61-9856-7733708b0f75" name="a51e240d-a911-4303-9bdb-77b6eb03f6fd" type="radio">
+</input><label class="sd-tab-label" for="0a8e01c0-fd49-4e61-9856-7733708b0f75">
 naca0012</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># NACA 0012 from http://airfoiltools.com/
   1.000000  0.001260
@@ -1309,8 +1363,8 @@ naca0012</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="38ff3846-f2a2-48b7-a6cc-f8fb4db8ef25" name="d29bbb17-fc79-4645-865c-72dd8d1965b9" type="radio">
-</input><label class="sd-tab-label" for="38ff3846-f2a2-48b7-a6cc-f8fb4db8ef25">
+<input id="0029c9fa-6168-431f-bbb6-798c63f8ae1b" name="a51e240d-a911-4303-9bdb-77b6eb03f6fd" type="radio">
+</input><label class="sd-tab-label" for="0029c9fa-6168-431f-bbb6-798c63f8ae1b">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;span&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"></span>
@@ -1378,8 +1432,8 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-calculix-fea-files">
-<input checked="checked" id="9f5e459d-3a52-426b-a2b1-0c7a030440cd" name="9046adff-2c25-46e5-99ab-d1ee234f4530" type="radio">
-</input><label class="sd-tab-label" for="9f5e459d-3a52-426b-a2b1-0c7a030440cd">
+<input checked="checked" id="5a716cb7-de4e-4c98-ba51-a8f2d4b7d75b" name="6fec5021-9a32-4148-bd07-a177dc7227c8" type="radio">
+</input><label class="sd-tab-label" for="5a716cb7-de4e-4c98-ba51-a8f2d4b7d75b">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1415,8 +1469,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="b8a1d87a-369a-48b7-b21d-7c3518259feb" name="9046adff-2c25-46e5-99ab-d1ee234f4530" type="radio">
-</input><label class="sd-tab-label" for="b8a1d87a-369a-48b7-b21d-7c3518259feb">
+<input id="da232ea7-8eb6-4c17-9ad9-ab3b08c478f4" name="6fec5021-9a32-4148-bd07-a177dc7227c8" type="radio">
+</input><label class="sd-tab-label" for="da232ea7-8eb6-4c17-9ad9-ab3b08c478f4">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -1650,8 +1704,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c1e183c5-b1f5-42bd-a795-139ce2a689ad" name="9046adff-2c25-46e5-99ab-d1ee234f4530" type="radio">
-</input><label class="sd-tab-label" for="c1e183c5-b1f5-42bd-a795-139ce2a689ad">
+<input id="e8445a28-7fd5-4b23-8f37-a7bfe48ac854" name="6fec5021-9a32-4148-bd07-a177dc7227c8" type="radio">
+</input><label class="sd-tab-label" for="e8445a28-7fd5-4b23-8f37-a7bfe48ac854">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 numpy == 1.21.5
@@ -1659,8 +1713,8 @@ scipy == 1.7.3
 </pre></div>
 </div>
 </div>
-<input id="a7c816f3-7bfa-4c1c-b817-2a916c220980" name="9046adff-2c25-46e5-99ab-d1ee234f4530" type="radio">
-</input><label class="sd-tab-label" for="a7c816f3-7bfa-4c1c-b817-2a916c220980">
+<input id="f9da80fe-45af-443b-9b4f-762521bd9552" name="6fec5021-9a32-4148-bd07-a177dc7227c8" type="radio">
+</input><label class="sd-tab-label" for="f9da80fe-45af-443b-9b4f-762521bd9552">
 ccx_static_tip_shear</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*HEADING
 Model: Cantilevered composite box with tip shear
@@ -1694,8 +1748,8 @@ U
 </pre></div>
 </div>
 </div>
-<input id="11277a99-a9c9-4543-8daf-54650ab39f2c" name="9046adff-2c25-46e5-99ab-d1ee234f4530" type="radio">
-</input><label class="sd-tab-label" for="11277a99-a9c9-4543-8daf-54650ab39f2c">
+<input id="a9fd0eaa-6378-44da-b471-57aa6e510daf" name="6fec5021-9a32-4148-bd07-a177dc7227c8" type="radio">
+</input><label class="sd-tab-label" for="a9fd0eaa-6378-44da-b471-57aa6e510daf">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;analysis_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ccx_static_tip_shear.inp&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1808,8 +1862,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <p>Remember to save the session data now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 </div>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-results-processor-files">
-<input checked="checked" id="0dc8382b-f847-4968-a28e-9cce3e201cf8" name="eb70bfb9-7f03-4f73-9b46-d3c9731925b8" type="radio">
-</input><label class="sd-tab-label" for="0dc8382b-f847-4968-a28e-9cce3e201cf8">
+<input checked="checked" id="1a066523-7c2c-494c-bc23-264adce34e2d" name="1d757a77-03a8-4a7e-bec8-720c95ba6827" type="radio">
+</input><label class="sd-tab-label" for="1a066523-7c2c-494c-bc23-264adce34e2d">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1878,8 +1932,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="47808afb-c23c-490a-83f0-77f692f2568a" name="eb70bfb9-7f03-4f73-9b46-d3c9731925b8" type="radio">
-</input><label class="sd-tab-label" for="47808afb-c23c-490a-83f0-77f692f2568a">
+<input id="7f8a1668-a411-4a83-bc9c-31990ca9b675" name="1d757a77-03a8-4a7e-bec8-720c95ba6827" type="radio">
+</input><label class="sd-tab-label" for="7f8a1668-a411-4a83-bc9c-31990ca9b675">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -2099,8 +2153,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="899a1913-d373-409f-b6d1-163253eb4dd4" name="eb70bfb9-7f03-4f73-9b46-d3c9731925b8" type="radio">
-</input><label class="sd-tab-label" for="899a1913-d373-409f-b6d1-163253eb4dd4">
+<input id="ec65dcb1-ba2c-4fcb-89ea-99cb2d204d6b" name="1d757a77-03a8-4a7e-bec8-720c95ba6827" type="radio">
+</input><label class="sd-tab-label" for="ec65dcb1-ba2c-4fcb-89ea-99cb2d204d6b">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 </pre></div>

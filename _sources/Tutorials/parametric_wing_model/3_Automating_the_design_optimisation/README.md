@@ -1,0 +1,1 @@
+The optimiser component can be found under [Tutorials/open-mdao-paraboloid](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/open-mdao-paraboloid)

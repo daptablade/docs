@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -57,11 +57,19 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Working with spreadsheets" href="Working%20with%20spreadsheets.html" />
     <link rel="prev" title="Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
     
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -242,6 +250,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Automating design optimisations.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -429,6 +482,7 @@ title="Print to PDF"
 <p>Driver components can be used to automate complex analysis workflows.</p>
 <p>In the previous example, we performed a parametric study on a single variable.
 In this tutorial we go one step further by re-using the OpenMDAO optimisation component from the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example to optimise the wing design for minimum wing incidence at the tip.</p>
+<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model">Github</a>.</strong></p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-parametric-model-1.png"><img alt="chained process with optimiser" class="bg-primary mb-1 align-center" src="../_images/open-mdao-parametric-model-1.png" style="width: 700px;" /></a>
 <section id="opening-a-saved-session">
 <h2>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
@@ -461,8 +515,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c190ea49-d430-42ac-bd90-6dbb7759ba00" name="ebe4d160-8b86-4fe7-a8c4-eecf3fad910d" type="radio">
-</input><label class="sd-tab-label" for="c190ea49-d430-42ac-bd90-6dbb7759ba00">
+<input checked="checked" id="e7cedbdd-e89d-4682-9b3c-8352382aa027" name="72937386-5752-4503-ae88-b6d15d1acc64" type="radio">
+</input><label class="sd-tab-label" for="e7cedbdd-e89d-4682-9b3c-8352382aa027">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -489,8 +543,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="49687dd4-b702-439e-8439-dfaac753de05" name="ebe4d160-8b86-4fe7-a8c4-eecf3fad910d" type="radio">
-</input><label class="sd-tab-label" for="49687dd4-b702-439e-8439-dfaac753de05">
+<input id="ecc148b2-0db0-466d-ba84-a1636f3c3162" name="72937386-5752-4503-ae88-b6d15d1acc64" type="radio">
+</input><label class="sd-tab-label" for="ecc148b2-0db0-466d-ba84-a1636f3c3162">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -825,8 +879,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c4556545-6251-4fec-8284-e3a21375d3a6" name="ebe4d160-8b86-4fe7-a8c4-eecf3fad910d" type="radio">
-</input><label class="sd-tab-label" for="c4556545-6251-4fec-8284-e3a21375d3a6">
+<input id="178fab90-5eb0-4279-9caf-7b70c6a7b10d" name="72937386-5752-4503-ae88-b6d15d1acc64" type="radio">
+</input><label class="sd-tab-label" for="178fab90-5eb0-4279-9caf-7b70c6a7b10d">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 openmdao == 3.16.0
@@ -834,8 +888,8 @@ matplotlib == 3.5.2
 </pre></div>
 </div>
 </div>
-<input id="d0b167a2-7936-458a-a564-750e7d4af1ba" name="ebe4d160-8b86-4fe7-a8c4-eecf3fad910d" type="radio">
-</input><label class="sd-tab-label" for="d0b167a2-7936-458a-a564-750e7d4af1ba">
+<input id="8347b17f-4ec9-47e4-8b38-467e5ea60349" name="72937386-5752-4503-ae88-b6d15d1acc64" type="radio">
+</input><label class="sd-tab-label" for="8347b17f-4ec9-47e4-8b38-467e5ea60349">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -887,8 +941,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f34b5118-ae95-4724-9f52-ff21d09e6b44" name="ebe4d160-8b86-4fe7-a8c4-eecf3fad910d" type="radio">
-</input><label class="sd-tab-label" for="f34b5118-ae95-4724-9f52-ff21d09e6b44">
+<input id="55d96c5a-3cd9-45a8-b17d-942013f197da" name="72937386-5752-4503-ae88-b6d15d1acc64" type="radio">
+</input><label class="sd-tab-label" for="55d96c5a-3cd9-45a8-b17d-942013f197da">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1042,8 +1096,8 @@ The design variable connections in particular are used by OpenMDAO to determine 
 <p>It is necessary to define the following artificial design variables and connections before we can launch the Run.</p>
 <p>Select the <strong>parametric-model</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="1d69c08c-9497-436b-b1e8-5b5aac1eb857" name="37334c66-a52a-454d-b8aa-19c4cd56b8ad" type="radio">
-</input><label class="sd-tab-label" for="1d69c08c-9497-436b-b1e8-5b5aac1eb857">
+<input checked="checked" id="fdfceffc-7bae-4427-8c22-6c90d00fc675" name="199f7afe-f2a1-4196-9fff-7183c8309a08" type="radio">
+</input><label class="sd-tab-label" for="fdfceffc-7bae-4427-8c22-6c90d00fc675">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;input_0&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
@@ -1051,8 +1105,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c60d90dd-e866-4c01-aa43-d9cdfb83420a" name="37334c66-a52a-454d-b8aa-19c4cd56b8ad" type="radio">
-</input><label class="sd-tab-label" for="c60d90dd-e866-4c01-aa43-d9cdfb83420a">
+<input id="9880dea1-df2d-481f-86b4-1d6fa08b2d31" name="199f7afe-f2a1-4196-9fff-7183c8309a08" type="radio">
+</input><label class="sd-tab-label" for="9880dea1-df2d-481f-86b4-1d6fa08b2d31">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1064,8 +1118,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>calculix-fea</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="9c7d7913-8372-4c92-9ea9-73345700abf8" name="587eda75-5f49-4094-99c3-db9409a8a9b7" type="radio">
-</input><label class="sd-tab-label" for="9c7d7913-8372-4c92-9ea9-73345700abf8">
+<input checked="checked" id="74632b6f-31f6-4650-aec8-21b67c9af569" name="33f68208-0654-421d-a348-5a7520f08b94" type="radio">
+</input><label class="sd-tab-label" for="74632b6f-31f6-4650-aec8-21b67c9af569">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1075,8 +1129,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="8d223cf1-ff7a-431f-abaf-5b0f741e4560" name="587eda75-5f49-4094-99c3-db9409a8a9b7" type="radio">
-</input><label class="sd-tab-label" for="8d223cf1-ff7a-431f-abaf-5b0f741e4560">
+<input id="e0615f27-61c8-48c7-88d9-aecc31c7d068" name="33f68208-0654-421d-a348-5a7520f08b94" type="radio">
+</input><label class="sd-tab-label" for="e0615f27-61c8-48c7-88d9-aecc31c7d068">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1090,8 +1144,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>fea-results-processor</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab only:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="d43dfa28-4a3e-40dd-ae36-3855ef133b04" name="f580f28c-1a25-4425-871a-724e1f24ae5a" type="radio">
-</input><label class="sd-tab-label" for="d43dfa28-4a3e-40dd-ae36-3855ef133b04">
+<input checked="checked" id="216dd26f-ece7-4ddf-85d2-1121a4e5995f" name="052edb52-cd16-4b9c-9e67-c750a36e161f" type="radio">
+</input><label class="sd-tab-label" for="216dd26f-ece7-4ddf-85d2-1121a4e5995f">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -57,11 +57,19 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Automating the design optimisation of the composite wing model" href="Automating%20design%20optimisations.html" />
     <link rel="prev" title="Chaining component analyses" href="Chaining%20component%20analyses.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
     
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -243,6 +251,51 @@ title="Fullscreen mode"
 
 </button>
 
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Automating parametric studies.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
       aria-label="Download this page">
@@ -418,6 +471,7 @@ title="Print to PDF"
 <p><strong>Duration: 15 min</strong></p>
 <p>Driver components can be used to automate complex analysis workflows.</p>
 <p>In this tutorial, we automate the execution of a parametric study using the chained component analyses from the previous example.</p>
+<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model">Github</a>.</strong></p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/driver-parametric-model-1.png"><img alt="chained process" class="bg-primary mb-1 align-center" src="../_images/driver-parametric-model-1.png" style="width: 700px;" /></a>
 <section id="opening-a-saved-session">
 <span id="tutorials-automating-parametric-studies-opening-a-saved-session"></span><h2>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
@@ -655,8 +709,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="f00a9d73-e7ff-46d0-9c59-3dce6ef338bf" name="3b151920-ac10-421f-813f-4b71b3ecc916" type="radio">
-</input><label class="sd-tab-label" for="f00a9d73-e7ff-46d0-9c59-3dce6ef338bf">
+<input checked="checked" id="164a5af8-8c4a-461d-9680-164ae38a1a99" name="55fd3c17-a187-42c8-8eca-0182df516351" type="radio">
+</input><label class="sd-tab-label" for="164a5af8-8c4a-461d-9680-164ae38a1a99">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -679,8 +733,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="90bc8bd0-fcb0-42e9-9419-c4d62c21f6ff" name="3b151920-ac10-421f-813f-4b71b3ecc916" type="radio">
-</input><label class="sd-tab-label" for="90bc8bd0-fcb0-42e9-9419-c4d62c21f6ff">
+<input id="53408e94-6f46-4b87-8e91-ba6989c0b01b" name="55fd3c17-a187-42c8-8eca-0182df516351" type="radio">
+</input><label class="sd-tab-label" for="53408e94-6f46-4b87-8e91-ba6989c0b01b">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -811,15 +865,15 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f2acce00-e055-4c78-a4dc-96fa7bbdcd85" name="3b151920-ac10-421f-813f-4b71b3ecc916" type="radio">
-</input><label class="sd-tab-label" for="f2acce00-e055-4c78-a4dc-96fa7bbdcd85">
+<input id="4a391029-e431-4781-9dcb-7bab671f7dd6" name="55fd3c17-a187-42c8-8eca-0182df516351" type="radio">
+</input><label class="sd-tab-label" for="4a391029-e431-4781-9dcb-7bab671f7dd6">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
 </pre></div>
 </div>
 </div>
-<input id="b541f86e-79ef-435c-a4f6-f563c88e8946" name="3b151920-ac10-421f-813f-4b71b3ecc916" type="radio">
-</input><label class="sd-tab-label" for="b541f86e-79ef-435c-a4f6-f563c88e8946">
+<input id="7bb7b4de-59b8-4617-8b93-75eeb9a47c66" name="55fd3c17-a187-42c8-8eca-0182df516351" type="radio">
+</input><label class="sd-tab-label" for="7bb7b4de-59b8-4617-8b93-75eeb9a47c66">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;component_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>

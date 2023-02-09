@@ -6,6 +6,8 @@ Driver components can be used to automate complex analysis workflows.
 
 In this tutorial, we automate the execution of a parametric study using the chained component analyses from the previous example.
 
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).**
+
 ```{image} media/driver-parametric-model-1.png
 :alt: chained process
 :class: bg-primary mb-1
@@ -22,7 +24,7 @@ Alternatively, copy the JSON object below into a text editor and save it locally
 Three connected components should appear in the workspace. 
 
 ````{dropdown} dapta_input.json
-```{literalinclude} ./automating_parametric_studies/dapta_input.json   
+```{literalinclude} ./parametric_wing_model/1_Chaining_component_analyses/dapta_input.json   
 :language: json
 ```
 ````
@@ -79,22 +81,22 @@ Then upload them under the `Properties` tab.
 
 `````{tab-set}
 ````{tab-item} setup
-```{literalinclude} ./driver-calculix-fea/setup.py
+```{literalinclude} ./parametric_wing_model/parametric-study-driver/setup.py
 :language: python
 ```
 ````
 ````{tab-item} compute
-```{literalinclude} ./driver-calculix-fea/compute.py
+```{literalinclude} ./parametric_wing_model/parametric-study-driver/compute.py
 :language: python
 ```
 ````
 ````{tab-item} requirements
-```{literalinclude} ./driver-calculix-fea/requirements.txt
+```{literalinclude} ./parametric_wing_model/parametric-study-driver/requirements.txt
 :language: text
 ```
 ````
 ````{tab-item} parameters
-```{literalinclude} ./driver-calculix-fea/parameters.json
+```{literalinclude} ./parametric_wing_model/parametric-study-driver/parameters.json
 :language: json
 ```
 ````

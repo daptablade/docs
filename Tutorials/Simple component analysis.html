@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -59,11 +59,19 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="Simple optimisation problem" href="Simple%20optimisation%20problem.html" />
     <link rel="prev" title="Overview" href="../intro.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
     
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -244,6 +252,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Simple component analysis.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -467,6 +520,7 @@ title="Print to PDF"
 <p>All you need to get started is a text editor and your web browser.
 No need to download or install anything!
 However, as we will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).</p>
+<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/paraboloid">Github</a>.</strong></p>
 <section id="component-description">
 <h2>Component description<a class="headerlink" href="#component-description" title="Permalink to this headline">#</a></h2>
 <p>The paraboloid component solves the function</p>
@@ -512,8 +566,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="a0d7eae4-ad99-497f-a1a6-4a091617e442" name="61d45475-708e-464c-9574-5fa693958a5d" type="radio">
-</input><label class="sd-tab-label" for="a0d7eae4-ad99-497f-a1a6-4a091617e442">
+<input checked="checked" id="054c4e14-bc05-4c78-b84b-d22fe6862a40" name="81b776af-ee70-4284-902e-9a156d849002" type="radio">
+</input><label class="sd-tab-label" for="054c4e14-bc05-4c78-b84b-d22fe6862a40">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -601,8 +655,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="54ed75df-fad4-4b63-996f-8edb8b9dd1fb" name="61d45475-708e-464c-9574-5fa693958a5d" type="radio">
-</input><label class="sd-tab-label" for="54ed75df-fad4-4b63-996f-8edb8b9dd1fb">
+<input id="0a0dd007-4ff1-4b36-b387-ecc66642f9d8" name="81b776af-ee70-4284-902e-9a156d849002" type="radio">
+</input><label class="sd-tab-label" for="0a0dd007-4ff1-4b36-b387-ecc66642f9d8">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>

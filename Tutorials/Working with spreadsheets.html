@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
@@ -57,11 +57,19 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
     <link rel="prev" title="Automating the design optimisation of the composite wing model" href="Automating%20design%20optimisations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
+    <meta name="docsearch:language" content="en">
     
 
     <!-- Google Analytics -->
     
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
 <!-- Checkboxes to toggle the left sidebar -->
@@ -242,6 +250,51 @@ title="Fullscreen mode"
   </span>
 
 </button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Working with spreadsheets.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Edit this page"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-pencil-alt"></i>
+  </span>
+<span class="headerbtn__text-container">suggest edit</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
 
 <div class="menu-dropdown menu-dropdown-download-buttons">
   <button class="headerbtn menu-dropdown__trigger"
@@ -428,6 +481,7 @@ title="Print to PDF"
 <p><strong>Duration: 15 min</strong></p>
 <p>In this example we explore the use of <strong>spreadsheets and macros</strong> within simulation workflows.</p>
 <p>We replicate the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> simulation workflow, but this time using the spreadsheet component <code class="docutils literal notranslate"><span class="pre">libreoffice-comp</span></code> for the paraboloid function calculation instead of a pure python component.</p>
+<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/libreoffice">Github</a>.</strong></p>
 <p>Don’t have time to work though the example yourself?
 Watch the <strong><a class="reference external" href="https://youtu.be/2GaVVrot-4I">video tutorial</a></strong> instead.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/spreadsheet_1.png"><img alt="paraboloid-spreadsheet" class="bg-primary mb-1 align-center" src="../_images/spreadsheet_1.png" style="width: 700px;" /></a>
@@ -444,7 +498,7 @@ Watch the <strong><a class="reference external" href="https://youtu.be/2GaVVrot-
 <p>The <code class="docutils literal notranslate"><span class="pre">libreoffice-comp</span></code> includes a full installation of <a class="reference external" href="https://www.libreoffice.org/">LibreOffice</a>, which includes a spreadsheet editor (Calc).
 Calc can open and save files in its native Open Document Format (.ods), as well as Microsoft Excel® format (.xls), and it is also is compatible with macros (currently supported languages are LibreOffice Basic, BeanShell, JavaScript, and Python, with some support for importing Microsoft VBA macros too).
 To find out more about writing LibreOffice macros, we recommend having a look at the <a class="reference external" href="https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html">Getting Started with Macros</a> guide. <a class="reference internal" href="#tutorials-working-with-spreadsheets-references"><span class="std std-ref">Reference 1</span></a> also provides a good introduction to python macros for Calc.</p>
-<p>Download the example spreadsheet (shown in the figure above) here: <a class="reference external" href="https://github.com/daptablade/parametric_cgx_model/raw/dapta-components/dapta_model_components/libreoffice/paraboloid.ods">paraboloid.ods</a>.</p>
+<p>Download the example spreadsheet (shown in the figure above) here: <a class="reference external" href="https://github.com/daptablade/docs/raw/master/mynewbook/Tutorials/libreoffice/paraboloid.ods">paraboloid.ods</a>.</p>
 <p>It includes a VBA macro that automatically calculates the paraboloid function f(x,y) from the <a class="reference internal" href="Simple%20component%20analysis.html"><span class="doc std std-doc">Simple component analysis</span></a> example, whenever the spreadsheet x and y inputs are updated.
 The spreadsheet also contains an initially empty optimisation history table, which will be used to store and plot the optimisation history data during the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
 </section>
@@ -507,8 +561,8 @@ Finally the spreadsheet is saved and closed.</p></li>
 <p>Save and close the component by selecting the <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> button.</p>
 <p>You can check that the component works as expected by executing the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> now, or you can add a driver component in the next section before launching the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="198253e8-5e2f-45e2-8c56-24bad308b0c6" name="5975fa5a-ee4f-4fb6-a78d-211c4439b1d1" type="radio">
-</input><label class="sd-tab-label" for="198253e8-5e2f-45e2-8c56-24bad308b0c6">
+<input checked="checked" id="59440a87-1857-4660-882b-79330a51acb6" name="9d831f1c-cce0-400c-8f09-7fb9fb798d27" type="radio">
+</input><label class="sd-tab-label" for="59440a87-1857-4660-882b-79330a51acb6">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -575,8 +629,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="2974a04b-8cb3-4261-a456-855796298197" name="5975fa5a-ee4f-4fb6-a78d-211c4439b1d1" type="radio">
-</input><label class="sd-tab-label" for="2974a04b-8cb3-4261-a456-855796298197">
+<input id="045302de-92a4-4e2d-aa42-dfe173acf835" name="9d831f1c-cce0-400c-8f09-7fb9fb798d27" type="radio">
+</input><label class="sd-tab-label" for="045302de-92a4-4e2d-aa42-dfe173acf835">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -674,8 +728,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="339b98d4-5202-4a47-a12c-d58886fd5b2f" name="9d497d47-c4dd-41cc-94dc-f3230d997078" type="radio">
-</input><label class="sd-tab-label" for="339b98d4-5202-4a47-a12c-d58886fd5b2f">
+<input checked="checked" id="23d88eea-38e9-4428-8124-e0e0680bef55" name="52f67ab8-7390-442b-95c1-a6ddaac6e654" type="radio">
+</input><label class="sd-tab-label" for="23d88eea-38e9-4428-8124-e0e0680bef55">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -702,8 +756,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e226dd6d-f167-4454-bd1d-cf081efdbb16" name="9d497d47-c4dd-41cc-94dc-f3230d997078" type="radio">
-</input><label class="sd-tab-label" for="e226dd6d-f167-4454-bd1d-cf081efdbb16">
+<input id="c0d83d51-756d-4f67-afd2-1f52e8744689" name="52f67ab8-7390-442b-95c1-a6ddaac6e654" type="radio">
+</input><label class="sd-tab-label" for="c0d83d51-756d-4f67-afd2-1f52e8744689">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1038,8 +1092,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c0a40270-74fb-48ea-8798-15200e1d33db" name="9d497d47-c4dd-41cc-94dc-f3230d997078" type="radio">
-</input><label class="sd-tab-label" for="c0a40270-74fb-48ea-8798-15200e1d33db">
+<input id="60112326-7964-4390-ab65-1164f92c264b" name="52f67ab8-7390-442b-95c1-a6ddaac6e654" type="radio">
+</input><label class="sd-tab-label" for="60112326-7964-4390-ab65-1164f92c264b">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 openmdao == 3.16.0
@@ -1047,8 +1101,8 @@ matplotlib == 3.5.2
 </pre></div>
 </div>
 </div>
-<input id="4531906a-1d87-4a6e-ac3a-79f346c7d8f2" name="9d497d47-c4dd-41cc-94dc-f3230d997078" type="radio">
-</input><label class="sd-tab-label" for="4531906a-1d87-4a6e-ac3a-79f346c7d8f2">
+<input id="9213b302-94cf-4596-87f9-1be994d22248" name="52f67ab8-7390-442b-95c1-a6ddaac6e654" type="radio">
+</input><label class="sd-tab-label" for="9213b302-94cf-4596-87f9-1be994d22248">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;user_input_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
@@ -1097,8 +1151,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="6d89b404-067a-49fd-befa-8aa2f3ddef01" name="9d497d47-c4dd-41cc-94dc-f3230d997078" type="radio">
-</input><label class="sd-tab-label" for="6d89b404-067a-49fd-befa-8aa2f3ddef01">
+<input id="3476089d-e8f0-46a6-8427-58f98a1cdfdb" name="52f67ab8-7390-442b-95c1-a6ddaac6e654" type="radio">
+</input><label class="sd-tab-label" for="3476089d-e8f0-46a6-8427-58f98a1cdfdb">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 

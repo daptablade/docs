@@ -7,6 +7,8 @@ In this example we explore the use of **spreadsheets and macros** within simulat
 
 We replicate the [Simple optimisation problem](./Simple%20optimisation%20problem.md) simulation workflow, but this time using the spreadsheet component `libreoffice-comp` for the paraboloid function calculation instead of a pure python component. 
 
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/libreoffice).**
+
 Don't have time to work though the example yourself? 
 Watch the **[video tutorial](https://youtu.be/2GaVVrot-4I)** instead.
 
@@ -33,7 +35,7 @@ The `libreoffice-comp` includes a full installation of [LibreOffice](https://www
 Calc can open and save files in its native Open Document Format (.ods), as well as Microsoft Excel® format (.xls), and it is also is compatible with macros (currently supported languages are LibreOffice Basic, BeanShell, JavaScript, and Python, with some support for importing Microsoft VBA macros too). 
 To find out more about writing LibreOffice macros, we recommend having a look at the [Getting Started with Macros](https://books.libreoffice.org/en/GS70/GS7013-GettingStartedWithMacros.html) guide. [Reference 1](tutorials-working-with-spreadsheets-references) also provides a good introduction to python macros for Calc. 
 
-Download the example spreadsheet (shown in the figure above) here: [paraboloid.ods](https://github.com/daptablade/parametric_cgx_model/raw/dapta-components/dapta_model_components/libreoffice/paraboloid.ods). 
+Download the example spreadsheet (shown in the figure above) here: [paraboloid.ods](https://github.com/daptablade/docs/raw/master/mynewbook/Tutorials/libreoffice/paraboloid.ods). 
 
 It includes a VBA macro that automatically calculates the paraboloid function f(x,y) from the [Simple component analysis](./Simple%20component%20analysis.md) example, whenever the spreadsheet x and y inputs are updated.
 The spreadsheet also contains an initially empty optimisation history table, which will be used to store and plot the optimisation history data during the {term}`Run`.   
@@ -45,7 +47,7 @@ Since we already created and analysed the paraboloid component previously, we ca
 Select `Open` from the interface controls to load the JSON formatted version of our previous session (dapta_input.json). 
 Alternatively, copy the object below into a text editor and save it locally, then select `Open` to load it. 
 
-```{literalinclude} ./paraboloid/paraboloid.json    
+```{literalinclude} ./paraboloid/dapta_input.json   
 :language: json
 ```
 
