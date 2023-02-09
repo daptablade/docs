@@ -6,6 +6,8 @@ Driver components can be used to automate complex analysis workflows.
 
 In this tutorial, we automate the execution of a parametric study using the chained component analyses from the previous example.
 
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).**
+
 ```{image} media/driver-parametric-model-1.png
 :alt: chained process
 :class: bg-primary mb-1

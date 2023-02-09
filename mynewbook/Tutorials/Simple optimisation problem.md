@@ -12,6 +12,8 @@
 In this example we solve a simple analytical function minimisation problem. 
 We create an optimisation driver component using the [openMDAO](https://openmdao.org) python package, and then use it to determine the unconstrained and constrained minimum values of the paraboloid function from the [previous example](./Simple%20component%20analysis.md).  
 
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/open-mdao-paraboloid).**
+
 ## Opening a saved session
 
 Since we already created and analysed the paraboloid component previously, we can load our previous session to speed things up. 

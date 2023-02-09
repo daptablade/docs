@@ -6,6 +6,8 @@
 In this tutorial we explore the usage of {term}`Connection`s to chain the execution of {term}`Component`s. 
 The example also introduces a finite element analysis specific 'calculix-fea-comp' component API.  
 
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).**
+
 ```{image} media/parametric-model-1.png
 :alt: chained process
 :class: bg-primary mb-1

@@ -15,6 +15,8 @@ All you need to get started is a text editor and your web browser.
 No need to download or install anything! 
 However, as we will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).
 
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/paraboloid).**
+
 ## Component description 
 The paraboloid component solves the function
 
