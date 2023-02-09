@@ -278,18 +278,18 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Simple optimisation problem.md"
+        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Simple optimisation problem.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
-title="Edit this page"
+title="Open an issue"
 >
   
 
 <span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
+  <i class="fas fa-lightbulb"></i>
   </span>
-<span class="headerbtn__text-container">suggest edit</span>
+<span class="headerbtn__text-container">open issue</span>
 </a>
 
       </li>
@@ -553,8 +553,8 @@ In addition, we import a <code class="docutils literal notranslate"><span class=
 <p>The last import in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">om_component</span> <span class="pre">import</span> <span class="pre">...</span></code>) is specific to our component and provides a custom implementation of the openMDAO ExplicitComponent class. The contents of the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module are shown below and we will upload this as a Parameter input file in the next section.</p>
 <p>Finally, check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option as shown below.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-files">
-<input checked="checked" id="ad8bd65a-adbf-4e8a-abab-fbf314127851" name="33aebbfb-9cd7-4c90-8a1b-900d6b206a9d" type="radio">
-</input><label class="sd-tab-label" for="ad8bd65a-adbf-4e8a-abab-fbf314127851">
+<input checked="checked" id="10bebe5a-9062-406d-b139-033a2f1e6fb8" name="e75ded6e-6b14-4768-a96d-66fb6c3f295f" type="radio">
+</input><label class="sd-tab-label" for="10bebe5a-9062-406d-b139-033a2f1e6fb8">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -581,8 +581,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="34abf28c-b4e6-4126-bb4c-674a05e27f4e" name="33aebbfb-9cd7-4c90-8a1b-900d6b206a9d" type="radio">
-</input><label class="sd-tab-label" for="34abf28c-b4e6-4126-bb4c-674a05e27f4e">
+<input id="7605761c-3de5-4ab9-bb4e-796d4e15c530" name="e75ded6e-6b14-4768-a96d-66fb6c3f295f" type="radio">
+</input><label class="sd-tab-label" for="7605761c-3de5-4ab9-bb4e-796d4e15c530">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -917,8 +917,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="22f7bb25-9699-4cbf-9896-ec5bc8b8cc1a" name="33aebbfb-9cd7-4c90-8a1b-900d6b206a9d" type="radio">
-</input><label class="sd-tab-label" for="22f7bb25-9699-4cbf-9896-ec5bc8b8cc1a">
+<input id="01aa2e0f-292e-417f-8f9c-c58d44b0b827" name="e75ded6e-6b14-4768-a96d-66fb6c3f295f" type="radio">
+</input><label class="sd-tab-label" for="01aa2e0f-292e-417f-8f9c-c58d44b0b827">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 openmdao == 3.16.0
@@ -926,8 +926,8 @@ matplotlib == 3.5.2
 </pre></div>
 </div>
 </div>
-<input id="d2658309-7436-4137-83fa-1579884c450c" name="33aebbfb-9cd7-4c90-8a1b-900d6b206a9d" type="radio">
-</input><label class="sd-tab-label" for="d2658309-7436-4137-83fa-1579884c450c">
+<input id="7b73a5bc-f096-42e5-8137-819b8a48a299" name="e75ded6e-6b14-4768-a96d-66fb6c3f295f" type="radio">
+</input><label class="sd-tab-label" for="7b73a5bc-f096-42e5-8137-819b8a48a299">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1078,8 +1078,8 @@ om_component</label><div class="sd-tab-content docutils">
 <h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the ‘unconstrained’ parameters JSON object into the text box.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-parameters">
-<input checked="checked" id="27fa93c3-9f3b-4ae7-90f3-302b5cd7403e" name="2bca9284-87b0-477d-a184-6889c05d52ad" type="radio">
-</input><label class="sd-tab-label" for="27fa93c3-9f3b-4ae7-90f3-302b5cd7403e">
+<input checked="checked" id="806dfed7-377a-4175-b720-b1f8c80f6ceb" name="cc9182ed-db32-4e69-a674-db653aced239" type="radio">
+</input><label class="sd-tab-label" for="806dfed7-377a-4175-b720-b1f8c80f6ceb">
 unconstrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1126,8 +1126,8 @@ unconstrained</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="67306bf9-da8b-4526-a721-8be76b465ea2" name="2bca9284-87b0-477d-a184-6889c05d52ad" type="radio">
-</input><label class="sd-tab-label" for="67306bf9-da8b-4526-a721-8be76b465ea2">
+<input id="d8734ac3-0270-4cc3-8f92-b45050694293" name="cc9182ed-db32-4e69-a674-db653aced239" type="radio">
+</input><label class="sd-tab-label" for="d8734ac3-0270-4cc3-8f92-b45050694293">
 constrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>

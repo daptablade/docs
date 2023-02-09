@@ -278,18 +278,18 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/daptablade/docs/edit/gh-pages/Tutorials/Simple component analysis.md"
+        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Simple component analysis.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
-title="Edit this page"
+title="Open an issue"
 >
   
 
 <span class="headerbtn__icon-container">
-  <i class="fas fa-pencil-alt"></i>
+  <i class="fas fa-lightbulb"></i>
   </span>
-<span class="headerbtn__text-container">suggest edit</span>
+<span class="headerbtn__text-container">open issue</span>
 </a>
 
       </li>
@@ -566,8 +566,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="054c4e14-bc05-4c78-b84b-d22fe6862a40" name="81b776af-ee70-4284-902e-9a156d849002" type="radio">
-</input><label class="sd-tab-label" for="054c4e14-bc05-4c78-b84b-d22fe6862a40">
+<input checked="checked" id="62c09429-3224-44b9-b7ea-81bbea26ac04" name="0eb6c663-1a8c-4c97-bee2-0465315fd8fd" type="radio">
+</input><label class="sd-tab-label" for="62c09429-3224-44b9-b7ea-81bbea26ac04">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -655,8 +655,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0a0dd007-4ff1-4b36-b387-ecc66642f9d8" name="81b776af-ee70-4284-902e-9a156d849002" type="radio">
-</input><label class="sd-tab-label" for="0a0dd007-4ff1-4b36-b387-ecc66642f9d8">
+<input id="fd9ec85d-13b5-48fe-bfe4-1a094a3780dd" name="0eb6c663-1a8c-4c97-bee2-0465315fd8fd" type="radio">
+</input><label class="sd-tab-label" for="fd9ec85d-13b5-48fe-bfe4-1a094a3780dd">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
