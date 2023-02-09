@@ -62,27 +62,27 @@ Then upload the first 3 files under the `Properties` tab and upload the `naca001
 (tutorials-chained_components-parametric_model-files)=
 `````{tab-set}
 ````{tab-item} setup
-```{literalinclude} ./parametric-model/setup.py
+```{literalinclude} ./parametric_wing_model/parametric-model/setup.py
 :language: python
 ```
 ````
 ````{tab-item} compute
-```{literalinclude} ./parametric-model/compute.py
+```{literalinclude} ./parametric_wing_model/parametric-model/compute.py
 :language: python
 ```
 ````
 ````{tab-item} requirements
-```{literalinclude} ./parametric-model/requirements.txt
+```{literalinclude} ./parametric_wing_model/parametric-model/requirements.txt
 :language: text
 ```
 ````
 ````{tab-item} naca0012
-```{literalinclude} ./parametric-model/naca0012.csv
+```{literalinclude} ./parametric_wing_model/parametric-model/naca0012.csv
 :language: text
 ```
 ````
 ````{tab-item} parameters
-```{literalinclude} ./parametric-model/parameters.json
+```{literalinclude} ./parametric_wing_model/parametric-model/parameters.json
 :language: json
 ```
 ````
@@ -134,27 +134,27 @@ Then upload the first 3 files under the `Properties` tab and upload the last one
 (tutorials-chained_components-calculix_fea-files)=
 `````{tab-set}
 ````{tab-item} setup
-```{literalinclude} ./calculix-fea/setup.py
+```{literalinclude} ./parametric_wing_model/calculix-fea/setup.py
 :language: python
 ```
 ````
 ````{tab-item} compute
-```{literalinclude} ./calculix-fea/compute.py
+```{literalinclude} ./parametric_wing_model/calculix-fea/compute.py
 :language: python
 ```
 ````
 ````{tab-item} requirements
-```{literalinclude} ./calculix-fea/requirements.txt
+```{literalinclude} ./parametric_wing_model/calculix-fea/requirements.txt
 :language: text
 ```
 ````
 ````{tab-item} ccx_static_tip_shear
-```{literalinclude} ./calculix-fea/ccx_static_tip_shear.inp
+```{literalinclude} ./parametric_wing_model/calculix-fea/ccx_static_tip_shear.inp
 :language: text
 ```
 ````
 ````{tab-item} parameters
-```{literalinclude} ./calculix-fea/parameters.json
+```{literalinclude} ./parametric_wing_model/calculix-fea/parameters.json
 :language: json
 ```
 ````
@@ -208,17 +208,17 @@ Remember to save the session data now by selecting `Download` from the interface
 (tutorials-chained_components-results_processor-files)=
 `````{tab-set}
 ````{tab-item} setup
-```{literalinclude} ./fea-results-processor/setup.py
+```{literalinclude} ./parametric_wing_model/fea-results-processor/setup.py
 :language: python
 ```
 ````
 ````{tab-item} compute
-```{literalinclude} ./fea-results-processor/compute.py
+```{literalinclude} ./parametric_wing_model/fea-results-processor/compute.py
 :language: python
 ```
 ````
 ````{tab-item} requirements
-```{literalinclude} ./fea-results-processor/requirements.txt
+```{literalinclude} ./parametric_wing_model/fea-results-processor/requirements.txt
 :language: text
 ```
 ````

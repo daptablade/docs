@@ -69,7 +69,7 @@ Then upload it under the `Parameters` tab by selecting `upload user input files`
 ```
 ````
 ````{tab-item} parameters
-```{literalinclude} ./automating_design_optimisations/driver_parameters.json
+```{literalinclude} ./parametric_wing_model/3_Automating_the_design_optimisation/driver_parameters.json
 :language: json
 ```
 ````

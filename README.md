@@ -12,7 +12,7 @@ jupyter-book build . --all
 
 ```
 cd mynewbook
-ghp-import -n -p -f --prefix=build _build/html
+ghp-import -n -p -f _build/html --cname=daptadocs.com
 ```
 ## Edit the flask app 
 

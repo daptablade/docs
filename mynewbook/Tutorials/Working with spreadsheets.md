@@ -45,7 +45,7 @@ Since we already created and analysed the paraboloid component previously, we ca
 Select `Open` from the interface controls to load the JSON formatted version of our previous session (dapta_input.json). 
 Alternatively, copy the object below into a text editor and save it locally, then select `Open` to load it. 
 
-```{literalinclude} ./paraboloid/paraboloid.json    
+```{literalinclude} ./paraboloid/dapta_input.json   
 :language: json
 ```
 
