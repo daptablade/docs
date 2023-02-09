@@ -1,7 +1,0 @@
-venv/
-venv_flask/
-mynewbook/
-__pycache__/
-
-.env
-*.pyc
