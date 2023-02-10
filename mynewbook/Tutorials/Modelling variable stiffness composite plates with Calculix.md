@@ -231,12 +231,9 @@ Then select the `Log` tab and click on `download files snapshot`.
 The optimisation study outputs are summarised at the end of the 'run_driver.log' file in the 'outputs' folder, as shown below.
 We can also inspect the convergence history plots of the design variable, objective and constraints functions in the same folder.
 
-The optimal fibre rotation angle converges after TODO SLSQP algorithm iterations to ~22.68 degrees, which results in a wing tip incidence of -0.0377 radians and a vertical deflection of 6cm. 
-
 ```{code}
-
+TODO
 ```
-
 
 ```{image} media/parametric-plate-buckling-rts_6.png
 :alt: results-plot
@@ -262,6 +259,9 @@ The optimal fibre rotation angle converges after TODO SLSQP algorithm iterations
 :width: 400px
 :align: center
 ```
+
+The optimal fibre rotation angle converges after TODO SLSQP algorithm iterations to ~22.68 degrees, which results in a wing tip incidence of -0.0377 radians and a vertical deflection of 6cm. 
+These results are compared with the optimal design from Reference 1 below, showing a good correlation. 
 
 ## Clean-up
 
