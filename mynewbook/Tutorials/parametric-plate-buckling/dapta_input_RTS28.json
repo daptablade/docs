@@ -262,8 +262,8 @@
         "number_of_modes": 10
       },
       "inputs": {
-        "T0": 45.0,
-        "T1": 69.0
+        "T0": 70.0,
+        "T1": 70.0
       },
       "outputs": {
         "mass": 0.0,
@@ -280,7 +280,7 @@
         "user_input_files": [],
         "optimizer": "SLSQP",
         "max_iter": 20,
-        "tol": 1e-8,
+        "tol": 1e-6,
         "disp": true,
         "debug_print": [
           "desvars",
@@ -290,14 +290,21 @@
           "totals"
         ],
         "approx_totals": true,
-        "fd_step": 1.0,
+        "fd_step": 0.2,
         "input_variables": [
           {
             "component": "parametric-plate-buckling",
             "name": "T0",
-            "lower": -90,
-            "upper": 90,
-            "value": 69.0
+            "lower": 0,
+            "upper": 75,
+            "value": 0
+          },
+          {
+            "component": "parametric-plate-buckling",
+            "name": "T1",
+            "lower": 0,
+            "upper": 75,
+            "value": 0
           }
         ],
         "output_variables": [
@@ -305,16 +312,16 @@
             "component": "parametric-plate-buckling",
             "type": "objective",
             "name": "mass",
-            "value": 0.0
+            "value": 0
           },
           {
             "component": "parametric-plate-buckling",
             "type": "constraint",
             "name": "buckling_factors",
             "value": [
-              0.0
+              0
             ],
-            "lower": 0.97
+            "lower": 0.95
           }
         ],
         "driver": {

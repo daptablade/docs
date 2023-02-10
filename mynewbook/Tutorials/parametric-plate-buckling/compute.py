@@ -868,8 +868,7 @@ def get_surface_normal_from_nodes(nodes: list) -> np.ndarray:
         raise ValueError("Need at least 3 nodes to calculate surface normal vector.")
     v01 = np.array(nodes[1]["global_xyz"]) - np.array(nodes[0]["global_xyz"])
     v02 = np.array(nodes[2]["global_xyz"]) - np.array(nodes[0]["global_xyz"])
-    # TODO check angle between vectors is > 10
-    # deg?
+    # TODO check angle between vectors is > 10 deg for more general meshes
     return np.cross(v02, v01)  # order so that the norm points out of the element
 
 
