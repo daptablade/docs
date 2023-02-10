@@ -10,7 +10,7 @@ This example is based on [Reference 1](tutorials-Modelling-variable-stiffness-co
 **>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric-plate-buckling).**
 
 ```{image} media/parametric-plate-buckling-rts_1.png
-:alt: Buckling of a plate
+:alt: Buckling of an rts plate - mode 1
 :class: bg-primary mb-1
 :width: 700px
 :align: center
@@ -90,6 +90,7 @@ To reduce the number of elements through the thickness of the plate, we also cho
 
 Copy the JSON object below into a text editor and save it locally, then select `Open` to load it. 
 Two components should appear in the workspace. 
+Since the second component is a driver we do not define any connections in this workflow. 
 
 ````{dropdown} dapta_input.json
 ```{literalinclude} ./parametric-plate-buckling/dapta_input_RTS28.json   
@@ -150,13 +151,117 @@ The other parameters, inputs and outputs should have been pre-populated by loadi
 ````
 `````
 
-### Create the driver 
+### Update the driver component
 
+The driver component is identical to the OpenMDAO optimisation component used in the [Simple optimisation problem](./Simple%20optimisation%20problem.md) example, except for the driver parameters, which have been adjusted for the plate optimisation problem:
 
+* The "input_variables" and "output_variables" parameters set the optimisation variables, objective and constraint functions.
+* The calculation of total derivatives across the chained components (using finite differencing) is requested by setting `"approx_totals": true` and `"fd_step": 0.2` in the driver parameters.
+* Optimisation iteration history plots are requested by adding the "plot_history" option into the "visualise" parameter list.   
+
+To create the driver component:
+
+* Select the open-mdao component to edit it.
+
+* Copy the contents of the `setup.py`, `compute.py`, `requirements.txt` files from below into a text editor, save them locally.
+Then upload them under the `Properties` tab. 
+
+* Copy the contents of the `om_component.py` file from below into a text editor and save it locally. 
+Then upload it under the `Parameters` tab by selecting `upload user input files`.
+
+* Select `Save data` to save and close the component. 
+
+`````{tab-set}
+````{tab-item} setup
+```{literalinclude} ./open-mdao-paraboloid/setup.py
+:language: python
+```
+````
+````{tab-item} compute
+```{literalinclude} ./open-mdao-paraboloid/compute.py
+:language: python
+```
+````
+````{tab-item} requirements
+```{literalinclude} ./open-mdao-paraboloid/requirements.txt
+:language: text
+```
+````
+````{tab-item} om_component
+```{literalinclude} ./open-mdao-paraboloid/om_component.py
+:language: python
+```
+````
+`````
 
 ### Execute the workflow
 
+We can now execute the design optimisation by selecting the play symbol ▶ in the Run controls interface. 
+
+The {term}`Run` should complete after 23 iterations of the chained components (1 iteration of the `open-mdao` component). 
+
 ### Inspect results
+
+#### Run log
+The {term}`Run` log summarises the output of the components. Open the log by selecting `View Log` in the interface controls. 
+The "run_output" entry (at the end of the log) should state that the "OpenMDAO compute completed".  
+
+#### Plate component analysis outputs 
+
+Next, close the {term}`Run` log and select the `parametric-plate-buckling` component.
+Then select the `Log` tab and click on `download files snapshot`.
+
+The zip file includes an 'outputs' folder that contains the outputs of the `compute.py` script and the CalculiX CrunchiX input and output files. 
+
+Open the 'run.log' file in a text editor to view the standard python command-line output. This includes any log statement output with the `print()` function, as well as function execution times captures with the `timeit()` decorator. 
+
+```{code}
+TODO
+```
+
+Open the 'ccx_compression_buckle.dat' file in a text editor to view a list of the lowest 10 buckling factors.
+View the buckling mode shapes by opening the 'ccx_compression_buckle.frd' file in a CalculiX compatible post-processor, such as CalculiX GraphiX.
+The lowest mode shape should look similar to the one shown in the figure at the top of this tutorial.
+
+#### Plate component analysis outputs 
+
+Next, close the plate component and select the `open-mdao` component.
+Then select the `Log` tab and click on `download files snapshot`.
+
+The optimisation study outputs are summarised at the end of the 'run_driver.log' file in the 'outputs' folder, as shown below.
+We can also inspect the convergence history plots of the design variable, objective and constraints functions in the same folder.
+
+The optimal fibre rotation angle converges after TODO SLSQP algorithm iterations to ~22.68 degrees, which results in a wing tip incidence of -0.0377 radians and a vertical deflection of 6cm. 
+
+```{code}
+
+```
+
+
+```{image} media/parametric-plate-buckling-rts_6.png
+:alt: results-plot
+:class: bg-primary mb-1
+:width: 400px
+:align: center
+```
+```{image} media/parametric-plate-buckling-rts_7.png
+:alt: results-plot
+:class: bg-primary mb-1
+:width: 400px
+:align: center
+```
+```{image} media/parametric-plate-buckling-rts_8.png
+:alt: results-plot
+:class: bg-primary mb-1
+:width: 400px
+:align: center
+```
+```{image} media/parametric-plate-buckling-rts_9.png
+:alt: results-plot
+:class: bg-primary mb-1
+:width: 400px
+:align: center
+```
 
 ## Clean-up
 
