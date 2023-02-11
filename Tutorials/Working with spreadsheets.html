@@ -54,7 +54,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
+    <link rel="next" title="Example of a variable stiffness plate in compression" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html" />
     <link rel="prev" title="Automating the design optimisation of the composite wing model" href="Automating%20design%20optimisations.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
@@ -157,6 +157,11 @@ const thebe_selector_output = ".output, .cell_output"
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
    Working with spreadsheets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
+   Example of a variable stiffness plate in compression
   </a>
  </li>
 </ul>
@@ -561,8 +566,8 @@ Finally the spreadsheet is saved and closed.</p></li>
 <p>Save and close the component by selecting the <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> button.</p>
 <p>You can check that the component works as expected by executing the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> now, or you can add a driver component in the next section before launching the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="6f7cd5ee-a1c4-4488-9585-364cf3bbbefd" name="40115f63-3ba9-42eb-a070-f68471f20000" type="radio">
-</input><label class="sd-tab-label" for="6f7cd5ee-a1c4-4488-9585-364cf3bbbefd">
+<input checked="checked" id="bce12ce9-92c5-4bfe-94ec-4bf5c242270b" name="367064f2-23ec-4683-a3b1-133207532de0" type="radio">
+</input><label class="sd-tab-label" for="bce12ce9-92c5-4bfe-94ec-4bf5c242270b">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -629,8 +634,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="4727651e-c5b9-4163-a442-6026be235de1" name="40115f63-3ba9-42eb-a070-f68471f20000" type="radio">
-</input><label class="sd-tab-label" for="4727651e-c5b9-4163-a442-6026be235de1">
+<input id="62d7a638-e26b-44fb-b329-1662eb329918" name="367064f2-23ec-4683-a3b1-133207532de0" type="radio">
+</input><label class="sd-tab-label" for="62d7a638-e26b-44fb-b329-1662eb329918">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -728,8 +733,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="681c2fa2-df02-4f57-a79e-c567c839176f" name="28b1f272-f9b1-4655-abcd-ff08c51169c0" type="radio">
-</input><label class="sd-tab-label" for="681c2fa2-df02-4f57-a79e-c567c839176f">
+<input checked="checked" id="8fad2986-6c92-4e2b-874a-d1875c75bf8c" name="c70776be-ee17-41c8-9cf6-047ffcdd0a1d" type="radio">
+</input><label class="sd-tab-label" for="8fad2986-6c92-4e2b-874a-d1875c75bf8c">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -756,8 +761,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cd7d4423-7a0e-4cb6-8594-e5308ea5a0d2" name="28b1f272-f9b1-4655-abcd-ff08c51169c0" type="radio">
-</input><label class="sd-tab-label" for="cd7d4423-7a0e-4cb6-8594-e5308ea5a0d2">
+<input id="342dc64a-ee05-4bf9-a7d8-0cf77d59a71a" name="c70776be-ee17-41c8-9cf6-047ffcdd0a1d" type="radio">
+</input><label class="sd-tab-label" for="342dc64a-ee05-4bf9-a7d8-0cf77d59a71a">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1092,8 +1097,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="91db40f3-a8b6-4343-a5f4-074b54e128e2" name="28b1f272-f9b1-4655-abcd-ff08c51169c0" type="radio">
-</input><label class="sd-tab-label" for="91db40f3-a8b6-4343-a5f4-074b54e128e2">
+<input id="6e32d1c4-7bb4-4b51-aa43-0990cdc8ffb9" name="c70776be-ee17-41c8-9cf6-047ffcdd0a1d" type="radio">
+</input><label class="sd-tab-label" for="6e32d1c4-7bb4-4b51-aa43-0990cdc8ffb9">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 openmdao == 3.16.0
@@ -1101,8 +1106,8 @@ matplotlib == 3.5.2
 </pre></div>
 </div>
 </div>
-<input id="5cc8c5f0-158e-4d16-a88c-cb78aa35587d" name="28b1f272-f9b1-4655-abcd-ff08c51169c0" type="radio">
-</input><label class="sd-tab-label" for="5cc8c5f0-158e-4d16-a88c-cb78aa35587d">
+<input id="cbdb627e-2231-4ea8-88fa-8bb8a9526f66" name="c70776be-ee17-41c8-9cf6-047ffcdd0a1d" type="radio">
+</input><label class="sd-tab-label" for="cbdb627e-2231-4ea8-88fa-8bb8a9526f66">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;user_input_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
@@ -1151,8 +1156,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="bf4b7ceb-0457-486e-bbb3-5b58381ed293" name="28b1f272-f9b1-4655-abcd-ff08c51169c0" type="radio">
-</input><label class="sd-tab-label" for="bf4b7ceb-0457-486e-bbb3-5b58381ed293">
+<input id="488a7ac9-9368-4c72-b02b-a32a544d331c" name="c70776be-ee17-41c8-9cf6-047ffcdd0a1d" type="radio">
+</input><label class="sd-tab-label" for="488a7ac9-9368-4c72-b02b-a32a544d331c">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1367,10 +1372,10 @@ It may take a minute or so for the Cloud session to be reset.</p>
             <p class="prev-next-title">Automating the design optimisation of the composite wing model</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../Reference/The%20dashboard.html" title="next page">
+    <a class='right-next' id="next-link" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">The dashboard</p>
+        <p class="prev-next-title">Example of a variable stiffness plate in compression</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
