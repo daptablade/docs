@@ -12,7 +12,7 @@ parts:
       - file: Tutorials/Automating parametric studies
       - file: Tutorials/Automating design optimisations
       - file: Tutorials/Working with spreadsheets
-      - file: Tutorials/Modelling variable stiffness composite plates with Calculix
+      - file: Tutorials/Example of a variable stiffness plate in compression
   - caption: Reference Guide
     chapters:
       - file: Reference/The dashboard

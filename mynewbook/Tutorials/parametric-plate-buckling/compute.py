@@ -28,13 +28,13 @@ PARAMS = {
         "support_ymax": {
             "lines": [6, 7, 8],
             "kinematic": "23",
-            "ref_node_SPC": "34",
+            "ref_node_SPC": "346",
             "surface_vector": [0.0, 1.0, 0.0],
         },
         "loaded_xmax": {
             "lines": [3, 4, 5],
             "kinematic": "13",
-            "ref_node_SPC": "35",
+            "ref_node_SPC": "356",
             "surface_vector": [1.0, 0.0, 0.0],
             "ref_node_forces": [-10000.0, 0.0, 0.0],
         },
