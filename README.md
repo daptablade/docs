@@ -1,6 +1,7 @@
 # Docs
 
-This repository contains the dapta docs and associated tutorial files.
+This repository contains the dapta docs source files and associated tutorial files.
+View the docs at https://daptadocs.com
 
 ## Build docs
 
