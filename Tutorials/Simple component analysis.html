@@ -571,8 +571,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="aa6f3610-64bc-4ed3-9746-e4526396170d" name="d21c8df8-c9ac-4013-a83d-4940f840906c" type="radio">
-</input><label class="sd-tab-label" for="aa6f3610-64bc-4ed3-9746-e4526396170d">
+<input checked="checked" id="da38799f-b83a-4e3d-aa5f-edfdf586c7f9" name="77fe107b-e622-438b-afce-6ca9aa95e4c0" type="radio">
+</input><label class="sd-tab-label" for="da38799f-b83a-4e3d-aa5f-edfdf586c7f9">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -660,8 +660,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="aed9107e-ff8f-4563-b3ac-d67bd2e8a798" name="d21c8df8-c9ac-4013-a83d-4940f840906c" type="radio">
-</input><label class="sd-tab-label" for="aed9107e-ff8f-4563-b3ac-d67bd2e8a798">
+<input id="254d0070-32f7-416b-88b5-57c78bd4a8a9" name="77fe107b-e622-438b-afce-6ca9aa95e4c0" type="radio">
+</input><label class="sd-tab-label" for="254d0070-32f7-416b-88b5-57c78bd4a8a9">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
