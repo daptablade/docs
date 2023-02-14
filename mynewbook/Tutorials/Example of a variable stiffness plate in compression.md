@@ -232,8 +232,8 @@ Then upload it under the `Parameters` tab by selecting `upload user input files`
 
 We can now execute the design optimisation by selecting the play symbol ▶ in the Run controls interface. 
 
-The {term}`Run` should complete after approximately 53 iterations of the parametric-plate-buckling component (1 iteration of the `open-mdao` component). 
-Since each component execution takes a minute to complete (of which ~45s are allocated to the actual CalculiX CrunchiX finite element analysis), the design optimisation task should complete within ~1 hour.
+The {term}`Run` should complete after approximately 57 iterations of the parametric-plate-buckling component (1 iteration of the `open-mdao` component). 
+Since each component execution takes just under a minute to complete (of which ~40s are allocated to the actual CalculiX CrunchiX finite element analysis), the design optimisation task should complete within 50min.
 
 ### Inspect results
 
@@ -272,29 +272,29 @@ The optimisation study outputs are summarised at the end of the 'run_driver.log'
 We can also inspect the convergence history plots of the design variables, objective and constraint functions in the same folder.
 
 ```{code}
-Driver debug print for iter coord: rank0:ScipyOptimize_SLSQP|19
+Driver debug print for iter coord: rank0:ScipyOptimize_SLSQP|28
 ---------------------------------------------------------------
 Design Vars
-{'parametric_plate_buckling.T0': array([4.90288545]),
- 'parametric_plate_buckling.T1': array([68.19927386])}
+{'parametric_plate_buckling.T0': array([4.63764166]),
+ 'parametric_plate_buckling.T1': array([68.21746728])}
 
 Calling compute.
 message: 
- {'component': 'parametric-plate-buckling', 'inputs': {'design': {'T1': [68.19927385891286], 'T0': [4.9028854501079655]}}, 'get_grads': False, 'get_outputs': True}
+ {'component': 'parametric-plate-buckling', 'inputs': {'design': {'T1': [68.21746728435265], 'T0': [4.637641660750407]}}, 'get_grads': False, 'get_outputs': True}
 Nonlinear constraints
-{'parametric_plate_buckling.buckling_factors': array([75.00002])}
+{'parametric_plate_buckling.buckling_factors': array([75.00001])}
 
 Linear constraints
 None
 
 Objectives
-{'parametric_plate_buckling.mass': array([6.76487929])}
+{'parametric_plate_buckling.mass': array([6.76051059])}
 
 Optimization terminated successfully    (Exit mode 0)
-            Current function value: 6.7648792895827246
-            Iterations: 17
-            Function evaluations: 19
-            Gradient evaluations: 17
+            Current function value: 6.76051059005866
+            Iterations: 16
+            Function evaluations: 28
+            Gradient evaluations: 16
 Optimization Complete
 -----------------------------------
 ```
@@ -324,7 +324,7 @@ Optimization Complete
 :align: right
 ```
 
-The control point fibre shearing angles converge after 17 SLSQP algorithm iterations to T0=5 and T1=68 degrees.
+The control point fibre shearing angles converge after 16 SLSQP algorithm iterations to T0=5 and T1=68 degrees.
  
 The mass and buckling load results are compared with the optimal design from Reference 1 below, showing a good correlation. 
 
@@ -337,7 +337,7 @@ The mass and buckling load results are compared with the optimal design from Ref
   - Relative Error
 * - Mass (g)
   - 1321
-  - 1353
+  - 1352
   - 2 %
 * - Buckling load (kN) 
   - 750

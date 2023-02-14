@@ -1,8 +1,8 @@
 Starting user function evaluation.
 Elapsed time for function 'update_parameters_with_inputs': 0.0000 seconds
 Applied design inputs.
-Elapsed time for function 'get_commands': 0.0003 seconds
-Elapsed time for function 'get_geometry': 0.0012 seconds
+Elapsed time for function 'get_commands': 0.0002 seconds
+Elapsed time for function 'get_geometry': 0.0005 seconds
 start reading nodes.
 start reading elements.
 start reading node set support_ymax.
@@ -22,27 +22,27 @@ Node 1910 is removed from constraint SUPPORT_Z as it is already constrained.
 Node 2259 is removed from constraint SUPPORT_Z as it is already constrained.
 Node 3190 is removed from constraint SUPPORT_Z as it is already constrained.
 Node 3539 is removed from constraint SUPPORT_Z as it is already constrained.
-Elapsed time for function 'get_2Dmesh': 0.0561 seconds
-Elapsed time for function 'set_element_normals': 0.0233 seconds
-Elapsed time for function 'set_node_normals': 0.0032 seconds
+Elapsed time for function 'get_2Dmesh': 0.0264 seconds
+Elapsed time for function 'set_element_normals': 0.0172 seconds
+Elapsed time for function 'set_node_normals': 0.0022 seconds
 Elapsed time for function 'get_rts_distributions': 0.0003 seconds
-Elapsed time for function 'offset_nodes': 0.1472 seconds
-Elapsed time for function 'offset_elements': 0.5509 seconds
-Elapsed time for function 'set_materials': 0.0102 seconds
+Elapsed time for function 'offset_nodes': 0.0617 seconds
+Elapsed time for function 'offset_elements': 0.3491 seconds
+Elapsed time for function 'set_materials': 0.0078 seconds
 Elapsed time for function 'get_rts_distributions': 0.0001 seconds
-Elapsed time for function 'offset_nodes': 0.1753 seconds
-Elapsed time for function 'offset_elements': 0.5188 seconds
-Elapsed time for function 'set_materials': 0.0011 seconds
-Elapsed time for function 'get_rts_distributions': 0.0001 seconds
-Elapsed time for function 'offset_nodes': 0.1735 seconds
-Elapsed time for function 'offset_elements': 0.4680 seconds
-Elapsed time for function 'set_materials': 0.0187 seconds
-Elapsed time for function 'update_kinematic_constraints_ref_nodes': 0.0025 seconds
-Elapsed time for function 'write_solid_mesh': 0.2240 seconds
-Elapsed time for function 'write_materials': 0.0012 seconds
-Elapsed time for function 'write_element_sets': 0.0042 seconds
-Elapsed time for function 'write_solid_sections': 0.0005 seconds
-Elapsed time for function 'write_node_sets': 0.0025 seconds
+Elapsed time for function 'offset_nodes': 0.0670 seconds
+Elapsed time for function 'offset_elements': 0.3093 seconds
+Elapsed time for function 'set_materials': 0.0055 seconds
+Elapsed time for function 'get_rts_distributions': 0.0008 seconds
+Elapsed time for function 'offset_nodes': 0.0766 seconds
+Elapsed time for function 'offset_elements': 0.2965 seconds
+Elapsed time for function 'set_materials': 0.0047 seconds
+Elapsed time for function 'update_kinematic_constraints_ref_nodes': 0.0014 seconds
+Elapsed time for function 'write_solid_mesh': 0.1659 seconds
+Elapsed time for function 'write_materials': 0.0013 seconds
+Elapsed time for function 'write_element_sets': 0.0028 seconds
+Elapsed time for function 'write_solid_sections': 0.0003 seconds
+Elapsed time for function 'write_node_sets': 0.0018 seconds
 Created CCX solid mesh files.
 Executed CCX FEM analysis.
-20230210-204431: Executed Calculix finite element analysis.
+20230214-093319: Executed Calculix finite element analysis.
