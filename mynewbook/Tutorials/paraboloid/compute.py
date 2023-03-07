@@ -1,5 +1,8 @@
+import os
 from datetime import datetime
 from pathlib import Path
+
+HOSTNAME = os.getenv("HOSTNAME")
 
 
 def compute(
@@ -60,7 +63,7 @@ def compute(
         partials["f_xy"]["y"]["val"] = [x + 2 * (y + 4.0)]
         resp["partials"] = partials
 
-    message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Compute paraboloid f(x:{str(x)},y:{str(y)}) = {str(outputs['design']['f_xy'])} with options: {str(options)}"
+    message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Compute paraboloid f(x:{str(x)},y:{str(y)}) = {str(outputs['design']['f_xy'])} on host {HOSTNAME}"
     resp["message"] = message
 
     return resp
