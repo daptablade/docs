@@ -1,7 +1,7 @@
 # Using OpenVSP for aircraft performance analysis
 
-```{image} media/paraboloid_rotation.gif
-:alt: paraboloid-surface
+```{image} media/openvsp-performance-1.png
+:alt: vsp3 model of a Cessna 210
 :class: bg-primary mb-1
 :width: 400px
 :align: right
@@ -9,59 +9,288 @@
 
 **Duration: 60 min**
 
+In this example we create a simple aircraft performance analysis workflow using [OpenVSP](https://openvsp.org/) and [OpenMDAO](https://openmdao.org/). 
+
+We also demonstrate how to execute components in parallel to speed up large parametric studies.   
+
+**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance).**
 
 
+## Problem description
 
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric-plate-buckling).**
+Theory tells us that an aircraft's optimal cruise velocity for minimum thrust is where its lift to drag ratio (L/D) is maximised, which also corresponds to the flight velocity where the total drag (including lift-induced drag) is minimised.
+In this example, we wish to graphically determine this optimal cruise velocity for a Cessna 210 for a range of different wing aspect ratios, given a certain flight altitude and fixed aircraft total mass.
 
-
-## Simulation workflow overview
-
-In this example we create a simple aircraft performance analysis workflow using [OpenVSP]() and [OpenMDAO](). 
-
-The OpenVSP aircraft model (Cessna-210_metric.vsp3) is representative of a Cessna 210 as shown below. 
-It is suitable for vortex lattice method (VLM) aero analysis using the VSPAERO solver that comes with OpenVSP.
+We use a representative OpenVSP aircraft model (Cessna-210_metric.vsp3) as shown above. 
+The aircraft's aerodynamic lift, drag and pitching moment coefficients are calculated using the for vortex lattice method (VLM) implemented in the VSPAERO solver that comes with OpenVSP.
 The model is in SI units (m/s/kg). 
-Only the wing and the horizontal tailplane (HTP) are modelled in the VLM analysis.
-Local installation of OpenVSP is required view the model and execute VSPAERO on your machine - see installation instructions on the OpenVSP website. 
+Only the wing and the horizontal tailplane (HTP) are modelled in the VLM analysis, with the input mesh and a example output pressure distribution shown below. 
+It is not necessary to install OpenVSP on your machine for this example, since most of the analysis input and output data can also be accessed by opening the files in a simple text editor. 
+However, you will need to *install OpenVSP if you want to run the component code locally* since we will be using the OpenVSP python API in the next section.   
 
-```{image} media/parametric-model-1.png
-:alt: vsp3 model of a Cessna 210
+```{image} media/openvsp-performance-2.png
+:alt: VLM mesh and pressure distribution
 :class: bg-primary mb-1
 :width: 700px
 :align: center
 ```
 
-In this example, we wish to plot the aircraft's lift to drag ratio (L/D) with respect to cruise velocity (`Vinfinity`) to graphically determine the aircraft's optimal cruise velocity for a range of different wing aspect ratios. 
-Indeed, theory tells us that the optimal cruise velocity occurs where L/D is maximised, which also corresponds to flight velocity where the total drag (including lift-induced drag) is minimised.
-
-To plot L/D we need to be able to perform multiple trimmed aircraft analyses for different cruise velocities and wing aspect ratios. 
+To determine the optimum flight velocity, we need to be able to perform multiple trimmed aircraft analyses for different cruise velocities and wing aspect ratios. 
 The aircraft is trimmed in level flight when all forces and moments about the aircraft's centre of gravity (CG) cancel out. 
 
 Unfortunately, VSPAERO only does part of the job for us.
-It allows us to calculate the aircraft's lift and the drag, but it won't adjust the aircraft pitch angle (AoA) or the HTP angle to balance the aero forces and moments out with the aircraft's weight (let's assume that thrust can be set to cancel out drag). 
+It allows us to calculate the aircraft's aerodynamic coefficients for a certain configuration, but it can't calculate the aircraft trim angle of attack (AoA) or the HTP angle required to balance the aero forces and moments out with the aircraft's weight (assuming that thrust can be set to cancel out drag). 
 
-To solve this problem we can add a trim component to our simulation workflow as shown in the next figure. The trim component introduces a feedback cycle that adjusts the trim variables (AoA and HTP angles) based on the forces and moments at the aircraft's CG. 
-We can then use Newton's method to converge the cycle to a trimmed solution.
+To solve this problem we can add a trim component to our simulation workflow as shown below. The trim component introduces a feedback cycle that adjusts the trim variables (AoA and HTP angles) based on the forces and moments at the aircraft's CG. 
+We can use Newton's method to converge the cycle to a trimmed solution.
 
-In this example, we again choose to use OpenMDAO as the driver for our workflow for 3 main reasons: 
- 1. It allows us to easily implement the trim analysis cycle by using an 'implicit' component and variable promotion (where normal dapta design variable connections can only go forwards).
- 2. It includes a nonlinear solvers, including a [Newton solver](https://openmdao.org/newdocs/versions/latest/features/building_blocks/solvers/newton.html) to converge the trim cycle.
- 3. It allows us to set up a design of experiments analysis to iteratively solve the trim problem for different flight conditions and aircraft designs.
-
-```{image} media/parametric-model-1.png
+```{image} media/openvsp-performance-3.png
 :alt: trim analysis cycle
 :class: bg-primary mb-1
 :width: 700px
 :align: center
 ```
 
+Finally, we choose to use OpenMDAO as the driver component for our workflow for 3 main reasons: 
+ 1. It allows us to easily implement the trim analysis cycle mentioned above by using an 'implicit' component and variable promotion (where normal dapta design variable connections can only go forwards).
+ 2. It includes nonlinear solvers, including a versatile [Newton solver](https://openmdao.org/newdocs/versions/latest/features/building_blocks/solvers/newton.html) which can be used to converge the trim solution.
+ 3. It allows us to set up a design of experiments workflow to iteratively solve the aircraft trim problem for different flight conditions and aircraft designs.
+
 ## Create the components
 
+The following sections will guide you through the creation of the simulation workflow starting from an empty workspace.
+**Already signed-up?**
+[Access your dashboard here.](https://app.daptaflow.com/) 
+### VSPAERO component
 
-## Automating the design study
+The purpose of this component is to calculate the aerodynamic forces and moments about the aircraft's CG for a given set of inputs and parameters.
+The inputs include the aircraft angle of attack (AoA), the HTP angle (HTP_RY) and the wing aspect ratio (desvars_PONPNSVRANE). 
+Parameters include the OpenVSP model input file (Cessna-210_metric.vsp3), an OpenVSP design variables file (Cessna-210_metric.des) and a "HTP_RY_ID" lookup  parameter.
+Note that the wing aspect ratio variable name and the value of the "HTP_RY_ID" parameter both refer to 11 letter IDs from the OpenVPS design variables file instead of being hard-coded in the python script. 
+
+The `compute.py` module makes use of the [OpenVSP python API](https://openvsp.org/api_docs/latest/) to read the model files, to apply the input values to the model, to setup and execute the VSPAERO analysis and to recover the analysis outputs.     
+The API is contained in the `vsp` object that is imported at the top of the file (`import openvsp as vsp`).
+
+**Parallel execution:** We use the new "replicas" option on the `Properties` tab to create 4 independent copies of this component. This number should match the number of python threads set up in the OpenMDAO DOE driver. 
+
+Create the component:
+
+* Right-click in the workspace and select `Add Empty Node`. Select the empty component to edit it.
+
+* In the `Properties` tab, fill in the component name, `vspaero`, and select the OpenVSP component API `openvsp-comp:latest`. 
+
+* Copy the contents of the `setup.py`, `compute.py`, `Cessna-210_metric.vsp3` and `Cessna-210_metric.des` files from below into a text editor, save them locally.
+Then upload the first 2 files under the `Properties` tab and upload the `.vsp3` and `.des` files under the `Parameters` tab by selecting `upload user input files`. 
+
+* In the `Properties` tab copy the following JSON object into the `Options` text box:
+
+```{code}
+{
+    "replicas": 4
+}
+```
+
+* Also in the `Properties` tab check the box next to the `Start Node` option. 
+
+* Insert the following JSON object into the `Parameters` tab text box (below the "user_input_files" entry):
+
+```{code}
+{
+    "HTP_RY_ID": "ABCVDMNNBOE",
+    "vsp3_file": "Cessna-210_metric.vsp3",
+    "des_file": "Cessna-210_metric.des"
+}
+```
+
+* Copy the following JSON object into the `Inputs` tab text box:
+
+```{code}
+{
+    "AoA": 0,
+    "HTP_RY": 0,
+    "desvars_PONPNSVRANE": 3.86
+}
+```
+
+* Copy the following JSON object into the `Outputs` tab text box:
+
+```{code}
+{
+    "CL": 0,
+    "CMy": 0,
+    "CDtot": 0,
+    "L2D": 0,
+    "E": 0
+}
+```
+
+* Select `Save data` to save and close the component. 
+
+`````{tab-set}
+````{tab-item} setup
+```{literalinclude} ./openvsp-aircraft-aircraft-performance/vspaero/setup.py
+:language: python
+```
+````
+````{tab-item} compute
+```{literalinclude} ./openvsp-aircraft-aircraft-performance/vspaero/compute.py
+:language: python
+```
+````
+````{tab-item} Cessna-210_metric.vsp3
+TODO update github link
+[Download Cessna-210_metric.vsp3 from Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials)
+````
+````{tab-item} Cessna-210_metric.des
+```{literalinclude} ./openvsp-aircraft-aircraft-performance/vspaero/Cessna-210_metric.des
+:language: text
+```
+````
+`````
 
 
+### Trim component
+
+This is a simple analytical implicit component that calculates the force and pitching moment residuals at the aircraft CG. 
+The inputs are the lift and pitching moment coefficients from the vspaero component and the flight velocity (Vinfinity). 
+Fixed parameters include the aircraft total mass, flight altitude and wing reference area (S).       
+
+Note that OpenMDAO implicit components don't usually have a compute function. 
+By inspecting the OM_component.py file in the OpenMDAO component below, we can see that the trim component's `compute` function is actually called from within the implicit component's `apply_nonlinear` method.     
+The [OpenMDAO Advanced user guide](https://openmdao.org/newdocs/versions/latest/advanced_user_guide/models_implicit_components/models_with_solvers_implicit.html) explains the structure and purpose of implicit components in more detail.  
+
+**Parallel execution:** This component is not parallelised as it executes quickly and queuing times are minimal. 
+
+Create the component:
+
+* Right-click in the workspace and select `Add Empty Node`. Select the empty component to edit it.
+
+* In the `Properties` tab, fill in the component name, `trim`, and select the generic python component API `generic-python3-comp:latest`. 
+
+* Copy the contents of the `setup.py`, `compute.py` and `requirements.txt` files from below into a text editor, save them locally.
+Then upload them under the `Properties` tab. 
+
+* Also in the `Properties` tab check the box next to the `End Node` option. 
+
+* Insert the following JSON object into the `Parameters` tab text box (below the "user_input_files" entry):
+
+```{code}
+{
+    "Mass": 1111,
+    "Altitude": 3000,
+    "S": 16.234472
+}
+```
+
+* Copy the following JSON object into the `Inputs` tab text box:
+
+```{code}
+{
+    "CL": 0,
+    "CMy": 0,
+    "Vinfinity": 40
+}
+```
+
+* Copy the following JSON object into the `Outputs` tab text box:
+
+```{code}
+{
+    "AoA": 0,
+    "HTP_RY": 0
+}
+```
+
+* Select `Save data` to save and close the component. 
+
+`````{tab-set}
+````{tab-item} setup
+```{literalinclude} ./openvsp-aircraft-aircraft-performance/trim/setup.py
+:language: python
+```
+````
+````{tab-item} compute
+```{literalinclude} ./openvsp-aircraft-aircraft-performance/trim/compute.py
+:language: python
+```
+````
+````{tab-item} requirements.txt
+```{literalinclude} ./openvsp-aircraft-aircraft-performance/trim/requirements.txt
+:language: text
+```
+````
+`````
+
+
+### OpenMDAO driver component
+
+The driver component is identical to the OpenMDAO component used in the [Simple optimisation problem](./Simple%20optimisation%20problem.md) example, except for the driver parameters, which have been adjusted for this problem:
+
+* We define a OpenMDAO group object named "cycle" with both a nonlinear solver and linear solver attached. 
+By referencing this group by name in the "ExplicitComponents" and "ImplicitComponents" component entries, these components are automatically included in the cycle group. 
+* The trim variables ("AoA" and "HTP_RY") feedback connection is implemented by promotion of the variables as inputs in the vspaero component and as outputs in the time component. 
+
+
+
+The "input_variables" and "output_variables" parameters set the optimisation variables, objective and constraint functions.
+* The calculation of total derivatives across the chained components (using finite differencing) is requested by setting `"approx_totals": true` and `"fd_step": 1.0` in the driver parameters.
+* Optimisation iteration history plots are requested by adding the "plot_history" option into the "visualise" parameter list.   
+
+To create the driver component:
+
+* Right-click in the workspace and select `Add Empty Node`. Select the empty component to edit it.
+
+* In the `Properties` tab, fill in the component name, `open-mdao`, and select the component API `generic-python3-driver:latest`. 
+
+* Copy the contents of the `setup.py`, `compute.py`, `requirements.txt` files from below into a text editor, save them locally.
+Then upload them under the `Properties` tab. 
+
+* In the `Properties` tab check the box next to the `Driver` option. 
+
+* Copy the contents of the parameters JSON object below into the `Parameters` tab text box. 
+
+* Copy the contents of the `om_component.py` file from below into a text editor and save it locally. 
+Then upload it under the `Parameters` tab by selecting `upload user input files`.
+
+* Select `Save data` to save and close the component. 
+
+`````{tab-set}
+````{tab-item} setup
+```{literalinclude} ./open-mdao-paraboloid/setup.py
+:language: python
+```
+````
+````{tab-item} compute
+```{literalinclude} ./open-mdao-paraboloid/compute.py
+:language: python
+```
+````
+````{tab-item} requirements
+```{literalinclude} ./open-mdao-paraboloid/requirements.txt
+:language: text
+```
+````
+````{tab-item} parameters
+```{literalinclude} ./parametric_wing_model/3_Automating_the_design_optimisation/driver_parameters.json
+:language: json
+```
+````
+````{tab-item} om_component
+```{literalinclude} ./open-mdao-paraboloid/om_component.py
+:language: python
+```
+````
+`````
+
+### Component connections
+
+## Execute the workflow
+
+
+(tutorials-openvsp-aircraft-performance-outputs)=
+## Inspect the outputs
+
+Parallel vs. single thread.
 
 ## Clean-up
 
@@ -72,5 +301,7 @@ It may take a minute or so for the Cloud session to be reset.
 You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` data (session data, inputs and outputs) will be permanently deleted. 
 ```
 
-(tutorials-Modelling-variable-stiffness-composite-plates-references)=
+(tutorials-openvsp-aircraft-performance-references)=
 ## References
+
+1. 
