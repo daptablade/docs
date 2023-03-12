@@ -148,7 +148,7 @@
               "Altitude": "Altitude, m",
               "S": "Wing S, sqm",
               "Vinfinity": "Vinfinity, m/s",
-              "desvars_PONPNSVRANE": "Wing AR",
+              "desvars_PONPNSVRANE": "H-Wing AR",
               "CL": "CL",
               "CMy": "CMy",
               "CDtot": "CDtot",
