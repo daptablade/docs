@@ -9,7 +9,7 @@ We recommend using [Chrome](https://www.google.com/chrome/) v.108 or later.
 
 Current maximum user resource limits for the trial version are:
 
-* **5 components** including a driver.
+* **6 components** including drivers and component replicas.
 * **1 Giga byte (Gi) Memory** per component 
 * **1 CPU** per component
 * **1 Mega byte (Mi)** storage per uploaded file

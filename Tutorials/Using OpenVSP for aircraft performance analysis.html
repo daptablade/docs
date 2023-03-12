@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Simple optimisation problem &#8212; dapta docs</title>
+    <title>Using OpenVSP for aircraft performance analysis &#8212; dapta docs</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -50,14 +50,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Simple optimisation problem.html" />
+    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Using OpenVSP for aircraft performance analysis.html" />
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Chaining component analyses" href="Chaining%20component%20analyses.html" />
-    <link rel="prev" title="Simple component analysis" href="Simple%20component%20analysis.html" />
+    <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
+    <link rel="prev" title="Example of a variable stiffness plate in compression" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -136,8 +134,8 @@ const thebe_selector_output = ".output, .cell_output"
    Simple component analysis
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Simple%20optimisation%20problem.html">
    Simple optimisation problem
   </a>
  </li>
@@ -166,8 +164,8 @@ const thebe_selector_output = ".output, .cell_output"
    Example of a variable stiffness plate in compression
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    Using OpenVSP for aircraft performance analysis
   </a>
  </li>
@@ -288,7 +286,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Simple optimisation problem.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Using OpenVSP for aircraft performance analysis.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -316,7 +314,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/Tutorials/Simple optimisation problem.md"
+        <a href="../_sources/Tutorials/Using OpenVSP for aircraft performance analysis.md"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -376,52 +374,55 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#opening-a-saved-session">
-   Opening a saved session
+  <a class="reference internal nav-link" href="#problem-description">
+   Problem description
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-the-driver-component">
-   Create the driver component
+  <a class="reference internal nav-link" href="#create-the-components">
+   Create the components
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#properties">
-     Properties
+    <a class="reference internal nav-link" href="#vspaero-component">
+     VSPAERO component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     Parameters
+    <a class="reference internal nav-link" href="#trim-component">
+     Trim component
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openmdao-driver-component">
+     OpenMDAO driver component
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connections">
+     Connections
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#executing-the-driver">
-   Executing the driver
+  <a class="reference internal nav-link" href="#execute-the-workflow">
+   Execute the workflow
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-unconstrained-optimisation-problem">
-     The unconstrained optimisation problem
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-constrained-optimisation-problem">
-     The constrained optimisation problem
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-the-outputs">
+   Inspect the outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#increase-the-number-of-design-points-and-re-run">
+   Increase the number of design points and re-run
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
    Clean-up
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
   </a>
  </li>
 </ul>
@@ -433,7 +434,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Simple optimisation problem</h1>
+                <h1>Using OpenVSP for aircraft performance analysis</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -444,52 +445,55 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#opening-a-saved-session">
-   Opening a saved session
+  <a class="reference internal nav-link" href="#problem-description">
+   Problem description
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#create-the-driver-component">
-   Create the driver component
+  <a class="reference internal nav-link" href="#create-the-components">
+   Create the components
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#properties">
-     Properties
+    <a class="reference internal nav-link" href="#vspaero-component">
+     VSPAERO component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#parameters">
-     Parameters
+    <a class="reference internal nav-link" href="#trim-component">
+     Trim component
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openmdao-driver-component">
+     OpenMDAO driver component
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#connections">
+     Connections
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#executing-the-driver">
-   Executing the driver
+  <a class="reference internal nav-link" href="#execute-the-workflow">
+   Execute the workflow
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-unconstrained-optimisation-problem">
-     The unconstrained optimisation problem
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-constrained-optimisation-problem">
-     The constrained optimisation problem
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-the-outputs">
+   Inspect the outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#increase-the-number-of-design-points-and-re-run">
+   Increase the number of design points and re-run
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
    Clean-up
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   References
   </a>
  </li>
 </ul>
@@ -502,69 +506,519 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="simple-optimisation-problem">
-<h1>Simple optimisation problem<a class="headerlink" href="#simple-optimisation-problem" title="Permalink to this headline">#</a></h1>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_optimisation.gif"><img alt="paraboloid-optimisation" class="bg-primary mb-1 align-right" src="../_images/paraboloid_optimisation.gif" style="width: 400px;" /></a>
-<p><strong>Duration: 15 min</strong></p>
-<p>In this example we solve a simple analytical function minimisation problem.
-We create an optimisation driver component using the <a class="reference external" href="https://openmdao.org">openMDAO</a> python package, and then use it to determine the unconstrained and constrained minimum values of the paraboloid function from the <a class="reference internal" href="Simple%20component%20analysis.html"><span class="doc std std-doc">previous example</span></a>.</p>
-<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/open-mdao-paraboloid">Github</a>.</strong></p>
-<section id="opening-a-saved-session">
-<h2>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
-<p>Since we already created and analysed the paraboloid component previously, we can load our previous session to speed things up.</p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">Open</span></code> from the interface controls to load the JSON formatted version of our previous session (dapta_input.json).
-Alternatively, copy the object below into a text editor and save it locally, then select <code class="docutils literal notranslate"><span class="pre">Open</span></code> to load it.</p>
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;components&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;api&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;generic-python3-comp:latest&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;user_input_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;f_xy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;x&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;y&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">},</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;f_xy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;default&quot;</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;connections&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;workflow&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;start&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;end&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+  <section class="tex2jax_ignore mathjax_ignore" id="using-openvsp-for-aircraft-performance-analysis">
+<h1>Using OpenVSP for aircraft performance analysis<a class="headerlink" href="#using-openvsp-for-aircraft-performance-analysis" title="Permalink to this headline">#</a></h1>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-1.png"><img alt="vsp3 model of a Cessna 210" class="bg-primary mb-1 align-right" src="../_images/openvsp-performance-1.png" style="width: 400px;" /></a>
+<p><strong>Duration: 60 min</strong></p>
+<p>In this example we create a simple aircraft performance analysis workflow using <a class="reference external" href="https://openvsp.org/">OpenVSP</a> and <a class="reference external" href="https://openmdao.org/">OpenMDAO</a>.</p>
+<p>We also demonstrate how to execute components in parallel to speed up large parametric studies.</p>
+<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance">Github</a>.</strong></p>
+<section id="problem-description">
+<h2>Problem description<a class="headerlink" href="#problem-description" title="Permalink to this headline">#</a></h2>
+<p>Theory tells us that an aircraft’s optimal cruise velocity for minimum thrust is where its lift to drag ratio (L/D) is maximised, which also corresponds to the flight velocity where the total drag (including lift-induced drag) is minimised.
+In this example, we wish to graphically determine this optimal cruise velocity for a Cessna 210 for a range of different wing aspect ratios, given a certain flight altitude and fixed aircraft total mass.</p>
+<p>We use a representative OpenVSP aircraft model (Cessna-210_metric.vsp3) as shown above.
+The aircraft’s aerodynamic lift, drag and pitching moment coefficients are calculated using the vortex lattice method (VLM) implemented in the VSPAERO solver that comes with OpenVSP.
+The model is in SI units (m/s/kg).
+Only the wing and the horizontal tailplane (HTP) are modelled in the VLM analysis, with the input mesh and a example output pressure distribution shown below.</p>
+<p>It is not necessary to install OpenVSP on your machine for this example, since most of the analysis input and output data can also be accessed by opening the files in a simple text editor.
+However, you will need to install OpenVSP if you want to run the component code locally since we will be using the OpenVSP python API in the next section.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-2.png"><img alt="VLM mesh and pressure distribution" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-2.png" style="width: 700px;" /></a>
+<p>To determine the optimum flight velocity, we need to be able to perform multiple trimmed aircraft analyses for different cruise velocities and wing aspect ratios.
+The aircraft is trimmed in level flight when all forces and moments about the aircraft’s centre of gravity (CG) cancel out.</p>
+<p>Unfortunately, VSPAERO only does part of the job for us.
+It allows us to calculate the aircraft’s aerodynamic coefficients for a certain configuration, but it can’t calculate the aircraft trim angle of attack (AoA) or the HTP angle required to balance the aero forces and moments out with the aircraft’s weight (assuming that thrust can be set to cancel out drag).</p>
+<p>To solve this problem we can add a trim component to our simulation workflow as shown below. The trim component introduces a feedback cycle that adjusts the trim variables (AoA and HTP angles) based on the forces and moments at the aircraft’s CG.
+We can use Newton’s method to converge the cycle to a trimmed solution.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-3.png"><img alt="trim analysis cycle" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-3.png" style="width: 700px;" /></a>
+<p>Finally, we choose to use OpenMDAO as the driver component for our workflow for 3 main reasons:</p>
+<ol class="simple">
+<li><p>It allows us to easily implement the trim analysis cycle mentioned above by using an ‘implicit’ component and variable promotion (where normal dapta design variable connections can only go forwards).</p></li>
+<li><p>It includes nonlinear solvers, including a versatile <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/features/building_blocks/solvers/newton.html">Newton solver</a> which can be used to converge the trim solution.</p></li>
+<li><p>It allows us to set up a design of experiments workflow to iteratively solve the aircraft trim problem for different flight conditions and aircraft designs.</p></li>
+</ol>
+</section>
+<section id="create-the-components">
+<h2>Create the components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
+<p>The following sections will guide you through the creation of the simulation workflow starting from an empty workspace.
+<strong>Already signed-up?</strong>
+<a class="reference external" href="https://app.daptaflow.com/">Access your workspace here.</a></p>
+<section id="vspaero-component">
+<h3>VSPAERO component<a class="headerlink" href="#vspaero-component" title="Permalink to this headline">#</a></h3>
+<p>The purpose of this component is to calculate the aerodynamic forces and moments about the aircraft’s CG for a given set of inputs and parameters.
+The inputs include the aircraft angle of attack (AoA), the HTP angle (HTP_RY) and the half-wing aspect ratio (desvars_PONPNSVRANE).
+Multiply the half-wing aspect ratio by 2 to recover an approximate full wing aspect ratio value (with the error due to dihedral angle).</p>
+<p>Parameters include the OpenVSP model input file (Cessna-210_metric.vsp3), an OpenVSP design variables file (Cessna-210_metric.des) and a “HTP_RY_ID” lookup  parameter.
+Note that the wing aspect ratio variable name and the value of the “HTP_RY_ID” parameter both refer to 11 character IDs from the OpenVPS design variables file instead of being hard-coded in the python script.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module makes use of the <a class="reference external" href="https://openvsp.org/api_docs/latest/">OpenVSP python API</a> to read the model files, to apply the input values to the model, to setup and execute the VSPAERO analysis and to recover the analysis outputs.<br />
+The API is contained in the <code class="docutils literal notranslate"><span class="pre">vsp</span></code> object that is imported at the top of the file (<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">openvsp</span> <span class="pre">as</span> <span class="pre">vsp</span></code>).</p>
+<p><strong>Parallel execution:</strong> We use the “replicas” option on the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab to create 4 independent copies of this component. This number should match the number of python threads set up in the OpenMDAO DOE driver.</p>
+<p>Create the component:</p>
+<ul class="simple">
+<li><p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>. Select the empty component to edit it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">vspaero</span></code>, and select the OpenVSP component API <code class="docutils literal notranslate"><span class="pre">openvsp-comp:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compute.py</span></code>, <code class="docutils literal notranslate"><span class="pre">Cessna-210_metric.vsp3</span></code> and <code class="docutils literal notranslate"><span class="pre">Cessna-210_metric.des</span></code> files from below into a text editor, save them locally.
+Then upload the first 2 files under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab and upload the <code class="docutils literal notranslate"><span class="pre">.vsp3</span></code> and <code class="docutils literal notranslate"><span class="pre">.des</span></code> files under the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab by selecting <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">user</span> <span class="pre">input</span> <span class="pre">files</span></code>.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Options</span></code> text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;replicas&quot;</span><span class="p">:</span> <span class="mi">4</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-<p>The paraboloid component should have appeared in the workspace, but the question mark next to the component name indicates that it is missing some data.
-To fully define it, we need to upload the component <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> input files under the component <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab again.
-The file contents are available under the <a class="reference internal" href="Simple%20component%20analysis.html#tutorials-paraboloid-files"><span class="std std-ref">Simple Component Analysis</span></a> example.</p>
+<ul class="simple">
+<li><p>Also in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> option.</p></li>
+<li><p>Insert the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box (below the “user_input_files” entry):</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;HTP_RY_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;ABCVDMNNBOE&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;vsp3_file&quot;</span><span class="p">:</span> <span class="s2">&quot;Cessna-210_metric.vsp3&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;des_file&quot;</span><span class="p">:</span> <span class="s2">&quot;Cessna-210_metric.des&quot;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;AoA&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;HTP_RY&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">:</span> <span class="mf">3.86</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;CL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;CMy&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;CDtot&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;L2D&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="961ba159-0f30-4edd-821e-e1b9fc585297" name="f216cc4d-d2dd-46ad-8bc0-7d3272abe889" type="radio">
+</input><label class="sd-tab-label" for="961ba159-0f30-4edd-821e-e1b9fc585297">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOSTNAME&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.&quot;&quot;&quot;</span>
+
+    <span class="c1"># initalise setup_data keys</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># delete previous run log</span>
+    <span class="n">run_log</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">.log&quot;</span>
+    <span class="k">if</span> <span class="n">run_log</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">run_log</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed on host </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<input id="841abe9e-c50d-4366-8f08-bcc6654d32e1" name="f216cc4d-d2dd-46ad-8bc0-7d3272abe889" type="radio">
+</input><label class="sd-tab-label" for="841abe9e-c50d-4366-8f08-bcc6654d32e1">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">from</span> <span class="nn">shutil</span> <span class="kn">import</span> <span class="n">copy2</span>
+
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">redirect_stdout</span>
+
+<span class="kn">import</span> <span class="nn">openvsp</span> <span class="k">as</span> <span class="nn">vsp</span>
+
+<span class="n">stdout</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">cvar</span><span class="o">.</span><span class="n">cstdout</span>
+<span class="n">errorMgr</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">ErrorMgrSingleton_getInstance</span><span class="p">()</span>
+
+<span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOSTNAME&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">timeit</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">wrapper_timer</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">tic</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">toc</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">perf_counter</span><span class="p">()</span>
+        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">toc</span> <span class="o">-</span> <span class="n">tic</span>
+        <span class="nb">print</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Elapsed time for function &#39;</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">&#39;: </span><span class="si">{</span><span class="n">elapsed_time</span><span class="si">:</span><span class="s2">0.4f</span><span class="si">}</span><span class="s2"> seconds&quot;</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">return</span> <span class="n">wrapper_timer</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Wrapper around main function.&quot;&quot;&quot;</span>
+
+    <span class="n">run_log</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;run_</span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">.log&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_log</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="n">resp</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">partials</span><span class="p">,</span> <span class="n">options</span><span class="p">,</span> <span class="n">parameters</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">resp</span>
+
+
+<span class="nd">@timeit</span>
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable compute function.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting VSPAERO run on </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2"> with: &quot;</span><span class="p">,</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">])</span>
+
+    <span class="c1"># check that input files have been uploaded</span>
+    <span class="n">inputs_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;vsp3_file&quot;</span><span class="p">,</span> <span class="s2">&quot;des_file&quot;</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">inputs_folder</span> <span class="o">/</span> <span class="n">parameters</span><span class="p">[</span><span class="n">file</span><span class="p">])</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">parameters</span><span class="p">[</span><span class="n">file</span><span class="p">]</span><span class="si">}</span><span class="s2"> needs to be uploaded by the user.&quot;</span>
+            <span class="p">)</span>
+
+    <span class="c1"># copy input files to run folder</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;user_input_files&quot;</span><span class="p">]:</span>  <span class="c1"># .vsp3 and .des files</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">inputs_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+        <span class="n">copy2</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">])</span>
+    <span class="n">vsp_file</span> <span class="o">=</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;vsp3_file&quot;</span><span class="p">]</span>
+    <span class="n">des_file</span> <span class="o">=</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;des_file&quot;</span><span class="p">]</span>
+
+    <span class="c1"># get inputs</span>
+    <span class="n">desvars</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">k</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;_&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">v</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;desvars_&quot;</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="n">AoA</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;AoA&quot;</span><span class="p">]</span>
+    <span class="c1"># dynamically update trim desvars with input values</span>
+    <span class="n">desvars</span><span class="p">[</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;HTP_RY_ID&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;HTP_RY&quot;</span><span class="p">])</span>
+
+    <span class="n">vsp</span><span class="o">.</span><span class="n">ClearVSPModel</span><span class="p">()</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+    <span class="c1"># read vsp3 input file</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">ReadVSPFile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">vsp_file</span><span class="p">))</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+    <span class="c1"># load the default OpenVSP design variables</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">ReadApplyDESFile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">des_file</span><span class="p">))</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+
+    <span class="c1"># get / set specific parameters by id - optional</span>
+    <span class="k">if</span> <span class="n">desvars</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">desvars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># vsp.GetParmVal(k)</span>
+            <span class="n">vsp</span><span class="o">.</span><span class="n">SetParmValUpdate</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="c1"># create _DegenGeom.csv file input for VLM</span>
+    <span class="n">analysis_name</span> <span class="o">=</span> <span class="s2">&quot;VSPAEROComputeGeometry&quot;</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetAnalysisInputDefaults</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">)</span>
+    <span class="n">method</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">vsp</span><span class="o">.</span><span class="n">GetIntAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;AnalysisMethod&quot;</span><span class="p">))</span>
+    <span class="n">method</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">VORTEX_LATTICE</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetIntAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;AnalysisMethod&quot;</span><span class="p">,</span> <span class="n">method</span><span class="p">)</span>
+    <span class="c1"># vsp.PrintAnalysisInputs(analysis_name)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">ExecAnalysis</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">)</span>
+    <span class="c1"># vsp.PrintResults(resp)</span>
+
+    <span class="c1"># setup VSPAERO - preconfigure everything else in the vsp3 file</span>
+    <span class="n">analysis_name</span> <span class="o">=</span> <span class="s2">&quot;VSPAEROSweep&quot;</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetAnalysisInputDefaults</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">)</span>
+    <span class="n">wid</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">FindGeomsWithName</span><span class="p">(</span><span class="s2">&quot;NormalWing&quot;</span><span class="p">)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetStringAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;WingID&quot;</span><span class="p">,</span> <span class="n">wid</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetDoubleAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;AlphaStart&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">AoA</span><span class="p">),),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetIntAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;AlphaNpts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetDoubleAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;MachStart&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">SetIntAnalysisInput</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">,</span> <span class="s2">&quot;MachNpts&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,),</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">Update</span><span class="p">()</span>
+    <span class="c1"># # vsp.PrintAnalysisInputs(analysis_name)</span>
+    <span class="n">vsp</span><span class="o">.</span><span class="n">ExecAnalysis</span><span class="p">(</span><span class="n">analysis_name</span><span class="p">)</span>
+    <span class="c1"># vsp.PrintResults(resp)</span>
+
+    <span class="c1"># process outputs</span>
+    <span class="n">history_res</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">FindLatestResultsID</span><span class="p">(</span><span class="s2">&quot;VSPAERO_History&quot;</span><span class="p">)</span>
+    <span class="c1"># load_res = vsp.FindLatestResultsID(&quot;VSPAERO_Load&quot;)</span>
+    <span class="n">CL</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">GetDoubleResults</span><span class="p">(</span><span class="n">history_res</span><span class="p">,</span> <span class="s2">&quot;CL&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">CDtot</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">GetDoubleResults</span><span class="p">(</span><span class="n">history_res</span><span class="p">,</span> <span class="s2">&quot;CDtot&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">L2D</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">GetDoubleResults</span><span class="p">(</span><span class="n">history_res</span><span class="p">,</span> <span class="s2">&quot;L/D&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">E</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">GetDoubleResults</span><span class="p">(</span><span class="n">history_res</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="c1"># cl = vsp.GetDoubleResults( load_res, &quot;cl&quot;, 0 )</span>
+    <span class="n">CMy</span> <span class="o">=</span> <span class="n">vsp</span><span class="o">.</span><span class="n">GetDoubleResults</span><span class="p">(</span><span class="n">history_res</span><span class="p">,</span> <span class="s2">&quot;CMy&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">while</span> <span class="n">errorMgr</span><span class="o">.</span><span class="n">GetNumTotalErrors</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">errorMgr</span><span class="o">.</span><span class="n">PopErrorAndPrint</span><span class="p">(</span><span class="n">stdout</span><span class="p">)</span>
+
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;CL&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CL</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;CMy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CMy</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;CDtot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">CDtot</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;L2D&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">L2D</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;E&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: VSPAERO Compute completed on host </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with:</span><span class="se">\n</span><span class="s2">INPUTS: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">OUTPUTS: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># for local testing only</span>
+    <span class="n">design_inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;AoA&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;HTP_RY&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">:</span> <span class="mf">3.86</span><span class="p">}</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;CL&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;CMy&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;CDtot&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;L2D&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;desvars&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;PONPNSVRANE&quot;</span><span class="p">:</span> <span class="mf">3.86</span><span class="p">},</span>
+        <span class="s2">&quot;AoA&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;HTP_RY&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>
+        <span class="s2">&quot;HTP_RY_ID&quot;</span><span class="p">:</span> <span class="s2">&quot;ABCVDMNNBOE&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;vsp3_file&quot;</span><span class="p">:</span> <span class="s2">&quot;Cessna-210_metric.vsp3&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;des_file&quot;</span><span class="p">:</span> <span class="s2">&quot;.des&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;../outputs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;../inputs&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.des&quot;</span><span class="p">,</span> <span class="s2">&quot;Cessna-210_metric.vsp3&quot;</span><span class="p">],</span>
+    <span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">main</span><span class="p">(</span>
+        <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="n">design_inputs</span><span class="p">},</span>
+        <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">},</span>
+        <span class="n">partials</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="35f28fb9-741d-43d9-b417-5b06e1aa21d5" name="f216cc4d-d2dd-46ad-8bc0-7d3272abe889" type="radio">
+</input><label class="sd-tab-label" for="35f28fb9-741d-43d9-b417-5b06e1aa21d5">
+Cessna-210_metric.vsp3</label><div class="sd-tab-content docutils">
+<p><a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance/vspaero/Cessna-210_metric.vsp3">Download Cessna-210_metric.vsp3 from Github</a></p>
+</div>
+<input id="dea1ff98-9336-4599-a9b5-2828ed4e7b31" name="f216cc4d-d2dd-46ad-8bc0-7d3272abe889" type="radio">
+</input><label class="sd-tab-label" for="dea1ff98-9336-4599-a9b5-2828ed4e7b31">
+Cessna-210_metric.des</label><div class="sd-tab-content docutils">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
+BMZJCENVRIX:Default:VSPAERO:NCPU: 1
+ABCVDMNNBOE:Horz:XForm:Y_Rel_Rotation: -2.5
+PONPNSVRANE:NormalWing:XSec_1:Aspect: 3.86435
+</pre></div>
+</div>
+</div>
+</div>
 </section>
-<section id="create-the-driver-component">
-<h2>Create the driver component<a class="headerlink" href="#create-the-driver-component" title="Permalink to this headline">#</a></h2>
-<p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>.
-This adds an empty template component to your workspace.</p>
-<p>Select the empty component to edit it.</p>
-<section id="properties">
-<h3>Properties<a class="headerlink" href="#properties" title="Permalink to this headline">#</a></h3>
-<p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code>, and select the driver component API <code class="docutils literal notranslate"><span class="pre">generic-python3-driver:latest</span></code>.</p>
-<p>Just as in the previous example, the python driver requires <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> input files to be uploaded.
-In addition, we also upload a <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file, so that we can access the openMDAO package in the python code.
-You can inspect the contents of the files below.</p>
-<p>In the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> file, we can see that the imports include the ‘numpy’ and ‘openmdao’ packages that we listed in the <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file.
-In addition, we import a <code class="docutils literal notranslate"><span class="pre">call_compute</span></code> function from the <code class="docutils literal notranslate"><span class="pre">component_api2.py</span></code> module that is specific to the <code class="docutils literal notranslate"><span class="pre">generic-python3-driver</span></code> API and allows the driver to execute other components (this is the main difference with the <code class="docutils literal notranslate"><span class="pre">generic-python3-comp</span></code> API!).</p>
-<p>The last import in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">om_component</span> <span class="pre">import</span> <span class="pre">...</span></code>) is specific to our component and provides a custom implementation of the openMDAO ExplicitComponent class. The contents of the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module are shown below and we will upload this as a Parameter input file in the next section.</p>
-<p>Finally, check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option as shown below.</p>
-<div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-files">
-<input checked="checked" id="ea6fca0b-555f-4f43-9962-523b7f9f0d79" name="58e6bde0-b007-445f-b087-65181fbff5b0" type="radio">
-</input><label class="sd-tab-label" for="ea6fca0b-555f-4f43-9962-523b7f9f0d79">
+<section id="trim-component">
+<h3>Trim component<a class="headerlink" href="#trim-component" title="Permalink to this headline">#</a></h3>
+<p>This is a simple analytical implicit component that calculates the force and pitching moment residuals at the aircraft CG.
+The inputs are the lift and pitching moment coefficients from the vspaero component and the flight velocity (Vinfinity).
+Fixed parameters include the aircraft total mass, flight altitude and wing reference area (S).</p>
+<p>Note that OpenMDAO implicit components don’t usually have a compute function.
+By inspecting the OM_component.py file in the OpenMDAO component below, we can see that the trim component’s <code class="docutils literal notranslate"><span class="pre">compute</span></code> function is actually called from within the implicit component’s <code class="docutils literal notranslate"><span class="pre">apply_nonlinear</span></code> method.<br />
+The <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/advanced_user_guide/models_implicit_components/models_with_solvers_implicit.html">OpenMDAO Advanced user guide</a> explains the structure and purpose of implicit components in more detail.</p>
+<p><strong>Parallel execution:</strong> This component is not parallelised as it executes quickly compared to the vspaero analysis.</p>
+<p>Create the component:</p>
+<ul class="simple">
+<li><p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>. Select the empty component to edit it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">trim</span></code>, and select the generic python component API <code class="docutils literal notranslate"><span class="pre">generic-python3-comp:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> and <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> files from below into a text editor, save them locally.
+Then upload them under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab.</p></li>
+<li><p>Also in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> option.</p></li>
+<li><p>Insert the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box (below the “user_input_files” entry):</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;Mass&quot;</span><span class="p">:</span> <span class="mi">1111</span><span class="p">,</span>
+    <span class="s2">&quot;Altitude&quot;</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+    <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">16.234472</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;CL&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;CMy&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;Vinfinity&quot;</span><span class="p">:</span> <span class="mi">40</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;AoA&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">&quot;HTP_RY&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="7231ac06-a577-4d3e-afaa-47be617eeace" name="4a55a4d8-37a1-46bd-aabd-bd78990e325d" type="radio">
+</input><label class="sd-tab-label" for="7231ac06-a577-4d3e-afaa-47be617eeace">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.&quot;&quot;&quot;</span>
+
+    <span class="c1"># initalise setup_data keys</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<input id="1bbf8ed5-626a-4481-9161-d513495030d5" name="4a55a4d8-37a1-46bd-aabd-bd78990e325d" type="radio">
+</input><label class="sd-tab-label" for="1bbf8ed5-626a-4481-9161-d513495030d5">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">fluids.atmosphere</span> <span class="kn">import</span> <span class="n">ATMOSPHERE_1976</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable compute function.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting residuals check.&quot;</span><span class="p">)</span>
+
+    <span class="n">g</span> <span class="o">=</span> <span class="mf">9.81</span>  <span class="c1"># gravity acceleration in m/s**2</span>
+    <span class="n">rho</span> <span class="o">=</span> <span class="n">ATMOSPHERE_1976</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Altitude&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">rho</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;Mass&quot;</span><span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">]</span>
+
+    <span class="n">v</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;Vinfinity&quot;</span><span class="p">]</span>
+
+    <span class="n">CL_target</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">m</span> <span class="o">*</span> <span class="n">g</span> <span class="o">/</span> <span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">v</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">s</span><span class="p">)</span>
+
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;AoA&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;CL&quot;</span><span class="p">]</span> <span class="o">-</span> <span class="n">CL_target</span>
+    <span class="n">outputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;HTP_RY&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="s2">&quot;CMy&quot;</span><span class="p">]</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Trim residual compute completed.&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;with:</span><span class="se">\n</span><span class="s2">INPUTS: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">inputs</span><span class="p">)</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">OUTPUTS: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">)</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="c1"># for local testing only</span>
+    <span class="n">design_inputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;CL&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;CMy&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;Vinfinity&quot;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">}</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;AoA&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s2">&quot;HTP_RY&quot;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">}</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Mass&quot;</span><span class="p">:</span> <span class="mf">1111.0</span><span class="p">,</span> <span class="s2">&quot;Altitude&quot;</span><span class="p">:</span> <span class="mf">3000.0</span><span class="p">,</span> <span class="s2">&quot;Vinfinity&quot;</span><span class="p">:</span> <span class="mf">40.0</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="mf">16.234472</span><span class="p">}</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="n">compute</span><span class="p">(</span>
+        <span class="n">inputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="n">design_inputs</span><span class="p">},</span>
+        <span class="n">outputs</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">},</span>
+        <span class="n">partials</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+        <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<input id="b37822de-ffd2-45f7-b2e1-d619b868e326" name="4a55a4d8-37a1-46bd-aabd-bd78990e325d" type="radio">
+</input><label class="sd-tab-label" for="b37822de-ffd2-45f7-b2e1-d619b868e326">
+requirements.txt</label><div class="sd-tab-content docutils">
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fluids == 1.0.22
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="openmdao-driver-component">
+<h3>OpenMDAO driver component<a class="headerlink" href="#openmdao-driver-component" title="Permalink to this headline">#</a></h3>
+<p>The driver component is identical to the OpenMDAO component used in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example, except for the driver parameters (defined on the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab), which have been adjusted for this problem:</p>
+<ul class="simple">
+<li><p>The driver type is set to “doe” instead of “optimisation” to request a sweep of the design space. In the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module, this selects the use of the <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/features/building_blocks/drivers/doe_driver.html">OpenMDAO “FullFactorialGenerator”</a> to define the design points to evaluate. The number of design points can be increased via the {“driver”:{“kwargs”:{“levels”:{“Vinfinity”: 2, “desvars_PONPNSVRANE”: 2}}}} parameter values (minimum of 2 points per design variable).</p></li>
+<li><p>The design space is defined by the “input_variables” object, listing upper and lower values for the flight velocity range (Vinfinity) and for the wing aspect ratio range (desvars_PONPNSVRANE).</p></li>
+<li><p>We define a OpenMDAO group object named “cycle”, which has both a nonlinear solver and linear solver attached.
+By referencing this group by name in the vspaero and trim component entries (under “ExplicitComponents” and “ImplicitComponents”), these components are automatically included in the cycle group.</p></li>
+<li><p>The trim variables (“AoA” and “HTP_RY”) feedback connection is implemented by promotion of the variables as inputs in the vspaero component and as outputs in the trim component.</p></li>
+<li><p>The {“visualise”:”plot_history”} option here is used to call a custom plotting function imported from the <code class="docutils literal notranslate"><span class="pre">post.py</span></code> user file.</p></li>
+</ul>
+<p><strong>Parallel execution:</strong> We use the {“driver”:{“nb_threads”:4}} parameter to create 4 python execution threads, each launching a quarter of the design cases (using a modified OpenMDAO DOEDriver class, defined in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module). The number of doe threads should match the number of vspaero replicas set up earlier.</p>
+<p>To create the driver component:</p>
+<ul class="simple">
+<li><p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>. Select the empty component to edit it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code>, and select the component API <code class="docutils literal notranslate"><span class="pre">generic-python3-driver:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compute.py</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> files from below into a text editor, save them locally.
+Then upload them under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option.</p></li>
+<li><p>Copy the contents of the parameters JSON object below into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> and <code class="docutils literal notranslate"><span class="pre">post.py</span></code> files from below into a text editor and save them locally.
+Then upload them under the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab by selecting <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">user</span> <span class="pre">input</span> <span class="pre">files</span></code>.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="09079619-f37f-496a-92bd-d057af7df51e" name="68ff99cc-999d-45c8-9d28-708a7d1d7478" type="radio">
+</input><label class="sd-tab-label" for="09079619-f37f-496a-92bd-d057af7df51e">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -591,8 +1045,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c64ebc63-e6a6-47bd-959a-e1d8f5ae5863" name="58e6bde0-b007-445f-b087-65181fbff5b0" type="radio">
-</input><label class="sd-tab-label" for="c64ebc63-e6a6-47bd-959a-e1d8f5ae5863">
+<input id="1a61ce85-eb13-4385-973a-647c4cd72e86" name="68ff99cc-999d-45c8-9d28-708a7d1d7478" type="radio">
+</input><label class="sd-tab-label" for="1a61ce85-eb13-4385-973a-647c4cd72e86">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1193,8 +1647,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="24e95460-b8b2-4b63-9844-67b55e30dca8" name="58e6bde0-b007-445f-b087-65181fbff5b0" type="radio">
-</input><label class="sd-tab-label" for="24e95460-b8b2-4b63-9844-67b55e30dca8">
+<input id="546bcdad-d5cc-47aa-a9b6-139fda4a0547" name="68ff99cc-999d-45c8-9d28-708a7d1d7478" type="radio">
+</input><label class="sd-tab-label" for="546bcdad-d5cc-47aa-a9b6-139fda4a0547">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
 openmdao == 3.16.0
@@ -1204,8 +1658,146 @@ pandas == 1.4.4
 </pre></div>
 </div>
 </div>
-<input id="01c010af-39bf-4339-bb79-e81aafd76943" name="58e6bde0-b007-445f-b087-65181fbff5b0" type="radio">
-</input><label class="sd-tab-label" for="01c010af-39bf-4339-bb79-e81aafd76943">
+<input id="969b5dcc-4c82-48d8-a2c7-b76d1930109b" name="68ff99cc-999d-45c8-9d28-708a7d1d7478" type="radio">
+</input><label class="sd-tab-label" for="969b5dcc-4c82-48d8-a2c7-b76d1930109b">
+parameters</label><div class="sd-tab-content docutils">
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;Groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cycle&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;solvers&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;nonlinear_solver&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;options&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;iprint&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;maxiter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"></span>
+<span class="w">            </span><span class="nt">&quot;rtol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.001</span><span class="w"></span>
+<span class="w">          </span><span class="p">}</span><span class="w"></span>
+<span class="w">        </span><span class="p">},</span><span class="w"></span>
+<span class="w">        </span><span class="p">{</span><span class="w"></span>
+<span class="w">          </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;linear_solver&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">}</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;promotes&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;*&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;ExplicitComponents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;vspaero&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cycle&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;promotes_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;AoA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;HTP_RY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;fd_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;ImplicitComponents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;trim&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;group&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;cycle&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;promotes_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;Vinfinity&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">],</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;promotes_outputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;AoA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">          </span><span class="s2">&quot;HTP_RY&quot;</span><span class="w"></span>
+<span class="w">        </span><span class="p">]</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;fd_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.01</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;doe&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;reset_vars&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;cycle.vspaero.AoA&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;cycle.vspaero.HTP_RY&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;cycle.trim.CL&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;cycle.trim.CMy&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;levels&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Vinfinity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;store_parameters&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Mass&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1111</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Altitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3000</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;S&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">16.234472</span><span class="w"></span>
+<span class="w">      </span><span class="p">},</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;store_case_data&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.vspaero.AoA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.vspaero.HTP_RY&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.vspaero.CDtot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.vspaero.L2D&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.vspaero.E&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.vspaero.desvars_PONPNSVRANE&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.trim.CL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.trim.CMy&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;cycle.trim.Vinfinity&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">]</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;post&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;case_outputs_keys&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;CL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;CMy&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;CDtot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;L2D&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;AoA&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="s2">&quot;E&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">],</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;plt_x_label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vinfinity&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;columns&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;variable_names&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Mass&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Mass, kg&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Altitude&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Altitude, m&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;S&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Wing S, sqm&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;Vinfinity&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vinfinity, m/s&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;H-Wing AR&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;CL&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CL&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;CMy&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CMy&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;CDtot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;CDtot&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;L2D&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;L/D&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;AoA&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;AoA, degrees&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;E&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Oswald Efficiency Factor&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="nt">&quot;drag_tot&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Drag, N&quot;</span><span class="w"></span>
+<span class="w">      </span><span class="p">}</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="nt">&quot;nb_threads&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="w"></span>
+<span class="w">  </span><span class="p">},</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;visualise&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;n2_diagram&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="s2">&quot;plot_history&quot;</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;input_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Vinfinity&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">65</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.86</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">4.64</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">3.86</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">]</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</pre></div>
+</div>
+</div>
+<input id="661e8491-dd31-4b6a-9344-e162276b42ec" name="68ff99cc-999d-45c8-9d28-708a7d1d7478" type="radio">
+</input><label class="sd-tab-label" for="661e8491-dd31-4b6a-9344-e162276b42ec">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1424,268 +2016,141 @@ om_component</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-</div>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-paraboloid-1.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_images/open-mdao-paraboloid-1.png" style="width: 700px;" /></a>
-</section>
-<section id="parameters">
-<h3>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
-<p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the ‘unconstrained’ parameters JSON object into the text box.</p>
-<div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-parameters">
-<input checked="checked" id="3d150cc3-9ed2-4267-a9cf-ba21736238ce" name="6ad024ee-b3a8-4263-9b33-030c0b77bc7e" type="radio">
-</input><label class="sd-tab-label" for="3d150cc3-9ed2-4267-a9cf-ba21736238ce">
-unconstrained</label><div class="sd-tab-content docutils">
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;max_iter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;tol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1e-8</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;disp&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;debug_print&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;desvars&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;ln_cons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;nl_cons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;objs&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;totals&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;approx_totals&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;fd_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0001</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;input_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-50</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-50</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;output_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;objective&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f_xy&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;optimisation&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;visualise&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;n2_diagram&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
-</pre></div>
-</div>
-</div>
-<input id="8fc13cd7-2fcc-4144-92ad-a0270347d764" name="6ad024ee-b3a8-4263-9b33-030c0b77bc7e" type="radio">
-</input><label class="sd-tab-label" for="8fc13cd7-2fcc-4144-92ad-a0270347d764">
-constrained</label><div class="sd-tab-content docutils">
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;max_iter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;tol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1e-8</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;disp&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;debug_print&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;desvars&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;ln_cons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;nl_cons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;objs&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;totals&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;approx_totals&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ExplicitComponents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;promotes_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;y&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;ExecComps&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;constraint&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;exprs&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;g = x + y&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;kwargs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">                </span><span class="nt">&quot;promotes_inputs&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">                    </span><span class="s2">&quot;y&quot;</span><span class="w"></span>
-<span class="w">                </span><span class="p">]</span><span class="w"></span>
-<span class="w">            </span><span class="p">}</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;input_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;x&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-50</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;y&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-50</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;output_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;paraboloid&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;objective&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;f_xy&quot;</span><span class="w"></span>
-<span class="w">        </span><span class="p">},</span><span class="w"></span>
-<span class="w">        </span><span class="p">{</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;constraint&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;constraint&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;g&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">            </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">10.0</span><span class="w"></span>
-<span class="w">        </span><span class="p">}</span><span class="w"></span>
-<span class="w">    </span><span class="p">],</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">        </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;optimisation&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;visualise&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">        </span><span class="s2">&quot;n2_diagram&quot;</span><span class="w"></span>
-<span class="w">    </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<input id="5d536dc7-a88b-4447-8bab-67859853f6cc" name="68ff99cc-999d-45c8-9d28-708a7d1d7478" type="radio">
+</input><label class="sd-tab-label" for="5d536dc7-a88b-4447-8bab-67859853f6cc">
+post</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>  <span class="c1"># type: ignore</span>
+
+<span class="kn">from</span> <span class="nn">fluids.atmosphere</span> <span class="kn">import</span> <span class="n">ATMOSPHERE_1976</span>
+
+
+<span class="k">def</span> <span class="nf">post_process_doe</span><span class="p">(</span>
+    <span class="n">parameters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">run_folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">files</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;results.json&quot;</span><span class="p">],</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Plot VSPAERO outputs and save figures as pngs.&quot;&quot;&quot;</span>
+
+    <span class="n">case_outputs_keys</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;driver&quot;</span><span class="p">][</span><span class="s2">&quot;post&quot;</span><span class="p">][</span><span class="s2">&quot;case_outputs_keys&quot;</span><span class="p">]</span>
+    <span class="n">plt_x_label</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;driver&quot;</span><span class="p">][</span><span class="s2">&quot;post&quot;</span><span class="p">][</span><span class="s2">&quot;plt_x_label&quot;</span><span class="p">]</span>
+    <span class="n">columns</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;driver&quot;</span><span class="p">][</span><span class="s2">&quot;post&quot;</span><span class="p">][</span><span class="s2">&quot;columns&quot;</span><span class="p">]</span>
+    <span class="n">variable_names</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;driver&quot;</span><span class="p">][</span><span class="s2">&quot;post&quot;</span><span class="p">][</span><span class="s2">&quot;variable_names&quot;</span><span class="p">]</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">)</span> <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">files</span><span class="p">])</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Vinfinity&quot;</span><span class="p">],</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># calculate derived properties</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">ATMOSPHERE_1976</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="s2">&quot;Altitude&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">rho</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">[</span><span class="s2">&quot;drag_tot&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;CDtot&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mi">1</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;rho&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;Vinfinity&quot;</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">]</span>
+    <span class="n">case_outputs_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;drag_tot&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">case_outputs_keys</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">grp</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">columns</span><span class="p">):</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">grp</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">plt_x_label</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">output</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">key</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">variable_names</span><span class="p">[</span><span class="n">plt_x_label</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">variable_names</span><span class="p">[</span><span class="n">output</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="n">variable_names</span><span class="p">[</span><span class="n">columns</span><span class="p">])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;results_</span><span class="si">{</span><span class="n">output</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">)</span>  <span class="c1"># avoid memory warning for repeated runs</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;driver&quot;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s2">&quot;post&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;case_outputs_keys&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;CL&quot;</span><span class="p">,</span> <span class="s2">&quot;CMy&quot;</span><span class="p">,</span> <span class="s2">&quot;CDtot&quot;</span><span class="p">,</span> <span class="s2">&quot;L2D&quot;</span><span class="p">,</span> <span class="s2">&quot;AoA&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">],</span>
+                <span class="s2">&quot;plt_x_label&quot;</span><span class="p">:</span> <span class="s2">&quot;Vinfinity&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;columns&quot;</span><span class="p">:</span> <span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;variable_names&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;Mass&quot;</span><span class="p">:</span> <span class="s2">&quot;Mass, kg&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Altitude&quot;</span><span class="p">:</span> <span class="s2">&quot;Altitude, m&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;S&quot;</span><span class="p">:</span> <span class="s2">&quot;Wing S, sqm&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;Vinfinity&quot;</span><span class="p">:</span> <span class="s2">&quot;Vinfinity, m/s&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">:</span> <span class="s2">&quot;Wing AR&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;CL&quot;</span><span class="p">:</span> <span class="s2">&quot;CL&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;CMy&quot;</span><span class="p">:</span> <span class="s2">&quot;CMy&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;CDtot&quot;</span><span class="p">:</span> <span class="s2">&quot;CDtot&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;L2D&quot;</span><span class="p">:</span> <span class="s2">&quot;L/D&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;AoA&quot;</span><span class="p">:</span> <span class="s2">&quot;AoA, degrees&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;E&quot;</span><span class="p">:</span> <span class="s2">&quot;Oswald Efficiency Factor&quot;</span><span class="p">,</span>
+                    <span class="s2">&quot;drag_tot&quot;</span><span class="p">:</span> <span class="s2">&quot;Drag, N&quot;</span><span class="p">,</span>
+                <span class="p">},</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;outputs&quot;</span><span class="p">)</span>
+    <span class="n">files</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;results_0.json&quot;</span><span class="p">,</span> <span class="s2">&quot;results_1.json&quot;</span><span class="p">,</span> <span class="s2">&quot;results_2.json&quot;</span><span class="p">,</span> <span class="s2">&quot;results_3.json&quot;</span><span class="p">]</span>
+    <span class="n">post_process_doe</span><span class="p">(</span><span class="n">run_folder</span><span class="o">=</span><span class="n">run_folder</span><span class="p">,</span> <span class="n">parameters</span><span class="o">=</span><span class="n">parameters</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="n">files</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
-<p>These parameters are used in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module to define a standard openMDAO optimisation problem.</p>
-<p>Next, as mentioned in the previous section, we also need to upload the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module.
-Copy the contents of the <a class="reference internal" href="#tutorials-open-mdao-paraboloid-files"><span class="std std-ref">‘om_component’ tab above</span></a> into a text editor and save as ‘om_component.py’.<br />
-Select the <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">user</span> <span class="pre">input</span> <span class="pre">files</span></code> link at the bottom of the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab to upload the file.
-The upload was successful if a corresponding entry appears under the ‘user_input_files’ section of the JSON object in the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> text box.</p>
-<p>By extracting parameters from the python code and defining them in the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab instead, we can change the optimisation setup without having to view or modify the python code.
-This makes it easier to track input changes and to compare Runs (e.g. via the session file).
-The component also becomes more general, robust and re-usable.
-We will demonstrate the benefits of this approach in the next section by replacing the ‘unconstrained’ parameters with the ‘constrained’ ones.</p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the edits and close the component interface.</p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls to save the current session as a local JSON file.</p>
+</section>
+<section id="connections">
+<h3>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">#</a></h3>
+<p>Finally, we connect the outputs of the vspaero component to the inputs of the trim analysis component.</p>
+<p>In the workspace view, create a connection by selecting the “CL” output handle of the vspaero component and dragging a line to the corresponding input handle of the trim component.
+Repeat for the “CMy” handles.
+Hover the mouse pointer over a handle to see the name of the associated input or output data appear below the component.<br />
+Both connections are ‘Design variable’ type connections by default (black line), which is the type of connection we need in this case.</p>
+<p>The workspace should now contain the 3 components and 2 connections as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-4.png"><img alt="workspace view" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-4.png" style="width: 700px;" /></a>
 </section>
 </section>
-<section id="executing-the-driver">
-<h2>Executing the driver<a class="headerlink" href="#executing-the-driver" title="Permalink to this headline">#</a></h2>
-<p>We should now have a valid <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> with two components: the paraboloid analysis and the open-mdao driver.</p>
-<p>Execute the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> controls interface and wait for it to complete.
-As before, this may take a few minutes as your <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> is being processed in the Cloud.
-If you don’t get a message saying that the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> was successful, try to refresh your web browser page or consult the <a class="reference internal" href="../Reference/FAQs.html"><span class="doc std std-doc">FAQ</span></a> section for troubleshooting suggestions.</p>
-<section id="the-unconstrained-optimisation-problem">
-<h3>The unconstrained optimisation problem<a class="headerlink" href="#the-unconstrained-optimisation-problem" title="Permalink to this headline">#</a></h3>
-<p>We can now inspect the outputs of the unconstrained optimisation <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> to view the Run log as shown below.
-The optimisation outcome is summarised in the ‘open-mdao’ entry, which indicates that the optimisation completed successfully.
-The optimisation input values (x, y) converged to the known analytical solution within a few decimals (<span class="math notranslate nohighlight">\(x=\frac{20}{3}\)</span>, <span class="math notranslate nohighlight">\(y=-\frac{22}{3}\)</span>).
-If we scroll down, we can see that the paraboloid component has 13 separate entries, each one corresponding to one analysis execution of the component.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-paraboloid-2.png"><img alt="run-log-open-mdao-paraboloid-unconstrained" class="bg-primary mb-1 align-center" src="../_images/open-mdao-paraboloid-2.png" style="width: 700px;" /></a>
-<p>We can also look at the outputs of the open-mdao component in more detail.
-Select the open-mdao component in the workspace and navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab, then select <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>. The ‘outputs’ folder should contain three files:</p>
+<section id="execute-the-workflow">
+<h2>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
+<p>We can now execute the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.
+Once the run has started, each component will setup and then execute.</p>
+<p>Open the vspaero component and select the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab as shown below.
+Each log line lists a component event by time and iteration number.
+Notice that the first 4 compute events happen practically simultaneously, indicating that the 4 replicas are active.
+After that, new compute requests are executed as soon as a free replica is available, resulting in seemingly random series of “SLEEP” and “COMPUTE” events.</p>
+<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete after a couple of minutes once the vspaero component compute has completed 44 iterations (1 iteration of the open-mdao component).</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-8.png"><img alt="vspaero log entries" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-8.png" style="width: 700px;" /></a>
+</section>
+<section id="inspect-the-outputs">
+<span id="tutorials-openvsp-aircraft-performance-outputs"></span><h2>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
+<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.
+The first three “run_output” entries are setup messages from the vspaero component 4 replicas, the trim and open-mdao components.
+Notice that the vspaero messages include the replica hostname, which is different for each replica and always starts with “vspaero-“.<br />
+The last “run_output” entry should state that the “OpenMDAO compute completed”.</p>
+<p>Next, close the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log and select the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component.
+Then select the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and click on <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.
+The outputs folder should include the n2 diagram (shown below), the driver log file (useful to check Newton solver convergence), one results file per driver thread in JSON format and results plots in .png format.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-5.png"><img alt="n2 diagram" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-5.png" style="width: 700px;" /></a>
+<p>Since we set the DOE driver “levels” values to 2 for both input variables, the driver only executed 4 cases in total (1 per thread), each case being a combination of the maximum / minimum variable values.
+As a result, the plots show straight lines as shown below.</p>
+<p>Clearly, we do not have enough data from this run to graphically determine the optimal cruise velocity.
+We’ll resolve this problem in the next section.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-6.png"><img alt="L/D from the first run" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-6.png" style="width: 500px;" /></a>
+</section>
+<section id="increase-the-number-of-design-points-and-re-run">
+<h2>Increase the number of design points and re-run<a class="headerlink" href="#increase-the-number-of-design-points-and-re-run" title="Permalink to this headline">#</a></h2>
+<p>Select the open-mdao component in the workspace to edit it:</p>
 <ul class="simple">
-<li><p><strong>n2.html</strong> : A visual representation of the optimisation problem. We can switch this output off by removing the ‘n2_diagram’ entry from the ‘visualise’ list in the component Parameters.</p></li>
-<li><p><strong>om_problem_recorder_(time-stamp).sqlite</strong> : An openMDAO recorder database can be used for further data analysis, visualisation and results storage. The contents of the database can be adjusted (see the use of the ‘om.SqliteRecorder’ class in the open-mdao compute function).</p></li>
-<li><p><strong>run_driver.log</strong> : a log file that contains the openMDAO stdout output and any additional print() function outputs from the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module.</p></li>
+<li><p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and scroll to the “driver” object.</p></li>
+<li><p>Update the existing {“driver”:{“kwargs”:{“levels”:{}}}} parameter values to:</p></li>
 </ul>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Python print() output can be very useful for capturing intermediary variable values and for debugging purposes.
-In order to access this output in a log file, you can use the following python code construct (see the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module for an example):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">redirect_stdout</span>
-
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;filename.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-    <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;This is a log message!&quot;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;levels&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;Vinfinity&quot;</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+    <span class="s2">&quot;desvars_PONPNSVRANE&quot;</span><span class="p">:</span> <span class="mi">3</span>
+<span class="p">}</span>
 </pre></div>
 </div>
-</div>
-<p>Below is an extract from the end of the <code class="docutils literal notranslate"><span class="pre">run_driver.log</span></code> file.
-This file provides some interesting insights into the optimisation process.</p>
-<p>It appears that the SLSQP optimisation converged to an optimum after 4 iterations, which included 5 ‘Function evaluations’ to calculate the function outputs and 4 ‘Gradient evaluations’ to calculate the derivatives (gradient) of the paraboloid function with respect to the design variables x and y.</p>
-<p>Looking at the frequency of the ‘Calling compute’ message in the last iteration, we can see that the ‘Function evaluation’ executed the paraboloid component once and that the ‘Gradient computation’ executed it twice (once for each design variable).
-This is because we requested the finite difference gradient calculation method by setting <code class="docutils literal notranslate"><span class="pre">&quot;approx_totals&quot;:</span> <span class="pre">true</span></code> in the in the Parameters (with the ‘fd_step’ parameter setting the size of the step).</p>
-<p>The paraboloid component was therefore executed a total of 13 times, which matches the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log output.</p>
-<p>Save the session data and Run log by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Driver</span> <span class="n">debug</span> <span class="nb">print</span> <span class="k">for</span> <span class="nb">iter</span> <span class="n">coord</span><span class="p">:</span> <span class="n">rank0</span><span class="p">:</span><span class="n">ScipyOptimize_SLSQP</span><span class="o">|</span><span class="mi">5</span>
-<span class="o">--------------------------------------------------------------</span>
-<span class="n">Design</span> <span class="n">Vars</span>
-<span class="p">{</span><span class="s1">&#39;paraboloid.x&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span><span class="mf">6.66663333</span><span class="p">]),</span> <span class="s1">&#39;paraboloid.y&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">7.33336667</span><span class="p">])}</span>
-
-<span class="n">Calling</span> <span class="n">compute</span><span class="o">.</span>
-<span class="n">message</span><span class="p">:</span> 
- <span class="p">{</span><span class="s1">&#39;component&#39;</span><span class="p">:</span> <span class="s1">&#39;paraboloid&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">7.333366666671174</span><span class="p">],</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.666633333303766</span><span class="p">]},</span> <span class="s1">&#39;get_grads&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;get_outputs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-<span class="n">Nonlinear</span> <span class="n">constraints</span>
-<span class="kc">None</span>
-
-<span class="n">Linear</span> <span class="n">constraints</span>
-<span class="kc">None</span>
-
-<span class="n">Objectives</span>
-<span class="p">{</span><span class="s1">&#39;paraboloid.f_xy&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">27.33333333</span><span class="p">])}</span>
-
-<span class="n">Driver</span> <span class="n">total</span> <span class="n">derivatives</span> <span class="k">for</span> <span class="n">iteration</span><span class="p">:</span> <span class="mi">6</span>
-<span class="o">-----------------------------------------</span>
-
-<span class="n">Calling</span> <span class="n">compute</span><span class="o">.</span>
-<span class="n">message</span><span class="p">:</span> 
- <span class="p">{</span><span class="s1">&#39;component&#39;</span><span class="p">:</span> <span class="s1">&#39;paraboloid&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">7.333366666671174</span><span class="p">],</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.666733333303766</span><span class="p">]},</span> <span class="s1">&#39;get_grads&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;get_outputs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-<span class="n">Calling</span> <span class="n">compute</span><span class="o">.</span>
-<span class="n">message</span><span class="p">:</span> 
- <span class="p">{</span><span class="s1">&#39;component&#39;</span><span class="p">:</span> <span class="s1">&#39;paraboloid&#39;</span><span class="p">,</span> <span class="s1">&#39;inputs&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;y&#39;</span><span class="p">:</span> <span class="p">[</span><span class="o">-</span><span class="mf">7.333266666671174</span><span class="p">],</span> <span class="s1">&#39;x&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">6.666633333303766</span><span class="p">]},</span> <span class="s1">&#39;get_grads&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;get_outputs&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">}</span>
-<span class="n">Elapsed</span> <span class="n">time</span> <span class="n">to</span> <span class="n">approx</span> <span class="n">totals</span><span class="p">:</span> <span class="mf">0.11306452751159668</span> <span class="n">secs</span>
-
-<span class="p">{(</span><span class="s1">&#39;paraboloid.f_xy&#39;</span><span class="p">,</span> <span class="s1">&#39;paraboloid.x&#39;</span><span class="p">):</span> <span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">5.82076609e-11</span><span class="p">]])}</span>
-<span class="p">{(</span><span class="s1">&#39;paraboloid.f_xy&#39;</span><span class="p">,</span> <span class="s1">&#39;paraboloid.y&#39;</span><span class="p">):</span> <span class="n">array</span><span class="p">([[</span><span class="o">-</span><span class="mf">5.82076609e-11</span><span class="p">]])}</span>
-
-<span class="n">Optimization</span> <span class="n">terminated</span> <span class="n">successfully</span>    <span class="p">(</span><span class="n">Exit</span> <span class="n">mode</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="n">Current</span> <span class="n">function</span> <span class="n">value</span><span class="p">:</span> <span class="o">-</span><span class="mf">27.333333329999995</span>
-            <span class="n">Iterations</span><span class="p">:</span> <span class="mi">4</span>
-            <span class="n">Function</span> <span class="n">evaluations</span><span class="p">:</span> <span class="mi">5</span>
-            <span class="n">Gradient</span> <span class="n">evaluations</span><span class="p">:</span> <span class="mi">4</span>
-<span class="n">Optimization</span> <span class="n">Complete</span>
-<span class="o">-----------------------------------</span>
-</pre></div>
-</div>
-</section>
-<section id="the-constrained-optimisation-problem">
-<h3>The constrained optimisation problem<a class="headerlink" href="#the-constrained-optimisation-problem" title="Permalink to this headline">#</a></h3>
-<p>We now wish to add the following constraint to the optimisation problem</p>
-<div class="math notranslate nohighlight">
-\[ 
-  0.0 \leq g(x,y) \leq 10.0  \quad , \quad g(x,y) = x + y  . 
-\]</div>
-<p>Instead of adding another component to the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>, we can implement this simple constraint using an openMDAO <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/features/building_blocks/components/exec_comp.html">ExecComp</a> component.</p>
-<p>Select the open-mdao component in the workspace to edit it, navigate to the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab, and copy and paste the <a class="reference internal" href="#tutorials-open-mdao-paraboloid-parameters"><span class="std std-ref">constrained</span></a> Parameter values.</p>
-<p>A few changes have been made compared to the unconstrained problem Parameters:</p>
 <ul class="simple">
-<li><p>The ‘ExplicitComponents’ section is added to promote the paraboloid component x and y variables to global problem variables.</p></li>
-<li><p>The ‘ExecComps’ section is added to define the a component named ‘constraint’.</p></li>
-<li><p>The constraint output is added to the ‘output_variables’ list.</p></li>
-<li><p>The finite difference gradient calculations are switched off by setting ‘approx_totals’ to false.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
-<p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p>
-<p>Note that it is not necessary to upload the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module again.
-To verify this, you can open the open-mdao component <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and the file entry should appear again under ‘user_input_files’, just as before.</p>
-<p>Create a new <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> controls interface.
-This should execute very quickly.</p>
-<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> to view the Run log as shown below.
-The open-mdao component entry lists optimal x and y values for the constrained problem, which have converged within a few decimals of the analytical solution (<span class="math notranslate nohighlight">\(x=7\)</span>, <span class="math notranslate nohighlight">\(y=-7\)</span>).</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-paraboloid-3.png"><img alt="run-log-open-mdao-paraboloid-constrained" class="bg-primary mb-1 align-center" src="../_images/open-mdao-paraboloid-3.png" style="width: 700px;" /></a>
-<p>Select the open-mdao component in the workspace, open the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and select <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.</p>
-<p>Visually compare the N2 diagram (n2.html) shown below with that from the previous <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.<br />
-The new constraint component appears as another Explicit Component under the paraboloid component.</p>
-<p>Next, inspect the ‘run_driver.log’ output file.
-Only 2 iterations, with 2 ‘Function evaluations’ and 2 ‘Gradient evaluations’ were required to reach convergence.
-The ‘Calling compute_partials’ messages confirm that instead of using finite differencing, we are now requesting the analytical gradient information directly from the paraboloid component.
-With one paraboloid component evaluation yielding derivatives with respect to all variables, this approach is significantly more efficient than the finite differencing method.</p>
-<p>For comparison, a reference pure python/openMDAO implementation of this problem can be found in the <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/basic_user_guide/single_disciplinary_optimization/first_optimization.html">Optimization of Paraboloid</a> section of the openMDAO user guide.</p>
-<p>Save the session data and Run log by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
-<a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-paraboloid-4.png"><img alt="n2-open-mdao-paraboloid-constrained" class="bg-primary mb-1 align-center" src="../_images/open-mdao-paraboloid-4.png" style="width: 700px;" /></a>
-</section>
+<p>Execute <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> again by selecting the play symbol ▶ in the Run controls interface.
+The DOE driver will execute 63 cases (21 velocities for 3 aspect ratios) and should complete within ~33min.</p>
+<p>The figure below shows the L/D variation obtained.
+The maximum L/D cruise velocity occurs between 55m/s and 60m/s.
+As expected, the maximum L/D increases with increasing half-wing aspect ratio and the maximum L/D cruise velocity decreases.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-7.png"><img alt="L/D from the second run" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-7.png" style="width: 500px;" /></a>
 </section>
 <section id="clean-up">
 <h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
@@ -1695,13 +2160,6 @@ It may take a minute or so for the Cloud session to be reset.</p>
 <p class="admonition-title">Warning</p>
 <p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> data (session data, inputs and outputs) will be permanently deleted.</p>
 </div>
-</section>
-<section id="references">
-<h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
-<li><p><a class="reference external" href="https://openmdao.org/newdocs/versions/latest/examples/paraboloid.html?highlight=unconstrained">Simple Optimization</a> example from the openMDAO user guide.</p></li>
-<li><p><a class="reference external" href="https://openmdao.org/newdocs/versions/latest/basic_user_guide/single_disciplinary_optimization/first_optimization.html">Optimization of Paraboloid</a> section of the openMDAO user guide.</p></li>
-</ol>
 </section>
 </section>
 
@@ -1732,17 +2190,17 @@ It may take a minute or so for the Cloud session to be reset.</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Simple%20component%20analysis.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Simple component analysis</p>
+            <p class="prev-next-title">Example of a variable stiffness plate in compression</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="Chaining%20component%20analyses.html" title="next page">
+    <a class='right-next' id="next-link" href="../Reference/The%20dashboard.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Chaining component analyses</p>
+        <p class="prev-next-title">The dashboard</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

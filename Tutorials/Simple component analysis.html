@@ -166,6 +166,11 @@ const thebe_selector_output = ".output, .cell_output"
    Example of a variable stiffness plate in compression
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
+   Using OpenVSP for aircraft performance analysis
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -571,11 +576,14 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="5a287358-52bf-44a5-8953-6ebd38008c89" name="f264e9c9-2703-4925-8da7-1e6bdbea588c" type="radio">
-</input><label class="sd-tab-label" for="5a287358-52bf-44a5-8953-6ebd38008c89">
+<input checked="checked" id="2daf6422-87ea-45c0-a18a-4ac073228d73" name="10b4aa59-9908-4ef8-903a-daa12c376f6f" type="radio">
+</input><label class="sd-tab-label" for="2daf6422-87ea-45c0-a18a-4ac073228d73">
 setup</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOSTNAME&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
@@ -653,18 +661,21 @@ setup</label><div class="sd-tab-content docutils">
     <span class="p">}</span>
 
     <span class="c1"># optional</span>
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed on host </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">.&quot;</span>
     <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
 
     <span class="k">return</span> <span class="n">response</span>
 </pre></div>
 </div>
 </div>
-<input id="7326a6b3-465e-4d63-add0-8690099e39a2" name="f264e9c9-2703-4925-8da7-1e6bdbea588c" type="radio">
-</input><label class="sd-tab-label" for="7326a6b3-465e-4d63-add0-8690099e39a2">
+<input id="046d54e1-14f4-4e15-998d-4b0db2ea884e" name="10b4aa59-9908-4ef8-903a-daa12c376f6f" type="radio">
+</input><label class="sd-tab-label" for="046d54e1-14f4-4e15-998d-4b0db2ea884e">
 compute</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOSTNAME&quot;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
@@ -725,7 +736,7 @@ compute</label><div class="sd-tab-content docutils">
         <span class="n">partials</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">][</span><span class="s2">&quot;y&quot;</span><span class="p">][</span><span class="s2">&quot;val&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)]</span>
         <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;partials&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">partials</span>
 
-    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute paraboloid f(x:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">,y:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;design&#39;</span><span class="p">][</span><span class="s1">&#39;f_xy&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> with options: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">options</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute paraboloid f(x:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">,y:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">outputs</span><span class="p">[</span><span class="s1">&#39;design&#39;</span><span class="p">][</span><span class="s1">&#39;f_xy&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2"> on host </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">&quot;</span>
     <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
 
     <span class="k">return</span> <span class="n">resp</span>
