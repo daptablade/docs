@@ -1,0 +1,207 @@
+{
+  "components": [
+    {
+      "name": "vspaero",
+      "api": "openvsp-comp:latest",
+      "options": {
+        "replicas": 4
+      },
+      "parameters": {
+        "HTP_RY_ID": "ABCVDMNNBOE",
+        "vsp3_file": "Cessna-210_metric.vsp3",
+        "des_file": "Cessna-210_metric.des"
+      },
+      "inputs": {
+        "AoA": 0,
+        "HTP_RY": 0,
+        "desvars_PONPNSVRANE": 3.86
+      },
+      "outputs": {
+        "CL": 0,
+        "CMy": 0,
+        "CDtot": 0,
+        "L2D": 0,
+        "E": 0
+      }
+    },
+    {
+      "name": "trim",
+      "api": "generic-python3-comp:latest",
+      "options": {},
+      "parameters": {
+        "Mass": 1111,
+        "Altitude": 3000,
+        "S": 16.234472
+      },
+      "inputs": {
+        "CL": 0,
+        "CMy": 0,
+        "Vinfinity": 40
+      },
+      "outputs": {
+        "AoA": 0,
+        "HTP_RY": 0
+      }
+    },
+    {
+      "name": "open-mdao",
+      "api": "generic-python3-driver:latest",
+      "options": {},
+      "parameters": {
+        "Groups": [
+          {
+            "name": "cycle",
+            "solvers": [
+              {
+                "type": "nonlinear_solver",
+                "options": {
+                  "iprint": 2,
+                  "maxiter": 10,
+                  "rtol": 0.001
+                }
+              },
+              {
+                "type": "linear_solver"
+              }
+            ],
+            "kwargs": {
+              "promotes": [
+                "*"
+              ]
+            }
+          }
+        ],
+        "ExplicitComponents": [
+          {
+            "name": "vspaero",
+            "group": "cycle",
+            "kwargs": {
+              "promotes_inputs": [
+                "AoA",
+                "HTP_RY",
+                "desvars_PONPNSVRANE"
+              ]
+            },
+            "fd_step": 0.01,
+            "has_compute_partials": false
+          }
+        ],
+        "ImplicitComponents": [
+          {
+            "name": "trim",
+            "group": "cycle",
+            "kwargs": {
+              "promotes_inputs": [
+                "Vinfinity"
+              ],
+              "promotes_outputs": [
+                "AoA",
+                "HTP_RY"
+              ]
+            },
+            "fd_step": 0.01
+          }
+        ],
+        "driver": {
+          "type": "doe",
+          "kwargs": {
+            "reset_vars": {
+              "cycle.vspaero.AoA": 0.0,
+              "cycle.vspaero.HTP_RY": 0.0,
+              "cycle.trim.CL": 0.5,
+              "cycle.trim.CMy": 0.0
+            },
+            "levels": {
+              "Vinfinity": 2,
+              "desvars_PONPNSVRANE": 2
+            },
+            "store_parameters": {
+              "Mass": 1111,
+              "Altitude": 3000,
+              "S": 16.234472
+            },
+            "store_case_data": [
+              "cycle.vspaero.AoA",
+              "cycle.vspaero.HTP_RY",
+              "cycle.vspaero.CDtot",
+              "cycle.vspaero.L2D",
+              "cycle.vspaero.E",
+              "cycle.vspaero.desvars_PONPNSVRANE",
+              "cycle.trim.CL",
+              "cycle.trim.CMy",
+              "cycle.trim.Vinfinity"
+            ]
+          },
+          "post": {
+            "case_outputs_keys": [
+              "CL",
+              "CMy",
+              "CDtot",
+              "L2D",
+              "AoA",
+              "E"
+            ],
+            "plt_x_label": "Vinfinity",
+            "columns": "desvars_PONPNSVRANE",
+            "variable_names": {
+              "Mass": "Mass, kg",
+              "Altitude": "Altitude, m",
+              "S": "Wing S, sqm",
+              "Vinfinity": "Vinfinity, m/s",
+              "desvars_PONPNSVRANE": "H-Wing AR",
+              "CL": "CL",
+              "CMy": "CMy",
+              "CDtot": "CDtot",
+              "L2D": "L/D",
+              "AoA": "AoA, degrees",
+              "E": "Oswald Efficiency Factor",
+              "drag_tot": "Drag, N"
+            }
+          },
+          "nb_threads": 4
+        },
+        "visualise": [
+          "n2_diagram",
+          "plot_history"
+        ],
+        "input_variables": [
+          {
+            "name": "Vinfinity",
+            "lower": 40,
+            "upper": 80,
+            "value": 65
+          },
+          {
+            "name": "desvars_PONPNSVRANE",
+            "lower": 3.86,
+            "upper": 4.64,
+            "value": 3.86
+          }
+        ]
+      },
+      "inputs": {},
+      "outputs": {}
+    }
+  ],
+  "connections": [
+    {
+      "origin": "vspaero",
+      "name_origin": "CL",
+      "target": "trim",
+      "name_target": "CL",
+      "type": "design"
+    },
+    {
+      "origin": "vspaero",
+      "name_origin": "CMy",
+      "target": "trim",
+      "name_target": "CMy",
+      "type": "design"
+    }
+  ],
+  "workflow": {
+    "start": "vspaero",
+    "end": "trim",
+    "driver": "open-mdao"
+  }
+}

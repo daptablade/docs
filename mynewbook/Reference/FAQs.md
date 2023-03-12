@@ -9,7 +9,7 @@ We recommend using [Chrome](https://www.google.com/chrome/) v.108 or later.
 
 Current maximum user resource limits for the trial version are:
 
-* **5 components** including a driver.
+* **6 components** including drivers and component replicas.
 * **1 Giga byte (Gi) Memory** per component 
 * **1 CPU** per component
 * **1 Mega byte (Mi)** storage per uploaded file
@@ -35,6 +35,7 @@ The following table provides an overview of currently available software APIs.
 | generic-python3-comp     | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
 | generic-python3-driver   | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
 | libreoffice-comp         | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, LibreOffice (Version: 7.0.4.2)|
+| openvsp-comp             | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, OpenVSP (Version: 3.31.1-Linux)|
 
 
 ## What python packages can I use?
