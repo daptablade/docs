@@ -13,6 +13,7 @@ parts:
       - file: Tutorials/Automating design optimisations
       - file: Tutorials/Working with spreadsheets
       - file: Tutorials/Example of a variable stiffness plate in compression
+      - file: Tutorials/Using OpenVSP for aircraft performance analysis
   - caption: Reference Guide
     chapters:
       - file: Reference/The dashboard

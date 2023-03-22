@@ -1,3 +1,5 @@
 numpy == 1.21.5
 openmdao == 3.16.0
 matplotlib == 3.5.2
+fluids == 1.0.22
+pandas == 1.4.4

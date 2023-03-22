@@ -1,5 +1,8 @@
+import os
 from datetime import datetime
 from pathlib import Path
+
+HOSTNAME = os.getenv("HOSTNAME")
 
 
 def setup(
@@ -77,7 +80,7 @@ def setup(
     }
 
     # optional
-    message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Setup completed."
+    message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: Setup completed on host {HOSTNAME}."
     response["message"] = message
 
     return response

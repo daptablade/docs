@@ -3,11 +3,25 @@ from pathlib import Path
 import traceback
 from contextlib import redirect_stdout
 import numpy as np
+import json
+from copy import deepcopy
+from concurrent.futures import ThreadPoolExecutor
+
 import openmdao.api as om
 from matplotlib import pyplot as plt  # type: ignore
 
-from component_api2 import call_compute
-from om_component import OMexplicitComp  # type: ignore
+from om_component import OMexplicitComp, OMimplicitComp  # type: ignore
+
+OM_DEFAULTS = {
+    "nonlinear_solver": {
+        "class": om.NewtonSolver,
+        "kwargs": {"solve_subsystems": False},
+    },
+    "linear_solver": {
+        "class": om.DirectSolver,
+        "kwargs": {},
+    },
+}
 
 
 def compute(
@@ -27,25 +41,93 @@ def compute(
     print("OpenMDAO problem setup started.")
 
     workflow = parameters["workflow"]
-    all_connections = parameters["all_connections"]
     run_folder = Path(parameters["outputs_folder_path"])
+    all_connections = parameters.get("all_connections", [])
 
     # 1) define the simulation components
     prob = om.Problem()
+
+    # add groups
+    groups = {}
+    if "Groups" in parameters:
+        for group in parameters["Groups"]:
+            name = reformat_compname(group["name"])
+            kwargs = group.get("kwargs", {})
+            groups[name] = prob.model.add_subsystem(
+                name,
+                om.Group(),
+                **kwargs,
+            )
+            if "solvers" in group:
+                for solver in group["solvers"]:
+                    if solver["type"] == "nonlinear_solver":
+                        groups[name].nonlinear_solver = OM_DEFAULTS["nonlinear_solver"][
+                            "class"
+                        ](**OM_DEFAULTS["nonlinear_solver"]["kwargs"])
+                        solver_obj = groups[name].nonlinear_solver
+                    elif solver["type"] == "linear_solver":
+                        groups[name].linear_solver = OM_DEFAULTS["linear_solver"][
+                            "class"
+                        ](**OM_DEFAULTS["linear_solver"]["kwargs"])
+                        solver_obj = groups[name].nonlinear_solver
+                    else:
+                        raise ValueError(
+                            f"Solver of type {solver['type']} is not implemented."
+                        )
+                    if "options" in solver:
+                        for option, val in solver["options"].items():
+                            if option in ["iprint", "maxiter"]:
+                                solver_obj.options[option] = int(val)
+                            else:
+                                solver_obj.options[option] = val
+
+    # add components
+    def get_comp_by_name(name, objs: dict):
+
+        comp_type_lookup = {
+            "ExplicitComponents": OMexplicitComp,
+            "ImplicitComponents": OMimplicitComp,
+        }
+
+        for key, obj in objs.items():
+            filtered = [comp_obj for comp_obj in obj if comp_obj["name"] == name]
+            if filtered:
+                return [comp_type_lookup[key], filtered[0]]
+        return OMexplicitComp, None  # default
+
+    model_lookup = {}
     for component in workflow:
-        if "ExplicitComponents" in parameters:
-            kwargs = [
-                comp["kwargs"]
-                for comp in parameters["ExplicitComponents"]
-                if comp["name"] == component
-            ][0]
-        else:
-            kwargs = {}
-        prob.model.add_subsystem(
+        # defaults
+        kwargs = {}
+        fd_step = 0.1
+        model = prob.model
+        has_compute_partials = True  # set this to False if fd gradients should be used
+
+        objs = {
+            k: parameters[k]
+            for k in ["ExplicitComponents", "ImplicitComponents"]
+            if k in parameters
+        }
+        comp_type, comp_obj = get_comp_by_name(component, objs)
+        if comp_obj:
+            kwargs = comp_obj.get("kwargs", kwargs)
+            fd_step = comp_obj.get("fd_step", fd_step)
+            has_compute_partials = comp_obj.get(
+                "has_compute_partials", has_compute_partials
+            )
+            model = groups.get(comp_obj.get("group"), model)
+
+        model_lookup[component] = model
+        model.add_subsystem(
             reformat_compname(component),
-            OMexplicitComp(compname=component, run_number=0),
+            comp_type(
+                compname=component,
+                fd_step=fd_step,
+                has_compute_partials=has_compute_partials,
+            ),
             **kwargs,
         )
+
     if "ExecComps" in parameters and parameters["ExecComps"]:
         for component in parameters["ExecComps"]:
             prob.model.add_subsystem(
@@ -55,15 +137,14 @@ def compute(
             )
 
     # 2) define the component connections
+    def get_var_str(c, name):
+        return f"{reformat_compname(c)}.{name.replace('.','-')}"
+
     for connection in all_connections:
         if connection["type"] == "design":
             prob.model.connect(
-                reformat_compname(connection["origin"])
-                + "."
-                + connection["name_origin"].replace(".", "-"),
-                reformat_compname(connection["target"])
-                + "."
-                + connection["name_target"].replace(".", "-"),
+                get_var_str(connection["origin"], connection["name_origin"]),
+                get_var_str(connection["target"], connection["name_target"]),
             )
 
     if parameters["driver"]["type"] == "optimisation":
@@ -83,56 +164,60 @@ def compute(
 
     elif parameters["driver"]["type"] == "doe":
         # 3) alternative: setup a design of experiments
-        prob.driver = om.DOEDriver(
-            om.UniformGenerator(num_samples=parameters["driver"]["samples"])
+
+        levels = parameters["driver"]["kwargs"].get("levels", 2)
+        if isinstance(levels, float):  # All have the same number of levels
+            levels = int(levels)
+        elif isinstance(levels, dict):  # Different DVs have different number of levels
+            levels = {k: int(v) for k, v in levels.items()}
+
+        prob.driver = DOEDriver(
+            om.FullFactorialGenerator(levels=levels),
+            reset_vars=parameters["driver"]["kwargs"].get("reset_vars", {}),
+            store_case_data=parameters["driver"]["kwargs"].get("store_case_data", {}),
+            store_parameters=parameters["driver"]["kwargs"].get("store_parameters", {}),
+            run_folder=run_folder,
         )
 
     # 4) add design variables
-    for var in parameters["input_variables"]:
-        upper = var["upper"]
-        lower = var["lower"]
-        if "component" in var:
-            comp = reformat_compname(var["component"])
-            prob.model.add_design_var(
-                f"{comp}.{var['name'].replace('.', '-')}",
-                lower=lower,
-                upper=upper,
-            )
-        else:
-            prob.model.add_design_var(
-                var["name"].replace(".", "-"), lower=lower, upper=upper
-            )
-            prob.model.set_input_defaults(var["name"].replace(".", "-"), var["value"])
+    if "input_variables" in parameters:
+        for var in parameters["input_variables"]:
+            upper = var["upper"]
+            lower = var["lower"]
+            if "component" in var:
+                comp_obj = reformat_compname(var["component"])
+                prob.model.add_design_var(
+                    f"{comp_obj}.{var['name'].replace('.', '-')}",
+                    lower=lower,
+                    upper=upper,
+                )
+            else:
+                prob.model.add_design_var(
+                    var["name"].replace(".", "-"), lower=lower, upper=upper
+                )
+                val_default = var.get("value", lower)
+                prob.model.set_input_defaults(
+                    var["name"].replace(".", "-"), val_default
+                )
 
     # 5) add an objective and constraints
-    for var in parameters["output_variables"]:
-        comp = reformat_compname(var["component"])
-        name = f"{comp}.{var['name'].replace('.', '-')}"
+    if "output_variables" in parameters:
+        for var in parameters["output_variables"]:
+            comp_obj = reformat_compname(var["component"])
+            name = f"{comp_obj}.{var['name'].replace('.', '-')}"
 
-        # set scaling from parameter input file
-        if "scaler" in var:
-            scaler = var["scaler"]
-        else:
-            scaler = None
-        if "adder" in [var]:
-            adder = var["adder"]
-        else:
-            adder = None
+            # set scaling from parameter input file
+            scaler = var.get("scaler", None)
+            adder = var.get("adder", None)
 
-        if var["type"] == "objective":
-            prob.model.add_objective(name, scaler=scaler, adder=adder)
-        elif var["type"] == "constraint":
-            if "lower" in var:
-                lower = var["lower"]
-            else:
-                lower = None
-            if "upper" in var:
-                upper = var["upper"]
-            else:
-                upper = None
-            prob.model.add_constraint(
-                name, lower=lower, upper=upper, scaler=scaler, adder=adder
-            )
+            if var["type"] == "objective":
+                prob.model.add_objective(name, scaler=scaler, adder=adder)
+            elif var["type"] == "constraint":
+                lower = var.get("lower", None)
+                upper = var.get("upper", None)
+                prob.model.add_constraint(
+                    name, lower=lower, upper=upper, scaler=scaler, adder=adder
+                )
 
     prob.setup()  # required to generate the n2 diagram
     print("OpenMDAO problem setup completed.")
@@ -154,21 +239,24 @@ def compute(
     # elif parameters["driver"]["type"] == "check_totals":
     #     dict_out = run_check_totals(prob, parameters)
 
-    # elif parameters["driver"]["type"] == "doe":
-    #     dict_out = run_doe(prob, parameters)
+    elif parameters["driver"]["type"] == "doe":
+        nb_threads = int(parameters["driver"].get("nb_threads", 1))
+        dict_out = run_doe(prob, parameters, run_folder, nb_threads=nb_threads)
 
     # elif parameters["driver"]["type"] == "post":
     #     dict_out = run_post(prob, parameters)
 
     else:
-        raise ValueError(
-            f"driver {parameters['driver']['type']} is not a valid component driver type."
-        )
+        with open(run_folder / "trim_convergence.log", "w") as f:
+            with redirect_stdout(f):
+                prob.run_model()
+                dict_out = {}
 
     message = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}: OpenMDAO compute completed."
     print(message)
 
-    outputs["design"] = dict_out
+    if dict_out:
+        outputs["design"] = dict_out
 
     return {"message": message, "outputs": outputs}
 
@@ -248,9 +336,51 @@ def run_optimisation(prob, parameters, run_folder):
     print(opt_output)
 
     if "visualise" in parameters and "plot_history" in parameters["visualise"]:
-        post_process(parameters, run_folder, r_name)
+        post_process_optimisation(parameters, run_folder, r_name)
 
     return opt_output
+
+
+def run_doe(prob, parameters, run_folder, nb_threads=1):
+
+    # 7) execute the driver in parallel
+    def run_cases_thread(color):
+        print(f"Starting thread {color}.")
+        prob_copy = deepcopy(prob)
+        print(f"problem id for color {color}: ", id(prob_copy))
+
+        # set driver instance properties
+        prob_copy.driver.nb_threads = nb_threads
+        prob_copy.driver.color = color
+        try:
+            prob_copy.run_driver()
+        except Exception as e:
+            print(f"run driver exited with error: {e}")
+            tb = traceback.format_exc()
+            return f"OpenMDAO DOE error: {tb}"
+
+        print(f"Completed thread {color}.")
+
+    with open(run_folder / f"run_driver.log", "w") as f:
+        with redirect_stdout(f):
+            with ThreadPoolExecutor(max_workers=nb_threads) as executor:
+                msgs = executor.map(run_cases_thread, range(nb_threads))
+                errors = list(msgs)
+                if errors and errors[0]:
+                    raise ValueError(errors[0])
+
+    print("completed all threads")
+
+    if "visualise" in parameters and "plot_history" in parameters["visualise"]:
+        from post import post_process_doe
+
+        post_process_doe(
+            parameters,
+            run_folder,
+            files=[f"results_{c}.json" for c in range(nb_threads)],
+        )
+
+    return {}
 
 
 def reformat_compname(name):
@@ -258,7 +388,9 @@ def reformat_compname(name):
     return name.replace("-", "_")
 
 
-def post_process(parameters, run_folder, r_name, only_plot_major_iter=True):
+def post_process_optimisation(
+    parameters, run_folder, r_name, only_plot_major_iter=True
+):
     # read database
     # Instantiate your CaseReader
     cr = om.CaseReader(r_name)
@@ -328,3 +460,137 @@ def _plot_iteration_histories(
         plt.savefig(str(run_folder / (key + ".png")))
 
     plt.show()
+
+
+class DOEDriver(om.DOEDriver):
+    def __init__(
+        self,
+        generator=None,
+        reset_vars: dict = None,
+        store_case_data: list = None,
+        store_parameters: dict = None,
+        run_folder: Path = None,
+        **kwargs,
+    ):
+        self.reset_vars = reset_vars
+        self.cases_store = []
+        self.store_case_data = store_case_data
+        self.store_parameters = store_parameters
+        self.run_folder = run_folder
+        self.nb_threads = 1
+        self.color = 0
+        super().__init__(generator=generator, **kwargs)
+
+    def run(self):
+        """
+        Generate cases and run the model for each set of generated input values.
+
+        Returns
+        -------
+        bool
+            Failure flag; True if failed to converge, False is successful.
+        """
+        self.iter_count = 0
+        self._quantities = []
+
+        # set driver name with current generator
+        self._set_name()
+
+        # Add all design variables
+        dv_meta = self._designvars
+        self._indep_list = list(dv_meta)
+
+        # Add all objectives
+        objs = self.get_objective_values()
+        for name in objs:
+            self._quantities.append(name)
+
+        # Add all constraints
+        con_meta = self._cons
+        for name, _ in con_meta.items():
+            self._quantities.append(name)
+
+        for case in self._parallel_generator(self._designvars, self._problem().model):
+            print(f"Starting case on thread {self.color}.")
+            self._custom_reset_variables()
+            self._run_case(case)
+            self.iter_count += 1
+            self._custom_store_to_json()
+
+        return False
+
+    def _custom_reset_variables(self):
+        # reset the initial variable guesses
+        for k, v in self.reset_vars.items():
+            self._problem()[k] = v
+
+    def _custom_store_to_json(self):
+        # store the outputs to the json database
+        self.cases_store.append(
+            {
+                **self.store_parameters,
+                **{
+                    k.split(".")[-1]: self._problem()[k][0]
+                    for k in self.store_case_data
+                },
+            }
+        )
+        # dump to json file
+        fname = f"results_{self.color}.json"
+        with open(self.run_folder / fname, "w", encoding="utf-8") as f:
+            json.dump(self.cases_store, f)
+
+    def _parallel_generator(self, design_vars, model=None):
+        """
+        Generate case for this thread.
+
+        Parameters
+        ----------
+        design_vars : dict
+            Dictionary of design variables for which to generate values.
+
+        model : Group
+            The model containing the design variables (used by some generators).
+
+        Yields
+        ------
+        list
+            list of name, value tuples for the design variables.
+        """
+        size = self.nb_threads
+        color = self.color
+
+        generator = self.options["generator"]
+        for i, case in enumerate(generator(design_vars, model)):
+            if i % size == color:
+                yield case
+
+
+if __name__ == "__main__":
+    with open("open-mdao-driver/parameters.json", "r") as f:
+        parameters = json.load(f)
+    parameters["all_connections"] = [
+        {
+            "origin": "vspaero",
+            "name_origin": "CL",
+            "target": "trim",
+            "name_target": "CL",
+            "type": "design",
+        },
+        {
+            "origin": "vspaero",
+            "name_origin": "CMy",
+            "target": "trim",
+            "name_target": "CMy",
+            "type": "design",
+        },
+    ]
+    parameters["workflow"] = ["vspaero", "trim"]  # defined by controller
+    parameters["outputs_folder_path"] = "outputs"  # defined by component generic api
+    compute(
+        inputs={},
+        outputs={"design": {}},
+        partials=None,
+        options=None,
+        parameters=parameters,
+    )
