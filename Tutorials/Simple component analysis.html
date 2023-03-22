@@ -576,8 +576,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="2daf6422-87ea-45c0-a18a-4ac073228d73" name="10b4aa59-9908-4ef8-903a-daa12c376f6f" type="radio">
-</input><label class="sd-tab-label" for="2daf6422-87ea-45c0-a18a-4ac073228d73">
+<input checked="checked" id="572e2e50-27c5-4139-8048-2a46e9bfb49c" name="e0c3ce49-7ac8-428e-affe-b82b88957f3b" type="radio">
+</input><label class="sd-tab-label" for="572e2e50-27c5-4139-8048-2a46e9bfb49c">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -668,8 +668,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="046d54e1-14f4-4e15-998d-4b0db2ea884e" name="10b4aa59-9908-4ef8-903a-daa12c376f6f" type="radio">
-</input><label class="sd-tab-label" for="046d54e1-14f4-4e15-998d-4b0db2ea884e">
+<input id="898fd9d0-6a15-4300-bb2b-130a7279aaa2" name="e0c3ce49-7ac8-428e-affe-b82b88957f3b" type="radio">
+</input><label class="sd-tab-label" for="898fd9d0-6a15-4300-bb2b-130a7279aaa2">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
