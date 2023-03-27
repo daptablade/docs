@@ -1,13 +1,14 @@
 # Automating the design optimisation of the composite wing model
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/5).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).
+
 **Duration: 15 min**
 
 Driver components can be used to automate complex analysis workflows.
 
 In the previous example, we performed a parametric study on a single variable.
 In this tutorial we go one step further by re-using the OpenMDAO optimisation component from the [Simple optimisation problem](./Simple%20optimisation%20problem.md) example to optimise the wing design for minimum wing incidence at the tip.
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).**
 
 ```{image} media/open-mdao-parametric-model-1.png
 :alt: chained process with optimiser

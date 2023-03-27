@@ -1,5 +1,8 @@
 # Simple optimisation problem
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/2).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/open-mdao-paraboloid).
+
 ```{image} media/paraboloid_optimisation.gif
 :alt: paraboloid-optimisation 
 :class: bg-primary mb-1
@@ -11,8 +14,6 @@
 
 In this example we solve a simple analytical function minimisation problem. 
 We create an optimisation driver component using the [openMDAO](https://openmdao.org) python package, and then use it to determine the unconstrained and constrained minimum values of the paraboloid function from the [previous example](./Simple%20component%20analysis.md).  
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/open-mdao-paraboloid).**
 
 ## Opening a saved session
 

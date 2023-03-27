@@ -1,12 +1,13 @@
 # Automating the composite wing model parametric study 
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/4).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).
+
 **Duration: 15 min**
 
 Driver components can be used to automate complex analysis workflows.
 
 In this tutorial, we automate the execution of a parametric study using the chained component analyses from the previous example.
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).**
 
 ```{image} media/driver-parametric-model-1.png
 :alt: chained process

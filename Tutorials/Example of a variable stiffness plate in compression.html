@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Example of a variable stiffness plate in compression &#8212; dapta docs</title>
+    <title>7. Example of a variable stiffness plate in compression &#8212; dapta docs</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -56,8 +56,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Using OpenVSP for aircraft performance analysis" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html" />
-    <link rel="prev" title="Working with spreadsheets" href="Working%20with%20spreadsheets.html" />
+    <link rel="next" title="8. Using OpenVSP for aircraft performance analysis" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html" />
+    <link rel="prev" title="6. Working with spreadsheets" href="Working%20with%20spreadsheets.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -133,42 +133,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20component%20analysis.html">
-   Simple component analysis
+   1. Simple component analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20optimisation%20problem.html">
-   Simple optimisation problem
+   2. Simple optimisation problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Chaining%20component%20analyses.html">
-   Chaining component analyses
+   3. Chaining component analyses
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20parametric%20studies.html">
-   Automating the composite wing model parametric study
+   4. Automating the composite wing model parametric study
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20design%20optimisations.html">
-   Automating the design optimisation of the composite wing model
+   5. Automating the design optimisation of the composite wing model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Working%20with%20spreadsheets.html">
-   Working with spreadsheets
+   6. Working with spreadsheets
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Example of a variable stiffness plate in compression
+   7. Example of a variable stiffness plate in compression
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
-   Using OpenVSP for aircraft performance analysis
+   8. Using OpenVSP for aircraft performance analysis
   </a>
  </li>
 </ul>
@@ -377,37 +377,37 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-overview">
-   Model overview
+   7.1. Model overview
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#variable-stiffness-rts-composites">
-     Variable stiffness RTS composites
+     7.1.1. Variable stiffness RTS composites
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#modelling-approach-in-calculix">
-     Modelling approach in Calculix
+     7.1.2. Modelling approach in Calculix
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#modelling-the-boundary-conditions">
-       Modelling the boundary conditions
+       7.1.2.1. Modelling the boundary conditions
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#modelling-the-applied-compression-load">
-       Modelling the applied compression load
+       7.1.2.2. Modelling the applied compression load
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#defining-the-design-variables">
-       Defining the design variables
+       7.1.2.3. Defining the design variables
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#choosing-the-element-type">
-       Choosing the element type
+       7.1.2.4. Choosing the element type
       </a>
      </li>
     </ul>
@@ -416,47 +416,47 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automating-the-design-optimisation">
-   Automating the design optimisation
+   7.2. Automating the design optimisation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#load-a-workflow-from-file">
-     Load a workflow from file
+     7.2.1. Load a workflow from file
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#update-the-plate-component">
-     Update the plate component
+     7.2.2. Update the plate component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#update-the-driver-component">
-     Update the driver component
+     7.2.3. Update the driver component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#execute-the-workflow">
-     Execute the workflow
+     7.2.4. Execute the workflow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#inspect-results">
-     Inspect results
+     7.2.5. Inspect results
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#run-log">
-       Run log
+       7.2.5.1. Run log
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#plate-component-analysis-outputs">
-       Plate component analysis outputs
+       7.2.5.2. Plate component analysis outputs
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#optimisation-driver-outputs">
-       Optimisation driver outputs
+       7.2.5.3. Optimisation driver outputs
       </a>
      </li>
     </ul>
@@ -465,12 +465,12 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   7.3. Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References
+   7.4. References
   </a>
  </li>
 </ul>
@@ -494,37 +494,37 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#model-overview">
-   Model overview
+   7.1. Model overview
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#variable-stiffness-rts-composites">
-     Variable stiffness RTS composites
+     7.1.1. Variable stiffness RTS composites
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#modelling-approach-in-calculix">
-     Modelling approach in Calculix
+     7.1.2. Modelling approach in Calculix
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#modelling-the-boundary-conditions">
-       Modelling the boundary conditions
+       7.1.2.1. Modelling the boundary conditions
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#modelling-the-applied-compression-load">
-       Modelling the applied compression load
+       7.1.2.2. Modelling the applied compression load
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#defining-the-design-variables">
-       Defining the design variables
+       7.1.2.3. Defining the design variables
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#choosing-the-element-type">
-       Choosing the element type
+       7.1.2.4. Choosing the element type
       </a>
      </li>
     </ul>
@@ -533,47 +533,47 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automating-the-design-optimisation">
-   Automating the design optimisation
+   7.2. Automating the design optimisation
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#load-a-workflow-from-file">
-     Load a workflow from file
+     7.2.1. Load a workflow from file
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#update-the-plate-component">
-     Update the plate component
+     7.2.2. Update the plate component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#update-the-driver-component">
-     Update the driver component
+     7.2.3. Update the driver component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#execute-the-workflow">
-     Execute the workflow
+     7.2.4. Execute the workflow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#inspect-results">
-     Inspect results
+     7.2.5. Inspect results
     </a>
     <ul class="nav section-nav flex-column">
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#run-log">
-       Run log
+       7.2.5.1. Run log
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#plate-component-analysis-outputs">
-       Plate component analysis outputs
+       7.2.5.2. Plate component analysis outputs
       </a>
      </li>
      <li class="toc-h4 nav-item toc-entry">
       <a class="reference internal nav-link" href="#optimisation-driver-outputs">
-       Optimisation driver outputs
+       7.2.5.3. Optimisation driver outputs
       </a>
      </li>
     </ul>
@@ -582,12 +582,12 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   7.3. Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References
+   7.4. References
   </a>
  </li>
 </ul>
@@ -601,17 +601,18 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="example-of-a-variable-stiffness-plate-in-compression">
-<h1>Example of a variable stiffness plate in compression<a class="headerlink" href="#example-of-a-variable-stiffness-plate-in-compression" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">7. </span>Example of a variable stiffness plate in compression<a class="headerlink" href="#example-of-a-variable-stiffness-plate-in-compression" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/7"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric-plate-buckling"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
 <p><strong>Duration: 60 min</strong></p>
 <p>We optimise the design of a variable stiffness RTS composite plate in compression.
 We use CalculiX to model the plate and analyse the buckling behaviour, and OpenMDAO to minimise the mass of the plate, subject to a minimum buckling load constraint.</p>
 <p>This example is based on <a class="reference internal" href="#tutorials-modelling-variable-stiffness-composite-plates-references"><span class="std std-ref">Reference 1</span></a> and results are compared to the reference data showing a good correlation.</p>
-<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric-plate-buckling">Github</a>.</strong></p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-plate-buckling-rts_1.png"><img alt="Buckling of an rts plate - mode 1" class="bg-primary mb-1 align-center" src="../_images/parametric-plate-buckling-rts_1.png" style="width: 500px;" /></a>
 <section id="model-overview">
-<h2>Model overview<a class="headerlink" href="#model-overview" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.1. </span>Model overview<a class="headerlink" href="#model-overview" title="Permalink to this headline">#</a></h2>
 <section id="variable-stiffness-rts-composites">
-<h3>Variable stiffness RTS composites<a class="headerlink" href="#variable-stiffness-rts-composites" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.1.1. </span>Variable stiffness RTS composites<a class="headerlink" href="#variable-stiffness-rts-composites" title="Permalink to this headline">#</a></h3>
 <p>With steered-fibre composites (also called variable-stiffness composites), engineers have the option to change the fibre directions within each ply, as well as stacking plies with different fibre orientations through the laminate thickness.</p>
 <p>The use of steered-fibre composites opens-up the design space and has been shown to lead to lighter, more efficient designs in a number of applications, for example, by steering fibres around holes or cut-outs in complex parts <a class="reference internal" href="#tutorials-modelling-variable-stiffness-composite-plates-references"><span class="std std-ref">[2]</span></a>.
 By steering the fibres, the number of stacked plies and their surface area can be optimised for structural efficiency, which leads to lighter designs.
@@ -623,13 +624,13 @@ This is a key advantage compared to other steering methods, such as ATL, AFP or 
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-plate-buckling-rts_2.png"><img alt="rts composites link thickness and steering angle" class="bg-primary mb-1 align-center" src="../_images/parametric-plate-buckling-rts_2.png" style="width: 400px;" /></a>
 </section>
 <section id="modelling-approach-in-calculix">
-<h3>Modelling approach in Calculix<a class="headerlink" href="#modelling-approach-in-calculix" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.1.2. </span>Modelling approach in Calculix<a class="headerlink" href="#modelling-approach-in-calculix" title="Permalink to this headline">#</a></h3>
 <p>Our objective is to optimise an RTS composite plate design for minimum mass, subject to a minimum buckling load constraint and to compare our results with data from <a class="reference internal" href="#tutorials-modelling-variable-stiffness-composite-plates-references"><span class="std std-ref">Reference 1</span></a>.
 We reduce the size of the optimisation problem compared to Reference 1 by using a fixed composite ply stacking sequence and only optimising the outer RTS ply steering angles.</p>
 <p>We create a parametric Calculix finite element model of the plate to perform a linear eigenvalue buckling analysis.
 This type of analysis can be used to estimate the critical (bifurcation) loads of “stiff” structures.</p>
 <section id="modelling-the-boundary-conditions">
-<h4>Modelling the boundary conditions<a class="headerlink" href="#modelling-the-boundary-conditions" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.1.2.1. </span>Modelling the boundary conditions<a class="headerlink" href="#modelling-the-boundary-conditions" title="Permalink to this headline">#</a></h4>
 <p>The rectangular plate (250x750mm) described in the reference is simply supported on all edges and loaded in the x-direction as shown below.
 In the reference, the analytical boundary conditions are applied directly at the laminate neutral plane, the location of which is a function of the laminate properties.
 There is normally no requirement for element nodes to coincide with the laminate neutral plane.
@@ -645,7 +646,7 @@ However, the plate’s stiffness distributions here are not necessarily symmetri
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-plate-buckling-rts_4.png"><img alt="new boundary conditions" class="bg-primary mb-1 align-center" src="../_images/parametric-plate-buckling-rts_4.png" style="width: 400px;" /></a>
 </section>
 <section id="modelling-the-applied-compression-load">
-<h4>Modelling the applied compression load<a class="headerlink" href="#modelling-the-applied-compression-load" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.1.2.2. </span>Modelling the applied compression load<a class="headerlink" href="#modelling-the-applied-compression-load" title="Permalink to this headline">#</a></h4>
 <p>The compression load (750kN) shown in the second figure is the target load below which the panel should not buckle.
 The compression load is applied to the model via a kinematic coupling (using the *KINEMATIC keyword), which distributes the load to the edge nodes and ensures that the edge remains straight.
 A second kinematic coupling is applied to the top edge of the plate to keep it straight, whilst allowing nodes to slide in the x and y directions.</p>
@@ -656,7 +657,7 @@ This ensures that the compression load applied to the model is always lower than
 </div>
 </section>
 <section id="defining-the-design-variables">
-<h4>Defining the design variables<a class="headerlink" href="#defining-the-design-variables" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.1.2.3. </span>Defining the design variables<a class="headerlink" href="#defining-the-design-variables" title="Permalink to this headline">#</a></h4>
 <p>The design variables for the RTS panel are the outer ply shearing angles T0 and T1, which are defined at 7 equally spaced control points in the 90 degree ply reference direction (model y-direction) as shown in the next figure.
 The location of the control points is also a variable in the component parameters, but we will not change these positions in this example.</p>
 <p>For example, by defining angles of 0 and 69 degrees at T0 and T1 respectively, we can now model the fibre paths shown below in green and orange for the +/- RTS plies.
@@ -666,16 +667,16 @@ Note that the plate lower surface is flat, so that the thickness variation shown
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-plate-buckling-rts_5_2.png"><img alt="thickness distribution" class="bg-primary mb-1 align-center" src="../_images/parametric-plate-buckling-rts_5_2.png" style="width: 350px;" /></a>
 </section>
 <section id="choosing-the-element-type">
-<h4>Choosing the element type<a class="headerlink" href="#choosing-the-element-type" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.1.2.4. </span>Choosing the element type<a class="headerlink" href="#choosing-the-element-type" title="Permalink to this headline">#</a></h4>
 <p>We choose to model the plate directly with solid C3D20R elements, as the alternative of using S8R shell elements with varying thicknesses in CalculiX would introduce undesired rigid body constraints at element interfaces <a class="reference internal" href="#tutorials-modelling-variable-stiffness-composite-plates-references"><span class="std std-ref">[3]</span></a>.
 To reduce the number of elements through the thickness of the plate, we also choose to calculate homogenised material properties for +/- plies, so that the optimal 28-ply RTS laminate design <span class="math notranslate nohighlight">\([(90 \pm \langle 0|69 \rangle)_4 / 90 \pm \langle 0|67 \rangle / \pm 80 / 90_2]_s\)</span>  from Reference 1 can be approximated with only 3 element layers consisting of the following sub-laminates: <span class="math notranslate nohighlight">\([(90 \pm \langle 0|69 \rangle)_5]\)</span>, <span class="math notranslate nohighlight">\([90_8]\)</span> and <span class="math notranslate nohighlight">\([(90 \pm \langle 0|69 \rangle)_5]\)</span>.</p>
 </section>
 </section>
 </section>
 <section id="automating-the-design-optimisation">
-<h2>Automating the design optimisation<a class="headerlink" href="#automating-the-design-optimisation" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.2. </span>Automating the design optimisation<a class="headerlink" href="#automating-the-design-optimisation" title="Permalink to this headline">#</a></h2>
 <section id="load-a-workflow-from-file">
-<h3>Load a workflow from file<a class="headerlink" href="#load-a-workflow-from-file" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.1. </span>Load a workflow from file<a class="headerlink" href="#load-a-workflow-from-file" title="Permalink to this headline">#</a></h3>
 <p>Copy the JSON object below into a text editor and save it locally, then select <code class="docutils literal notranslate"><span class="pre">Open</span></code> to load it.
 Two components should appear in the workspace.
 Since the second component is a driver we do not define any connections between components in this workflow.</p>
@@ -1036,7 +1037,7 @@ dapta_input.json<div class="sd-summary-down docutils">
 To fully define them, we need to upload all the components’ <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compute.py</span></code>, <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> and user input files, as described in the next sections.</p>
 </section>
 <section id="update-the-plate-component">
-<h3>Update the plate component<a class="headerlink" href="#update-the-plate-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.2. </span>Update the plate component<a class="headerlink" href="#update-the-plate-component" title="Permalink to this headline">#</a></h3>
 <p>The parametric plate component performs 3 main tasks:</p>
 <ol class="simple">
 <li><p>It creates a set of analysis input files from the component parameters and design variable inputs;</p></li>
@@ -1058,8 +1059,8 @@ The other parameters, inputs and outputs should have been pre-populated by loadi
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="caba20ff-d7fe-4409-8837-b0ef35d0e1af" name="c3f7b764-0249-4e66-9451-f9232f4d7172" type="radio">
-</input><label class="sd-tab-label" for="caba20ff-d7fe-4409-8837-b0ef35d0e1af">
+<input checked="checked" id="b8fead5e-7fd7-42d4-8540-4191a7cb13f6" name="acc26665-a1db-407b-80a3-41b99faa4875" type="radio">
+</input><label class="sd-tab-label" for="b8fead5e-7fd7-42d4-8540-4191a7cb13f6">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1082,8 +1083,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="2c068fcc-31e5-48ca-b3a8-0479fdda83f3" name="c3f7b764-0249-4e66-9451-f9232f4d7172" type="radio">
-</input><label class="sd-tab-label" for="2c068fcc-31e5-48ca-b3a8-0479fdda83f3">
+<input id="5a24d4ad-3488-4aff-832e-318f5f3797a6" name="acc26665-a1db-407b-80a3-41b99faa4875" type="radio">
+</input><label class="sd-tab-label" for="5a24d4ad-3488-4aff-832e-318f5f3797a6">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Create a 3D element mesh for the RTS panel buckling analysis. &quot;&quot;&quot;</span>
 
@@ -2306,15 +2307,15 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="3bd472c7-95c5-4c79-b202-cdaff3cc54d4" name="c3f7b764-0249-4e66-9451-f9232f4d7172" type="radio">
-</input><label class="sd-tab-label" for="3bd472c7-95c5-4c79-b202-cdaff3cc54d4">
+<input id="c6b2c653-e193-44e7-b74c-9ea4f7bbe6b4" name="acc26665-a1db-407b-80a3-41b99faa4875" type="radio">
+</input><label class="sd-tab-label" for="c6b2c653-e193-44e7-b74c-9ea4f7bbe6b4">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 </pre></div>
 </div>
 </div>
-<input id="a641d0c1-c27d-497f-9dd1-59b078cc826f" name="c3f7b764-0249-4e66-9451-f9232f4d7172" type="radio">
-</input><label class="sd-tab-label" for="a641d0c1-c27d-497f-9dd1-59b078cc826f">
+<input id="da5b65e1-c8f8-4c0b-9cc7-a906254b235d" name="acc26665-a1db-407b-80a3-41b99faa4875" type="radio">
+</input><label class="sd-tab-label" for="da5b65e1-c8f8-4c0b-9cc7-a906254b235d">
 ccx_compression_buckle.inp</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="n">HEADING</span>
 <span class="n">Model</span><span class="p">:</span> <span class="n">Unsuported</span> <span class="n">composite</span> <span class="n">box</span> <span class="n">normal</span> <span class="n">modes</span>
@@ -2346,7 +2347,7 @@ ccx_compression_buckle.inp</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="update-the-driver-component">
-<h3>Update the driver component<a class="headerlink" href="#update-the-driver-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.3. </span>Update the driver component<a class="headerlink" href="#update-the-driver-component" title="Permalink to this headline">#</a></h3>
 <p>The driver component is identical to the OpenMDAO optimisation component used in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example, except for the driver parameters, which have been adjusted for the plate optimisation problem:</p>
 <ul class="simple">
 <li><p>The “input_variables” and “output_variables” parameters set the optimisation variables, objective and constraint functions.</p></li>
@@ -2363,8 +2364,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="ce381cad-3902-47d6-b0ca-bbd9dbe71fd1" name="ea4bcc87-194a-4ead-8a17-db3a8cc86b68" type="radio">
-</input><label class="sd-tab-label" for="ce381cad-3902-47d6-b0ca-bbd9dbe71fd1">
+<input checked="checked" id="2d8e58cf-8e97-48a3-8712-0c3fbbcca273" name="5f0f327d-4a0f-4421-84c9-6ccfa748dd52" type="radio">
+</input><label class="sd-tab-label" for="2d8e58cf-8e97-48a3-8712-0c3fbbcca273">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -2391,8 +2392,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="d0d9012d-2205-4dd9-aac8-2474611fe869" name="ea4bcc87-194a-4ead-8a17-db3a8cc86b68" type="radio">
-</input><label class="sd-tab-label" for="d0d9012d-2205-4dd9-aac8-2474611fe869">
+<input id="ca6ee60b-ea8f-4966-8eaa-c6f4333ffa0f" name="5f0f327d-4a0f-4421-84c9-6ccfa748dd52" type="radio">
+</input><label class="sd-tab-label" for="ca6ee60b-ea8f-4966-8eaa-c6f4333ffa0f">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -2993,19 +2994,19 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="cf6a359c-68a5-43da-86f4-089e243bc4c4" name="ea4bcc87-194a-4ead-8a17-db3a8cc86b68" type="radio">
-</input><label class="sd-tab-label" for="cf6a359c-68a5-43da-86f4-089e243bc4c4">
+<input id="f22a7055-ed1a-4fab-aa35-37c96ff8b00a" name="5f0f327d-4a0f-4421-84c9-6ccfa748dd52" type="radio">
+</input><label class="sd-tab-label" for="f22a7055-ed1a-4fab-aa35-37c96ff8b00a">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
-openmdao == 3.16.0
-matplotlib == 3.5.2
-fluids == 1.0.22
-pandas == 1.4.4
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
+openmdao==3.16.0
+matplotlib==3.7.0
+fluids==1.0.22
+pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="55963725-bb37-4b22-81ac-abf2fcf9c992" name="ea4bcc87-194a-4ead-8a17-db3a8cc86b68" type="radio">
-</input><label class="sd-tab-label" for="55963725-bb37-4b22-81ac-abf2fcf9c992">
+<input id="98fe6285-9f7a-4706-8764-e7b1f6063e00" name="5f0f327d-4a0f-4421-84c9-6ccfa748dd52" type="radio">
+</input><label class="sd-tab-label" for="98fe6285-9f7a-4706-8764-e7b1f6063e00">
 om_component.py</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -3227,20 +3228,20 @@ om_component.py</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="execute-the-workflow">
-<h3>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.4. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h3>
 <p>We can now execute the design optimisation by selecting the play symbol ▶ in the Run controls interface.</p>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete after approximately 57 iterations of the parametric-plate-buckling component (1 iteration of the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component).
 Since each component execution takes just under a minute to complete (of which ~40s are allocated to the actual CalculiX CrunchiX finite element analysis), the design optimisation task should complete within 50min.</p>
 </section>
 <section id="inspect-results">
-<h3>Inspect results<a class="headerlink" href="#inspect-results" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">7.2.5. </span>Inspect results<a class="headerlink" href="#inspect-results" title="Permalink to this headline">#</a></h3>
 <section id="run-log">
-<h4>Run log<a class="headerlink" href="#run-log" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.2.5.1. </span>Run log<a class="headerlink" href="#run-log" title="Permalink to this headline">#</a></h4>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.
 The “run_output” entry (at the end of the log) should state that the “OpenMDAO compute completed”.</p>
 </section>
 <section id="plate-component-analysis-outputs">
-<h4>Plate component analysis outputs<a class="headerlink" href="#plate-component-analysis-outputs" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.2.5.2. </span>Plate component analysis outputs<a class="headerlink" href="#plate-component-analysis-outputs" title="Permalink to this headline">#</a></h4>
 <p>Next, close the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log and select the <code class="docutils literal notranslate"><span class="pre">parametric-plate-buckling</span></code> component.
 Then select the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and click on <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.</p>
 <p>The zip file includes an ‘outputs’ folder that contains the outputs of the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> script and the CalculiX CrunchiX input and output files.</p>
@@ -3335,7 +3336,7 @@ ccx_compression_buckle.dat<div class="sd-summary-down docutils">
 </div>
 </details></section>
 <section id="optimisation-driver-outputs">
-<h4>Optimisation driver outputs<a class="headerlink" href="#optimisation-driver-outputs" title="Permalink to this headline">#</a></h4>
+<h4><span class="section-number">7.2.5.3. </span>Optimisation driver outputs<a class="headerlink" href="#optimisation-driver-outputs" title="Permalink to this headline">#</a></h4>
 <p>Next, close the plate component and select the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component.
 Then select the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and click on <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.</p>
 <p>The optimisation study outputs are summarised at the end of the ‘run_driver.log’ file in the ‘outputs’ folder, as shown below.
@@ -3404,7 +3405,7 @@ We can also inspect the convergence history plots of the design variables, objec
 </section>
 </section>
 <section id="clean-up">
-<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">7.3. </span>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
 <p>Delete your session by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface.
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
@@ -3413,7 +3414,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
 </div>
 </section>
 <section id="references">
-<span id="tutorials-modelling-variable-stiffness-composite-plates-references"></span><h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<span id="tutorials-modelling-variable-stiffness-composite-plates-references"></span><h2><span class="section-number">7.4. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p>Rainer M. Groh and Paul Weaver. “Mass Optimisation of Variable Angle Tow, Variable Thickness Panels with Static Failure and Buckling Constraints,” AIAA 2015-0452. 56th AIAA/ASCE/AHS/ASC Structures, Structural Dynamics, and Materials Conference. January 2015, url: <a class="reference external" href="https://doi.org/10.2514/6.2015-0452">https://doi.org/10.2514/6.2015-0452</a></p></li>
 <li><p>C.S. Lopes, Z. Gürdal, P.P. Camanho, “Tailoring for strength of composite steered-fibre panels with cutouts”, Composites Part A: Applied Science and Manufacturing, Volume 41, Issue 12, 2010, Pages 1760-176, url: <a class="reference external" href="https://doi.org/10.1016/j.compositesa.2010.08.011">https://doi.org/10.1016/j.compositesa.2010.08.011</a></p></li>
@@ -3453,13 +3454,13 @@ It may take a minute or so for the Cloud session to be reset.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Working with spreadsheets</p>
+            <p class="prev-next-title"><span class="section-number">6. </span>Working with spreadsheets</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Using OpenVSP for aircraft performance analysis</p>
+        <p class="prev-next-title"><span class="section-number">8. </span>Using OpenVSP for aircraft performance analysis</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

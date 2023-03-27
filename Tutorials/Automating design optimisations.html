@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Automating the design optimisation of the composite wing model &#8212; dapta docs</title>
+    <title>5. Automating the design optimisation of the composite wing model &#8212; dapta docs</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Working with spreadsheets" href="Working%20with%20spreadsheets.html" />
-    <link rel="prev" title="Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
+    <link rel="next" title="6. Working with spreadsheets" href="Working%20with%20spreadsheets.html" />
+    <link rel="prev" title="4. Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -131,42 +131,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20component%20analysis.html">
-   Simple component analysis
+   1. Simple component analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20optimisation%20problem.html">
-   Simple optimisation problem
+   2. Simple optimisation problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Chaining%20component%20analyses.html">
-   Chaining component analyses
+   3. Chaining component analyses
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20parametric%20studies.html">
-   Automating the composite wing model parametric study
+   4. Automating the composite wing model parametric study
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Automating the design optimisation of the composite wing model
+   5. Automating the design optimisation of the composite wing model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Working%20with%20spreadsheets.html">
-   Working with spreadsheets
+   6. Working with spreadsheets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
-   Example of a variable stiffness plate in compression
+   7. Example of a variable stiffness plate in compression
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
-   Using OpenVSP for aircraft performance analysis
+   8. Using OpenVSP for aircraft performance analysis
   </a>
  </li>
 </ul>
@@ -375,44 +375,44 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#opening-a-saved-session">
-   Opening a saved session
+   5.1. Opening a saved session
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automating-a-design-optimisation-study">
-   Automating a design optimisation study
+   5.2. Automating a design optimisation study
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-driver-component">
-     The driver component
+     5.2.1. The driver component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#add-design-variables-and-connections">
-     Add design variables and connections
+     5.2.2. Add design variables and connections
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#execute-the-workflow">
-     Execute the workflow
+     5.2.3. Execute the workflow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#inspect-the-outputs">
-     Inspect the outputs
+     5.2.4. Inspect the outputs
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   5.3. Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References
+   5.4. References
   </a>
  </li>
 </ul>
@@ -436,44 +436,44 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#opening-a-saved-session">
-   Opening a saved session
+   5.1. Opening a saved session
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#automating-a-design-optimisation-study">
-   Automating a design optimisation study
+   5.2. Automating a design optimisation study
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#the-driver-component">
-     The driver component
+     5.2.1. The driver component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#add-design-variables-and-connections">
-     Add design variables and connections
+     5.2.2. Add design variables and connections
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#execute-the-workflow">
-     Execute the workflow
+     5.2.3. Execute the workflow
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#inspect-the-outputs">
-     Inspect the outputs
+     5.2.4. Inspect the outputs
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   5.3. Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References
+   5.4. References
   </a>
  </li>
 </ul>
@@ -487,24 +487,25 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="automating-the-design-optimisation-of-the-composite-wing-model">
-<h1>Automating the design optimisation of the composite wing model<a class="headerlink" href="#automating-the-design-optimisation-of-the-composite-wing-model" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">5. </span>Automating the design optimisation of the composite wing model<a class="headerlink" href="#automating-the-design-optimisation-of-the-composite-wing-model" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/5"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
 <p><strong>Duration: 15 min</strong></p>
 <p>Driver components can be used to automate complex analysis workflows.</p>
 <p>In the previous example, we performed a parametric study on a single variable.
 In this tutorial we go one step further by re-using the OpenMDAO optimisation component from the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example to optimise the wing design for minimum wing incidence at the tip.</p>
-<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model">Github</a>.</strong></p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-parametric-model-1.png"><img alt="chained process with optimiser" class="bg-primary mb-1 align-center" src="../_images/open-mdao-parametric-model-1.png" style="width: 700px;" /></a>
 <section id="opening-a-saved-session">
-<h2>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
 <p>Follow the process outlined in the previous example for <a class="reference internal" href="Automating%20parametric%20studies.html#tutorials-automating-parametric-studies-opening-a-saved-session"><span class="std std-ref">Opening a saved session</span></a>.</p>
 </section>
 <section id="automating-a-design-optimisation-study">
-<h2>Automating a design optimisation study<a class="headerlink" href="#automating-a-design-optimisation-study" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.2. </span>Automating a design optimisation study<a class="headerlink" href="#automating-a-design-optimisation-study" title="Permalink to this headline">#</a></h2>
 <p>The aim is to determine which composite fibre angle minimises the deflected wing incidence (“Ry”), whilst satisfying the design constraint on the maximum allowable vertical deflection (“Uz”) of 6 cm maximum.</p>
 <p>To answer this question, we can perform a design optimisation study.
 This example is based on the pure python implementation in <a class="reference internal" href="#tutorials-automating-design-optimisations-references"><span class="std std-ref">Reference 1</span></a>.</p>
 <section id="the-driver-component">
-<h3>The driver component<a class="headerlink" href="#the-driver-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.1. </span>The driver component<a class="headerlink" href="#the-driver-component" title="Permalink to this headline">#</a></h3>
 <p>As in the previous example, the variable of interest is the <code class="docutils literal notranslate"><span class="pre">calculix-fea</span></code> input variable <code class="docutils literal notranslate"><span class="pre">fibre_rotation_angle.ORI_0.1</span></code>.
 The driver component is identical to the OpenMDAO optimisation component used in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example, except for the driver parameters, which have been adjusted for the wing optimisation problem:</p>
 <ul class="simple">
@@ -525,8 +526,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c6d32839-5603-4fa2-9730-1d4c741d7919" name="bbb22795-d668-47a7-b3db-b3ab5ae15c47" type="radio">
-</input><label class="sd-tab-label" for="c6d32839-5603-4fa2-9730-1d4c741d7919">
+<input checked="checked" id="62266564-3553-4d52-aa9e-fc356a82cb88" name="441a59b2-cf6f-482b-b2af-c97466a35ea1" type="radio">
+</input><label class="sd-tab-label" for="62266564-3553-4d52-aa9e-fc356a82cb88">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -553,8 +554,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e6425f31-ca9c-43e3-93e7-c268acbc5010" name="bbb22795-d668-47a7-b3db-b3ab5ae15c47" type="radio">
-</input><label class="sd-tab-label" for="e6425f31-ca9c-43e3-93e7-c268acbc5010">
+<input id="7ef244e9-257f-4811-8195-9b91b2e2290e" name="441a59b2-cf6f-482b-b2af-c97466a35ea1" type="radio">
+</input><label class="sd-tab-label" for="7ef244e9-257f-4811-8195-9b91b2e2290e">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1155,19 +1156,19 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="847cfc60-dc35-4f83-976c-af3bd0215749" name="bbb22795-d668-47a7-b3db-b3ab5ae15c47" type="radio">
-</input><label class="sd-tab-label" for="847cfc60-dc35-4f83-976c-af3bd0215749">
+<input id="3f6fbfe7-b7c9-4a44-8d9c-eeb69e63e4c3" name="441a59b2-cf6f-482b-b2af-c97466a35ea1" type="radio">
+</input><label class="sd-tab-label" for="3f6fbfe7-b7c9-4a44-8d9c-eeb69e63e4c3">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
-openmdao == 3.16.0
-matplotlib == 3.5.2
-fluids == 1.0.22
-pandas == 1.4.4
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
+openmdao==3.16.0
+matplotlib==3.7.0
+fluids==1.0.22
+pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="748cc471-4a4b-4185-8531-69bc55943b93" name="bbb22795-d668-47a7-b3db-b3ab5ae15c47" type="radio">
-</input><label class="sd-tab-label" for="748cc471-4a4b-4185-8531-69bc55943b93">
+<input id="da7c4592-a238-4100-9841-6da0bbc0ef74" name="441a59b2-cf6f-482b-b2af-c97466a35ea1" type="radio">
+</input><label class="sd-tab-label" for="da7c4592-a238-4100-9841-6da0bbc0ef74">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1183,6 +1184,20 @@ parameters</label><div class="sd-tab-content docutils">
 <span class="w">  </span><span class="p">],</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;approx_totals&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;fd_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"></span>
+<span class="w">  </span><span class="nt">&quot;ExplicitComponents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;parametric-model&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;calculix-fea&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="p">},</span><span class="w"></span>
+<span class="w">    </span><span class="p">{</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span><span class="w"></span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
+<span class="w">    </span><span class="p">}</span><span class="w"></span>
+<span class="w">  </span><span class="p">],</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;input_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
 <span class="w">    </span><span class="p">{</span><span class="w"></span>
 <span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;calculix-fea&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1219,8 +1234,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="45d5ba21-2a70-4ad6-8a76-7cfa3cd24f9d" name="bbb22795-d668-47a7-b3db-b3ab5ae15c47" type="radio">
-</input><label class="sd-tab-label" for="45d5ba21-2a70-4ad6-8a76-7cfa3cd24f9d">
+<input id="69253099-6060-46b1-a453-498a2cc271a6" name="441a59b2-cf6f-482b-b2af-c97466a35ea1" type="radio">
+</input><label class="sd-tab-label" for="69253099-6060-46b1-a453-498a2cc271a6">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1442,15 +1457,15 @@ om_component</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="add-design-variables-and-connections">
-<h3>Add design variables and connections<a class="headerlink" href="#add-design-variables-and-connections" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.2. </span>Add design variables and connections<a class="headerlink" href="#add-design-variables-and-connections" title="Permalink to this headline">#</a></h3>
 <p>Despite all the components seeming valid, we would encounter errors if we tried to launch the Run now.</p>
 <p>By inspecting the driver compute function, we can see that OpenMDAO is only aware of design variable inputs, outputs and connections (<code class="docutils literal notranslate"><span class="pre">connection[&quot;type&quot;]</span> <span class="pre">==</span> <span class="pre">&quot;design&quot;</span></code>).
 The design variable connections in particular are used by OpenMDAO to determine the order of component execution.</p>
 <p>It is necessary to define the following artificial design variables and connections before we can launch the Run.</p>
 <p>Select the <strong>parametric-model</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="70acaab2-307f-4e97-99bf-bb7ca2c2bcbe" name="4fc1168b-793e-4a64-b9e7-2f5a7e1c4aa9" type="radio">
-</input><label class="sd-tab-label" for="70acaab2-307f-4e97-99bf-bb7ca2c2bcbe">
+<input checked="checked" id="3b12e9be-2438-49fe-9af4-f9254fa5b543" name="93017acb-6a21-40a1-a3dd-fcda0604c255" type="radio">
+</input><label class="sd-tab-label" for="3b12e9be-2438-49fe-9af4-f9254fa5b543">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;input_0&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
@@ -1458,8 +1473,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="fac02ceb-985d-41c0-aba5-58384af16be6" name="4fc1168b-793e-4a64-b9e7-2f5a7e1c4aa9" type="radio">
-</input><label class="sd-tab-label" for="fac02ceb-985d-41c0-aba5-58384af16be6">
+<input id="73516437-350e-4fc8-9c8c-949a07b8d47d" name="93017acb-6a21-40a1-a3dd-fcda0604c255" type="radio">
+</input><label class="sd-tab-label" for="73516437-350e-4fc8-9c8c-949a07b8d47d">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1471,8 +1486,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>calculix-fea</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="51954bea-b1b0-4298-abf3-f97598c15331" name="e105336c-a5b0-48ab-8674-2f2af5007825" type="radio">
-</input><label class="sd-tab-label" for="51954bea-b1b0-4298-abf3-f97598c15331">
+<input checked="checked" id="29b05585-420e-4641-8b90-1459a15ef8df" name="98349751-38fd-4491-a90e-513b87766222" type="radio">
+</input><label class="sd-tab-label" for="29b05585-420e-4641-8b90-1459a15ef8df">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1482,8 +1497,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a70094a4-2e50-4551-9e75-205ef86b04b0" name="e105336c-a5b0-48ab-8674-2f2af5007825" type="radio">
-</input><label class="sd-tab-label" for="a70094a4-2e50-4551-9e75-205ef86b04b0">
+<input id="4249c635-93ef-4549-97d4-ebd7d95285d4" name="98349751-38fd-4491-a90e-513b87766222" type="radio">
+</input><label class="sd-tab-label" for="4249c635-93ef-4549-97d4-ebd7d95285d4">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1497,8 +1512,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>fea-results-processor</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab only:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c865114b-6059-48d0-bc28-45308636d3bc" name="9d7cdddd-8b30-4a68-a481-928bacd5d996" type="radio">
-</input><label class="sd-tab-label" for="c865114b-6059-48d0-bc28-45308636d3bc">
+<input checked="checked" id="99ba09f0-b1b1-45ea-8590-a5f0c6da5784" name="093feb7e-29b0-48ce-9a1f-78a880235711" type="radio">
+</input><label class="sd-tab-label" for="99ba09f0-b1b1-45ea-8590-a5f0c6da5784">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1517,7 +1532,7 @@ Inputs</label><div class="sd-tab-content docutils">
 </ol>
 </section>
 <section id="execute-the-workflow">
-<h3>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.3. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h3>
 <p>We can now execute the design optimisation by selecting the play symbol ▶ in the Run controls interface.</p>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete after 23 iterations of the chained components (1 iteration of the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component).</p>
 <div class="admonition note">
@@ -1526,7 +1541,7 @@ Inputs</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="inspect-the-outputs">
-<h3>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.4. </span>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h3>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.
 The “run_output” entry (at the end of the log) should state that the “OpenMDAO compute completed”.</p>
 <p>Next, close the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log and select the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component.
@@ -1572,7 +1587,7 @@ We can also inspect the convergence history plots of the design variable, object
 </section>
 </section>
 <section id="clean-up">
-<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.3. </span>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
 <p>Delete your session by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface.
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
@@ -1581,7 +1596,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
 </div>
 </section>
 <section id="references">
-<span id="tutorials-automating-design-optimisations-references"></span><h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<span id="tutorials-automating-design-optimisations-references"></span><h2><span class="section-number">5.4. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p><a class="reference external" href="https://www.dapta.com/design-optimisation-in-practice-with-python-openmdao-and-scipy/">Design optimisation in practice with Python, OpenMDAO and Scipy</a></p></li>
 </ol>
@@ -1619,13 +1634,13 @@ It may take a minute or so for the Cloud session to be reset.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Automating the composite wing model parametric study</p>
+            <p class="prev-next-title"><span class="section-number">4. </span>Automating the composite wing model parametric study</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Working%20with%20spreadsheets.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Working with spreadsheets</p>
+        <p class="prev-next-title"><span class="section-number">6. </span>Working with spreadsheets</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

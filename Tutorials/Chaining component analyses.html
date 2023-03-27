@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Chaining component analyses &#8212; dapta docs</title>
+    <title>3. Chaining component analyses &#8212; dapta docs</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
-    <link rel="prev" title="Simple optimisation problem" href="Simple%20optimisation%20problem.html" />
+    <link rel="next" title="4. Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
+    <link rel="prev" title="2. Simple optimisation problem" href="Simple%20optimisation%20problem.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -131,42 +131,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20component%20analysis.html">
-   Simple component analysis
+   1. Simple component analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20optimisation%20problem.html">
-   Simple optimisation problem
+   2. Simple optimisation problem
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Chaining component analyses
+   3. Chaining component analyses
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20parametric%20studies.html">
-   Automating the composite wing model parametric study
+   4. Automating the composite wing model parametric study
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20design%20optimisations.html">
-   Automating the design optimisation of the composite wing model
+   5. Automating the design optimisation of the composite wing model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Working%20with%20spreadsheets.html">
-   Working with spreadsheets
+   6. Working with spreadsheets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
-   Example of a variable stiffness plate in compression
+   7. Example of a variable stiffness plate in compression
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
-   Using OpenVSP for aircraft performance analysis
+   8. Using OpenVSP for aircraft performance analysis
   </a>
  </li>
 </ul>
@@ -375,61 +375,61 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-components">
-   Create the Components
+   3.1. Create the Components
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parametric-model-component">
-     Parametric-model component
+     3.1.1. Parametric-model component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#calculix-fea-component">
-     Calculix-fea component
+     3.1.2. Calculix-fea component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#results-processor-component">
-     Results processor component
+     3.1.3. Results processor component
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-connections">
-   Create the Connections
+   3.2. Create the Connections
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#first-connection">
-     First connection
+     3.2.1. First connection
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#more-connections">
-     More connections
+     3.2.2. More connections
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#execute-the-workflow">
-   Execute the workflow
+   3.3. Execute the workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inspect-the-outputs">
-   Inspect the outputs
+   3.4. Inspect the outputs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   3.5. Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References
+   3.6. References
   </a>
  </li>
 </ul>
@@ -453,61 +453,61 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-components">
-   Create the Components
+   3.1. Create the Components
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#parametric-model-component">
-     Parametric-model component
+     3.1.1. Parametric-model component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#calculix-fea-component">
-     Calculix-fea component
+     3.1.2. Calculix-fea component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#results-processor-component">
-     Results processor component
+     3.1.3. Results processor component
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-connections">
-   Create the Connections
+   3.2. Create the Connections
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#first-connection">
-     First connection
+     3.2.1. First connection
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#more-connections">
-     More connections
+     3.2.2. More connections
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#execute-the-workflow">
-   Execute the workflow
+   3.3. Execute the workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inspect-the-outputs">
-   Inspect the outputs
+   3.4. Inspect the outputs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   3.5. Clean-up
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#references">
-   References
+   3.6. References
   </a>
  </li>
 </ul>
@@ -521,14 +521,15 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="chaining-component-analyses">
-<h1>Chaining component analyses<a class="headerlink" href="#chaining-component-analyses" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3. </span>Chaining component analyses<a class="headerlink" href="#chaining-component-analyses" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/3"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
 <p><strong>Duration: 45 min</strong></p>
 <p>In this tutorial we explore the usage of <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a>s to chain the execution of <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
 The example also introduces a finite element analysis specific ‘calculix-fea-comp’ component API.</p>
-<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model">Github</a>.</strong></p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-model-1.png"><img alt="chained process" class="bg-primary mb-1 align-center" src="../_images/parametric-model-1.png" style="width: 700px;" /></a>
 <section id="create-the-components">
-<h2>Create the Components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.1. </span>Create the Components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
 <p>This example replicates the chained analyses described in Parts 1 and 2 of the <a class="reference external" href="https://youtube.com/playlist?list=PL3ZV4Vo-Sjze6-DaoPgJcIvU-uAYB7KpZ">Parametric wing model series</a>.
 We make use of python and the open source software <a class="reference external" href="http://www.dhondt.de/">CalculiX GraphiX</a> to create a parametric finite element model of a composite wing subject to a static tip load, which is then analysed using <a class="reference external" href="http://www.dhondt.de/">CalculiX CrunchiX</a>.</p>
 <p>We show how the previously monolithic python code can be split into discrete and potentially re-usable <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
@@ -536,7 +537,7 @@ The details of the python code were previously covered in the videos and associa
 <p>We group the parametric model analysis processes into three distinct <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s as shown in the figure below.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-model-2.png"><img alt="chained-process-components" class="bg-primary mb-1 align-center" src="../_images/parametric-model-2.png" style="width: 700px;" /></a>
 <section id="parametric-model-component">
-<h3>Parametric-model component<a class="headerlink" href="#parametric-model-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.1. </span>Parametric-model component<a class="headerlink" href="#parametric-model-component" title="Permalink to this headline">#</a></h3>
 <p>The parametric-model component defines a parametric three-dimensional wing geometry in python. It also outputs meshing instructions for Calculix GraphiX in the .fdb file format.</p>
 <p>The component Parameters include the span and chord of the wing, as well as the aerofoil wing cross-section, which is defined by uploading a CSV input file with x and y section coordinates.</p>
 <p>Create the component:</p>
@@ -558,8 +559,8 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-parametric-model-files">
-<input checked="checked" id="3de2c4f5-5a37-4cb0-af51-bb37b3284b43" name="32b64a70-8dd2-431d-9851-5d3f448e219a" type="radio">
-</input><label class="sd-tab-label" for="3de2c4f5-5a37-4cb0-af51-bb37b3284b43">
+<input checked="checked" id="edfc9708-c1f7-49f7-9e9b-c7c12e6be441" name="02025b1a-69ca-487d-94d1-1a1ca3f85d34" type="radio">
+</input><label class="sd-tab-label" for="edfc9708-c1f7-49f7-9e9b-c7c12e6be441">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -596,8 +597,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0b9b9d90-34a4-41ae-81f6-08c16798a1a1" name="32b64a70-8dd2-431d-9851-5d3f448e219a" type="radio">
-</input><label class="sd-tab-label" for="0b9b9d90-34a4-41ae-81f6-08c16798a1a1">
+<input id="5c68660f-68d0-4f79-b543-01623dd82d15" name="02025b1a-69ca-487d-94d1-1a1ca3f85d34" type="radio">
+</input><label class="sd-tab-label" for="5c68660f-68d0-4f79-b543-01623dd82d15">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1226,17 +1227,17 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="5f7081d3-c84f-42ee-8e53-278b3c5e5e2a" name="32b64a70-8dd2-431d-9851-5d3f448e219a" type="radio">
-</input><label class="sd-tab-label" for="5f7081d3-c84f-42ee-8e53-278b3c5e5e2a">
+<input id="4a350bab-9677-479b-8b83-1e5823929331" name="02025b1a-69ca-487d-94d1-1a1ca3f85d34" type="radio">
+</input><label class="sd-tab-label" for="4a350bab-9677-479b-8b83-1e5823929331">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
-numpy == 1.21.5
-scipy == 1.7.3
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib==3.7.0
+numpy==1.23.5
+scipy==1.10.0
 </pre></div>
 </div>
 </div>
-<input id="f8f228cd-0f9a-41b6-8001-bc2f9b3a1617" name="32b64a70-8dd2-431d-9851-5d3f448e219a" type="radio">
-</input><label class="sd-tab-label" for="f8f228cd-0f9a-41b6-8001-bc2f9b3a1617">
+<input id="8226b8e5-d70f-4d2e-9dc1-5188c43539ea" name="02025b1a-69ca-487d-94d1-1a1ca3f85d34" type="radio">
+</input><label class="sd-tab-label" for="8226b8e5-d70f-4d2e-9dc1-5188c43539ea">
 naca0012</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># NACA 0012 from http://airfoiltools.com/
   1.000000  0.001260
@@ -1373,8 +1374,8 @@ naca0012</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="eeb08fd8-6dfd-43e3-86dc-cf481606a00d" name="32b64a70-8dd2-431d-9851-5d3f448e219a" type="radio">
-</input><label class="sd-tab-label" for="eeb08fd8-6dfd-43e3-86dc-cf481606a00d">
+<input id="65b27eba-5fb0-4b57-9162-06f79f6d00ab" name="02025b1a-69ca-487d-94d1-1a1ca3f85d34" type="radio">
+</input><label class="sd-tab-label" for="65b27eba-5fb0-4b57-9162-06f79f6d00ab">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;span&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"></span>
@@ -1406,7 +1407,7 @@ parameters</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="calculix-fea-component">
-<h3>Calculix-fea component<a class="headerlink" href="#calculix-fea-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.2. </span>Calculix-fea component<a class="headerlink" href="#calculix-fea-component" title="Permalink to this headline">#</a></h3>
 <p>This component first executes CalculiX GraphiX in batch mode on the .fdb file from the parametric-model component to generate the finite element model mesh file (all.msh).
 Then, the composite material shell section properties are generated in python and written to file (composite_shell.inp), before the finite element analysis (FEA) of the model is executed with CalculiX CrunchiX.</p>
 <p>The component outputs the mesh node deflections at the tip of the wing (FEA output file ‘ccx_static_tip_shear.dat’), as well as the model mesh file and a node set definition file, which will be needed for post-processing of the FEA results in the next component.</p>
@@ -1442,8 +1443,8 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-calculix-fea-files">
-<input checked="checked" id="9b6448ca-1d47-4100-be33-3e407519575a" name="953200aa-c644-4d66-a5b2-a1a22ce3a1a4" type="radio">
-</input><label class="sd-tab-label" for="9b6448ca-1d47-4100-be33-3e407519575a">
+<input checked="checked" id="d331f02e-9e12-4ef6-bb6e-e09a7ac331c0" name="6962c09e-3541-47aa-b7b5-05f6252a2bcc" type="radio">
+</input><label class="sd-tab-label" for="d331f02e-9e12-4ef6-bb6e-e09a7ac331c0">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1479,8 +1480,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="69ac4af7-ca91-4bc2-b1f9-d42495997be0" name="953200aa-c644-4d66-a5b2-a1a22ce3a1a4" type="radio">
-</input><label class="sd-tab-label" for="69ac4af7-ca91-4bc2-b1f9-d42495997be0">
+<input id="aff80302-b1df-493f-8b1a-e4bfcd36eb47" name="6962c09e-3541-47aa-b7b5-05f6252a2bcc" type="radio">
+</input><label class="sd-tab-label" for="aff80302-b1df-493f-8b1a-e4bfcd36eb47">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -1714,17 +1715,17 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="661ec5f7-d35a-45af-95d3-a4b48be18bb0" name="953200aa-c644-4d66-a5b2-a1a22ce3a1a4" type="radio">
-</input><label class="sd-tab-label" for="661ec5f7-d35a-45af-95d3-a4b48be18bb0">
+<input id="d69ff0e6-4db6-4c1c-9a3d-3348ffea5312" name="6962c09e-3541-47aa-b7b5-05f6252a2bcc" type="radio">
+</input><label class="sd-tab-label" for="d69ff0e6-4db6-4c1c-9a3d-3348ffea5312">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib == 3.5.2
-numpy == 1.21.5
-scipy == 1.7.3
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib==3.7.0
+numpy==1.23.5
+scipy==1.10.0
 </pre></div>
 </div>
 </div>
-<input id="6d2671a1-c5f4-4326-81b3-d330b2074243" name="953200aa-c644-4d66-a5b2-a1a22ce3a1a4" type="radio">
-</input><label class="sd-tab-label" for="6d2671a1-c5f4-4326-81b3-d330b2074243">
+<input id="2ac2739e-d324-4989-a29d-2aefd8c665c6" name="6962c09e-3541-47aa-b7b5-05f6252a2bcc" type="radio">
+</input><label class="sd-tab-label" for="2ac2739e-d324-4989-a29d-2aefd8c665c6">
 ccx_static_tip_shear</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*HEADING
 Model: Cantilevered composite box with tip shear
@@ -1758,8 +1759,8 @@ U
 </pre></div>
 </div>
 </div>
-<input id="2d3bcd00-2958-47ab-afaa-e99033e4ba85" name="953200aa-c644-4d66-a5b2-a1a22ce3a1a4" type="radio">
-</input><label class="sd-tab-label" for="2d3bcd00-2958-47ab-afaa-e99033e4ba85">
+<input id="20c73272-72ca-45ff-8dca-13cb1abec78c" name="6962c09e-3541-47aa-b7b5-05f6252a2bcc" type="radio">
+</input><label class="sd-tab-label" for="20c73272-72ca-45ff-8dca-13cb1abec78c">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;analysis_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ccx_static_tip_shear.inp&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1832,7 +1833,7 @@ parameters</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="results-processor-component">
-<h3>Results processor component<a class="headerlink" href="#results-processor-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.1.3. </span>Results processor component<a class="headerlink" href="#results-processor-component" title="Permalink to this headline">#</a></h3>
 <p>The last component in the execution chain reads the FEA analysis outputs at the mesh nodes at the tip of the wing and calculates average wing tip deflections and rotations.
 This data is output as a python dictionary with six entries: the 3 deflections (“U”) in global x, y and z, and the 3 rotations (“R”) about x, y, z.</p>
 <p>Create the component:</p>
@@ -1872,8 +1873,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <p>Remember to save the session data now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 </div>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-results-processor-files">
-<input checked="checked" id="ad55c95e-5166-448f-be91-89623bf747df" name="719b6660-8818-47ca-91d4-db692ffb4d34" type="radio">
-</input><label class="sd-tab-label" for="ad55c95e-5166-448f-be91-89623bf747df">
+<input checked="checked" id="ffcbcafc-385b-4928-9325-88f1fb2c13f6" name="e75920cf-16f6-4cf0-979c-746e13f73b7a" type="radio">
+</input><label class="sd-tab-label" for="ffcbcafc-385b-4928-9325-88f1fb2c13f6">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1942,8 +1943,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="60a489b7-dba4-4f99-b9b6-dbf8f11a42d9" name="719b6660-8818-47ca-91d4-db692ffb4d34" type="radio">
-</input><label class="sd-tab-label" for="60a489b7-dba4-4f99-b9b6-dbf8f11a42d9">
+<input id="892e3fb5-32cd-4e02-9003-b2bbd1526da7" name="e75920cf-16f6-4cf0-979c-746e13f73b7a" type="radio">
+</input><label class="sd-tab-label" for="892e3fb5-32cd-4e02-9003-b2bbd1526da7">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -2163,10 +2164,10 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f6e778e0-1096-4fc0-8d8b-32af7ec5c334" name="719b6660-8818-47ca-91d4-db692ffb4d34" type="radio">
-</input><label class="sd-tab-label" for="f6e778e0-1096-4fc0-8d8b-32af7ec5c334">
+<input id="20ba5c9a-79f8-4dbc-b28d-30f275f9a520" name="e75920cf-16f6-4cf0-979c-746e13f73b7a" type="radio">
+</input><label class="sd-tab-label" for="20ba5c9a-79f8-4dbc-b28d-30f275f9a520">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 </pre></div>
 </div>
 </div>
@@ -2174,10 +2175,10 @@ requirements</label><div class="sd-tab-content docutils">
 </section>
 </section>
 <section id="create-the-connections">
-<h2>Create the Connections<a class="headerlink" href="#create-the-connections" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.2. </span>Create the Connections<a class="headerlink" href="#create-the-connections" title="Permalink to this headline">#</a></h2>
 <p>We can now connect the <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s we created to ensure that outputs and inputs are passed between them as expected. A <a class="reference internal" href="../Reference/Glossary.html#term-Connection"><span class="xref std std-term">Connection</span></a> is defined as a data link from a <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> output handle to another <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> input handle.</p>
 <section id="first-connection">
-<h3>First connection<a class="headerlink" href="#first-connection" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.1. </span>First connection<a class="headerlink" href="#first-connection" title="Permalink to this headline">#</a></h3>
 <p>Create a first connection by selecting the output handle of the parametric-model component and dragging a line to the ‘files.cgx_file’ input handle of the calculix-fea component.
 Hover the mouse pointer over a handle to see the name of the associated input or output data appear below the component.</p>
 <p>By default, a new connection is a ‘Design variable’ type connection (black line), that is not valid for transferring files (see the dashboard Reference section for details).</p>
@@ -2192,7 +2193,7 @@ Indeed, there is no requirement for the input and output data names to match - s
 </div>
 </section>
 <section id="more-connections">
-<h3>More connections<a class="headerlink" href="#more-connections" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.2. </span>More connections<a class="headerlink" href="#more-connections" title="Permalink to this headline">#</a></h3>
 <p>In the same way, create 3 more connections between the calculix-fea component and the fea-results-processor component, linking the handles with matching data names.</p>
 <p>Edit all 3 connections to modify them to ‘implicit’ type data connections, since we are again transferring files and not design variables.</p>
 <p>Check that all 3 components have green tick marks appearing next to the component name to indicate that they are valid.</p>
@@ -2204,14 +2205,14 @@ Indeed, there is no requirement for the input and output data names to match - s
 </section>
 </section>
 <section id="execute-the-workflow">
-<h2>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.3. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
 <p>We can now execute the chained component analysis <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.</p>
 <p>Once the run has started, each component will setup and then execute one at a time.
 The setup order is arbitrary, but the compute functions will always be executed from the ‘Start Node’ to the ‘End Node’ (see dashboard Reference section for details).</p>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete once the fea-results-component compute has completed.</p>
 </section>
 <section id="inspect-the-outputs">
-<h2>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.4. </span>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.</p>
 <p>Scroll down to the “run_output” section to see that this contains the compute function output messages from all three components in the order of execution as shown below.
 The last message contains the wing tip deflection and rotation data as expected.</p>
@@ -2224,7 +2225,7 @@ The last message contains the wing tip deflection and rotation data as expected.
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/parametric-model-3.png"><img alt="run log" class="bg-primary mb-1 align-center" src="../_images/parametric-model-3.png" style="width: 700px;" /></a>
 </section>
 <section id="clean-up">
-<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.5. </span>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
 <p>Delete your session by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface.
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
@@ -2233,7 +2234,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
 </div>
 </section>
 <section id="references">
-<span id="tutorials-chaining-component-analyses-references"></span><h2>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<span id="tutorials-chaining-component-analyses-references"></span><h2><span class="section-number">3.6. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
 <ol class="simple">
 <li><p><a class="reference external" href="https://www.dapta.com/parametric-fem-model-creation-with-python-and-calculix-graphix-cgx/">Parametric FEM model creation with Python and CalculiX GraphiX (cgx)</a></p></li>
 <li><p><a class="reference external" href="https://www.dapta.com/automated-fem-analysis-and-output-processing-with-python-and-calculix-crunchix-ccx/">Automated FEM analysis and output processing with Python and CalculiX CrunchiX (ccx)</a></p></li>
@@ -2272,13 +2273,13 @@ It may take a minute or so for the Cloud session to be reset.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Simple optimisation problem</p>
+            <p class="prev-next-title"><span class="section-number">2. </span>Simple optimisation problem</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="Automating%20parametric%20studies.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Automating the composite wing model parametric study</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Automating the composite wing model parametric study</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

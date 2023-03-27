@@ -1,13 +1,14 @@
 # Example of a variable stiffness plate in compression
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/7).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric-plate-buckling).
+
 **Duration: 60 min**
 
 We optimise the design of a variable stiffness RTS composite plate in compression.
 We use CalculiX to model the plate and analyse the buckling behaviour, and OpenMDAO to minimise the mass of the plate, subject to a minimum buckling load constraint.
 
 This example is based on [Reference 1](tutorials-Modelling-variable-stiffness-composite-plates-references) and results are compared to the reference data showing a good correlation. 
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric-plate-buckling).**
 
 ```{image} media/parametric-plate-buckling-rts_1.png
 :alt: Buckling of an rts plate - mode 1

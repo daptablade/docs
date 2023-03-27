@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Using OpenVSP for aircraft performance analysis &#8212; dapta docs</title>
+    <title>8. Using OpenVSP for aircraft performance analysis &#8212; dapta docs</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -55,7 +55,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
-    <link rel="prev" title="Example of a variable stiffness plate in compression" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html" />
+    <link rel="prev" title="7. Example of a variable stiffness plate in compression" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en">
     
@@ -131,42 +131,42 @@ const thebe_selector_output = ".output, .cell_output"
 <ul class="current nav bd-sidenav">
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20component%20analysis.html">
-   Simple component analysis
+   1. Simple component analysis
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Simple%20optimisation%20problem.html">
-   Simple optimisation problem
+   2. Simple optimisation problem
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Chaining%20component%20analyses.html">
-   Chaining component analyses
+   3. Chaining component analyses
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20parametric%20studies.html">
-   Automating the composite wing model parametric study
+   4. Automating the composite wing model parametric study
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Automating%20design%20optimisations.html">
-   Automating the design optimisation of the composite wing model
+   5. Automating the design optimisation of the composite wing model
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Working%20with%20spreadsheets.html">
-   Working with spreadsheets
+   6. Working with spreadsheets
   </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
-   Example of a variable stiffness plate in compression
+   7. Example of a variable stiffness plate in compression
   </a>
  </li>
  <li class="toctree-l1 current active">
   <a class="current reference internal" href="#">
-   Using OpenVSP for aircraft performance analysis
+   8. Using OpenVSP for aircraft performance analysis
   </a>
  </li>
 </ul>
@@ -375,54 +375,54 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#problem-description">
-   Problem description
+   8.1. Problem description
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-components">
-   Create the components
+   8.2. Create the components
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#vspaero-component">
-     VSPAERO component
+     8.2.1. VSPAERO component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trim-component">
-     Trim component
+     8.2.2. Trim component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openmdao-driver-component">
-     OpenMDAO driver component
+     8.2.3. OpenMDAO driver component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#connections">
-     Connections
+     8.2.4. Connections
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#execute-the-workflow">
-   Execute the workflow
+   8.3. Execute the workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inspect-the-outputs">
-   Inspect the outputs
+   8.4. Inspect the outputs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#increase-the-number-of-design-points-and-re-run">
-   Increase the number of design points and re-run
+   8.5. Increase the number of design points and re-run
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   8.6. Clean-up
   </a>
  </li>
 </ul>
@@ -446,54 +446,54 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#problem-description">
-   Problem description
+   8.1. Problem description
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#create-the-components">
-   Create the components
+   8.2. Create the components
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#vspaero-component">
-     VSPAERO component
+     8.2.1. VSPAERO component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#trim-component">
-     Trim component
+     8.2.2. Trim component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#openmdao-driver-component">
-     OpenMDAO driver component
+     8.2.3. OpenMDAO driver component
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#connections">
-     Connections
+     8.2.4. Connections
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#execute-the-workflow">
-   Execute the workflow
+   8.3. Execute the workflow
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#inspect-the-outputs">
-   Inspect the outputs
+   8.4. Inspect the outputs
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#increase-the-number-of-design-points-and-re-run">
-   Increase the number of design points and re-run
+   8.5. Increase the number of design points and re-run
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#clean-up">
-   Clean-up
+   8.6. Clean-up
   </a>
  </li>
 </ul>
@@ -507,14 +507,15 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="using-openvsp-for-aircraft-performance-analysis">
-<h1>Using OpenVSP for aircraft performance analysis<a class="headerlink" href="#using-openvsp-for-aircraft-performance-analysis" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">8. </span>Using OpenVSP for aircraft performance analysis<a class="headerlink" href="#using-openvsp-for-aircraft-performance-analysis" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/8"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-1.png"><img alt="vsp3 model of a Cessna 210" class="bg-primary mb-1 align-right" src="../_images/openvsp-performance-1.png" style="width: 400px;" /></a>
 <p><strong>Duration: 60 min</strong></p>
 <p>In this example we create a simple aircraft performance analysis workflow using <a class="reference external" href="https://openvsp.org/">OpenVSP</a> and <a class="reference external" href="https://openmdao.org/">OpenMDAO</a>.</p>
 <p>We also demonstrate how to execute components in parallel to speed up large parametric studies.</p>
-<p><strong>&gt;&gt; The files for this tutorial are now on <a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance">Github</a>.</strong></p>
 <section id="problem-description">
-<h2>Problem description<a class="headerlink" href="#problem-description" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.1. </span>Problem description<a class="headerlink" href="#problem-description" title="Permalink to this headline">#</a></h2>
 <p>Theory tells us that an aircraft’s optimal cruise velocity for minimum thrust is where its lift to drag ratio (L/D) is maximised, which also corresponds to the flight velocity where the total drag (including lift-induced drag) is minimised.
 In this example, we wish to graphically determine this optimal cruise velocity for a Cessna 210 for a range of different wing aspect ratios, given a certain flight altitude and fixed aircraft total mass.</p>
 <p>We use a representative OpenVSP aircraft model (Cessna-210_metric.vsp3) as shown above.
@@ -539,12 +540,12 @@ We can use Newton’s method to converge the cycle to a trimmed solution.</p>
 </ol>
 </section>
 <section id="create-the-components">
-<h2>Create the components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.2. </span>Create the components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
 <p>The following sections will guide you through the creation of the simulation workflow starting from an empty workspace.
 <strong>Already signed-up?</strong>
 <a class="reference external" href="https://app.daptaflow.com/">Access your workspace here.</a></p>
 <section id="vspaero-component">
-<h3>VSPAERO component<a class="headerlink" href="#vspaero-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.1. </span>VSPAERO component<a class="headerlink" href="#vspaero-component" title="Permalink to this headline">#</a></h3>
 <p>The purpose of this component is to calculate the aerodynamic forces and moments about the aircraft’s CG for a given set of inputs and parameters.
 The inputs include the aircraft angle of attack (AoA), the HTP angle (HTP_RY) and the half-wing aspect ratio (desvars_PONPNSVRANE).
 Multiply the half-wing aspect ratio by 2 to recover an approximate full wing aspect ratio value (with the error due to dihedral angle).</p>
@@ -603,8 +604,8 @@ Then upload the first 2 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="f30891a7-9dc6-401d-99ca-fb349ac01a16" name="ae5ba837-3033-471a-a530-004ef2d2157a" type="radio">
-</input><label class="sd-tab-label" for="f30891a7-9dc6-401d-99ca-fb349ac01a16">
+<input checked="checked" id="2403fb20-01be-4643-ba05-6ce241f6e7c3" name="112c9fec-0d1d-483c-8185-eb9147ed04d3" type="radio">
+</input><label class="sd-tab-label" for="2403fb20-01be-4643-ba05-6ce241f6e7c3">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -640,8 +641,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="986bcbff-1bc3-4dba-a096-1c8f4c9a47be" name="ae5ba837-3033-471a-a530-004ef2d2157a" type="radio">
-</input><label class="sd-tab-label" for="986bcbff-1bc3-4dba-a096-1c8f4c9a47be">
+<input id="4666b09c-ebe1-46b0-b6e4-62b1d0a9d693" name="112c9fec-0d1d-483c-8185-eb9147ed04d3" type="radio">
+</input><label class="sd-tab-label" for="4666b09c-ebe1-46b0-b6e4-62b1d0a9d693">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -831,13 +832,13 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="7ece7163-1e8f-4d44-a175-b2b85f087c6b" name="ae5ba837-3033-471a-a530-004ef2d2157a" type="radio">
-</input><label class="sd-tab-label" for="7ece7163-1e8f-4d44-a175-b2b85f087c6b">
+<input id="9afdbf31-47b3-4c57-b854-74d180dcf444" name="112c9fec-0d1d-483c-8185-eb9147ed04d3" type="radio">
+</input><label class="sd-tab-label" for="9afdbf31-47b3-4c57-b854-74d180dcf444">
 Cessna-210_metric.vsp3</label><div class="sd-tab-content docutils">
 <p><a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance/vspaero/Cessna-210_metric.vsp3">Download Cessna-210_metric.vsp3 from Github</a></p>
 </div>
-<input id="f0864934-3f01-436b-ac0b-12b3aa1cf92d" name="ae5ba837-3033-471a-a530-004ef2d2157a" type="radio">
-</input><label class="sd-tab-label" for="f0864934-3f01-436b-ac0b-12b3aa1cf92d">
+<input id="2cf50988-663a-435c-bca3-42ad17780140" name="112c9fec-0d1d-483c-8185-eb9147ed04d3" type="radio">
+</input><label class="sd-tab-label" for="2cf50988-663a-435c-bca3-42ad17780140">
 Cessna-210_metric.des</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
 BMZJCENVRIX:Default:VSPAERO:NCPU: 1
@@ -849,7 +850,7 @@ PONPNSVRANE:NormalWing:XSec_1:Aspect: 3.86435
 </div>
 </section>
 <section id="trim-component">
-<h3>Trim component<a class="headerlink" href="#trim-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.2. </span>Trim component<a class="headerlink" href="#trim-component" title="Permalink to this headline">#</a></h3>
 <p>This is a simple analytical implicit component that calculates the force and pitching moment residuals at the aircraft CG.
 The inputs are the lift and pitching moment coefficients from the vspaero component and the flight velocity (Vinfinity).
 Fixed parameters include the aircraft total mass, flight altitude and wing reference area (S).</p>
@@ -896,8 +897,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="563f8213-e72e-4979-be89-68abf220f61b" name="3b078784-7eff-475d-a403-7d1382098432" type="radio">
-</input><label class="sd-tab-label" for="563f8213-e72e-4979-be89-68abf220f61b">
+<input checked="checked" id="6e273659-a026-4e67-8d00-d8b2022d9322" name="9b53c4c5-3834-4797-ae61-58c10a4eb8d1" type="radio">
+</input><label class="sd-tab-label" for="6e273659-a026-4e67-8d00-d8b2022d9322">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
@@ -924,8 +925,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="7cce3605-04b2-46f4-94e8-fd373383e486" name="3b078784-7eff-475d-a403-7d1382098432" type="radio">
-</input><label class="sd-tab-label" for="7cce3605-04b2-46f4-94e8-fd373383e486">
+<input id="956479f8-3228-496d-9761-30bcceb97537" name="9b53c4c5-3834-4797-ae61-58c10a4eb8d1" type="radio">
+</input><label class="sd-tab-label" for="956479f8-3228-496d-9761-30bcceb97537">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">fluids.atmosphere</span> <span class="kn">import</span> <span class="n">ATMOSPHERE_1976</span>
@@ -983,17 +984,17 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="2a88e94a-b3ed-485e-83eb-6adfd176ecea" name="3b078784-7eff-475d-a403-7d1382098432" type="radio">
-</input><label class="sd-tab-label" for="2a88e94a-b3ed-485e-83eb-6adfd176ecea">
+<input id="f3536330-f2a3-4c39-93bd-1ddbc087897c" name="9b53c4c5-3834-4797-ae61-58c10a4eb8d1" type="radio">
+</input><label class="sd-tab-label" for="f3536330-f2a3-4c39-93bd-1ddbc087897c">
 requirements.txt</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fluids == 1.0.22
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fluids==1.0.22
 </pre></div>
 </div>
 </div>
 </div>
 </section>
 <section id="openmdao-driver-component">
-<h3>OpenMDAO driver component<a class="headerlink" href="#openmdao-driver-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.3. </span>OpenMDAO driver component<a class="headerlink" href="#openmdao-driver-component" title="Permalink to this headline">#</a></h3>
 <p>The driver component is identical to the OpenMDAO component used in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example, except for the driver parameters (defined on the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab), which have been adjusted for this problem:</p>
 <ul class="simple">
 <li><p>The driver type is set to “doe” instead of “optimisation” to request a sweep of the design space. In the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module, this selects the use of the <a class="reference external" href="https://openmdao.org/newdocs/versions/latest/features/building_blocks/drivers/doe_driver.html">OpenMDAO “FullFactorialGenerator”</a> to define the design points to evaluate. The number of design points can be increased via the {“driver”:{“kwargs”:{“levels”:{“Vinfinity”: 2, “desvars_PONPNSVRANE”: 2}}}} parameter values (minimum of 2 points per design variable).</p></li>
@@ -1017,8 +1018,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="2d476282-7ca3-4bf1-adf3-e344eee0bb50" name="9415442f-6e98-40e2-b627-3acf9aa9eea8" type="radio">
-</input><label class="sd-tab-label" for="2d476282-7ca3-4bf1-adf3-e344eee0bb50">
+<input checked="checked" id="0bb8c395-4fb7-474c-be71-9cba8a96e9c9" name="37758549-fcb4-43fd-b0d6-b19c50766d91" type="radio">
+</input><label class="sd-tab-label" for="0bb8c395-4fb7-474c-be71-9cba8a96e9c9">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1045,8 +1046,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="da2d2213-38e6-4219-8a08-704097b7d93c" name="9415442f-6e98-40e2-b627-3acf9aa9eea8" type="radio">
-</input><label class="sd-tab-label" for="da2d2213-38e6-4219-8a08-704097b7d93c">
+<input id="0bf5e7f3-8d66-4fa0-acd0-a61567307e29" name="37758549-fcb4-43fd-b0d6-b19c50766d91" type="radio">
+</input><label class="sd-tab-label" for="0bf5e7f3-8d66-4fa0-acd0-a61567307e29">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1647,19 +1648,19 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a6800cf1-fdf1-4c84-9f21-32e46bc8de79" name="9415442f-6e98-40e2-b627-3acf9aa9eea8" type="radio">
-</input><label class="sd-tab-label" for="a6800cf1-fdf1-4c84-9f21-32e46bc8de79">
+<input id="a22db7eb-1c28-4d52-a318-262a5146d98e" name="37758549-fcb4-43fd-b0d6-b19c50766d91" type="radio">
+</input><label class="sd-tab-label" for="a22db7eb-1c28-4d52-a318-262a5146d98e">
 requirements</label><div class="sd-tab-content docutils">
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy == 1.21.5
-openmdao == 3.16.0
-matplotlib == 3.5.2
-fluids == 1.0.22
-pandas == 1.4.4
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
+openmdao==3.16.0
+matplotlib==3.7.0
+fluids==1.0.22
+pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="50fa44ce-44fd-4098-8f7f-5e6da517d8ca" name="9415442f-6e98-40e2-b627-3acf9aa9eea8" type="radio">
-</input><label class="sd-tab-label" for="50fa44ce-44fd-4098-8f7f-5e6da517d8ca">
+<input id="ecd5f985-d9f4-44a0-99c9-aa8f75bfb57c" name="37758549-fcb4-43fd-b0d6-b19c50766d91" type="radio">
+</input><label class="sd-tab-label" for="ecd5f985-d9f4-44a0-99c9-aa8f75bfb57c">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;Groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -1796,8 +1797,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="aae0088d-c62d-459d-88fa-f276838e3931" name="9415442f-6e98-40e2-b627-3acf9aa9eea8" type="radio">
-</input><label class="sd-tab-label" for="aae0088d-c62d-459d-88fa-f276838e3931">
+<input id="fd04b5fe-6501-4233-9c73-8368714efaf0" name="37758549-fcb4-43fd-b0d6-b19c50766d91" type="radio">
+</input><label class="sd-tab-label" for="fd04b5fe-6501-4233-9c73-8368714efaf0">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -2016,8 +2017,8 @@ om_component</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="7cc7e5de-c933-40f8-b489-004d6504859c" name="9415442f-6e98-40e2-b627-3acf9aa9eea8" type="radio">
-</input><label class="sd-tab-label" for="7cc7e5de-c933-40f8-b489-004d6504859c">
+<input id="82d56689-c061-4708-9b80-d29bdfac5743" name="37758549-fcb4-43fd-b0d6-b19c50766d91" type="radio">
+</input><label class="sd-tab-label" for="82d56689-c061-4708-9b80-d29bdfac5743">
 post</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -2092,7 +2093,7 @@ post</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="connections">
-<h3>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">8.2.4. </span>Connections<a class="headerlink" href="#connections" title="Permalink to this headline">#</a></h3>
 <p>Finally, we connect the outputs of the vspaero component to the inputs of the trim analysis component.</p>
 <p>In the workspace view, create a connection by selecting the “CL” output handle of the vspaero component and dragging a line to the corresponding input handle of the trim component.
 Repeat for the “CMy” handles.
@@ -2103,7 +2104,7 @@ Both connections are ‘Design variable’ type connections by default (black li
 </section>
 </section>
 <section id="execute-the-workflow">
-<h2>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.3. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
 <p>We can now execute the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.
 Once the run has started, each component will setup and then execute.</p>
 <p>Open the vspaero component and select the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab as shown below.
@@ -2114,7 +2115,7 @@ After that, new compute requests are executed as soon as a free replica is avail
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-8.png"><img alt="vspaero log entries" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-8.png" style="width: 700px;" /></a>
 </section>
 <section id="inspect-the-outputs">
-<span id="tutorials-openvsp-aircraft-performance-outputs"></span><h2>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
+<span id="tutorials-openvsp-aircraft-performance-outputs"></span><h2><span class="section-number">8.4. </span>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.
 The first three “run_output” entries are setup messages from the vspaero component 4 replicas, the trim and open-mdao components.
 Notice that the vspaero messages include the replica hostname, which is different for each replica and always starts with “vspaero-“.<br />
@@ -2130,7 +2131,7 @@ We’ll resolve this problem in the next section.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-6.png"><img alt="L/D from the first run" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-6.png" style="width: 500px;" /></a>
 </section>
 <section id="increase-the-number-of-design-points-and-re-run">
-<h2>Increase the number of design points and re-run<a class="headerlink" href="#increase-the-number-of-design-points-and-re-run" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.5. </span>Increase the number of design points and re-run<a class="headerlink" href="#increase-the-number-of-design-points-and-re-run" title="Permalink to this headline">#</a></h2>
 <p>Select the open-mdao component in the workspace to edit it:</p>
 <ul class="simple">
 <li><p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and scroll to the “driver” object.</p></li>
@@ -2153,7 +2154,7 @@ As expected, the maximum L/D increases with increasing half-wing aspect ratio an
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/openvsp-performance-7.png"><img alt="L/D from the second run" class="bg-primary mb-1 align-center" src="../_images/openvsp-performance-7.png" style="width: 500px;" /></a>
 </section>
 <section id="clean-up">
-<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">8.6. </span>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
 <p>Delete your session by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface.
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
@@ -2194,7 +2195,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Example of a variable stiffness plate in compression</p>
+            <p class="prev-next-title"><span class="section-number">7. </span>Example of a variable stiffness plate in compression</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="../Reference/The%20dashboard.html" title="next page">
