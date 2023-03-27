@@ -1,5 +1,8 @@
 # Simple component analysis
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/1).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/paraboloid).
+
 ```{image} media/paraboloid_rotation.gif
 :alt: paraboloid-surface
 :class: bg-primary mb-1
@@ -14,8 +17,6 @@ In our first example we explore the creation and analysis of a simple analytical
 All you need to get started is a text editor and your web browser. 
 No need to download or install anything! 
 However, as we will use python for all our examples, a basic understanding of the python syntax will be beneficial, as well as a code editor that supports python (e.g. VS Code, PyCharm or other).
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/paraboloid).**
 
 ## Component description 
 The paraboloid component solves the function

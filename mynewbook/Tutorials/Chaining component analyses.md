@@ -1,12 +1,12 @@
 # Chaining component analyses
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/3).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).
 
 **Duration: 45 min**
 
 In this tutorial we explore the usage of {term}`Connection`s to chain the execution of {term}`Component`s. 
 The example also introduces a finite element analysis specific 'calculix-fea-comp' component API.  
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model).**
 
 ```{image} media/parametric-model-1.png
 :alt: chained process

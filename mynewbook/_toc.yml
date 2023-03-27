@@ -5,6 +5,7 @@ format: jb-book
 root: intro
 parts:
   - caption: Tutorials
+    numbered: True # Only applies to chapters in this part
     chapters:
       - file: Tutorials/Simple component analysis
       - file: Tutorials/Simple optimisation problem

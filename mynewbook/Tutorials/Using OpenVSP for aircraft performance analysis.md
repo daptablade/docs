@@ -1,5 +1,8 @@
 # Using OpenVSP for aircraft performance analysis
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/8).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance).
+
 ```{image} media/openvsp-performance-1.png
 :alt: vsp3 model of a Cessna 210
 :class: bg-primary mb-1
@@ -12,8 +15,6 @@
 In this example we create a simple aircraft performance analysis workflow using [OpenVSP](https://openvsp.org/) and [OpenMDAO](https://openmdao.org/). 
 
 We also demonstrate how to execute components in parallel to speed up large parametric studies.   
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance).**
 
 
 ## Problem description

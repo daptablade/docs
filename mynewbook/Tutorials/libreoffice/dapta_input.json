@@ -2,7 +2,7 @@
     "components": [
         {
             "name": "paraboloid",
-            "api": "generic-python3-comp:latest",
+            "api": "libreoffice-comp:latest",
             "options": {},
             "parameters": {
                 "user_input_files": [],

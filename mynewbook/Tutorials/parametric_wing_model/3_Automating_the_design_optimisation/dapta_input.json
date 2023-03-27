@@ -166,6 +166,20 @@
                 ],
                 "approx_totals": true,
                 "fd_step": 1.0,
+                "ExplicitComponents": [
+                    {
+                        "name": "parametric-model",
+                        "has_compute_partials": false
+                    },
+                    {
+                        "name": "calculix-fea",
+                        "has_compute_partials": false
+                    },
+                    {
+                        "name": "fea-results-processor",
+                        "has_compute_partials": false
+                    }
+                ],
                 "input_variables": [
                     {
                         "component": "calculix-fea",

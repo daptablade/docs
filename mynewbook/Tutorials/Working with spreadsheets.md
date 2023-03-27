@@ -1,13 +1,13 @@
 # Working with spreadsheets
 
+[<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/6).
+[<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/libreoffice).
 
 **Duration: 15 min**
 
 In this example we explore the use of **spreadsheets and macros** within simulation workflows.
 
 We replicate the [Simple optimisation problem](./Simple%20optimisation%20problem.md) simulation workflow, but this time using the spreadsheet component `libreoffice-comp` for the paraboloid function calculation instead of a pure python component. 
-
-**>> The files for this tutorial are now on [Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/libreoffice).**
 
 Don't have time to work though the example yourself? 
 Watch the **[video tutorial](https://youtu.be/2GaVVrot-4I)** instead.
