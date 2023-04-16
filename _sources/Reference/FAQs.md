@@ -36,6 +36,7 @@ The following table provides an overview of currently available software APIs.
 | generic-python3-driver   | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
 | libreoffice-comp         | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, LibreOffice (Version: 7.0.4.2)|
 | openvsp-comp             | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, OpenVSP (Version: 3.31.1-Linux)|
+| rescale-comp             | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, Dapta Rescale API (latest version)|
 
 
 ## What python packages can I use?

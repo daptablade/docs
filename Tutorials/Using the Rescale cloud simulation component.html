@@ -1,0 +1,738 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>A simple Rescale simulation example &#8212; dapta docs</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Using the Rescale cloud simulation component.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">dapta docs</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Simple%20component%20analysis.html">
+   1. Simple component analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Simple%20optimisation%20problem.html">
+   2. Simple optimisation problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chaining%20component%20analyses.html">
+   3. Chaining component analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20parametric%20studies.html">
+   4. Automating the composite wing model parametric study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20design%20optimisations.html">
+   5. Automating the design optimisation of the composite wing model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Working%20with%20spreadsheets.html">
+   6. Working with spreadsheets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
+   7. Example of a variable stiffness plate in compression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
+   8. Using OpenVSP for aircraft performance analysis
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/The%20dashboard.html">
+   The dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/FAQs.html">
+   FAQs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/Glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/Support.html">
+   Support
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Using the Rescale cloud simulation component.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Tutorials/Using the Rescale cloud simulation component.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-component">
+   Create the component
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-a-user-secret">
+   Setup a user secret
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#execute-the-workflow">
+   Execute the workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-the-outputs">
+   Inspect the outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   Clean-up
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A simple Rescale simulation example</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#prerequisites">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-component">
+   Create the component
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#setup-a-user-secret">
+   Setup a user secret
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#execute-the-workflow">
+   Execute the workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-the-outputs">
+   Inspect the outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   Clean-up
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="a-simple-rescale-simulation-example">
+<h1>A simple Rescale simulation example<a class="headerlink" href="#a-simple-rescale-simulation-example" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/9"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/rescale"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
+<p><strong>Duration: 15 min</strong></p>
+<p>Rescale is a cloud-based platform for computational engineering and R&amp;D that offers access to <a class="reference external" href="https://rescale.com/platform/software-catalog/">many commercial simulation software tools</a>.
+This includes FEA and CFD solvers that are commonly used in industry.</p>
+<p>In this example we demonstrate how to setup and execute a simple Rescale simulation from within a dapta analysis workflow.</p>
+<p>The following sections will guide you through the creation of the simulation workflow starting from an empty workspace.
+<strong>Already signed-up?</strong>
+<a class="reference external" href="https://app.daptaflow.com/">Access your workspace here.</a></p>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">#</a></h2>
+<p>The tutorial runs a python script in <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">miniconda</a> via Rescale resources.
+You will need a <a class="reference external" href="https://rescale.com/">Rescale</a> account to execute the analysis, but no other software licenses are required.</p>
+<p>Although the Rescale job executes within a few seconds on a small compute node, be aware that it will use a very small amount of credit from your Rescale account.</p>
+<p>Before you start, setup a dedicated Rescale API key following the instructions from the advanced user guide: <a class="reference external" href="https://rescale.com/documentation/main/rescale-advanced-features/rest-api/">Using Rescale’s REST API</a>.
+This API key is required to authenticate your account when interacting with the Rescale API via the dapta web app.</p>
+</section>
+<section id="create-the-component">
+<h2>Create the component<a class="headerlink" href="#create-the-component" title="Permalink to this headline">#</a></h2>
+<p>Navigate to your dapta <a class="reference external" href="https://app.daptaflow.com/Interface">dashboard</a> and create a blank workspace by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> (if required).</p>
+<p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>.
+This creates an empty template component in your workspace.</p>
+<p>Select the component to edit it:</p>
+<ul class="simple">
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">rescale-comp</span></code>, and select the component API <code class="docutils literal notranslate"><span class="pre">rescale-comp:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code>, <code class="docutils literal notranslate"><span class="pre">compute.py</span></code>, <code class="docutils literal notranslate"><span class="pre">paraboloid.py</span></code> files from below into a text editor, save them locally.
+Then upload the first 2 files under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab and upload the <code class="docutils literal notranslate"><span class="pre">paraboloid.py</span></code> file under the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab by selecting <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">user</span> <span class="pre">input</span> <span class="pre">files</span></code>.</p></li>
+<li><p>Also in the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options.</p></li>
+<li><p>Insert the following “job” JSON object into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box (below the “user_input_files” entry).</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;job&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;API_token_name&quot;</span><span class="p">:</span> <span class="s2">&quot;rescale&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;analysis&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="s2">&quot;miniconda&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;version&quot;</span><span class="p">:</span> <span class="s2">&quot;4.8.4&quot;</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;archiveFilters&quot;</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+        <span class="s2">&quot;selector&quot;</span><span class="p">:</span> <span class="s2">&quot;*&quot;</span>
+      <span class="p">}</span>
+    <span class="p">],</span>
+    <span class="s2">&quot;command&quot;</span><span class="p">:</span> <span class="s2">&quot;python paraboloid.py&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;hardware&quot;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="s2">&quot;coreType&quot;</span><span class="p">:</span> <span class="s2">&quot;emerald&quot;</span><span class="p">,</span>
+      <span class="s2">&quot;coresPerSlot&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;slots&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">&quot;walltime&quot;</span><span class="p">:</span> <span class="mi">1</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="s2">&quot;test&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<p>The “job” parameter contains the standard Rescale job information:</p>
+<ul class="simple">
+<li><p>“analysis”: a description of the analysis software by Rescale code and version number;</p></li>
+<li><p>“hardware”: a description of the Rescale execution nodes you want to use;</p></li>
+<li><p>“name”: a customizable job name;</p></li>
+<li><p>“command”: a string of commands that should be executed to launch the analysis;</p></li>
+<li><p>“archiveFilters”: contains a list of selectors that are used to filter the analysis output files returned to the dapta interface - here we use a wildcard <code class="docutils literal notranslate"><span class="pre">&quot;*&quot;</span></code> to recover all analysis output files.</p></li>
+</ul>
+<p>The value of “API_token_name” refers to the name of a dapta user secret as explained in the next section.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="a6c83572-c29c-4919-b31b-039a58064578" name="9ab3cc8c-b1d3-406f-83d5-18b32c579111" type="radio">
+</input><label class="sd-tab-label" for="a6c83572-c29c-4919-b31b-039a58064578">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.&quot;&quot;&quot;</span>
+
+    <span class="c1"># initalise setup_data keys</span>
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<input id="fc259ad0-ea32-4a9d-b443-539fb6883407" name="9ab3cc8c-b1d3-406f-83d5-18b32c579111" type="radio">
+</input><label class="sd-tab-label" for="fc259ad0-ea32-4a9d-b443-539fb6883407">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">import</span> <span class="nn">rescale</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable compute function.&quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting user function evaluation.&quot;</span><span class="p">)</span>
+
+    <span class="n">inputs_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+
+    <span class="n">inputs_paths</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;user_input_files&quot;</span><span class="p">]:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">inputs_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+        <span class="n">inputs_paths</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">src</span><span class="p">)</span>
+
+    <span class="c1"># define rescale job parameters</span>
+    <span class="n">job</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;job&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;coresPerSlot&quot;</span><span class="p">,</span> <span class="s2">&quot;slots&quot;</span><span class="p">,</span> <span class="s2">&quot;walltime&quot;</span><span class="p">]:</span>
+        <span class="n">job</span><span class="p">[</span><span class="s2">&quot;hardware&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">job</span><span class="p">[</span><span class="s2">&quot;hardware&quot;</span><span class="p">][</span><span class="n">key</span><span class="p">])</span>
+
+    <span class="c1"># launch rescale job</span>
+    <span class="n">rescale</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="n">inputs_paths</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Rescale job completed.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="ac46aee5-604c-4dbd-aaa1-46bb9cfbcad8" name="9ab3cc8c-b1d3-406f-83d5-18b32c579111" type="radio">
+</input><label class="sd-tab-label" for="ac46aee5-604c-4dbd-aaa1-46bb9cfbcad8">
+paraboloid</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+
+<span class="k">def</span> <span class="nf">f_xy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+    
+    <span class="n">out</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;f_xy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="mf">3.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span> <span class="o">+</span> <span class="p">(</span><span class="n">y</span> <span class="o">+</span> <span class="mf">4.0</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mf">3.0</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute paraboloid f(x:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="si">}</span><span class="s2">,y:</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s2">) = </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s1">&#39;f_xy&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="n">out</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+    
+    <span class="k">return</span> <span class="n">out</span>
+    
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">f_xy</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">5.0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="setup-a-user-secret">
+<h2>Setup a user secret<a class="headerlink" href="#setup-a-user-secret" title="Permalink to this headline">#</a></h2>
+<p>User Secrets are a secure way of saving third-party software/API tokens to your dapta user account.</p>
+<p>In this section we create a User Secret in the dapta web app to save the Rescale API token:</p>
+<ul class="simple">
+<li><p>In the dapta interface controls, select the “…” button and then “User Secrets” as shown below.</p></li>
+</ul>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/rescale_1.png"><img alt="select user secrets from settings" class="bg-primary mb-1 align-center" src="../_images/rescale_1.png" style="width: 700px;" /></a>
+<ul class="simple">
+<li><p>Select the “+” icon to add user secret, which consists of a NAME and VALUE pair.</p></li>
+<li><p>Enter “rescale” in the NAME box and the value of your Rescale API Token in the VALUE box as shown below.</p></li>
+</ul>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/rescale_2.png"><img alt="select user secrets from settings" class="bg-primary mb-1 align-center" src="../_images/rescale_2.png" style="width: 700px;" /></a>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span></code> to save the new User Secret, then select <code class="docutils literal notranslate"><span class="pre">Close</span></code>.</p></li>
+</ul>
+<p>The rescale component created in the previous section can now access the token value by reference to the user secret name.</p>
+</section>
+<section id="execute-the-workflow">
+<h2>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
+<p>We can now execute the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.
+Once the run has started, the component will setup and then execute.
+The Run should complete within 5-10 min.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the dapta component is executing you can also view the job status in the Rescale web interface.
+However, do not edit the job or the files manually in Rescale, as this can cause dapta to crash.</p>
+</div>
+</section>
+<section id="inspect-the-outputs">
+<h2>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
+<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls to view a summary of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> as a nested JSON text object.</p>
+<p>Select the rescale-comp component in the workspace to open it and then navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab.
+The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab includes a <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code> link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace for this component.</p>
+<p>The “ouputs” folder includes all analysis output files (here the unmodified <a class="reference external" href="http://paraboloid.py">paraboloid.py</a> only), as well as the following two files:</p>
+<ul class="simple">
+<li><p>input_files.zip : an compressed archive that is uploaded to Rescale and contains all input files (here <a class="reference external" href="http://paraboloid.py">paraboloid.py</a> only);</p></li>
+<li><p>process_output.log : a log file that contains a list of time-stamped events and messages as shown below.</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">12</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">40</span><span class="n">Z</span><span class="p">]:</span> <span class="n">Launching</span> <span class="n">python</span> <span class="n">paraboloid</span><span class="o">.</span><span class="n">py</span><span class="p">,</span> <span class="n">Working</span> <span class="nb">dir</span><span class="p">:</span> <span class="o">/</span><span class="n">enc</span><span class="o">/</span><span class="n">udeprod_gmhfPb</span><span class="o">/</span><span class="n">work</span><span class="o">/</span><span class="n">shared</span><span class="o">.</span>  <span class="n">Process</span> <span class="n">output</span> <span class="n">follows</span><span class="p">:</span>
+<span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">12</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">40</span><span class="n">Z</span><span class="p">]:</span> <span class="mi">20230412</span><span class="o">-</span><span class="mi">134840</span><span class="p">:</span> <span class="n">Compute</span> <span class="n">paraboloid</span> <span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="mf">5.0</span><span class="p">,</span><span class="n">y</span><span class="p">:</span><span class="mf">5.0</span><span class="p">)</span> <span class="o">=</span> <span class="mf">107.0</span><span class="o">.</span>
+<span class="p">[</span><span class="mi">2023</span><span class="o">-</span><span class="mi">04</span><span class="o">-</span><span class="mi">12</span><span class="n">T13</span><span class="p">:</span><span class="mi">48</span><span class="p">:</span><span class="mi">40</span><span class="n">Z</span><span class="p">]:</span> <span class="n">Exited</span> <span class="k">with</span> <span class="n">code</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</section>
+<section id="clean-up">
+<h2>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<p>Delete your session by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface.
+It may take a minute or so for the Cloud session to be reset.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> session data (Run log and component logs) will be permanently deleted.</p>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dapta Ltd<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

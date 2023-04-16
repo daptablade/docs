@@ -171,6 +171,11 @@ const thebe_selector_output = ".output, .cell_output"
    8. Using OpenVSP for aircraft performance analysis
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20simple%20Rescale%20simulation%20example.html">
+   9. A simple Rescale simulation example
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -564,8 +569,8 @@ In addition, we import a <code class="docutils literal notranslate"><span class=
 <p>The last import in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">om_component</span> <span class="pre">import</span> <span class="pre">...</span></code>) is specific to our component and provides a custom implementation of the openMDAO ExplicitComponent class. The contents of the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module are shown below and we will upload this as a Parameter input file in the next section.</p>
 <p>Finally, check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option as shown below.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-files">
-<input checked="checked" id="8b2bc68e-0a2d-4e47-baed-e731094833be" name="df903c2c-7284-40fb-a920-e2d86e339fe9" type="radio">
-</input><label class="sd-tab-label" for="8b2bc68e-0a2d-4e47-baed-e731094833be">
+<input checked="checked" id="047fb6a4-31d6-4501-90cd-2402f7b565ca" name="0861d0c4-6871-4744-8627-7e5edfb92e35" type="radio">
+</input><label class="sd-tab-label" for="047fb6a4-31d6-4501-90cd-2402f7b565ca">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -592,8 +597,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="3d737c0a-ec97-45df-85e2-bc039b7d0841" name="df903c2c-7284-40fb-a920-e2d86e339fe9" type="radio">
-</input><label class="sd-tab-label" for="3d737c0a-ec97-45df-85e2-bc039b7d0841">
+<input id="cd4c985c-c25a-4555-8044-eebd8d0fdb6a" name="0861d0c4-6871-4744-8627-7e5edfb92e35" type="radio">
+</input><label class="sd-tab-label" for="cd4c985c-c25a-4555-8044-eebd8d0fdb6a">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1194,8 +1199,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="4b7c29ac-a095-4882-bd48-8bcc94449b02" name="df903c2c-7284-40fb-a920-e2d86e339fe9" type="radio">
-</input><label class="sd-tab-label" for="4b7c29ac-a095-4882-bd48-8bcc94449b02">
+<input id="7a9ba13b-9e62-4761-9ebf-c3da51801b62" name="0861d0c4-6871-4744-8627-7e5edfb92e35" type="radio">
+</input><label class="sd-tab-label" for="7a9ba13b-9e62-4761-9ebf-c3da51801b62">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 openmdao==3.16.0
@@ -1205,8 +1210,8 @@ pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="fca3b3e4-07f5-47ac-b5c1-7df28b8e4f70" name="df903c2c-7284-40fb-a920-e2d86e339fe9" type="radio">
-</input><label class="sd-tab-label" for="fca3b3e4-07f5-47ac-b5c1-7df28b8e4f70">
+<input id="6b17f73d-8307-404e-8a9f-6d5f2dae8a26" name="0861d0c4-6871-4744-8627-7e5edfb92e35" type="radio">
+</input><label class="sd-tab-label" for="6b17f73d-8307-404e-8a9f-6d5f2dae8a26">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1432,8 +1437,8 @@ om_component</label><div class="sd-tab-content docutils">
 <h3><span class="section-number">2.2.2. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the ‘unconstrained’ parameters JSON object into the text box.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-parameters">
-<input checked="checked" id="387881af-5db3-48bc-a291-0d196460f4d9" name="5d755600-c8ef-430e-aec4-60647bbf6d56" type="radio">
-</input><label class="sd-tab-label" for="387881af-5db3-48bc-a291-0d196460f4d9">
+<input checked="checked" id="78f4a8bf-a8d7-4398-834c-7f57353679ce" name="a203ad45-e0c6-4a36-8020-d087b10ad29d" type="radio">
+</input><label class="sd-tab-label" for="78f4a8bf-a8d7-4398-834c-7f57353679ce">
 unconstrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1480,8 +1485,8 @@ unconstrained</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="65778c80-ace0-4ceb-8ed8-0a17071e4b28" name="5d755600-c8ef-430e-aec4-60647bbf6d56" type="radio">
-</input><label class="sd-tab-label" for="65778c80-ace0-4ceb-8ed8-0a17071e4b28">
+<input id="b569c7be-af6a-466f-8ddc-c879e9d143f8" name="a203ad45-e0c6-4a36-8020-d087b10ad29d" type="radio">
+</input><label class="sd-tab-label" for="b569c7be-af6a-466f-8ddc-c879e9d143f8">
 constrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1694,7 +1699,7 @@ With one paraboloid component evaluation yielding derivatives with respect to al
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> data (session data, inputs and outputs) will be permanently deleted.</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> session data (Run log and component logs) will be permanently deleted.</p>
 </div>
 </section>
 <section id="references">
