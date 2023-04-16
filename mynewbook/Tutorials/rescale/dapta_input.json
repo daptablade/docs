@@ -1,0 +1,38 @@
+{
+  "components": [
+    {
+      "name": "rescale-comp",
+      "api": "rescale-comp:latest",
+      "options": {},
+      "parameters": {
+        "job": {
+          "API_token_name": "rescale",
+          "analysis": {
+            "code": "miniconda",
+            "version": "4.8.4"
+          },
+          "archiveFilters": [
+            {
+              "selector": "*"
+            }
+          ],
+          "command": "python paraboloid.py",
+          "hardware": {
+            "coreType": "emerald",
+            "coresPerSlot": 1,
+            "slots": 1,
+            "walltime": 1
+          },
+          "name": "test"
+        }
+      },
+      "inputs": {},
+      "outputs": {}
+    }
+  ],
+  "connections": [],
+  "workflow": {
+    "start": "rescale-comp",
+    "end": "rescale-comp"
+  }
+}
