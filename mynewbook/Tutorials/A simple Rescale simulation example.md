@@ -1,4 +1,4 @@
-# Using the Rescale cloud simulation component
+# A simple Rescale simulation example
 
 [<img src="media/Dapta-Brandmark-RGB.svg" alt="dapta" width="25px" height="25px"> Load tutorial into dapta app](https://app.daptaflow.com/tutorial/9).
 [<img src="media/github.svg" alt="github" width="25px" height="25px"> View files on Github](https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/rescale).
@@ -17,7 +17,8 @@ The following sections will guide you through the creation of the simulation wor
 ## Prerequisites
 
 The tutorial runs a python script in [miniconda](https://docs.conda.io/en/latest/miniconda.html) via Rescale resources. 
-You will need a [Rescale](https://rescale.com/) account to execute the analysis, but no other software licenses are required. 
+You will need a [Rescale](https://rescale.com/) account to execute the analysis.
+No other software licenses are required. 
 
 Although the Rescale job executes within a few seconds on a small compute node, be aware that it will use a very small amount of credit from your Rescale account.
 
