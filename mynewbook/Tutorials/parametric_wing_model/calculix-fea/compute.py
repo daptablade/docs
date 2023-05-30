@@ -22,7 +22,6 @@ def compute(
         "outputs_folder_path": "",
     },
 ) -> dict:
-
     """Editable compute function."""
 
     # check input files have been uploaded
@@ -60,7 +59,6 @@ def compute(
 
     # define composite material properties
     if "composite_layup" in parameters:
-
         fibre_rotation_angles = [
             key for key in inputs["design"] if key.startswith("fibre_rotation_angle")
         ]
@@ -138,7 +136,6 @@ def get_composite_properties_input(inputs, run_folder):
 
     shell_set_name = inputs["shell_set_name"]
     if "filled_sections_flags" in inputs and any(inputs["filled_sections_flags"]):
-
         if not (
             isinstance(inputs["airfoil_cut_chord_percentages"], list)
             and len(inputs["airfoil_cut_chord_percentages"]) == 2
@@ -197,7 +194,6 @@ def _file_find_replace(file, find: str, replace_with: str):
 def _get_ccx_composite_shell_props(
     plies=None, orientations=None, layup=None, shell_set_name=None
 ):
-
     commands = []
     if not shell_set_name:
         shell_set_name = {"ribs": "ERIBS", "aero": "EAERO"}
@@ -211,7 +207,7 @@ def _get_ccx_composite_shell_props(
 
     commands.append("** =============== \n")
     # shell property
-    for (key, section_name) in shell_set_name.items():
+    for key, section_name in shell_set_name.items():
         commands.append(f"*SHELL SECTION,ELSET={section_name},COMPOSITE\n")
         for ply in layup[key]:
             props = [p for p in plies if p["id"] == ply][0]
