@@ -1,0 +1,271 @@
+{
+  "components": [
+    {
+      "name": "precice-driver",
+      "api": "generic-python3-driver:latest",
+      "options": {},
+      "parameters": {
+        "user_input_files": []
+      },
+      "inputs": {},
+      "outputs": {},
+      "appmeta": {
+        "apiInputFiles": [
+          {
+            "filename": "setup.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T14:27:53",
+            "size": "2404"
+          },
+          {
+            "filename": "compute.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T15:54:03",
+            "size": "3175"
+          },
+          {
+            "filename": "requirements.txt",
+            "accept": ".txt",
+            "required": false,
+            "uploaded": false
+          }
+        ],
+        "validity": "valid",
+        "id": "precice-driver",
+        "position": {
+          "x": 808,
+          "y": 256
+        }
+      }
+    },
+    {
+      "name": "beam-1",
+      "api": "precice-calculix-comp:latest",
+      "options": {},
+      "parameters": {
+        "beam_frd": "beam1.frd",
+        "ccx_precice": {
+          "env": {
+            "CCX_NPROC_EQUATION_SOLVER": "1",
+            "OMP_NUM_THREADS": "1"
+          },
+          "infile": "beam1.inp",
+          "participant": "Calculix1",
+          "subfolder": "part_1"
+        },
+        "user_input_files": [
+          {
+            "filename": "part_1.zip",
+            "mtime": "2023-05-30T13:22:27",
+            "size": "3575"
+          },
+          {
+            "filename": "precice-config.xml",
+            "mtime": "2023-05-30T14:13:29",
+            "size": "2767"
+          }
+        ]
+      },
+      "inputs": {},
+      "outputs": {
+        "dummy_output": 0,
+        "files.beam_frd": "default"
+      },
+      "appmeta": {
+        "apiInputFiles": [
+          {
+            "filename": "setup.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T18:10:23",
+            "size": "1368"
+          },
+          {
+            "filename": "compute.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T18:10:27",
+            "size": "1722"
+          },
+          {
+            "filename": "requirements.txt",
+            "accept": ".txt",
+            "required": false,
+            "uploaded": false
+          }
+        ],
+        "validity": "valid",
+        "id": "beam-1",
+        "position": {
+          "x": 293.32678555811935,
+          "y": 575.4056481288387
+        }
+      }
+    },
+    {
+      "name": "beam-2",
+      "api": "precice-calculix-comp:latest",
+      "options": {},
+      "parameters": {
+        "beam_frd": "beam2.frd",
+        "ccx_precice": {
+          "env": {
+            "CCX_NPROC_EQUATION_SOLVER": "1",
+            "OMP_NUM_THREADS": "1"
+          },
+          "infile": "beam2.inp",
+          "participant": "Calculix2",
+          "subfolder": "part_2"
+        },
+        "user_input_files": [
+          {
+            "filename": "part_2.zip",
+            "mtime": "2023-05-30T13:27:22",
+            "size": "2604"
+          },
+          {
+            "filename": "precice-config.xml",
+            "mtime": "2023-05-30T14:13:47",
+            "size": "2767"
+          }
+        ]
+      },
+      "inputs": {
+        "dummy-in": 0
+      },
+      "outputs": {
+        "files.beam_frd": "default"
+      },
+      "appmeta": {
+        "apiInputFiles": [
+          {
+            "filename": "setup.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T18:10:36",
+            "size": "1368"
+          },
+          {
+            "filename": "compute.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T18:10:40",
+            "size": "1722"
+          },
+          {
+            "filename": "requirements.txt",
+            "accept": ".txt",
+            "required": false,
+            "uploaded": false
+          }
+        ],
+        "validity": "valid",
+        "id": "beam-2",
+        "position": {
+          "x": 892.2743876596861,
+          "y": 832.7680607597662
+        }
+      }
+    },
+    {
+      "name": "post-processing",
+      "api": "generic-python3-comp:latest",
+      "options": {},
+      "parameters": {
+        "user_input_files": []
+      },
+      "inputs": {
+        "files.beam1_frd": "default",
+        "files.beam2_frd": "default"
+      },
+      "outputs": {},
+      "appmeta": {
+        "apiInputFiles": [
+          {
+            "filename": "setup.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T15:13:28",
+            "size": "2020"
+          },
+          {
+            "filename": "compute.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2023-05-30T15:48:56",
+            "size": "6371"
+          },
+          {
+            "filename": "requirements.txt",
+            "accept": ".txt",
+            "required": false,
+            "uploaded": false
+          }
+        ],
+        "validity": "valid",
+        "id": "post-processing",
+        "position": {
+          "x": 1451.0270346261784,
+          "y": 582.989405779341
+        }
+      }
+    }
+  ],
+  "connections": [
+    {
+      "origin": "beam-1",
+      "name_origin": "dummy_output",
+      "target": "beam-2",
+      "name_target": "dummy-in",
+      "type": "design",
+      "appmeta": {
+        "id": "dummy_output",
+        "label": "dummy_output"
+      }
+    },
+    {
+      "origin": "beam-1",
+      "name_origin": "files.beam_frd",
+      "target": "post-processing",
+      "name_target": "files.beam1_frd",
+      "type": "implicit",
+      "appmeta": {
+        "id": "files.beam_frd",
+        "label": "files.beam_frd"
+      }
+    },
+    {
+      "origin": "beam-2",
+      "name_origin": "files.beam_frd",
+      "target": "post-processing",
+      "name_target": "files.beam2_frd",
+      "type": "implicit",
+      "appmeta": {
+        "id": "files.beam_frd",
+        "label": "files.beam_frd"
+      }
+    }
+  ],
+  "workflow": {
+    "start": "beam-1",
+    "end": "post-processing",
+    "driver": "precice-driver"
+  },
+  "run_parameters": {
+    "appmeta": {
+      "filename": "dapta_input.json",
+      "mtime": null
+    },
+    "name": "precice-beam-copy"
+  }
+}

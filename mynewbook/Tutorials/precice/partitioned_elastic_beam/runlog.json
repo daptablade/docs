@@ -1,0 +1,126 @@
+{
+  "time": "10:41:07",
+  "status": {
+    "beam-1": [
+      {
+        "message": [
+          "20230530-202752: Setup completed."
+        ],
+        "val": {}
+      },
+      {
+        "message": "20230530-203028: Compute completed.",
+        "val": {
+          "inputs": {
+            "design": {},
+            "implicit": {},
+            "setup": {}
+          },
+          "outputs": {
+            "design": {
+              "dummy_output": 0
+            },
+            "implicit": {
+              "files.beam_frd": "beam1.frd"
+            },
+            "setup": {}
+          }
+        }
+      }
+    ],
+    "beam-2": [
+      {
+        "message": [
+          "20230530-202753: Setup completed."
+        ],
+        "val": {}
+      },
+      {
+        "message": "20230530-203028: Compute completed.",
+        "val": {
+          "inputs": {
+            "design": {
+              "dummy-in": 0
+            },
+            "implicit": {},
+            "setup": {}
+          },
+          "outputs": {
+            "design": {},
+            "implicit": {
+              "files.beam_frd": "beam2.frd"
+            },
+            "setup": {}
+          }
+        }
+      }
+    ],
+    "post-processing": [
+      {
+        "message": [
+          "20230530-182754: Setup completed."
+        ],
+        "val": {}
+      },
+      {
+        "message": "20230530-183028: Post-processing completed.",
+        "val": {
+          "inputs": {
+            "design": {},
+            "implicit": {
+              "files.beam1_frd": "beam1.frd",
+              "files.beam2_frd": "beam2.frd"
+            },
+            "setup": {}
+          },
+          "outputs": {
+            "design": {},
+            "implicit": {},
+            "setup": {}
+          }
+        }
+      }
+    ],
+    "precice-driver": [
+      {
+        "message": [
+          "20230530-182751: preCICE setup completed on host precice-driver-846d69df86-b7hqf."
+        ],
+        "val": {}
+      },
+      {
+        "message": "20230530-183028: preCICE compute completed on host precice-driver-846d69df86-b7hqf",
+        "val": {
+          "inputs": {
+            "design": {},
+            "implicit": {},
+            "setup": {}
+          },
+          "outputs": {
+            "design": {},
+            "implicit": {},
+            "setup": {}
+          }
+        }
+      }
+    ],
+    "run_output": [
+      [
+        "20230530-182751: preCICE setup completed on host precice-driver-846d69df86-b7hqf."
+      ],
+      [
+        "20230530-202752: Setup completed."
+      ],
+      [
+        "20230530-202753: Setup completed."
+      ],
+      [
+        "20230530-182754: Setup completed."
+      ],
+      "20230530-203028: Compute completed.",
+      "20230530-203028: Compute completed.",
+      "20230530-183028: Post-processing completed.",
+      "20230530-183028: preCICE compute completed on host precice-driver-846d69df86-b7hqf"
+    ]
+  }
+}
