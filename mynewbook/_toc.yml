@@ -16,6 +16,8 @@ parts:
       - file: Tutorials/Example of a variable stiffness plate in compression
       - file: Tutorials/Using OpenVSP for aircraft performance analysis
       - file: Tutorials/A simple Rescale simulation example
+      - file: Tutorials/A structure-structure interaction simulation with preCICE
+      - file: Tutorials/A fluid-structure interaction simulation with preCICE
   - caption: Reference Guide
     chapters:
       - file: Reference/The dashboard

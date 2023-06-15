@@ -1,0 +1,12 @@
+{
+  "beam_frd": "beam2.frd",
+  "ccx_precice": {
+    "env": {
+      "CCX_NPROC_EQUATION_SOLVER": "1",
+      "OMP_NUM_THREADS": "1"
+    },
+    "infile": "beam2.inp",
+    "participant": "Calculix2",
+    "subfolder": "part_2"
+  }
+}
