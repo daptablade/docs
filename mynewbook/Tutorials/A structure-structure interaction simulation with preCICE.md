@@ -18,7 +18,7 @@ This tutorial is based on the [Partitioned elastic beam](https://precice.org/tut
 
 ## What is preCICE?
 
-preCICE stands for Precise Code Interaction Coupling Environment. Its main component is a library that can be used for partitioned multi-physics simulations, including, but not restricted to fluid-structure interaction and conjugate heat transfer simulations. Partitioned (as opposite to monolithic) means that preCICE couples existing programs (solvers) which simulate a subpart of the complete physics involved in a simulation. 
+[preCICE](https://precice.org/) stands for Precise Code Interaction Coupling Environment. Its main component is a library that can be used for partitioned multi-physics simulations, including, but not restricted to fluid-structure interaction and conjugate heat transfer simulations. Partitioned (as opposite to monolithic) means that preCICE couples existing programs (solvers) which simulate a subpart of the complete physics involved in a simulation. 
 
 The main elements of the preCICE library are shown in the following figure and include: communication, data mapping, coupling schemes and time interpolation. Read the [preCICE docs](https://precice.org/docs.html) to find out more about preCICE and how to use it. 
 
@@ -138,8 +138,8 @@ Upload these two files under the `Parameters` tab by selecting `upload user inpu
 ### Post-processing
 
 This component runs only after the coupled structure-structure interaction simulation completes.   
-It joins the *.frd output files from both beam simulation participants to form a new file with the entire beam.
-The output can be visualised in CalculiX Graphics as described in the [Inspect the outputs](tutorials-precice-beam-inspect-outputs) section. 
+It joins the .frd output files from both beam simulation participants to form a new file with the entire beam.
+The output can be visualised in CalculiX GraphiX as described in the [Inspect the outputs](tutorials-precice-beam-inspect-outputs) section. 
 
 Create the component:
 
@@ -217,9 +217,8 @@ We can now connect the {term}`Component`s we created to ensure that outputs and 
 ### Dummy design connection
 
 This 'Design variable' type connection (black line) links the beam-1 component to the beam-2 component.
-It exists purely to satisfy the basic workflow requirements that simulation workflows should have a single starting component and all components should be connected.
+It exists purely to satisfy the basic workflow requirements that simulation workflows should have a single starting component and that all (non-driver) components should be connected.
 In this case we choose the beam-1 component to be the start node.  
-The data transferred by this connection is not used. 
 
 Selecting the 'dummy_output' output handle of the beam-1 component and drag a line to the 'dummy-in' input handle of the beam-2 component.
  
@@ -243,13 +242,50 @@ We can now execute the analysis {term}`Run` by selecting the play symbol ▶ in 
 
 Once the run has started, each component will setup one at a time. 
 The setup order is arbitrary. 
-Then the compute on the driver, beam-1 and beam-2 will run in simultaneously, until the beam-1/2 coupled analysis completes and the post-processing component compute starts. 
+Then the compute on the driver, beam-1 and beam-2 will run in simultaneously until the coupled analysis completes and the post-processing component compute starts. 
 
 The {term}`Run` should complete once the post-processing component compute has completed.
 
 (tutorials-precice-beam-inspect-outputs)=
 ## Inspect the outputs
 
+The {term}`Run` log summarises the output of the components. Open the log by selecting `View Log` in the interface controls. 
+Scroll down to the "run_output" section to see that this contains the setup and compute function output messages from all four components (including the driver) in the order of execution as shown below.
+
+```{image} media/precice-elastic-beam-4.png
+:alt: run log
+:class: bg-primary mb-1
+:width: 700px
+:align: center
+```
+
+You can download the session data and the {term}`Run` log now by selecting `Download` from the interface controls. 
+
+To access the analysis output, select the post-processing component, navigate to the `Log` tab and select `download files snapshot` to download a zip folder containing the component files. 
+The outputs subfolder contains the consolidated CalculiX .frd output file with results from both beam components. 
+
+Local access to CalculiX GraphiX (CGX) is required to visualise the analysis output.
+Save a local copy of the following .fdb script in the same folder as the .frd file: [visualize.fbd](https://github.com/daptablade/docs/tree/preCICE/mynewbook/Tutorials/precice/partitioned_elastic_beam/post-processing/expected_output/visualize.fbd)
+
+In a command line execute: `cgx -b visualize.fbd` to view an animation of the magnified beam deflections.
+
+```{image} media/precice-elastic-beam-5.png
+:alt: run log
+:class: bg-primary mb-1
+:width: 700px
+:align: center
+```
 
 ## Clean-up
 
+Delete your workflow by selecting `Open` in the interface and then select the `Delete` button for the loaded workflow. 
+It may take a minute or so for the Cloud session to be reset. 
+
+```{warning}
+You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` session data (Run log and component logs) will be permanently deleted. 
+```
+
+(tutorials-precice-beam-references)=
+## References
+
+1. [Partitioned elastic beam preCICE tutorial](https://precice.org/tutorials-partitioned-elastic-beam.html)
