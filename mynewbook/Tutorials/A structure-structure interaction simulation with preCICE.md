@@ -22,7 +22,7 @@ This tutorial is based on the [Partitioned elastic beam](https://precice.org/tut
 
 The main elements of the preCICE library are shown in the following figure and include: communication, data mapping, coupling schemes and time interpolation. Read the [preCICE docs](https://precice.org/docs.html) to find out more about preCICE and how to use it. 
 
-```{image} media/precice-elastic-beam-2.png
+```{image} media/precice-1.png
 :alt: preCICE overview
 :class: bg-primary mb-1
 :width: 700px

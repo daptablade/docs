@@ -1,3 +1,6 @@
+""" Create animation .gif from openfoam animation export. 
+    Set `folder` to path with exported .png files, then execute this script."""
+
 import glob
 from PIL import Image
 
@@ -26,7 +29,7 @@ def make_gif(name, duration, folder=None, prefix=None):
 if __name__ == "__main__":
     make_gif(
         "perpendicular_plate_U.gif",
-        folder="/home/olivia/tutorials/perpendicular-flap/fluid-openfoam/animation",
+        folder="/home/olivia/perpendicular_plate_animation",
         duration=600,
         prefix="",
     )

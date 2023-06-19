@@ -1,6 +1,7 @@
 import shutil
 from datetime import datetime
 from pathlib import Path
+import zipfile
 
 from precice import run_openfoam_preCICE, run_openfoam_blockMesh
 
@@ -43,6 +44,16 @@ def compute(
         raise ChildProcessError(
             f'run_openfoam_precice returned non-zero exit status {resp["returncode"]}'
         )
+
+    # zip output subfolder to keep openfoam outputs directory structure
+    outputs_zip = run_folder / (subfolder + ".zip")
+    with zipfile.ZipFile(outputs_zip, mode="w") as archive:
+        for file_path in (run_folder / subfolder).rglob("*"):
+            archive.write(
+                file_path, arcname=file_path.relative_to(run_folder / subfolder)
+            )
+    # then delete subfolder
+    shutil.rmtree(run_folder / subfolder)
 
     print("Executed OpenFOAM analysis.")
 
