@@ -36,6 +36,8 @@ The following table provides an overview of currently available software APIs.
 | generic-python3-driver   | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
 | libreoffice-comp         | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, LibreOffice (Version: 7.0.4.2)|
 | openvsp-comp             | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, OpenVSP (Version: 3.31.1-Linux)|
+| precice-calculix-comp    | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, preCICE (libprecice2_2.5.0), Calculix CrunchiX (ccx_2.20), preCICE/Calculix adapter (calculix-precice2_2.20.0)|
+| precice-openfoam-comp    | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, preCICE (libprecice2_2.5.0), OpenFOAM (openfoam2212-default), preCICE/OpenFOAM adapter (openfoam-adapter-1.2.2)|
 | rescale-comp             | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, Dapta Rescale API (latest version)|
 
 
