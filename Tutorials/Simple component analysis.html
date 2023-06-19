@@ -176,6 +176,16 @@ const thebe_selector_output = ".output, .cell_output"
    9. A simple Rescale simulation example
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">
+   10. A structure-structure interaction simulation with preCICE and CalculiX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html">
+   11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -582,8 +592,8 @@ The <code class="docutils literal notranslate"><span class="pre">requirements.tx
 <p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we initialise x and y inputs with values from the <a class="reference internal" href="#tutorials-paraboloid-parameters"><span class="std std-ref">Parameters</span></a> input dictionary. We also initialise the outputs and partials (function gradients), which will only be needed for the next example.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which usually includes the component outputs dictionary. The compute function in this example calculates f(x,y) from the x and y values stored in the inputs dictionary. Again the partials calculation is only needed for the next example.</p>
 <div class="sd-tab-set docutils" id="tutorials-paraboloid-files">
-<input checked="checked" id="5a907c0e-69b7-4bde-9303-a1f27b9ecdd6" name="b070987f-c233-4e32-95ac-28512415a300" type="radio">
-</input><label class="sd-tab-label" for="5a907c0e-69b7-4bde-9303-a1f27b9ecdd6">
+<input checked="checked" id="9cbf9fcb-cffd-4ff1-a781-42996b170229" name="1988c3f7-f841-4a90-9eb1-229ae86a805b" type="radio">
+</input><label class="sd-tab-label" for="9cbf9fcb-cffd-4ff1-a781-42996b170229">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -674,8 +684,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="de882558-3fa1-462a-818f-540aecbb2609" name="b070987f-c233-4e32-95ac-28512415a300" type="radio">
-</input><label class="sd-tab-label" for="de882558-3fa1-462a-818f-540aecbb2609">
+<input id="eebf9422-e6fa-4b2f-b36f-2b0a40092e7f" name="1988c3f7-f841-4a90-9eb1-229ae86a805b" type="radio">
+</input><label class="sd-tab-label" for="eebf9422-e6fa-4b2f-b36f-2b0a40092e7f">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>

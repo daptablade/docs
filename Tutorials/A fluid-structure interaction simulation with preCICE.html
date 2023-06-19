@@ -1,0 +1,1147 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX &#8212; dapta docs</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/A fluid-structure interaction simulation with preCICE.html" />
+    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
+    <link rel="prev" title="10. A structure-structure interaction simulation with preCICE and CalculiX" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en">
+    
+
+    <!-- Google Analytics -->
+    
+<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+<script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){ dataLayer.push(arguments); }
+                    gtag('js', new Date());
+                    gtag('config', 'G-KD6ZCS0VXN');
+                </script>
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">dapta docs</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Tutorials
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="Simple%20component%20analysis.html">
+   1. Simple component analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Simple%20optimisation%20problem.html">
+   2. Simple optimisation problem
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Chaining%20component%20analyses.html">
+   3. Chaining component analyses
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20parametric%20studies.html">
+   4. Automating the composite wing model parametric study
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Automating%20design%20optimisations.html">
+   5. Automating the design optimisation of the composite wing model
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Working%20with%20spreadsheets.html">
+   6. Working with spreadsheets
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
+   7. Example of a variable stiffness plate in compression
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
+   8. Using OpenVSP for aircraft performance analysis
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20simple%20Rescale%20simulation%20example.html">
+   9. A simple Rescale simulation example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">
+   10. A structure-structure interaction simulation with preCICE and CalculiX
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Reference Guide
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/The%20dashboard.html">
+   The dashboard
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/FAQs.html">
+   FAQs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/Glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../Reference/Support.html">
+   Support
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/daptablade/docs"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/A fluid-structure interaction simulation with preCICE.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/Tutorials/A fluid-structure interaction simulation with preCICE.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-precice">
+   11.1. What is preCICE?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fsi-model-description">
+   11.2. FSI model description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-components">
+   11.3. Create the Components
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openfoam-fluid">
+     11.3.1. OpenFOAM fluid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculix-solid">
+     11.3.2. CalculiX solid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#precice-driver">
+     11.3.3. PreCICE driver
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-connections">
+   11.4. Create the Connections
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#execute-the-workflow">
+   11.5. Execute the workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-the-outputs">
+   11.6. Inspect the outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   11.7. Clean-up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   11.8. References
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-is-precice">
+   11.1. What is preCICE?
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fsi-model-description">
+   11.2. FSI model description
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-components">
+   11.3. Create the Components
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#openfoam-fluid">
+     11.3.1. OpenFOAM fluid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#calculix-solid">
+     11.3.2. CalculiX solid
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#precice-driver">
+     11.3.3. PreCICE driver
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-the-connections">
+   11.4. Create the Connections
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#execute-the-workflow">
+   11.5. Execute the workflow
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#inspect-the-outputs">
+   11.6. Inspect the outputs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#clean-up">
+   11.7. Clean-up
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#references">
+   11.8. References
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="a-fluid-structure-interaction-simulation-with-precice-openfoam-and-calculix">
+<h1><span class="section-number">11. </span>A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX<a class="headerlink" href="#a-fluid-structure-interaction-simulation-with-precice-openfoam-and-calculix" title="Permalink to this headline">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/11"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/precice/perpendicular_plate"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
+<p><strong>Duration: 45 min</strong></p>
+<p>In this tutorial we explore the usage of the <a class="reference external" href="https://precice.org/">preCICE multi-physics simulations library</a> with an FSI example. We run a fluid-structure interaction simulation with OpenFOAM to model the fluid flow and CalculiX to model the behaviour of a flexible flap exposed to the fluid flow.</p>
+<p>This tutorial is based on the <a class="reference external" href="https://precice.org/tutorials-perpendicular-flap.html">Perpendicular flap</a> preCICE tutorial.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/precice-perpendicular-flap-1.gif"><img alt="FSI simulation with preCICE" class="bg-primary mb-1 align-center" src="../_images/precice-perpendicular-flap-1.gif" style="width: 700px;" /></a>
+<section id="what-is-precice">
+<h2><span class="section-number">11.1. </span>What is preCICE?<a class="headerlink" href="#what-is-precice" title="Permalink to this headline">#</a></h2>
+<p><a class="reference external" href="https://precice.org/">preCICE</a> stands for Precise Code Interaction Coupling Environment. Its main component is a library that can be used for partitioned multi-physics simulations, including, but not restricted to fluid-structure interaction and conjugate heat transfer simulations. Partitioned (as opposite to monolithic) means that preCICE couples existing programs (solvers) which simulate a subpart of the complete physics involved in a simulation.</p>
+<p>The main elements of the preCICE library are shown in the following figure and include: communication, data mapping, coupling schemes and time interpolation. Read the <a class="reference external" href="https://precice.org/docs.html">preCICE docs</a> to find out more about preCICE and how to use it.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/precice-1.png"><img alt="preCICE overview" class="bg-primary mb-1 align-center" src="../_images/precice-1.png" style="width: 700px;" /></a>
+</section>
+<section id="fsi-model-description">
+<h2><span class="section-number">11.2. </span>FSI model description<a class="headerlink" href="#fsi-model-description" title="Permalink to this headline">#</a></h2>
+<p>We model a two-dimensional fluid flowing through a channel. A solid, elastic flap is fixed to the floor of this channel. The flap oscillates due to the fluid pressure building up on its surface.
+The setup is shown schematically in the figure below.</p>
+<p>The simulated flow domain is 6 units long (x) and 4 units tall (y). The flap is located at the center of the bottom (x=0) and is 1 unit long (y) and 0.1 units thick (x). We set the fluid density to 1.0kg/m, the kinematic viscosity to 1.0m^2/s, the solid density to 3.0*10^3kg/m^3, the solid Young’s modulus to E=4.0*10^6kg/ms^2 and Poisson ratio to 0.3.
+​On the left boundary a constant inflow profile in x-direction of 10m/s is prescribed. The right boundary is an outflow and the top and bottom of the channel as well as the surface of the flap are no-slip walls.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/precice-perpendicular-flap-2.png"><img alt="FSI model overview" class="bg-primary mb-1 align-center" src="../_images/precice-perpendicular-flap-2.png" style="width: 400px;" /></a>
+</section>
+<section id="create-the-components">
+<h2><span class="section-number">11.3. </span>Create the Components<a class="headerlink" href="#create-the-components" title="Permalink to this headline">#</a></h2>
+<section id="openfoam-fluid">
+<h3><span class="section-number">11.3.1. </span>OpenFOAM fluid<a class="headerlink" href="#openfoam-fluid" title="Permalink to this headline">#</a></h3>
+<p>This component simulates the fluid flow in the channel.</p>
+<p>Create the component:</p>
+<ul class="simple">
+<li><p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>. Select the empty component to edit it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">fluid-openfoam</span></code>, and select the preCICE-openFOAM component API <code class="docutils literal notranslate"><span class="pre">precice-openfoam-comp:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> files from below into a text editor, save them locally.
+Then upload them under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> option.</p></li>
+<li><p>Copy the the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;openfoam_precice&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;subfolder&quot;</span><span class="p">:</span> <span class="s2">&quot;fluid-openfoam&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>From github download copies of the preCICE configuration file <a class="reference external" href="https://github.com/daptablade/docs/blob/master/mynewbook/Tutorials/precice/perpendicular_plate/fluid-openfoam/precice-config.xml">precice-config.xml</a> and of the zip folder with the openFOAM input files <a class="reference external" href="https://github.com/daptablade/docs/blob/master/mynewbook/Tutorials/precice/perpendicular_plate/fluid-openfoam/fluid-openfoam.zip">fluid-openfoam.zip</a>. Then upload these two files under the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab by selecting <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">user</span> <span class="pre">input</span> <span class="pre">files</span></code>.</p></li>
+<li><p>Copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;dummy_output&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="655e2527-012b-4faf-9e71-961c94c6be46" name="f8089af4-72a7-4a08-b5cd-da5243c6ce6a" type="radio">
+</input><label class="sd-tab-label" for="655e2527-012b-4faf-9e71-961c94c6be46">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.&quot;&quot;&quot;</span>
+
+    <span class="c1"># unzip the analysis input files into run folder</span>
+    <span class="n">inputs_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="n">subfolder</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;openfoam_precice&quot;</span><span class="p">][</span><span class="s2">&quot;subfolder&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;user_input_files&quot;</span><span class="p">]:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">inputs_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">src</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.zip&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping </span><span class="si">{</span><span class="n">file</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> into local component outputs folder.&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;precice-config.xml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing precice configuration &#39;precice-config.xml&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="b0f21b69-d6af-433e-b644-9930caa9c4ce" name="f8089af4-72a7-4a08-b5cd-da5243c6ce6a" type="radio">
+</input><label class="sd-tab-label" for="b0f21b69-d6af-433e-b644-9930caa9c4ce">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+
+<span class="kn">from</span> <span class="nn">precice</span> <span class="kn">import</span> <span class="n">run_openfoam_preCICE</span><span class="p">,</span> <span class="n">run_openfoam_blockMesh</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compute started.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get components inputs</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;openfoam_precice&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Missing required openfoam_precice parmeter dictionary with keys &#39;subfolder&#39;.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">subfolder</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;openfoam_precice&quot;</span><span class="p">][</span><span class="s2">&quot;subfolder&quot;</span><span class="p">]</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">run_openfoam_blockMesh</span><span class="p">(</span><span class="n">run_folder</span><span class="o">=</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;openfoam_precice.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ChildProcessError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;run_openfoam_blockMesh returned non-zero exit status </span><span class="si">{</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">run_openfoam_preCICE</span><span class="p">(</span><span class="n">run_folder</span><span class="o">=</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;openfoam_precice.log&quot;</span><span class="p">,</span> <span class="s2">&quot;a&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ChildProcessError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;run_openfoam_precice returned non-zero exit status </span><span class="si">{</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># zip output subfolder to keep openfoam outputs directory structure</span>
+    <span class="n">outputs_zip</span> <span class="o">=</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="p">(</span><span class="n">subfolder</span> <span class="o">+</span> <span class="s2">&quot;.zip&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">outputs_zip</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">file_path</span> <span class="ow">in</span> <span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span><span class="o">.</span><span class="n">rglob</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">):</span>
+            <span class="n">archive</span><span class="o">.</span><span class="n">write</span><span class="p">(</span>
+                <span class="n">file_path</span><span class="p">,</span> <span class="n">arcname</span><span class="o">=</span><span class="n">file_path</span><span class="o">.</span><span class="n">relative_to</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span>
+            <span class="p">)</span>
+    <span class="c1"># then delete subfolder</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executed OpenFOAM analysis.&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute completed.&quot;</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="calculix-solid">
+<h3><span class="section-number">11.3.2. </span>CalculiX solid<a class="headerlink" href="#calculix-solid" title="Permalink to this headline">#</a></h3>
+<p>This component simulates the flexible flap fixed to the lower surface of the channel.</p>
+<p>Create the component:</p>
+<ul class="simple">
+<li><p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>. Select the empty component to edit it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">solid-calculix</span></code>, and select the preCICE-CalculiX component API <code class="docutils literal notranslate"><span class="pre">precice-calculix-comp:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> files from below into a text editor, save them locally.
+Then upload them under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> option.</p></li>
+<li><p>Copy the the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;ccx_precice&quot;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s2">&quot;env&quot;</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="s2">&quot;infile&quot;</span><span class="p">:</span> <span class="s2">&quot;flap.inp&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;participant&quot;</span><span class="p">:</span> <span class="s2">&quot;Solid&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;subfolder&quot;</span><span class="p">:</span> <span class="s2">&quot;solid-calculix&quot;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>From github download copies of the preCICE configuration file <a class="reference external" href="https://github.com/daptablade/docs/blob/master/mynewbook/Tutorials/precice/perpendicular_plate/solid-calculix/precice-config.xml">precice-config.xml</a> and of the zip folder with the CalculiX input files <a class="reference external" href="https://github.com/daptablade/docs/blob/master/mynewbook/Tutorials/precice/perpendicular_plate/solid-calculix/solid-calculix.zip">solid-calculix.zip</a>. Then upload these two files under the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab by selecting <code class="docutils literal notranslate"><span class="pre">upload</span> <span class="pre">user</span> <span class="pre">input</span> <span class="pre">files</span></code>.</p></li>
+<li><p>Copy the following JSON object into the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab text box:</p></li>
+</ul>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;dummy-input&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="9f59599c-049c-4232-88ab-b36f2c06d7f0" name="7dcd4571-8767-4382-bf92-e20c409c4003" type="radio">
+</input><label class="sd-tab-label" for="9f59599c-049c-4232-88ab-b36f2c06d7f0">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.&quot;&quot;&quot;</span>
+
+    <span class="c1"># unzip the analysis input files into run folder</span>
+    <span class="n">inputs_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="n">subfolder</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;ccx_precice&quot;</span><span class="p">][</span><span class="s2">&quot;subfolder&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;user_input_files&quot;</span><span class="p">]:</span>
+        <span class="n">src</span> <span class="o">=</span> <span class="n">inputs_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">[</span><span class="s2">&quot;filename&quot;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">src</span><span class="o">.</span><span class="n">suffix</span> <span class="o">==</span> <span class="s2">&quot;.zip&quot;</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unzipping </span><span class="si">{</span><span class="n">file</span><span class="p">[</span><span class="s1">&#39;filename&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> into local component outputs folder.&quot;</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">shutil</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">src</span><span class="p">,</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="n">src</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;precice-config.xml&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Missing precice configuration &#39;precice-config.xml&#39;.&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="ff8680df-ace5-4110-8b47-187e5c58aa0b" name="7dcd4571-8767-4382-bf92-e20c409c4003" type="radio">
+</input><label class="sd-tab-label" for="ff8680df-ace5-4110-8b47-187e5c58aa0b">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">precice</span> <span class="kn">import</span> <span class="n">run_ccx_preCICE</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Compute started.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get components inputs</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="s2">&quot;ccx_precice&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;Missing required ccx_precice parmeter dictionary with keys &#39;infile&#39;, &#39;participant&#39;, &#39;subfolder&#39; and &#39;env&#39;.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">infile</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;ccx_precice&quot;</span><span class="p">][</span><span class="s2">&quot;infile&quot;</span><span class="p">]</span>
+    <span class="n">participant</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;ccx_precice&quot;</span><span class="p">][</span><span class="s2">&quot;participant&quot;</span><span class="p">]</span>
+    <span class="n">env</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;ccx_precice&quot;</span><span class="p">][</span><span class="s2">&quot;env&quot;</span><span class="p">]</span>
+    <span class="n">subfolder</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;ccx_precice&quot;</span><span class="p">][</span><span class="s2">&quot;subfolder&quot;</span><span class="p">]</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="n">run_ccx_preCICE</span><span class="p">(</span>
+        <span class="n">infile</span><span class="o">=</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span> <span class="o">/</span> <span class="n">infile</span><span class="p">,</span>
+        <span class="n">run_folder</span><span class="o">=</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">subfolder</span><span class="p">,</span>
+        <span class="n">participant</span><span class="o">=</span><span class="n">participant</span><span class="p">,</span>
+        <span class="n">env</span><span class="o">=</span><span class="n">env</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;ccx_precice_</span><span class="si">{</span><span class="n">participant</span><span class="si">}</span><span class="s2">.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;stdout&quot;</span><span class="p">])</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ChildProcessError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s1">&#39;ccx_precice returned non-zero exit status </span><span class="si">{</span><span class="n">resp</span><span class="p">[</span><span class="s2">&quot;returncode&quot;</span><span class="p">]</span><span class="si">}</span><span class="s1">&#39;</span>
+        <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Executed CCX FEM analysis.&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Compute completed.&quot;</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="precice-driver">
+<h3><span class="section-number">11.3.3. </span>PreCICE driver<a class="headerlink" href="#precice-driver" title="Permalink to this headline">#</a></h3>
+<p>In general, preCICE participants are launched in separate processes and the coupled simulation only starts once both processes have been launched.</p>
+<p>To replicate this approach, we define a driver component that launches the fluid and solid components in parallel using the python <a class="reference external" href="https://docs.python.org/3/library/concurrent.futures.html#threadpoolexecutor">ThreadPoolExecutor</a> class.</p>
+<p>Create the component:</p>
+<ul class="simple">
+<li><p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>. Select the empty component to edit it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab, fill in the component name, <code class="docutils literal notranslate"><span class="pre">precice-driver</span></code>, and select the generic python driver API <code class="docutils literal notranslate"><span class="pre">generic-python3-driver:latest</span></code>.</p></li>
+<li><p>Copy the contents of the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> files from below into a text editor, save them locally.
+Then upload them under the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Properties</span></code> tab check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option.</p></li>
+<li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
+</ul>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="e8f32cf0-5dcc-477f-ae83-58803fc7eb70" name="361e63ad-965f-416d-9df8-85886c2fd0bb" type="radio">
+</input><label class="sd-tab-label" for="e8f32cf0-5dcc-477f-ae83-58803fc7eb70">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">component_api2</span> <span class="kn">import</span> <span class="n">call_setup</span>
+
+<span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOSTNAME&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable setup function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs: dict</span>
+<span class="sd">        The component Inputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    outputs: dict</span>
+<span class="sd">        The component Outputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The component Parameters as defined in the component &#39;Parameters&#39; tab.</span>
+<span class="sd">        Includes the following special keys:</span>
+<span class="sd">        &#39;user_input_files&#39;: list of user-uploaded input file filenames</span>
+<span class="sd">        &#39;inputs_folder_path&#39;: path to all user and connection input files (str)</span>
+<span class="sd">        &#39;outputs_folder_path&#39;: path to component outputs folder (str)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dictionary of JSON-serialisable keys and values, including:</span>
+<span class="sd">        inputs: dict, optional</span>
+<span class="sd">            The setup function can assign values to input keys, but the inputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        outputs: dict, optional</span>
+<span class="sd">            The setup function can assign values to output keys, but the outputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        parameters: dict, optional</span>
+<span class="sd">            The setup function can add key/value pairs to the parameters dict,</span>
+<span class="sd">            but the existing key/value pairs cannot be modified.</span>
+<span class="sd">        partials: dict, optional</span>
+<span class="sd">            The derivatives of the component&#39;s &quot;design&quot; outputs with respect to its</span>
+<span class="sd">            &quot;design&quot; inputs, used for gradient-based design optimisation Runs.</span>
+<span class="sd">        message: str, optional</span>
+<span class="sd">            A setup message that will appear in the Run log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;preCICE problem setup started.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get components inputs</span>
+    <span class="n">workflow</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;workflow&quot;</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">component</span> <span class="ow">in</span> <span class="n">workflow</span><span class="p">:</span>
+        <span class="c1"># launch each component setup in sequence</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="n">component</span><span class="p">}</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">component_dict</span> <span class="o">=</span> <span class="n">call_setup</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="n">response</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># optional</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: preCICE setup completed on host </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="n">response</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">response</span>
+</pre></div>
+</div>
+</div>
+<input id="f1e9dc86-10b9-48f4-a28d-cdd210f6a090" name="361e63ad-965f-416d-9df8-85886c2fd0bb" type="radio">
+</input><label class="sd-tab-label" for="f1e9dc86-10b9-48f4-a28d-cdd210f6a090">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; preCICE driver component that launches the FSI components.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">redirect_stdout</span>
+<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+
+<span class="kn">from</span> <span class="nn">component_api2</span> <span class="kn">import</span> <span class="n">call_compute</span>
+
+<span class="n">HOSTNAME</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;HOSTNAME&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;A user editable compute function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs: dict</span>
+<span class="sd">        The component Inputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    outputs: dict</span>
+<span class="sd">        The component Outputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    partials: dict, optional</span>
+<span class="sd">        The derivatives of the component&#39;s &quot;design&quot; outputs with respect to its</span>
+<span class="sd">        &quot;design&quot; inputs, used for gradient-based design optimisation Runs.</span>
+<span class="sd">    options: dict, optional</span>
+<span class="sd">        component data processing options and flags, inc. : &quot;stream_call&quot;,</span>
+<span class="sd">        &quot;get_outputs&quot;, &quot;get_grads&quot;</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The component Parameters as returned by the setup function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dictionary of JSON-serialisable keys and values, including:</span>
+<span class="sd">        outputs: dict, optional</span>
+<span class="sd">            The compute function can assign values to output keys, but the outputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        partials: dict, optional</span>
+<span class="sd">            The compute function can assign values to partials keys, but the</span>
+<span class="sd">            partials keys should not be modified.</span>
+<span class="sd">        message: str, optional</span>
+<span class="sd">            A compute message that will appear in the Run log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;preCICE problem solution started.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># get components inputs</span>
+    <span class="n">workflow</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;workflow&quot;</span><span class="p">]</span>
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+
+    <span class="n">coupled_components</span> <span class="o">=</span> <span class="n">workflow</span>  <span class="c1"># [:-1]</span>
+    <span class="c1"># post_component = workflow[-1]</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="sa">f</span><span class="s2">&quot;run_driver.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+            <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+                <span class="c1"># launch each component compute in separate thread</span>
+                <span class="n">msgs</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">run_component_compute</span><span class="p">,</span> <span class="n">coupled_components</span><span class="p">)</span>
+                <span class="n">errors</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">msgs</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">errors</span> <span class="ow">and</span> <span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">errors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+            <span class="c1"># # post-process results</span>
+            <span class="c1"># run_component_compute(post_component)</span>
+
+    <span class="n">resp</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: preCICE compute completed on host </span><span class="si">{</span><span class="n">HOSTNAME</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">resp</span><span class="p">[</span><span class="s2">&quot;message&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">message</span>
+
+    <span class="k">return</span> <span class="n">resp</span>
+
+
+<span class="k">def</span> <span class="nf">run_component_compute</span><span class="p">(</span><span class="n">component</span><span class="p">):</span>
+    <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="n">component</span><span class="p">}</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">call_compute</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compute of </span><span class="si">{</span><span class="n">component</span><span class="si">}</span><span class="s2"> failed, input data was: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">message</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Component </span><span class="si">{</span><span class="n">component</span><span class="si">}</span><span class="s2"> compute error.&quot;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">exc</span>
+
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Completed compute for component </span><span class="si">{</span><span class="n">component</span><span class="si">}</span><span class="s2">.&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="create-the-connections">
+<h2><span class="section-number">11.4. </span>Create the Connections<a class="headerlink" href="#create-the-connections" title="Permalink to this headline">#</a></h2>
+<p>We need to create a ‘Design variable’ type connection (black line) that links the fluid component to solid component.
+It exists purely to satisfy the basic workflow requirements that simulation workflows should have a single starting component and that all (non-driver) components should be connected.
+In this case we choose the fluid component to be the start node (you can equally choose the solid component, without affecting the analysis in this case).</p>
+<p>Selecting the ‘dummy_output’ output handle of the fluid-openfoam component and drag a line to the ‘dummy-in’ input handle of the solid-calculix component.</p>
+</section>
+<section id="execute-the-workflow">
+<h2><span class="section-number">11.5. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h2>
+<p>We can now execute the analysis <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the Run controls interface.</p>
+<p>Once the run has started, each component will setup one at a time.
+The setup order is arbitrary.
+Then the compute on the driver, fluid and solid components will run in simultaneously until the coupled analysis completes, which should take less than ~10min.</p>
+<p>The workspace should appear as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/precice-perpendicular-flap-3.png"><img alt="preCICE overview" class="bg-primary mb-1 align-center" src="../_images/precice-perpendicular-flap-3.png" style="width: 700px;" /></a>
+</section>
+<section id="inspect-the-outputs">
+<h2><span class="section-number">11.6. </span>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h2>
+<p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.
+Scroll down to the “run_output” section to see that this contains the setup and compute function output messages from all three components (including the driver) in the order of execution as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/precice-perpendicular-flap-4.png"><img alt="run log" class="bg-primary mb-1 align-center" src="../_images/precice-perpendicular-flap-4.png" style="width: 700px;" /></a>
+<p>You can download the session data and the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
+<p>To access the openFOAM analysis output, select the fluid-openfoam component, navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and select <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code> to download a zip folder containing the component files.
+The outputs subfolder contains a zipped openFOAM outputs folder.</p>
+<p>Local access to Paraview is required to visualise the openFOAM analysis output.
+Unzip the outputs folder into a local directory, then open the fluid-openfoam.foam file in Paraview, for example by executing the following shell command:
+<code class="docutils literal notranslate"><span class="pre">paraview</span> <span class="pre">fluid-openfoam.foam</span></code></p>
+<p>Similarly, to access the CalculiX outputs, select the solid-calculix component, navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab and select <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code>.
+This output contains a 5s trace of the solid flap tip deflections and applied forces in the precice-Solid-watchpoint-Flap-Tip.log file, which can be plotted as described in <a class="reference internal" href="#tutorials-precice-perpendicular-flap-references"><span class="std std-ref">Ref 1</span></a>.</p>
+</section>
+<section id="clean-up">
+<h2><span class="section-number">11.7. </span>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<p>Delete your workflow by selecting <code class="docutils literal notranslate"><span class="pre">Open</span></code> in the interface and then select the <code class="docutils literal notranslate"><span class="pre">Delete</span></code> button for the loaded workflow.
+It may take a minute or so for the Cloud session to be reset.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> session data (Run log and component logs) will be permanently deleted.</p>
+</div>
+</section>
+<section id="references">
+<span id="tutorials-precice-perpendicular-flap-references"></span><h2><span class="section-number">11.8. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
+<ol class="simple">
+<li><p><a class="reference external" href="https://precice.org/tutorials-perpendicular-flap.html">Perpendicular flap preCICE tutorial</a></p></li>
+</ol>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./Tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">10. </span>A structure-structure interaction simulation with preCICE and CalculiX</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../Reference/The%20dashboard.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The dashboard</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Dapta Ltd<br/>
+  
+      &copy; Copyright 2023.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

@@ -174,6 +174,16 @@ const thebe_selector_output = ".output, .cell_output"
    9. A simple Rescale simulation example
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">
+   10. A structure-structure interaction simulation with preCICE and CalculiX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html">
+   11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -609,8 +619,8 @@ Then upload the first 2 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="78a346e5-0738-40b0-b37d-d2a8a6839ba6" name="20262cea-0ff6-4057-bfec-e0a9b5524acc" type="radio">
-</input><label class="sd-tab-label" for="78a346e5-0738-40b0-b37d-d2a8a6839ba6">
+<input checked="checked" id="395cac4b-6626-41ac-84e0-96772e1f38bc" name="68fcccc4-44eb-4a8c-88d5-0271b2b94485" type="radio">
+</input><label class="sd-tab-label" for="395cac4b-6626-41ac-84e0-96772e1f38bc">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -646,8 +656,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="4873e701-4ac6-47f8-9568-5f9ac61c88ad" name="20262cea-0ff6-4057-bfec-e0a9b5524acc" type="radio">
-</input><label class="sd-tab-label" for="4873e701-4ac6-47f8-9568-5f9ac61c88ad">
+<input id="c59be087-605c-4c12-ab89-0f49a088430f" name="68fcccc4-44eb-4a8c-88d5-0271b2b94485" type="radio">
+</input><label class="sd-tab-label" for="c59be087-605c-4c12-ab89-0f49a088430f">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -837,13 +847,13 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e66c3197-d6ec-4284-947e-2a3ea322960d" name="20262cea-0ff6-4057-bfec-e0a9b5524acc" type="radio">
-</input><label class="sd-tab-label" for="e66c3197-d6ec-4284-947e-2a3ea322960d">
+<input id="d645d764-fa12-486f-8667-99bb1f804fc8" name="68fcccc4-44eb-4a8c-88d5-0271b2b94485" type="radio">
+</input><label class="sd-tab-label" for="d645d764-fa12-486f-8667-99bb1f804fc8">
 Cessna-210_metric.vsp3</label><div class="sd-tab-content docutils">
 <p><a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/openvsp-aircraft-aircraft-performance/vspaero/Cessna-210_metric.vsp3">Download Cessna-210_metric.vsp3 from Github</a></p>
 </div>
-<input id="ec4526df-5143-4848-a74b-e1f9bbbb86a2" name="20262cea-0ff6-4057-bfec-e0a9b5524acc" type="radio">
-</input><label class="sd-tab-label" for="ec4526df-5143-4848-a74b-e1f9bbbb86a2">
+<input id="f2f88505-2801-4bf5-a18d-029d14e05cb4" name="68fcccc4-44eb-4a8c-88d5-0271b2b94485" type="radio">
+</input><label class="sd-tab-label" for="f2f88505-2801-4bf5-a18d-029d14e05cb4">
 Cessna-210_metric.des</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>3
 BMZJCENVRIX:Default:VSPAERO:NCPU: 1
@@ -902,8 +912,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="967b9a18-f5fd-4deb-995c-7e90927bd59e" name="fe2fa62b-bf10-4f8b-b336-a6c888a52add" type="radio">
-</input><label class="sd-tab-label" for="967b9a18-f5fd-4deb-995c-7e90927bd59e">
+<input checked="checked" id="66687ddd-98fb-4b72-91e1-bf7a95696706" name="4652e99a-28ec-4c60-b29d-baa68f30114f" type="radio">
+</input><label class="sd-tab-label" for="66687ddd-98fb-4b72-91e1-bf7a95696706">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 
@@ -930,8 +940,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="1eae4c0a-8377-4ad4-b71e-290a735f5f96" name="fe2fa62b-bf10-4f8b-b336-a6c888a52add" type="radio">
-</input><label class="sd-tab-label" for="1eae4c0a-8377-4ad4-b71e-290a735f5f96">
+<input id="e156e38e-b38b-4879-952c-7c30420528bc" name="4652e99a-28ec-4c60-b29d-baa68f30114f" type="radio">
+</input><label class="sd-tab-label" for="e156e38e-b38b-4879-952c-7c30420528bc">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">fluids.atmosphere</span> <span class="kn">import</span> <span class="n">ATMOSPHERE_1976</span>
@@ -989,8 +999,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="be38f4d2-7eaf-4ebb-99f2-d13f670fffd9" name="fe2fa62b-bf10-4f8b-b336-a6c888a52add" type="radio">
-</input><label class="sd-tab-label" for="be38f4d2-7eaf-4ebb-99f2-d13f670fffd9">
+<input id="0da9d053-92ae-4dc0-a816-f2c1390f0d30" name="4652e99a-28ec-4c60-b29d-baa68f30114f" type="radio">
+</input><label class="sd-tab-label" for="0da9d053-92ae-4dc0-a816-f2c1390f0d30">
 requirements.txt</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>fluids==1.0.22
 </pre></div>
@@ -1023,8 +1033,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="e188e01d-abc2-4bf8-a323-255aa69b329d" name="73cab7ea-a93d-4d1e-9d62-da4b60596841" type="radio">
-</input><label class="sd-tab-label" for="e188e01d-abc2-4bf8-a323-255aa69b329d">
+<input checked="checked" id="251f9f2e-ab2e-4759-9933-045936732418" name="bc8e2484-57f7-4e57-ba00-3cea9d7d8909" type="radio">
+</input><label class="sd-tab-label" for="251f9f2e-ab2e-4759-9933-045936732418">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1051,8 +1061,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c778df24-2881-4c51-941a-9979dfd27fd0" name="73cab7ea-a93d-4d1e-9d62-da4b60596841" type="radio">
-</input><label class="sd-tab-label" for="c778df24-2881-4c51-941a-9979dfd27fd0">
+<input id="d3390a12-7741-4789-b84e-56daac708f85" name="bc8e2484-57f7-4e57-ba00-3cea9d7d8909" type="radio">
+</input><label class="sd-tab-label" for="d3390a12-7741-4789-b84e-56daac708f85">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1653,8 +1663,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="5101a129-da3d-4ccc-aee8-d45e711ed01d" name="73cab7ea-a93d-4d1e-9d62-da4b60596841" type="radio">
-</input><label class="sd-tab-label" for="5101a129-da3d-4ccc-aee8-d45e711ed01d">
+<input id="180693e7-61fe-42a0-a965-86f12261d4db" name="bc8e2484-57f7-4e57-ba00-3cea9d7d8909" type="radio">
+</input><label class="sd-tab-label" for="180693e7-61fe-42a0-a965-86f12261d4db">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 openmdao==3.16.0
@@ -1664,8 +1674,8 @@ pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="0ebacf7f-65e7-4b4b-bb41-2b7bd6ca9b5c" name="73cab7ea-a93d-4d1e-9d62-da4b60596841" type="radio">
-</input><label class="sd-tab-label" for="0ebacf7f-65e7-4b4b-bb41-2b7bd6ca9b5c">
+<input id="2bb017c0-b918-4b64-be23-c0f1a1ee8d8c" name="bc8e2484-57f7-4e57-ba00-3cea9d7d8909" type="radio">
+</input><label class="sd-tab-label" for="2bb017c0-b918-4b64-be23-c0f1a1ee8d8c">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;Groups&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
@@ -1802,8 +1812,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="247c8ac1-0a7a-4433-9521-d6a2dc0878ce" name="73cab7ea-a93d-4d1e-9d62-da4b60596841" type="radio">
-</input><label class="sd-tab-label" for="247c8ac1-0a7a-4433-9521-d6a2dc0878ce">
+<input id="9b18da03-274e-474d-96e4-7284b9260c44" name="bc8e2484-57f7-4e57-ba00-3cea9d7d8909" type="radio">
+</input><label class="sd-tab-label" for="9b18da03-274e-474d-96e4-7284b9260c44">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -2022,8 +2032,8 @@ om_component</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="6518a7e6-1f9b-4899-9302-b850cef490e0" name="73cab7ea-a93d-4d1e-9d62-da4b60596841" type="radio">
-</input><label class="sd-tab-label" for="6518a7e6-1f9b-4899-9302-b850cef490e0">
+<input id="2c599bf1-effb-4900-a9e1-d854d6f697df" name="bc8e2484-57f7-4e57-ba00-3cea9d7d8909" type="radio">
+</input><label class="sd-tab-label" for="2c599bf1-effb-4900-a9e1-d854d6f697df">
 post</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>

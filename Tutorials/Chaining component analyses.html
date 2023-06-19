@@ -174,6 +174,16 @@ const thebe_selector_output = ".output, .cell_output"
    9. A simple Rescale simulation example
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">
+   10. A structure-structure interaction simulation with preCICE and CalculiX
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html">
+   11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX
+  </a>
+ </li>
 </ul>
 <p aria-level="2" class="caption" role="heading">
  <span class="caption-text">
@@ -564,8 +574,8 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-parametric-model-files">
-<input checked="checked" id="52ec3476-8220-45ed-a1df-1562f0a6c6be" name="da90fb29-594e-405d-ae96-e3dee9fb8503" type="radio">
-</input><label class="sd-tab-label" for="52ec3476-8220-45ed-a1df-1562f0a6c6be">
+<input checked="checked" id="341de887-db09-43a3-93e7-779489f303c9" name="d632b5e4-c2df-4aa3-8781-75a6c831d443" type="radio">
+</input><label class="sd-tab-label" for="341de887-db09-43a3-93e7-779489f303c9">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -602,8 +612,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="48d5fd24-ea06-4b4e-94eb-11f321b3f0ea" name="da90fb29-594e-405d-ae96-e3dee9fb8503" type="radio">
-</input><label class="sd-tab-label" for="48d5fd24-ea06-4b4e-94eb-11f321b3f0ea">
+<input id="a2c83aae-d560-4a1d-ae47-5a277e25b7e4" name="d632b5e4-c2df-4aa3-8781-75a6c831d443" type="radio">
+</input><label class="sd-tab-label" for="a2c83aae-d560-4a1d-ae47-5a277e25b7e4">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1232,8 +1242,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="4ac73026-d960-4c9b-a845-f85a695bbd95" name="da90fb29-594e-405d-ae96-e3dee9fb8503" type="radio">
-</input><label class="sd-tab-label" for="4ac73026-d960-4c9b-a845-f85a695bbd95">
+<input id="e9000bd8-d3c0-423b-b565-6c9466f04155" name="d632b5e4-c2df-4aa3-8781-75a6c831d443" type="radio">
+</input><label class="sd-tab-label" for="e9000bd8-d3c0-423b-b565-6c9466f04155">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib==3.7.0
 numpy==1.23.5
@@ -1241,8 +1251,8 @@ scipy==1.10.0
 </pre></div>
 </div>
 </div>
-<input id="91d65b2e-20a7-49f9-8029-abf283084ce0" name="da90fb29-594e-405d-ae96-e3dee9fb8503" type="radio">
-</input><label class="sd-tab-label" for="91d65b2e-20a7-49f9-8029-abf283084ce0">
+<input id="5aa451d5-54f3-47a3-8621-704820f96938" name="d632b5e4-c2df-4aa3-8781-75a6c831d443" type="radio">
+</input><label class="sd-tab-label" for="5aa451d5-54f3-47a3-8621-704820f96938">
 naca0012</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span># NACA 0012 from http://airfoiltools.com/
   1.000000  0.001260
@@ -1379,8 +1389,8 @@ naca0012</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="68c58143-822d-4fa5-b4ae-6dca89b40cc2" name="da90fb29-594e-405d-ae96-e3dee9fb8503" type="radio">
-</input><label class="sd-tab-label" for="68c58143-822d-4fa5-b4ae-6dca89b40cc2">
+<input id="e6497282-f889-4576-a1bc-6d0f752eb4b1" name="d632b5e4-c2df-4aa3-8781-75a6c831d443" type="radio">
+</input><label class="sd-tab-label" for="e6497282-f889-4576-a1bc-6d0f752eb4b1">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;span&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w"></span>
@@ -1448,8 +1458,8 @@ Then upload the first 3 files under the <code class="docutils literal notranslat
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-calculix-fea-files">
-<input checked="checked" id="aafdc197-f265-4547-a17f-cf23c488f9b1" name="ee2621c8-c5c5-4949-ad74-7f424a8313ee" type="radio">
-</input><label class="sd-tab-label" for="aafdc197-f265-4547-a17f-cf23c488f9b1">
+<input checked="checked" id="237390db-f71c-40ca-863f-16aec030efd7" name="a0a907fa-f0a9-48ca-bb63-cd50fe0bfb85" type="radio">
+</input><label class="sd-tab-label" for="237390db-f71c-40ca-863f-16aec030efd7">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1485,8 +1495,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="19c9f91d-7bb8-47dd-9e4f-70d592b8d743" name="ee2621c8-c5c5-4949-ad74-7f424a8313ee" type="radio">
-</input><label class="sd-tab-label" for="19c9f91d-7bb8-47dd-9e4f-70d592b8d743">
+<input id="d343cc8f-8da9-46c7-b8e6-78390b2e5961" name="a0a907fa-f0a9-48ca-bb63-cd50fe0bfb85" type="radio">
+</input><label class="sd-tab-label" for="d343cc8f-8da9-46c7-b8e6-78390b2e5961">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">shutil</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -1512,7 +1522,6 @@ compute</label><div class="sd-tab-content docutils">
         <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
 
     <span class="c1"># check input files have been uploaded</span>
@@ -1550,7 +1559,6 @@ compute</label><div class="sd-tab-content docutils">
 
     <span class="c1"># define composite material properties</span>
     <span class="k">if</span> <span class="s2">&quot;composite_layup&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
-
         <span class="n">fibre_rotation_angles</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;fibre_rotation_angle&quot;</span><span class="p">)</span>
         <span class="p">]</span>
@@ -1628,7 +1636,6 @@ compute</label><div class="sd-tab-content docutils">
 
     <span class="n">shell_set_name</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;shell_set_name&quot;</span><span class="p">]</span>
     <span class="k">if</span> <span class="s2">&quot;filled_sections_flags&quot;</span> <span class="ow">in</span> <span class="n">inputs</span> <span class="ow">and</span> <span class="nb">any</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;filled_sections_flags&quot;</span><span class="p">]):</span>
-
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span>
             <span class="nb">isinstance</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;airfoil_cut_chord_percentages&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">)</span>
             <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;airfoil_cut_chord_percentages&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="mi">2</span>
@@ -1687,7 +1694,6 @@ compute</label><div class="sd-tab-content docutils">
 <span class="k">def</span> <span class="nf">_get_ccx_composite_shell_props</span><span class="p">(</span>
     <span class="n">plies</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">orientations</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">layup</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">shell_set_name</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
-
     <span class="n">commands</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">shell_set_name</span><span class="p">:</span>
         <span class="n">shell_set_name</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ribs&quot;</span><span class="p">:</span> <span class="s2">&quot;ERIBS&quot;</span><span class="p">,</span> <span class="s2">&quot;aero&quot;</span><span class="p">:</span> <span class="s2">&quot;EAERO&quot;</span><span class="p">}</span>
@@ -1701,7 +1707,7 @@ compute</label><div class="sd-tab-content docutils">
 
     <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;** =============== </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># shell property</span>
-    <span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">section_name</span><span class="p">)</span> <span class="ow">in</span> <span class="n">shell_set_name</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">section_name</span> <span class="ow">in</span> <span class="n">shell_set_name</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="n">commands</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;*SHELL SECTION,ELSET=</span><span class="si">{</span><span class="n">section_name</span><span class="si">}</span><span class="s2">,COMPOSITE</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">ply</span> <span class="ow">in</span> <span class="n">layup</span><span class="p">[</span><span class="n">key</span><span class="p">]:</span>
             <span class="n">props</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">plies</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;id&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="n">ply</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
@@ -1720,8 +1726,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="939a6a25-e0dc-4bdb-948c-34041252f0ff" name="ee2621c8-c5c5-4949-ad74-7f424a8313ee" type="radio">
-</input><label class="sd-tab-label" for="939a6a25-e0dc-4bdb-948c-34041252f0ff">
+<input id="f287d479-31c2-456e-a300-1ea36605aeaf" name="a0a907fa-f0a9-48ca-bb63-cd50fe0bfb85" type="radio">
+</input><label class="sd-tab-label" for="f287d479-31c2-456e-a300-1ea36605aeaf">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>matplotlib==3.7.0
 numpy==1.23.5
@@ -1729,8 +1735,8 @@ scipy==1.10.0
 </pre></div>
 </div>
 </div>
-<input id="58a9923b-b605-4bb5-b959-f3a70a83ebfd" name="ee2621c8-c5c5-4949-ad74-7f424a8313ee" type="radio">
-</input><label class="sd-tab-label" for="58a9923b-b605-4bb5-b959-f3a70a83ebfd">
+<input id="1add6e01-eeec-4b04-a422-926783a14ff7" name="a0a907fa-f0a9-48ca-bb63-cd50fe0bfb85" type="radio">
+</input><label class="sd-tab-label" for="1add6e01-eeec-4b04-a422-926783a14ff7">
 ccx_static_tip_shear</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>*HEADING
 Model: Cantilevered composite box with tip shear
@@ -1764,8 +1770,8 @@ U
 </pre></div>
 </div>
 </div>
-<input id="e032fb2a-448f-4dab-8c65-75a8d095c840" name="ee2621c8-c5c5-4949-ad74-7f424a8313ee" type="radio">
-</input><label class="sd-tab-label" for="e032fb2a-448f-4dab-8c65-75a8d095c840">
+<input id="8c7bc329-d560-476a-99de-09da7009d242" name="a0a907fa-f0a9-48ca-bb63-cd50fe0bfb85" type="radio">
+</input><label class="sd-tab-label" for="8c7bc329-d560-476a-99de-09da7009d242">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;analysis_file&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ccx_static_tip_shear.inp&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1878,8 +1884,8 @@ Then upload them under the <code class="docutils literal notranslate"><span clas
 <p>Remember to save the session data now by selecting <code class="docutils literal notranslate"><span class="pre">Download</span></code> from the interface controls.</p>
 </div>
 <div class="sd-tab-set docutils" id="tutorials-chained-components-results-processor-files">
-<input checked="checked" id="1ce6787f-afe3-44ef-a500-fe122d6d082c" name="fe9db796-42e9-4351-a770-06b638967280" type="radio">
-</input><label class="sd-tab-label" for="1ce6787f-afe3-44ef-a500-fe122d6d082c">
+<input checked="checked" id="f784bac2-d5ed-49b1-acb1-8b9709c4d719" name="d3ee9ba6-7f48-4341-94e6-5493a7de06d1" type="radio">
+</input><label class="sd-tab-label" for="f784bac2-d5ed-49b1-acb1-8b9709c4d719">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1948,8 +1954,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="32a51806-4965-4edb-9ee7-7c7b7cfa3755" name="fe9db796-42e9-4351-a770-06b638967280" type="radio">
-</input><label class="sd-tab-label" for="32a51806-4965-4edb-9ee7-7c7b7cfa3755">
+<input id="6bd55a54-5fca-414c-b78c-d0484e04e6d9" name="d3ee9ba6-7f48-4341-94e6-5493a7de06d1" type="radio">
+</input><label class="sd-tab-label" for="6bd55a54-5fca-414c-b78c-d0484e04e6d9">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -2169,8 +2175,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="f43b5a58-8501-4663-a535-4924d0d64437" name="fe9db796-42e9-4351-a770-06b638967280" type="radio">
-</input><label class="sd-tab-label" for="f43b5a58-8501-4663-a535-4924d0d64437">
+<input id="5f447cb4-183b-453e-8ddf-96c20f27869e" name="d3ee9ba6-7f48-4341-94e6-5493a7de06d1" type="radio">
+</input><label class="sd-tab-label" for="5f447cb4-183b-453e-8ddf-96c20f27869e">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 </pre></div>
