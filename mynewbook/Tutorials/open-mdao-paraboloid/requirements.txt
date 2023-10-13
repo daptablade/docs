@@ -1,5 +1,5 @@
 numpy==1.23.5
-openmdao==3.16.0
+openmdao==3.28.0
 matplotlib==3.7.0
 fluids==1.0.22
 pandas==1.5.3

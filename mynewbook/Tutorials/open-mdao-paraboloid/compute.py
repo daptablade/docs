@@ -12,6 +12,8 @@ from matplotlib import pyplot as plt  # type: ignore
 
 from om_component import OMexplicitComp, OMimplicitComp  # type: ignore
 
+OPENMDAO_REPORTS = None
+
 OM_DEFAULTS = {
     "nonlinear_solver": {
         "class": om.NewtonSolver,
@@ -35,7 +37,6 @@ def compute(
         "outputs_folder_path": "",
     },
 ) -> dict:
-
     """Editable compute function."""
 
     print("OpenMDAO problem setup started.")
@@ -45,7 +46,7 @@ def compute(
     all_connections = parameters.get("all_connections", [])
 
     # 1) define the simulation components
-    prob = om.Problem()
+    prob = om.Problem(reports=OPENMDAO_REPORTS)
 
     # add groups
     groups = {}
@@ -83,7 +84,6 @@ def compute(
 
     # add components
     def get_comp_by_name(name, objs: dict):
-
         comp_type_lookup = {
             "ExplicitComponents": OMexplicitComp,
             "ImplicitComponents": OMimplicitComp,
@@ -262,7 +262,6 @@ def compute(
 
 
 def run_optimisation(prob, parameters, run_folder):
-
     # 6) add a data recorder to the optimisation problem
     r_name = str(
         run_folder
@@ -342,7 +341,6 @@ def run_optimisation(prob, parameters, run_folder):
 
 
 def run_doe(prob, parameters, run_folder, nb_threads=1):
-
     # 7) execute the driver in parallel
     def run_cases_thread(color):
         print(f"Starting thread {color}.")
