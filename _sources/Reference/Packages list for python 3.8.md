@@ -216,7 +216,7 @@ numexpr  |  2.8.4  |
 numpy  |  1.23.5  |
 numpydoc  |  1.5.0  |
 olefile  |  0.46  |
-openmdao  |  3.16.0  |
+openmdao  |  3.28.0  |
 openpyxl  |  3.0.10  |
 opentracing  |  2.4.0  |
 packaging  |  22  |

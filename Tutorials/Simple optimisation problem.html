@@ -579,8 +579,8 @@ In addition, we import a <code class="docutils literal notranslate"><span class=
 <p>The last import in the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module (<code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">om_component</span> <span class="pre">import</span> <span class="pre">...</span></code>) is specific to our component and provides a custom implementation of the openMDAO ExplicitComponent class. The contents of the <code class="docutils literal notranslate"><span class="pre">om_component.py</span></code> module are shown below and we will upload this as a Parameter input file in the next section.</p>
 <p>Finally, check the box next to the <code class="docutils literal notranslate"><span class="pre">Driver</span></code> option as shown below.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-files">
-<input checked="checked" id="66f07328-c3e2-4f04-9b15-18187512d412" name="49382e3c-81f8-484c-bdcc-9fc326a89916" type="radio">
-</input><label class="sd-tab-label" for="66f07328-c3e2-4f04-9b15-18187512d412">
+<input checked="checked" id="e17f0869-9f79-4b7d-8dc1-ea5d5ad81ed8" name="bd7e4add-81d0-4c63-a2a9-4a1ec2dc9c42" type="radio">
+</input><label class="sd-tab-label" for="e17f0869-9f79-4b7d-8dc1-ea5d5ad81ed8">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -607,8 +607,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="d9d66665-08d0-4228-a33c-a5da83a242eb" name="49382e3c-81f8-484c-bdcc-9fc326a89916" type="radio">
-</input><label class="sd-tab-label" for="d9d66665-08d0-4228-a33c-a5da83a242eb">
+<input id="3e77730e-4dce-43af-adcb-6dbd2cfc6d2f" name="bd7e4add-81d0-4c63-a2a9-4a1ec2dc9c42" type="radio">
+</input><label class="sd-tab-label" for="3e77730e-4dce-43af-adcb-6dbd2cfc6d2f">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -623,6 +623,8 @@ compute</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>  <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">om_component</span> <span class="kn">import</span> <span class="n">OMexplicitComp</span><span class="p">,</span> <span class="n">OMimplicitComp</span>  <span class="c1"># type: ignore</span>
+
+<span class="n">OPENMDAO_REPORTS</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="n">OM_DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nonlinear_solver&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -647,7 +649,6 @@ compute</label><div class="sd-tab-content docutils">
         <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OpenMDAO problem setup started.&quot;</span><span class="p">)</span>
@@ -657,7 +658,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">all_connections</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;all_connections&quot;</span><span class="p">,</span> <span class="p">[])</span>
 
     <span class="c1"># 1) define the simulation components</span>
-    <span class="n">prob</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Problem</span><span class="p">()</span>
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">reports</span><span class="o">=</span><span class="n">OPENMDAO_REPORTS</span><span class="p">)</span>
 
     <span class="c1"># add groups</span>
     <span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
@@ -695,7 +696,6 @@ compute</label><div class="sd-tab-content docutils">
 
     <span class="c1"># add components</span>
     <span class="k">def</span> <span class="nf">get_comp_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">objs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-
         <span class="n">comp_type_lookup</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;ExplicitComponents&quot;</span><span class="p">:</span> <span class="n">OMexplicitComp</span><span class="p">,</span>
             <span class="s2">&quot;ImplicitComponents&quot;</span><span class="p">:</span> <span class="n">OMimplicitComp</span><span class="p">,</span>
@@ -874,7 +874,6 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">run_optimisation</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">):</span>
-
     <span class="c1"># 6) add a data recorder to the optimisation problem</span>
     <span class="n">r_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
         <span class="n">run_folder</span>
@@ -954,7 +953,6 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">run_doe</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">,</span> <span class="n">nb_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-
     <span class="c1"># 7) execute the driver in parallel</span>
     <span class="k">def</span> <span class="nf">run_cases_thread</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting thread </span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
@@ -1209,19 +1207,19 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="a7dc0c1c-27d0-4149-b2dd-c9ea66b8ef36" name="49382e3c-81f8-484c-bdcc-9fc326a89916" type="radio">
-</input><label class="sd-tab-label" for="a7dc0c1c-27d0-4149-b2dd-c9ea66b8ef36">
+<input id="5b7066e0-0574-4f1d-9577-883aa85f1ffb" name="bd7e4add-81d0-4c63-a2a9-4a1ec2dc9c42" type="radio">
+</input><label class="sd-tab-label" for="5b7066e0-0574-4f1d-9577-883aa85f1ffb">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
-openmdao==3.16.0
+openmdao==3.28.0
 matplotlib==3.7.0
 fluids==1.0.22
 pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="151a6979-4acb-4e4c-8b39-f65f8e0c3104" name="49382e3c-81f8-484c-bdcc-9fc326a89916" type="radio">
-</input><label class="sd-tab-label" for="151a6979-4acb-4e4c-8b39-f65f8e0c3104">
+<input id="a50fb650-0334-43ef-95e0-aca25f27924b" name="bd7e4add-81d0-4c63-a2a9-4a1ec2dc9c42" type="radio">
+</input><label class="sd-tab-label" for="a50fb650-0334-43ef-95e0-aca25f27924b">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1447,8 +1445,8 @@ om_component</label><div class="sd-tab-content docutils">
 <h3><span class="section-number">2.2.2. </span>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">#</a></h3>
 <p>Select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the ‘unconstrained’ parameters JSON object into the text box.</p>
 <div class="sd-tab-set docutils" id="tutorials-open-mdao-paraboloid-parameters">
-<input checked="checked" id="950749ed-0cac-421a-b012-90b0a9ab459f" name="dda15c82-f455-4e2c-9f2e-1a31ed9e64b4" type="radio">
-</input><label class="sd-tab-label" for="950749ed-0cac-421a-b012-90b0a9ab459f">
+<input checked="checked" id="9cb9038e-39da-4f46-84fb-ad075488c0a7" name="e732b64b-be14-40a2-b756-d70dcd4e532e" type="radio">
+</input><label class="sd-tab-label" for="9cb9038e-39da-4f46-84fb-ad075488c0a7">
 unconstrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1495,8 +1493,8 @@ unconstrained</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="8a57994f-f6c4-42ca-b074-84c540f3577c" name="dda15c82-f455-4e2c-9f2e-1a31ed9e64b4" type="radio">
-</input><label class="sd-tab-label" for="8a57994f-f6c4-42ca-b074-84c540f3577c">
+<input id="96fb5034-6472-4af8-9caf-99caae3157a5" name="e732b64b-be14-40a2-b756-d70dcd4e532e" type="radio">
+</input><label class="sd-tab-label" for="96fb5034-6472-4af8-9caf-99caae3157a5">
 constrained</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>

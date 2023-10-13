@@ -541,8 +541,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="ddd50230-777b-4829-8404-77ba7a8dba5e" name="b0bec229-bed3-4303-8bc3-df16012a3c04" type="radio">
-</input><label class="sd-tab-label" for="ddd50230-777b-4829-8404-77ba7a8dba5e">
+<input checked="checked" id="ebf163fa-951c-45dc-b375-71c989530d0b" name="535e3a66-05e4-48bb-8bf4-f6c92a9be9ec" type="radio">
+</input><label class="sd-tab-label" for="ebf163fa-951c-45dc-b375-71c989530d0b">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -569,8 +569,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="6f1f29a7-2247-4c0a-98dd-d28d9445c33b" name="b0bec229-bed3-4303-8bc3-df16012a3c04" type="radio">
-</input><label class="sd-tab-label" for="6f1f29a7-2247-4c0a-98dd-d28d9445c33b">
+<input id="99fcfee3-4311-450e-a271-15c937930bfd" name="535e3a66-05e4-48bb-8bf4-f6c92a9be9ec" type="radio">
+</input><label class="sd-tab-label" for="99fcfee3-4311-450e-a271-15c937930bfd">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -585,6 +585,8 @@ compute</label><div class="sd-tab-content docutils">
 <span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>  <span class="c1"># type: ignore</span>
 
 <span class="kn">from</span> <span class="nn">om_component</span> <span class="kn">import</span> <span class="n">OMexplicitComp</span><span class="p">,</span> <span class="n">OMimplicitComp</span>  <span class="c1"># type: ignore</span>
+
+<span class="n">OPENMDAO_REPORTS</span> <span class="o">=</span> <span class="kc">None</span>
 
 <span class="n">OM_DEFAULTS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;nonlinear_solver&quot;</span><span class="p">:</span> <span class="p">{</span>
@@ -609,7 +611,6 @@ compute</label><div class="sd-tab-content docutils">
         <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-
     <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OpenMDAO problem setup started.&quot;</span><span class="p">)</span>
@@ -619,7 +620,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">all_connections</span> <span class="o">=</span> <span class="n">parameters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;all_connections&quot;</span><span class="p">,</span> <span class="p">[])</span>
 
     <span class="c1"># 1) define the simulation components</span>
-    <span class="n">prob</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Problem</span><span class="p">()</span>
+    <span class="n">prob</span> <span class="o">=</span> <span class="n">om</span><span class="o">.</span><span class="n">Problem</span><span class="p">(</span><span class="n">reports</span><span class="o">=</span><span class="n">OPENMDAO_REPORTS</span><span class="p">)</span>
 
     <span class="c1"># add groups</span>
     <span class="n">groups</span> <span class="o">=</span> <span class="p">{}</span>
@@ -657,7 +658,6 @@ compute</label><div class="sd-tab-content docutils">
 
     <span class="c1"># add components</span>
     <span class="k">def</span> <span class="nf">get_comp_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">objs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
-
         <span class="n">comp_type_lookup</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;ExplicitComponents&quot;</span><span class="p">:</span> <span class="n">OMexplicitComp</span><span class="p">,</span>
             <span class="s2">&quot;ImplicitComponents&quot;</span><span class="p">:</span> <span class="n">OMimplicitComp</span><span class="p">,</span>
@@ -836,7 +836,6 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">run_optimisation</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">):</span>
-
     <span class="c1"># 6) add a data recorder to the optimisation problem</span>
     <span class="n">r_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
         <span class="n">run_folder</span>
@@ -916,7 +915,6 @@ compute</label><div class="sd-tab-content docutils">
 
 
 <span class="k">def</span> <span class="nf">run_doe</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">,</span> <span class="n">nb_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
-
     <span class="c1"># 7) execute the driver in parallel</span>
     <span class="k">def</span> <span class="nf">run_cases_thread</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting thread </span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
@@ -1171,19 +1169,19 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c2f9e9f0-2326-4c53-b82e-fe5b876b8afb" name="b0bec229-bed3-4303-8bc3-df16012a3c04" type="radio">
-</input><label class="sd-tab-label" for="c2f9e9f0-2326-4c53-b82e-fe5b876b8afb">
+<input id="dbc9de14-927c-464f-82c7-0e7d2ef32206" name="535e3a66-05e4-48bb-8bf4-f6c92a9be9ec" type="radio">
+</input><label class="sd-tab-label" for="dbc9de14-927c-464f-82c7-0e7d2ef32206">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
-openmdao==3.16.0
+openmdao==3.28.0
 matplotlib==3.7.0
 fluids==1.0.22
 pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="5b9a868b-187f-45b7-a1f3-4d8b846bb278" name="b0bec229-bed3-4303-8bc3-df16012a3c04" type="radio">
-</input><label class="sd-tab-label" for="5b9a868b-187f-45b7-a1f3-4d8b846bb278">
+<input id="06669757-aecb-4287-938c-403334edc70f" name="535e3a66-05e4-48bb-8bf4-f6c92a9be9ec" type="radio">
+</input><label class="sd-tab-label" for="06669757-aecb-4287-938c-403334edc70f">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
@@ -1249,8 +1247,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="271b410d-0e07-45df-88ef-1cc373bb1b98" name="b0bec229-bed3-4303-8bc3-df16012a3c04" type="radio">
-</input><label class="sd-tab-label" for="271b410d-0e07-45df-88ef-1cc373bb1b98">
+<input id="68160182-7387-41d8-901e-902d3bf4f861" name="535e3a66-05e4-48bb-8bf4-f6c92a9be9ec" type="radio">
+</input><label class="sd-tab-label" for="68160182-7387-41d8-901e-902d3bf4f861">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
@@ -1479,8 +1477,8 @@ The design variable connections in particular are used by OpenMDAO to determine 
 <p>It is necessary to define the following artificial design variables and connections before we can launch the Run.</p>
 <p>Select the <strong>parametric-model</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="3cb76d90-dbfc-4917-b242-c18ed8c33724" name="3988cc24-252c-4e67-978a-cf3cc8caead1" type="radio">
-</input><label class="sd-tab-label" for="3cb76d90-dbfc-4917-b242-c18ed8c33724">
+<input checked="checked" id="11e78100-3e48-4b7a-b3fa-afdb2eb287e5" name="f933d357-27c3-46de-80d7-77d6c7ce2962" type="radio">
+</input><label class="sd-tab-label" for="11e78100-3e48-4b7a-b3fa-afdb2eb287e5">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;input_0&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
@@ -1488,8 +1486,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="c117f5d6-8b7d-4327-8c6d-52d57edfcfbc" name="3988cc24-252c-4e67-978a-cf3cc8caead1" type="radio">
-</input><label class="sd-tab-label" for="c117f5d6-8b7d-4327-8c6d-52d57edfcfbc">
+<input id="d2ceb8fb-750e-41cf-97f2-cd31173fc661" name="f933d357-27c3-46de-80d7-77d6c7ce2962" type="radio">
+</input><label class="sd-tab-label" for="d2ceb8fb-750e-41cf-97f2-cd31173fc661">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1501,8 +1499,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>calculix-fea</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="2859f865-8966-4231-bd92-4d91fd5a2847" name="a97b72e3-3956-456a-b3b7-17e55506a688" type="radio">
-</input><label class="sd-tab-label" for="2859f865-8966-4231-bd92-4d91fd5a2847">
+<input checked="checked" id="a66787e7-ee4a-42a9-a56e-bba47847064b" name="05f52e42-8fa8-45eb-9bf6-292be74a85d7" type="radio">
+</input><label class="sd-tab-label" for="a66787e7-ee4a-42a9-a56e-bba47847064b">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1512,8 +1510,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="e79391d6-658e-46e7-a7c2-8a6a6505af7c" name="a97b72e3-3956-456a-b3b7-17e55506a688" type="radio">
-</input><label class="sd-tab-label" for="e79391d6-658e-46e7-a7c2-8a6a6505af7c">
+<input id="10abf94b-da74-400e-b7d9-81264cfdc9f9" name="05f52e42-8fa8-45eb-9bf6-292be74a85d7" type="radio">
+</input><label class="sd-tab-label" for="10abf94b-da74-400e-b7d9-81264cfdc9f9">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1527,8 +1525,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>fea-results-processor</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab only:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="20072305-5abe-497d-b983-4b80999b4ec2" name="40dbeeb2-b6fa-415a-82e4-79d095086d82" type="radio">
-</input><label class="sd-tab-label" for="20072305-5abe-497d-b983-4b80999b4ec2">
+<input checked="checked" id="cfcba871-8e1a-470a-be9d-e65f64a804b4" name="debc1062-bbb0-4cc2-ac88-6ef13eca57c9" type="radio">
+</input><label class="sd-tab-label" for="cfcba871-8e1a-470a-be9d-e65f64a804b4">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
