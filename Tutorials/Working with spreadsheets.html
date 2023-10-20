@@ -587,8 +587,8 @@ Finally the spreadsheet is saved and closed.</p></li>
 <p>Save and close the component by selecting the <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> button.</p>
 <p>You can check that the component works as expected by executing the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> now, or you can add a driver component in the next section before launching the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="af84677b-7189-41ee-be39-4281a1a86ed9" name="39153b6f-b2e1-4850-8477-590bd76dfd28" type="radio">
-</input><label class="sd-tab-label" for="af84677b-7189-41ee-be39-4281a1a86ed9">
+<input checked="checked" id="a29d3425-9c45-4f8b-8066-e9c56a27aa80" name="0b1fe34a-ace9-4f42-9ea6-515c9510f555" type="radio">
+</input><label class="sd-tab-label" for="a29d3425-9c45-4f8b-8066-e9c56a27aa80">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -655,8 +655,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="ad14fdee-8238-48a3-a325-39d20cce868d" name="39153b6f-b2e1-4850-8477-590bd76dfd28" type="radio">
-</input><label class="sd-tab-label" for="ad14fdee-8238-48a3-a325-39d20cce868d">
+<input id="b9c4addc-8075-4803-943e-e9f4d6589f3c" name="0b1fe34a-ace9-4f42-9ea6-515c9510f555" type="radio">
+</input><label class="sd-tab-label" for="b9c4addc-8075-4803-943e-e9f4d6589f3c">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -754,8 +754,8 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="cf722a34-72da-48d3-addd-6c7e8c323f4c" name="9882202d-228e-49ca-8dbc-846a72075976" type="radio">
-</input><label class="sd-tab-label" for="cf722a34-72da-48d3-addd-6c7e8c323f4c">
+<input checked="checked" id="921734c5-95ac-4d2c-a811-44ce0337c316" name="5fc76d79-8092-4790-a2f7-978bb5b12cf3" type="radio">
+</input><label class="sd-tab-label" for="921734c5-95ac-4d2c-a811-44ce0337c316">
 setup</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -782,8 +782,8 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="dfd6b40d-3daf-41a3-ad18-366d0dda310a" name="9882202d-228e-49ca-8dbc-846a72075976" type="radio">
-</input><label class="sd-tab-label" for="dfd6b40d-3daf-41a3-ad18-366d0dda310a">
+<input id="1c25e4d0-91dd-45bf-b598-809c3f22b0de" name="5fc76d79-8092-4790-a2f7-978bb5b12cf3" type="radio">
+</input><label class="sd-tab-label" for="1c25e4d0-91dd-45bf-b598-809c3f22b0de">
 compute</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
@@ -1069,15 +1069,25 @@ compute</label><div class="sd-tab-content docutils">
         <span class="c1"># NOTE: running the model can generate large large amounts of stored data in orchestrator, which</span>
         <span class="c1"># can cause prob.setup() to fail if it is called again, so only execute</span>
         <span class="c1"># prob.run_model() after all setup has been completed</span>
-        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;scaling_report.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
-                <span class="n">prob</span><span class="o">.</span><span class="n">run_model</span><span class="p">()</span>
-                <span class="n">prob</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">scaling_report</span><span class="p">(</span>
-                    <span class="n">outfile</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;driver_scaling_report.html&quot;</span><span class="p">),</span>
-                    <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                    <span class="n">show_browser</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                    <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                <span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;scaling_report.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+                    <span class="n">prob</span><span class="o">.</span><span class="n">run_model</span><span class="p">()</span>
+                    <span class="n">prob</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">scaling_report</span><span class="p">(</span>
+                        <span class="n">outfile</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;driver_scaling_report.html&quot;</span><span class="p">),</span>
+                        <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                        <span class="n">show_browser</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="n">jac</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;run_driver.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+                <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+                    <span class="n">tb</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;OpenMDAO prob.run_model() exited with error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;OpenMDAO prob.run_model() error. Check outputs/run_driver.log for details.&quot;</span>
+            <span class="p">)</span>
 
     <span class="c1"># 7) execute the optimisation</span>
     <span class="k">try</span><span class="p">:</span>
@@ -1085,9 +1095,14 @@ compute</label><div class="sd-tab-content docutils">
             <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
                 <span class="n">prob</span><span class="o">.</span><span class="n">run_driver</span><span class="p">()</span>
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;run driver exited with error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="n">tb</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;OpenMDAO Optimisation error: &quot;</span> <span class="o">+</span> <span class="n">tb</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;run_driver.log&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">redirect_stdout</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+                <span class="n">tb</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;run driver exited with error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">tb</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;OpenMDAO Optimisation error. Check outputs/run_driver.log for details.&quot;</span>
+        <span class="p">)</span>
 
     <span class="n">opt_output</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="c1"># print(&quot;Completed model optimisation - solution is: \n inputs= (&quot;)</span>
@@ -1382,8 +1397,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="158672f8-9ad0-4cbf-8b78-5524bb6e002d" name="9882202d-228e-49ca-8dbc-846a72075976" type="radio">
-</input><label class="sd-tab-label" for="158672f8-9ad0-4cbf-8b78-5524bb6e002d">
+<input id="19816acf-0710-4a22-aaf2-d97cae6793ea" name="5fc76d79-8092-4790-a2f7-978bb5b12cf3" type="radio">
+</input><label class="sd-tab-label" for="19816acf-0710-4a22-aaf2-d97cae6793ea">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 openmdao==3.28.0
@@ -1393,8 +1408,8 @@ pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="fad405f3-f213-4fff-89ed-259cfe858464" name="9882202d-228e-49ca-8dbc-846a72075976" type="radio">
-</input><label class="sd-tab-label" for="fad405f3-f213-4fff-89ed-259cfe858464">
+<input id="c35920a5-686a-4f18-9d1f-28799520ce54" name="5fc76d79-8092-4790-a2f7-978bb5b12cf3" type="radio">
+</input><label class="sd-tab-label" for="c35920a5-686a-4f18-9d1f-28799520ce54">
 parameters</label><div class="sd-tab-content docutils">
 <div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
 <span class="w">  </span><span class="nt">&quot;user_input_files&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w"></span>
@@ -1443,8 +1458,8 @@ parameters</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="5c36edad-3de1-4d7a-b8ce-f20953faae94" name="9882202d-228e-49ca-8dbc-846a72075976" type="radio">
-</input><label class="sd-tab-label" for="5c36edad-3de1-4d7a-b8ce-f20953faae94">
+<input id="0b8f6364-729a-4deb-baf1-2e1c44febadc" name="5fc76d79-8092-4790-a2f7-978bb5b12cf3" type="radio">
+</input><label class="sd-tab-label" for="0b8f6364-729a-4deb-baf1-2e1c44febadc">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
