@@ -282,15 +282,25 @@ def run_optimisation(prob, parameters, run_folder):
         # NOTE: running the model can generate large large amounts of stored data in orchestrator, which
         # can cause prob.setup() to fail if it is called again, so only execute
         # prob.run_model() after all setup has been completed
-        with open(run_folder / "scaling_report.log", "w") as f:
-            with redirect_stdout(f):
-                prob.run_model()
-                prob.driver.scaling_report(
-                    outfile=str(run_folder / "driver_scaling_report.html"),
-                    title=None,
-                    show_browser=False,
-                    jac=True,
-                )
+        try:
+            with open(run_folder / "scaling_report.log", "w") as f:
+                with redirect_stdout(f):
+                    prob.run_model()
+                    prob.driver.scaling_report(
+                        outfile=str(run_folder / "driver_scaling_report.html"),
+                        title=None,
+                        show_browser=False,
+                        jac=True,
+                    )
+        except Exception as e:
+            with open(run_folder / "run_driver.log", "w") as f:
+                with redirect_stdout(f):
+                    tb = traceback.format_exc()
+                    print(f"OpenMDAO prob.run_model() exited with error: {e}")
+                    print(tb)
+            raise ValueError(
+                "OpenMDAO prob.run_model() error. Check outputs/run_driver.log for details."
+            )
 
     # 7) execute the optimisation
     try:
@@ -298,9 +308,14 @@ def run_optimisation(prob, parameters, run_folder):
             with redirect_stdout(f):
                 prob.run_driver()
     except Exception as e:
-        print(f"run driver exited with error: {e}")
-        tb = traceback.format_exc()
-        raise ValueError("OpenMDAO Optimisation error: " + tb)
+        with open(run_folder / "run_driver.log", "w") as f:
+            with redirect_stdout(f):
+                tb = traceback.format_exc()
+                print(f"run driver exited with error: {e}")
+                print(tb)
+        raise ValueError(
+            "OpenMDAO Optimisation error. Check outputs/run_driver.log for details."
+        )
 
     opt_output = {}
     # print("Completed model optimisation - solution is: \n inputs= (")
