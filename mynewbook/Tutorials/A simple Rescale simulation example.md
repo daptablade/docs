@@ -63,7 +63,8 @@ Then upload the first 2 files under the `Properties` tab and upload the `parabol
       "slots": 1,
       "walltime": 1
     },
-    "name": "test"
+    "name": "test",
+    "envVars": {}
   }
 }
 ```
