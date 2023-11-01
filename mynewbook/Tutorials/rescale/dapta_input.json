@@ -23,7 +23,8 @@
             "slots": 1,
             "walltime": 1
           },
-          "name": "test"
+          "name": "test",
+          "envVars": {}
         }
       },
       "inputs": {},
