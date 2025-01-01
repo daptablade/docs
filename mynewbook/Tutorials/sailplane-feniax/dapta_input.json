@@ -1,0 +1,70 @@
+{
+  "components": [
+    {
+      "name": "sailplane-feniax",
+      "api": "feniax-comp:latest",
+      "options": {},
+      "parameters": {
+        "number_of_modes": {
+          "SP1": 5,
+          "SP2": 15,
+          "SP3": 30,
+          "SP4": 50,
+          "SP5": 100
+        },
+        "user_input_files": []
+      },
+      "inputs": {
+        "number_of_modes.SP1": 10,
+        "number_of_modes.SP2": 20
+      },
+      "outputs": {
+        "deflection_output": 0
+      },
+      "appmeta": {
+        "apiInputFiles": [
+          {
+            "filename": "setup.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2024-12-31T19:28:07",
+            "size": "2202"
+          },
+          {
+            "filename": "compute.py",
+            "accept": ".py",
+            "required": true,
+            "uploaded": true,
+            "mtime": "2025-01-01T18:52:12",
+            "size": "18370"
+          },
+          {
+            "filename": "requirements.txt",
+            "accept": ".txt",
+            "required": false,
+            "uploaded": false
+          }
+        ],
+        "validity": "valid",
+        "id": "component-0",
+        "position": {
+          "x": 70,
+          "y": 94
+        }
+      }
+    }
+  ],
+  "connections": [],
+  "workflow": {
+    "start": "sailplane-feniax",
+    "end": "sailplane-feniax"
+  },
+  "run_parameters": {
+    "appmeta": {
+      "filename": "dapta_input.json",
+      "mtime": "2025-01-01T20:55:02.068Z"
+    },
+    "name": "feniax"
+  }
+}
