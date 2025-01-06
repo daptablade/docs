@@ -18,6 +18,7 @@ parts:
       - file: Tutorials/A simple Rescale simulation example
       - file: Tutorials/A structure-structure interaction simulation with preCICE
       - file: Tutorials/A fluid-structure interaction simulation with preCICE
+      - file: Tutorials/A nonlinear sailplane wing model with FENIAX
   - caption: Reference Guide
     chapters:
       - file: Reference/The dashboard

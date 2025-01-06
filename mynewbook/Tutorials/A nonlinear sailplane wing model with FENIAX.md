@@ -154,10 +154,43 @@ Select `Save data` to save the component and close it. You should now be able to
 
 ## Component analysis 
 
+All being well, you should now be able to launch a {term}`Run` by selecting the play symbol ▶ in the {term}`Run` controls interface. 
+The control symbols will start to fade in and out as your {term}`Run` is sent for analysis in the Cloud, this may take a few minutes the first time. 
+Eventually, the {term}`Run` should execute, after which you should see an alert window confirming that 'The {term}`Run` has completed successfully'. 
+If you don't get any messages, try to refresh your web browser page, or consult the [FAQ](../Reference/FAQs.md) section for troubleshooting suggestions. 
+
+We can now inspect the outputs of the {term}`Run`. 
+
 ### The Run Log
+
+Select `View Log` in the interface controls to view a summary of the {term}`Run` as a nested JSON text object. 
+
+The 'time' entry corresponds to the time at which the Run Log file was generated, while the time stamps in the messages that appear in the 'run_output' and 'sailplane-feniax' relate to the setup and compute execution times. The inputs and outputs of the sailplane-feniax component are available under the corresponding 'sailplane-feniax' entries.   
+
+To save a copy of the Run Log, select `Close` to return to the workspace view and then select `Download`. This should download two JSON files: the Run Log as 'runlog.json' and the copy of your work session as 'dapta_input.json'. 
 
 ### The Component Log
 
+Select the component again and navigate to the `Log` tab. 
+
+Both the Run Log and the Component Log are updated as the {term}`Run` executes, which allows us to monitor progress and view intermediary results.
+The Component Log lists events related to the component in order of time of occurrence. A 'SETUP' event corresponds to the execution of the component's setup function and a 'COMPUTE' event corresponds to the execution of the compute function, as defined in the `setup.py` and `compute.py` modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current {term}`Run`. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page. 
+
+The Component Log has another important function: if errors occur during the execution of the component, the Log will list an 'ERROR' event with a description of the error message and traceback information.  
+
+The `Log` tab also includes a `download files snapshot` link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace for this component. 
+Save this data, along with the JSON formatted version of your session ('dapta_input.json') and a copy of the {term}`Run` Log ('runlog.json'), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs. 
+
+
 ## Clean-up
 
+You can delete a session by creating a new session (select `New` in from the interface controls) or by loading a JSON session file from your machine (select `Open`). 
+It may take a minute or so for the Cloud session to be reset. 
+
+```{warning}
+You should see a warning message whenever you are about to delete a {term}`Run`. If you select to continue, then all the {term}`Run` session data (Run log and component logs) will be permanently deleted. 
+```
+
 ## References
+
+[FENIAX Sailplane Example](https://github.com/ostodieck/FENIAX/blob/master/docs/documentation/examples/SailPlane/sailplane_nb.md) 

@@ -32,6 +32,7 @@ The following table provides an overview of currently available software APIs.
 | API name                 | Github folder            | Software available |
 | --------                 | ---------                | ---------                    |
 | calculix-fea-comp        | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, Calculix GraphiX (cgx_2.20), Calculix CrunchiX (ccx_2.20)| 
+| feniax-comp | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.12, FENIAX |
 | generic-python3-comp     | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
 | generic-python3-driver   | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8 only|
 | libreoffice-comp         | [generic-python3-comp](https://github.com/daptablade/generic-python3-comp) | Python 3.8, LibreOffice (Version: 7.0.4.2)|
