@@ -1,0 +1,1315 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>12. A nonlinear sailplane wing model with FENIAX &#8212; dapta docs</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KD6ZCS0VXN');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KD6ZCS0VXN');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tutorials/A nonlinear sailplane wing model with FENIAX';</script>
+    <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/A nonlinear sailplane wing model with FENIAX.html" />
+    <link rel="icon" href="../_static/favicon.png"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The dashboard" href="../Reference/The%20dashboard.html" />
+    <link rel="prev" title="11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="dapta docs - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="dapta docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Simple%20component%20analysis.html">1. Simple component analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simple%20optimisation%20problem.html">2. Simple optimisation problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chaining%20component%20analyses.html">3. Chaining component analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Automating%20parametric%20studies.html">4. Automating the composite wing model parametric study</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Automating%20design%20optimisations.html">5. Automating the design optimisation of the composite wing model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Working%20with%20spreadsheets.html">6. Working with spreadsheets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">7. Example of a variable stiffness plate in compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">8. Using OpenVSP for aircraft performance analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20simple%20Rescale%20simulation%20example.html">9. A simple Rescale simulation example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">10. A structure-structure interaction simulation with preCICE and CalculiX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html">11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">12. A nonlinear sailplane wing model with FENIAX</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Guide</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../Reference/The%20dashboard.html">The dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/FAQs.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/Support.html">Support</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/daptablade/docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/A nonlinear sailplane wing model with FENIAX.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tutorials/A nonlinear sailplane wing model with FENIAX.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button>
+
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>A nonlinear sailplane wing model with FENIAX</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-description">12.1. Component description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-component">12.2. Create the component</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">12.2.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">12.2.2. Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-and-outputs">12.2.3. Inputs and Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-analysis">12.3. Component analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-run-log">12.3.1. The Run Log</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-component-log">12.3.2. The Component Log</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-up">12.4. Clean-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">12.5. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="a-nonlinear-sailplane-wing-model-with-feniax">
+<h1><span class="section-number">12. </span>A nonlinear sailplane wing model with FENIAX<a class="headerlink" href="#a-nonlinear-sailplane-wing-model-with-feniax" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/12"><img alt="dapta" src="../_images/Dapta-Brandmark-RGB.svg" style="width: 25px; height: 25px;" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/sailplane-feniax"><img alt="github" src="../_images/github.svg" style="width: 25px; height: 25px;" /> View files on Github</a>.</p>
+<p><strong>Duration: 10 min</strong></p>
+<p>This example replicates the <a class="reference external" href="https://github.com/ostodieck/FENIAX/blob/master/docs/documentation/examples/SailPlane/sailplane_nb.md">sailplane example</a> from the FENIAX repository and demonstrates the ability to modify analysis parameters and export outputs automatically through the dapta interface.</p>
+<p>Note: This component uses python 3.12 - for details of the software available in this component see <a class="reference external" href="https://daptadocs.com/Reference/FAQs.html#what-software-can-i-run-in-a-component">FAQS - What software can I run in a component?</a></p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/sailplane-feniax-1.png"><img alt="sailplane wing deflections" class="bg-primary mb-1 align-center" src="../_images/sailplane-feniax-1.png" style="width: 700px;" /></a>
+<section id="component-description">
+<h2><span class="section-number">12.1. </span>Component description<a class="headerlink" href="#component-description" title="Link to this heading">#</a></h2>
+<p>There is a single FENIAX component in this example. In future examples, we will connect FENIAX components to other components.</p>
+<p>The static equilibrium of the aircraft under prescribed loads is first studied with follower loads normal to the wing applied at the tip of each wing (nodes 25 and 48).</p>
+<p>The response for an increasing load stepping of 200, 300, 400, 480 and 530 KN is computed and compared to reference NASTRAN linear and nonlinear solutions.</p>
+<p>Then a convergence analysis with the number of modes in the solution is performed.</p>
+<p>Component inputs are the number of modes used for the convergence study.
+The output is the array of wing z-deflections for the 530 KN load case (in addition to the zip file of the output folder structure from FENIAX).</p>
+</section>
+<section id="create-the-component">
+<h2><span class="section-number">12.2. </span>Create the component<a class="headerlink" href="#create-the-component" title="Link to this heading">#</a></h2>
+<p>Navigate to the <a class="reference external" href="https://app.daptaflow.com/Interface">dashboard</a> and create a blank workspace by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> (if required).</p>
+<p>Right-click in the workspace and select <code class="docutils literal notranslate"><span class="pre">Add</span> <span class="pre">Empty</span> <span class="pre">Node</span></code>.
+This creates an empty template component in your workspace.</p>
+<p>Select the component to edit it.</p>
+<section id="properties">
+<h3><span class="section-number">12.2.1. </span>Properties<a class="headerlink" href="#properties" title="Link to this heading">#</a></h3>
+<p>The component interface opens on the Properties tab. This is where you define the core properties of your component.
+Fill in a component name, <code class="docutils literal notranslate"><span class="pre">sailplane-feniax</span></code>, and select the <code class="docutils literal notranslate"><span class="pre">feniax-comp:latest</span></code> component API.</p>
+<p>Press the tab key or click within the component interface to validate the selected API. This triggers the display of a list of API input files, as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_1.png"><img alt="properties-tab-empty" class="bg-primary mb-1 align-center" src="../_images/paraboloid_1.png" style="width: 700px;" /></a>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> Names should only contain lower case letters a-z, numbers 0-9 and dash (-), without spaces.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Clicking outside the component interface closes the component without saving changes.</p>
+</div>
+<p>We can see that the <code class="docutils literal notranslate"><span class="pre">feniax-comp</span></code> API has three input files:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">setup.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">compute.py</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code></p></li>
+</ul>
+<p>The first two files are required and the last one is optional. You can inspect the sailplane example file contents below.
+The <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file is not required here as the python code doesn’t import any third-party python packages.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> module has to include a <strong>setup</strong> function that returns data that will be available to the compute function. Here we set the type (integer) for the number of modes inputs.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> module has to include a <strong>compute</strong> function that returns a dictionary of data, which includes the component outputs dictionary.</p>
+<div class="sd-tab-set docutils">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
+setup</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A user editable setup function.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs: dict</span>
+<span class="sd">        The component Inputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    outputs: dict</span>
+<span class="sd">        The component Outputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The component Parameters as defined in the component &#39;Parameters&#39; tab.</span>
+<span class="sd">        Includes the following special keys:</span>
+<span class="sd">        &#39;user_input_files&#39;: list of user-uploaded input file filenames</span>
+<span class="sd">        &#39;inputs_folder_path&#39;: path to all user and connection input files (str)</span>
+<span class="sd">        &#39;outputs_folder_path&#39;: path to component outputs folder (str)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dictionary of JSON-serialisable keys and values, including:</span>
+<span class="sd">        inputs: dict, optional</span>
+<span class="sd">            The setup function can assign values to input keys, but the inputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        outputs: dict, optional</span>
+<span class="sd">            The setup function can assign values to output keys, but the outputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        parameters: dict, optional</span>
+<span class="sd">            The setup function can add key/value pairs to the parameters dict,</span>
+<span class="sd">            but the existing key/value pairs cannot be modified.</span>
+<span class="sd">        partials: dict, optional</span>
+<span class="sd">            The derivatives of the component&#39;s &quot;design&quot; outputs with respect to its</span>
+<span class="sd">            &quot;design&quot; inputs, used for gradient-based design optimisation Runs.</span>
+<span class="sd">        message: str, optional</span>
+<span class="sd">            A setup message that will appear in the Run log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># initialise setup_data keys</span>
+
+    <span class="n">number_of_modes</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;number_of_modes&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">number_of_modes</span><span class="p">:</span>
+        <span class="c1"># set to int</span>
+        <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">case</span><span class="p">]</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">case</span><span class="p">])</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Setup completed.&quot;</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;inputs&quot;</span><span class="p">:</span> <span class="n">inputs</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
+compute</label><div class="sd-tab-content docutils">
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">zipfile</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyNastran.op4.op4</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">op4</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">shutil</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax.numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">jnp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">jax</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">feniax.preprocessor.configuration</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">configuration</span>  <span class="c1"># import Config, dump_to_yaml</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">feniax.preprocessor.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Inputs</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">feniax.feniax_main</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">feniax.preprocessor.solution</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">solution</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">feniax.unastran.op2reader</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">op2reader</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">feniax.plotools.uplotly</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">uplotly</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tabulate</span><span class="w"> </span><span class="kn">import</span> <span class="n">tabulate</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ruamel.yaml</span><span class="w"> </span><span class="kn">import</span> <span class="n">YAML</span>
+
+<span class="c1"># RUN CASES</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="n">TIMES_DICT</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">SOL</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+<span class="n">CONFIG</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span>
+    <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
+    <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">options</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
+    <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[],</span>
+        <span class="s2">&quot;inputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">},</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A user editable compute function.</span>
+
+<span class="sd">    Here the compute function copies input files to the output folder.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    inputs: dict</span>
+<span class="sd">        The component Inputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    outputs: dict</span>
+<span class="sd">        The component Outputs sorted by type (design, implicit or setup).</span>
+<span class="sd">    partials: dict, optional</span>
+<span class="sd">        The derivatives of the component&#39;s &quot;design&quot; outputs with respect to its</span>
+<span class="sd">        &quot;design&quot; inputs, used for gradient-based design optimisation Runs.</span>
+<span class="sd">    options: dict, optional</span>
+<span class="sd">        component data processing options and flags, inc. : &quot;stream_call&quot;,</span>
+<span class="sd">        &quot;get_outputs&quot;, &quot;get_grads&quot;</span>
+<span class="sd">    parameters: dict</span>
+<span class="sd">        The component Parameters as returned by the setup function.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    dict</span>
+<span class="sd">        dictionary of JSON-serialisable keys and values, including:</span>
+<span class="sd">        outputs: dict, optional</span>
+<span class="sd">            The compute function can assign values to output keys, but the outputs</span>
+<span class="sd">            keys should not be modified.</span>
+<span class="sd">        partials: dict, optional</span>
+<span class="sd">            The compute function can assign values to partials keys, but the</span>
+<span class="sd">            partials keys should not be modified.</span>
+<span class="sd">        message: str, optional</span>
+<span class="sd">            A compute message that will appear in the Run log.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting user function evaluation.&quot;</span><span class="p">)</span>
+
+    <span class="n">run_folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">])</span>
+    <span class="n">cwd</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">()</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">run_folder</span><span class="p">)</span>
+
+    <span class="c1"># delete previous results</span>
+    <span class="n">output_zip</span> <span class="o">=</span> <span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;output_files.zip&quot;</span>
+    <span class="k">if</span> <span class="n">output_zip</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+        <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">output_zip</span><span class="p">)</span>
+
+    <span class="c1"># create results folders</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;./figs&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="s2">&quot;./results&quot;</span><span class="p">)</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="s2">&quot;./results&quot;</span><span class="p">)</span>
+
+    <span class="n">u_sp</span><span class="p">,</span> <span class="n">u_spl</span> <span class="o">=</span> <span class="n">load_NASTRAN_results</span><span class="p">()</span>
+
+    <span class="n">number_of_modes_inputs</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">key</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">key</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;number_of_modes&quot;</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">number_of_modes_inputs</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">case</span> <span class="ow">in</span> <span class="n">number_of_modes_inputs</span><span class="p">:</span>
+            <span class="c1"># rotate a fibre direction in the orientations parameter</span>
+            <span class="n">tree</span> <span class="o">=</span> <span class="n">case</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="n">case_name</span> <span class="o">=</span> <span class="n">tree</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;number_of_modes&quot;</span><span class="p">][</span><span class="n">case_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">inputs</span><span class="p">[</span><span class="s2">&quot;design&quot;</span><span class="p">][</span><span class="n">case</span><span class="p">]</span>
+
+    <span class="n">number_of_modes</span> <span class="o">=</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;number_of_modes&quot;</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input mode cases are: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">number_of_modes</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">generate_data</span><span class="p">(</span><span class="n">number_of_modes</span><span class="p">)</span>
+    <span class="n">postprocess</span><span class="p">(</span><span class="n">u_sp</span><span class="p">,</span> <span class="n">u_spl</span><span class="p">)</span>
+
+    <span class="n">os</span><span class="o">.</span><span class="n">chdir</span><span class="p">(</span><span class="n">cwd</span><span class="p">)</span>
+
+    <span class="c1"># zip all data in outputs folder to be able to recover it with structure</span>
+    <span class="n">result_files</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;**/*.*&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">root_dir</span><span class="o">=</span><span class="n">run_folder</span><span class="p">)</span>
+    <span class="p">]</span>
+    <span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">output_zip</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">result_files</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">is_file</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">FileNotFoundError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cannot find output file </span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">archive</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">file</span><span class="p">,</span> <span class="n">arcname</span><span class="o">=</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;results&quot;</span><span class="p">)</span>
+    <span class="n">shutil</span><span class="o">.</span><span class="n">rmtree</span><span class="p">(</span><span class="n">run_folder</span> <span class="o">/</span> <span class="s2">&quot;figs&quot;</span><span class="p">)</span>
+
+    <span class="n">message</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%Y%m</span><span class="si">%d</span><span class="s1">-%H%M%S&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">: Completed compute.&quot;</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">}</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">load_NASTRAN_results</span><span class="p">():</span>
+    <span class="n">examples_path</span> <span class="o">=</span> <span class="n">feniax</span><span class="o">.</span><span class="n">PATH</span> <span class="o">/</span> <span class="s2">&quot;../examples&quot;</span>
+    <span class="n">SP_folder</span> <span class="o">=</span> <span class="n">examples_path</span> <span class="o">/</span> <span class="s2">&quot;SailPlane&quot;</span>
+    <span class="c1"># nastran_path = wingSP_folder / &quot;NASTRAN/&quot;</span>
+
+    <span class="n">op2model</span> <span class="o">=</span> <span class="n">op2reader</span><span class="o">.</span><span class="n">NastranReader</span><span class="p">(</span>
+        <span class="n">SP_folder</span> <span class="o">/</span> <span class="s2">&quot;NASTRAN/static400/run.op2&quot;</span><span class="p">,</span>
+        <span class="n">SP_folder</span> <span class="o">/</span> <span class="s2">&quot;NASTRAN/static400/run.bdf&quot;</span><span class="p">,</span>
+        <span class="n">static</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">op2model</span><span class="o">.</span><span class="n">readModel</span><span class="p">()</span>
+    <span class="n">t_sp</span><span class="p">,</span> <span class="n">u_sp</span> <span class="o">=</span> <span class="n">op2model</span><span class="o">.</span><span class="n">displacements</span><span class="p">()</span>
+
+    <span class="n">op2modell</span> <span class="o">=</span> <span class="n">op2reader</span><span class="o">.</span><span class="n">NastranReader</span><span class="p">(</span>
+        <span class="n">SP_folder</span> <span class="o">/</span> <span class="s2">&quot;NASTRAN/static400/run_linear.op2&quot;</span><span class="p">,</span>
+        <span class="n">SP_folder</span> <span class="o">/</span> <span class="s2">&quot;NASTRAN/static400/run_linear.bdf&quot;</span><span class="p">,</span>
+        <span class="n">static</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">op2modell</span><span class="o">.</span><span class="n">readModel</span><span class="p">()</span>
+    <span class="n">t_spl</span><span class="p">,</span> <span class="n">u_spl</span> <span class="o">=</span> <span class="n">op2modell</span><span class="o">.</span><span class="n">displacements</span><span class="p">()</span>
+    <span class="n">sp_error3d</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">examples_path</span> <span class="o">/</span> <span class="s2">&quot;SailPlane/sp_err.npy&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">u_sp</span><span class="p">,</span> <span class="n">u_spl</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="n">input1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">jax</span><span class="o">.</span><span class="n">clear_caches</span><span class="p">()</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;label&quot;</span><span class="p">,</span> <span class="s2">&quot;default&quot;</span><span class="p">)</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">config</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">Config</span><span class="p">(</span><span class="n">input1</span><span class="p">)</span>
+    <span class="n">sol</span> <span class="o">=</span> <span class="n">feniax</span><span class="o">.</span><span class="n">feniax_main</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="n">input_obj</span><span class="o">=</span><span class="n">config</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">TIMES_DICT</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">t2</span> <span class="o">-</span> <span class="n">t1</span>
+    <span class="n">SOL</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">sol</span>
+    <span class="n">CONFIG</span><span class="p">[</span><span class="n">label</span><span class="p">]</span> <span class="o">=</span> <span class="n">config</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">save_times</span><span class="p">():</span>
+    <span class="n">pd_times</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">times</span><span class="o">=</span><span class="n">TIMES_DICT</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">index</span><span class="o">=</span><span class="n">TIMES_DICT</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+    <span class="n">pd_times</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s2">&quot;./run_times.csv&quot;</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">get_inputs</span><span class="p">():</span>
+    <span class="n">SP_folder</span> <span class="o">=</span> <span class="n">feniax</span><span class="o">.</span><span class="n">PATH</span> <span class="o">/</span> <span class="s2">&quot;../examples/SailPlane&quot;</span>
+    <span class="n">inp</span> <span class="o">=</span> <span class="n">Inputs</span><span class="p">()</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">engine</span> <span class="o">=</span> <span class="s2">&quot;intrinsicmodal&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">eig_type</span> <span class="o">=</span> <span class="s2">&quot;inputs&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">connectivity</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">FuselageFront</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RWingInner&quot;</span><span class="p">,</span> <span class="s2">&quot;LWingInner&quot;</span><span class="p">],</span>
+        <span class="n">FuselageBack</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;BottomTail&quot;</span><span class="p">,</span> <span class="s2">&quot;Fin&quot;</span><span class="p">],</span>
+        <span class="n">RWingInner</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;RWingOuter&quot;</span><span class="p">],</span>
+        <span class="n">RWingOuter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">LWingInner</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;LWingOuter&quot;</span><span class="p">],</span>
+        <span class="n">LWingOuter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">BottomTail</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;LHorizontalStabilizer&quot;</span><span class="p">,</span> <span class="s2">&quot;RHorizontalStabilizer&quot;</span><span class="p">],</span>
+        <span class="n">RHorizontalStabilizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">LHorizontalStabilizer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">Fin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">inp</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">folder</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">SP_folder</span> <span class="o">/</span> <span class="s2">&quot;FEM/&quot;</span><span class="p">)</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">num_modes</span> <span class="o">=</span> <span class="mi">50</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">typeof</span> <span class="o">=</span> <span class="s2">&quot;intrinsic&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">simulation</span><span class="o">.</span><span class="n">typeof</span> <span class="o">=</span> <span class="s2">&quot;single&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">solution</span> <span class="o">=</span> <span class="s2">&quot;static&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">solver_library</span> <span class="o">=</span> <span class="s2">&quot;diffrax&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">solver_function</span> <span class="o">=</span> <span class="s2">&quot;newton&quot;</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">solver_settings</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+        <span class="n">rtol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">atol</span><span class="o">=</span><span class="mf">1e-6</span><span class="p">,</span> <span class="n">max_steps</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s2">&quot;linalg_norm&quot;</span><span class="p">,</span> <span class="n">kappa</span><span class="o">=</span><span class="mf">0.01</span>
+    <span class="p">)</span>
+    <span class="c1"># inp.systems.sett.s1.solver_library = &quot;scipy&quot;</span>
+    <span class="c1"># inp.systems.sett.s1.solver_function = &quot;root&quot;</span>
+    <span class="c1"># inp.systems.sett.s1.solver_settings = dict(method=&#39;hybr&#39;,#&#39;krylov&#39;,</span>
+    <span class="c1">#                                           tolerance=1e-9)</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">xloads</span><span class="o">.</span><span class="n">follower_forces</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">xloads</span><span class="o">.</span><span class="n">follower_points</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">25</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">48</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>
+
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">xloads</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">xloads</span><span class="o">.</span><span class="n">follower_interpolation</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2e5</span><span class="p">,</span> <span class="mf">2.5e5</span><span class="p">,</span> <span class="mf">3.0e5</span><span class="p">,</span> <span class="mf">4.0e5</span><span class="p">,</span> <span class="mf">4.8e5</span><span class="p">,</span> <span class="mf">5.3e5</span><span class="p">],</span>
+        <span class="p">[</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">2e5</span><span class="p">,</span> <span class="mf">2.5e5</span><span class="p">,</span> <span class="mf">3.0e5</span><span class="p">,</span> <span class="mf">4.0e5</span><span class="p">,</span> <span class="mf">4.8e5</span><span class="p">,</span> <span class="mf">5.3e5</span><span class="p">],</span>
+    <span class="p">]</span>
+    <span class="n">inp</span><span class="o">.</span><span class="n">systems</span><span class="o">.</span><span class="n">sett</span><span class="o">.</span><span class="n">s1</span><span class="o">.</span><span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">inp</span><span class="p">,</span> <span class="n">SP_folder</span>
+
+
+<span class="c1"># plotting functions</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fig_out</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">figformat</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> <span class="n">update_layout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">update_layout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="o">**</span><span class="n">update_layout</span><span class="p">)</span>
+            <span class="c1"># fig.show()</span>
+            <span class="n">figname</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;figs/</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">figformat</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">fig</span><span class="o">.</span><span class="n">write_image</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;../</span><span class="si">{</span><span class="n">figname</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">figname</span>
+
+        <span class="k">return</span> <span class="n">inner</span>
+
+    <span class="k">return</span> <span class="n">inner_decorator</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fig_background</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># if fig.data[0].showlegend is None:</span>
+        <span class="c1">#     showlegend = True</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     showlegend = fig.data[0].showlegend</span>
+
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+            <span class="n">titlefont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+            <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+            <span class="n">mirror</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">ticks</span><span class="o">=</span><span class="s2">&quot;outside&quot;</span><span class="p">,</span>
+            <span class="n">showline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+            <span class="c1"># zeroline=True,</span>
+            <span class="c1"># zerolinewidth=2,</span>
+            <span class="c1"># zerolinecolor=&#39;LightPink&#39;,</span>
+            <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+            <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+            <span class="n">titlefont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
+            <span class="n">zeroline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">mirror</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">ticks</span><span class="o">=</span><span class="s2">&quot;outside&quot;</span><span class="p">,</span>
+            <span class="n">showline</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">linecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+            <span class="n">gridcolor</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>
+            <span class="n">plot_bgcolor</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span>
+            <span class="n">yaxis</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">zerolinecolor</span><span class="o">=</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">),</span>
+            <span class="n">showlegend</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>  <span class="c1"># showlegend,</span>
+            <span class="n">margin</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">autoexpand</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">l</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">r</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">fig</span>
+
+    <span class="k">return</span> <span class="n">inner</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fn_spError</span><span class="p">(</span><span class="n">sol_list</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">u_sp</span><span class="p">,</span> <span class="n">print_info</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+    <span class="n">sol_sp</span> <span class="o">=</span> <span class="p">[</span><span class="n">solution</span><span class="o">.</span><span class="n">IntrinsicReader</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./SP</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+    <span class="n">err</span> <span class="o">=</span> <span class="p">{</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_L</span><span class="si">{</span><span class="n">j</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">:</span> <span class="mf">0.0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">)}</span>
+    <span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># loads</span>
+        <span class="k">for</span> <span class="n">mi</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">):</span>  <span class="c1"># modes</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">r_spn</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">r_sp</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">df_grid</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="n">r_spn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sp</span><span class="p">[</span><span class="n">li</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">fe_order</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">config</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                <span class="n">r_sp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol_sp</span><span class="p">[</span><span class="n">mi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">staticsystem_s1</span><span class="o">.</span><span class="n">ra</span><span class="p">[</span><span class="n">li</span><span class="p">,</span> <span class="p">:,</span> <span class="n">index</span><span class="p">])</span>
+                <span class="c1"># print(f&quot;nas = {r_spn}  ,  {r_sp}&quot;)</span>
+                <span class="c1"># count += 1</span>
+            <span class="n">r_spn</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_spn</span><span class="p">)</span>
+            <span class="n">r_sp</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_sp</span><span class="p">)</span>
+            <span class="n">err</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">mi</span><span class="si">}</span><span class="s2">_L</span><span class="si">{</span><span class="n">li</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span>
+                <span class="n">r_spn</span> <span class="o">-</span> <span class="n">r_sp</span>
+            <span class="p">)</span>  <span class="c1"># / jnp.linalg.norm(r_spn)</span>
+            <span class="n">err</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">mi</span><span class="si">}</span><span class="s2">_L</span><span class="si">{</span><span class="n">li</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">/=</span> <span class="nb">len</span><span class="p">(</span><span class="n">r_sp</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">print_info</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;**** LOAD: </span><span class="si">{</span><span class="n">li</span><span class="si">}</span><span class="s2">, NumModes: </span><span class="si">{</span><span class="n">mi</span><span class="si">}</span><span class="s2"> ****&quot;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">err</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">mi</span><span class="si">}</span><span class="s2">_L</span><span class="si">{</span><span class="n">li</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">err</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">fn_spWingsection</span><span class="p">(</span><span class="n">sol_list</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">u_sp</span><span class="p">,</span> <span class="n">u_spl</span><span class="p">):</span>
+
+    <span class="n">sol_sp</span> <span class="o">=</span> <span class="p">[</span><span class="n">solution</span><span class="o">.</span><span class="n">IntrinsicReader</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./SP</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+    <span class="n">r_spn</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">r_spnl</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">r_sp</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>  <span class="c1"># loads</span>
+        <span class="k">for</span> <span class="n">mi</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span>  <span class="c1"># range(1,6):  # modes</span>
+            <span class="n">r_spni</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">r_spnli</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">r_spi</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">r_sp0</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">config</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">df_grid</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">fe_order</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)):</span>
+                    <span class="n">r_sp0</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">config</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                    <span class="n">r_spni</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_sp</span><span class="p">[</span><span class="n">li</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">fe_order</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">config</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                    <span class="n">r_spnli</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">u_spl</span><span class="p">[</span><span class="n">li</span><span class="p">,</span> <span class="n">row</span><span class="o">.</span><span class="n">fe_order</span><span class="p">,</span> <span class="p">:</span><span class="mi">3</span><span class="p">]</span> <span class="o">+</span> <span class="n">config</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">X</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+                    <span class="n">r_spi</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sol_sp</span><span class="p">[</span><span class="n">mi</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">staticsystem_s1</span><span class="o">.</span><span class="n">ra</span><span class="p">[</span><span class="n">li</span><span class="p">,</span> <span class="p">:,</span> <span class="n">index</span><span class="p">])</span>
+                <span class="c1"># print(f&quot;nas = {r_spn}  ,  {r_sp}&quot;)</span>
+                <span class="c1"># count += 1</span>
+
+            <span class="n">r_spn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_spni</span><span class="p">))</span>
+            <span class="n">r_spnl</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_spnli</span><span class="p">))</span>
+            <span class="n">r_sp</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_spi</span><span class="p">))</span>
+    <span class="n">r_sp0</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">r_sp0</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">r_sp0</span><span class="p">,</span> <span class="n">r_sp</span><span class="p">,</span> <span class="n">r_spn</span><span class="p">,</span> <span class="n">r_spnl</span>
+
+
+<span class="nd">@fig_background</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_spWingsection</span><span class="p">(</span><span class="n">r0</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">rn</span><span class="p">,</span> <span class="n">rnl</span><span class="p">):</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="c1"># colors=[&quot;darkgrey&quot;, &quot;darkgreen&quot;,</span>
+    <span class="c1">#         &quot;blue&quot;, &quot;magenta&quot;, &quot;orange&quot;, &quot;black&quot;]</span>
+    <span class="c1"># dash = [&#39;dash&#39;, &#39;dot&#39;, &#39;dashdot&#39;]</span>
+    <span class="n">modes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">li</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">li</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">r</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">fig</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;NMROM&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)),</span>
+                <span class="nb">dict</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">rn</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rn</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">rn</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">fig</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;FullFE-NL&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">)),</span>
+                <span class="nb">dict</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">rnl</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rnl</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">rnl</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">fig</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;FullFE-Lin&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)),</span>
+                <span class="nb">dict</span><span class="p">(),</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">r</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">r</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">fig</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)),</span>
+                <span class="nb">dict</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">rn</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rn</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">rn</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">fig</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">)),</span>
+                <span class="nb">dict</span><span class="p">(),</span>
+            <span class="p">)</span>
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">rnl</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">0</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">rnl</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">1</span><span class="p">]</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">**</span> <span class="mf">0.5</span><span class="p">,</span>
+                <span class="n">rnl</span><span class="p">[</span><span class="n">li</span><span class="p">][:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span>
+                <span class="n">fig</span><span class="p">,</span>
+                <span class="nb">dict</span><span class="p">(</span><span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;orange&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;solid&quot;</span><span class="p">)),</span>
+                <span class="nb">dict</span><span class="p">(),</span>
+            <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\large u_z [m]$&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span><span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\large S [m]$&quot;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">[</span><span class="mf">6.81</span><span class="p">,</span> <span class="mi">36</span><span class="p">])</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.95</span><span class="p">),</span> <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+    <span class="c1"># fig = uplotly.lines2d((rnl[:,0]**2 + rnl[:,1]**2)**0.5, rnl[:,2], fig,</span>
+    <span class="c1">#                       dict(name=f&quot;NASTRAN-101&quot;,</span>
+    <span class="c1">#                            line=dict(color=&quot;grey&quot;,</span>
+    <span class="c1">#                                      dash=&quot;solid&quot;)</span>
+    <span class="c1">#                                  ),</span>
+    <span class="c1">#                             dict())</span>
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="nd">@fig_background</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fn_spPloterror</span><span class="p">(</span><span class="n">error</span><span class="p">):</span>
+
+    <span class="n">loads</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+    <span class="n">num_modes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
+    <span class="n">e250</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">error</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_L1&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="n">e400</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">error</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_L3&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="n">e530</span> <span class="o">=</span> <span class="n">jnp</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">error</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;M</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">_L5&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)])</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+        <span class="n">num_modes</span><span class="p">,</span> <span class="n">e250</span><span class="p">,</span> <span class="n">fig</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;F = 250 KN&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)),</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+        <span class="n">num_modes</span><span class="p">,</span>
+        <span class="n">e400</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;F = 400 KN&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dash&quot;</span><span class="p">)),</span>
+        <span class="nb">dict</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+        <span class="n">num_modes</span><span class="p">,</span>
+        <span class="n">e530</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;F = 530 KN&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">dash</span><span class="o">=</span><span class="s2">&quot;dot&quot;</span><span class="p">)),</span>
+        <span class="nb">dict</span><span class="p">(),</span>
+    <span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_xaxes</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;font&quot;</span><span class="p">:</span> <span class="p">{</span><span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="mi">20</span><span class="p">},</span> <span class="s2">&quot;text&quot;</span><span class="p">:</span> <span class="s2">&quot;Number of modes&quot;</span><span class="p">}</span>
+    <span class="p">)</span>  <span class="c1"># title=&quot;Number of modes&quot;,title_font=dict(size=20))</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span>
+        <span class="n">title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\Large \epsilon$&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span>  <span class="c1"># tickformat= &#39;.1r&#39;,</span>
+        <span class="n">tickfont</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">12</span><span class="p">),</span>
+        <span class="n">exponentformat</span><span class="o">=</span><span class="s2">&quot;power&quot;</span><span class="p">,</span>
+        <span class="c1"># dtick=0.2,</span>
+        <span class="c1"># tickvals=[2e-2, 1e-2, 7e-3,5e-3,3e-3, 2e-3, 1e-3,7e-4, 5e-4,3e-4, 2e-4, 1e-4, 7e-5, 5e-5]</span>
+    <span class="p">)</span>
+    <span class="c1"># fig.update_layout(height=650)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">legend</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">0.95</span><span class="p">),</span> <span class="n">font</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">))</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="nd">@fig_background</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fn_spPloterror3D</span><span class="p">(</span><span class="n">error</span><span class="p">,</span> <span class="n">error3d</span><span class="p">):</span>
+
+    <span class="n">loads</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="n">error</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+            <span class="n">loads</span><span class="p">,</span>
+            <span class="n">error</span><span class="p">,</span>
+            <span class="n">fig</span><span class="p">,</span>
+            <span class="nb">dict</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Error ASET&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">),</span> <span class="n">marker</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">symbol</span><span class="o">=</span><span class="s2">&quot;square&quot;</span><span class="p">)</span>
+            <span class="p">),</span>
+            <span class="nb">dict</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+        <span class="n">loads</span><span class="p">,</span>
+        <span class="n">error3d</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Error full 3D&quot;</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;green&quot;</span><span class="p">)),</span>
+        <span class="nb">dict</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_yaxes</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s2">&quot;log&quot;</span><span class="p">,</span> <span class="n">tickformat</span><span class="o">=</span><span class="s2">&quot;.0e&quot;</span><span class="p">)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>  <span class="c1"># height=700,</span>
+        <span class="c1"># showlegend=False,</span>
+        <span class="c1"># legend=dict(x=0.7, y=0.95),</span>
+        <span class="n">xaxis_title</span><span class="o">=</span><span class="s2">&quot;Loading [KN]&quot;</span><span class="p">,</span>
+        <span class="n">yaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\Large \epsilon$&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="nd">@fig_background</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">plot_spAD</span><span class="p">(</span><span class="n">rn</span><span class="p">,</span> <span class="n">r0</span><span class="p">):</span>
+
+    <span class="n">loads</span> <span class="o">=</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">,</span> <span class="mi">480</span><span class="p">,</span> <span class="mi">530</span><span class="p">]</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="p">[</span><span class="n">rn</span><span class="p">[</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">r0</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">x</span><span class="p">]</span>
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">uplotly</span><span class="o">.</span><span class="n">lines2d</span><span class="p">(</span>
+        <span class="n">x</span><span class="p">,</span>
+        <span class="n">y</span><span class="p">,</span>
+        <span class="n">fig</span><span class="p">,</span>
+        <span class="nb">dict</span><span class="p">(</span>  <span class="c1"># name=&quot;Error ASET&quot;,</span>
+            <span class="c1"># line=dict(color=&quot;red&quot;),</span>
+            <span class="c1"># marker=dict(symbol=&quot;square&quot;)</span>
+        <span class="p">),</span>
+        <span class="nb">dict</span><span class="p">(),</span>
+    <span class="p">)</span>
+
+    <span class="c1"># fig.update_yaxes(type=&quot;log&quot;, tickformat= &#39;.0e&#39;)</span>
+    <span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span>  <span class="c1"># height=700,</span>
+        <span class="n">showlegend</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">xaxis_title</span><span class="o">=</span><span class="sa">r</span><span class="s2">&quot;$\Large{\tau}$&quot;</span><span class="p">,</span> <span class="n">yaxis_title</span><span class="o">=</span><span class="s2">&quot;Uz [m]&quot;</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">generate_data</span><span class="p">(</span><span class="n">number_of_modes</span><span class="p">):</span>
+
+    <span class="c1"># number_of_modes = {&quot;SP1&quot;: 5, &quot;SP2&quot;: 15, &quot;SP3&quot;: 30, &quot;SP4&quot;: 50, &quot;SP5&quot;: 100}</span>
+
+    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">number_of_modes</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="n">inp</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">get_inputs</span><span class="p">()</span>
+        <span class="n">inp</span><span class="o">.</span><span class="n">fem</span><span class="o">.</span><span class="n">num_modes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">number_of_modes</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+        <span class="n">inp</span><span class="o">.</span><span class="n">driver</span><span class="o">.</span><span class="n">sol_path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">run</span><span class="p">(</span><span class="n">inp</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
+
+    <span class="n">save_times</span><span class="p">()</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">postprocess</span><span class="p">(</span><span class="n">u_sp</span><span class="p">,</span> <span class="n">u_spl</span><span class="p">):</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="c1"># NOTE: correct config matrix names - default doesn&#39;t work</span>
+    <span class="n">yaml</span> <span class="o">=</span> <span class="n">YAML</span><span class="p">()</span>
+    <span class="n">yaml_dict</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;SP1/config.yaml&quot;</span><span class="p">))</span>
+    <span class="n">yaml_dict</span><span class="p">[</span><span class="s2">&quot;fem&quot;</span><span class="p">][</span><span class="s2">&quot;Ka_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Ka.npy&quot;</span>
+    <span class="n">yaml_dict</span><span class="p">[</span><span class="s2">&quot;fem&quot;</span><span class="p">][</span><span class="s2">&quot;Ma_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Ma.npy&quot;</span>
+    <span class="n">yaml_dict</span><span class="p">[</span><span class="s2">&quot;fem&quot;</span><span class="p">][</span><span class="s2">&quot;grid&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;structuralGrid&quot;</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">yaml_dict</span><span class="p">,</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;SP1/config.yaml&quot;</span><span class="p">))</span>
+
+    <span class="n">config</span> <span class="o">=</span> <span class="n">configuration</span><span class="o">.</span><span class="n">Config</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="s2">&quot;SP1/config.yaml&quot;</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time for config: </span><span class="si">{</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">sol_sp</span> <span class="o">=</span> <span class="p">[</span><span class="n">solution</span><span class="o">.</span><span class="n">IntrinsicReader</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;./SP</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+    <span class="n">r_sp0</span><span class="p">,</span> <span class="n">r_sp</span><span class="p">,</span> <span class="n">r_spn</span><span class="p">,</span> <span class="n">r_spnl</span> <span class="o">=</span> <span class="n">fn_spWingsection</span><span class="p">(</span><span class="n">sol_sp</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">u_sp</span><span class="p">,</span> <span class="n">u_spl</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">figname</span> <span class="o">=</span> <span class="n">fig_out</span><span class="p">(</span><span class="s2">&quot;SPWingsection&quot;</span><span class="p">)(</span><span class="n">plot_spWingsection</span><span class="p">)(</span>
+        <span class="n">r_sp0</span><span class="p">,</span> <span class="n">r_sp</span><span class="p">,</span> <span class="n">r_spn</span><span class="p">,</span> <span class="n">r_spnl</span>
+    <span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">figname</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time for figure: </span><span class="si">{</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># # config = configuration.Config.from_file(&quot;SP1/config.yaml&quot;)</span>
+    <span class="c1"># # sol_sp = [solution.IntrinsicReader(f&quot;./SP{i}&quot;) for i in range(1, 6)]</span>
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">sp_error</span> <span class="o">=</span> <span class="n">fn_spError</span><span class="p">(</span><span class="n">sol_sp</span><span class="p">,</span> <span class="n">config</span><span class="p">,</span> <span class="n">u_sp</span><span class="p">,</span> <span class="n">print_info</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">figname</span> <span class="o">=</span> <span class="n">fig_out</span><span class="p">(</span><span class="s2">&quot;SPstatic_3D&quot;</span><span class="p">)(</span><span class="n">fn_spPloterror</span><span class="p">)(</span><span class="n">sp_error</span><span class="p">)</span>
+    <span class="n">t2</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">figname</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Time for figure: </span><span class="si">{</span><span class="n">t2</span><span class="o">-</span><span class="n">t1</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">compute</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>For each file, copy the contents above into a text editor and save it locally. Make sure you include the ‘.py’ extension in the file name.</p>
+<p>Next, select <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> in the component interface to upload the corresponding file. A green tick and a file upload time stamp should appear to confirm that the upload was successful. Repeat for the <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> file.</p>
+<p>Check the boxes next to the <code class="docutils literal notranslate"><span class="pre">Start</span> <span class="pre">Node</span></code> and <code class="docutils literal notranslate"><span class="pre">End</span> <span class="pre">Node</span></code> options (since we only have one component in this <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>), as shown below.</p>
+<a class="bg-primary mb-1 reference internal image-reference" href="../_images/paraboloid_2.png"><img alt="properties-tab-completed" class="bg-primary mb-1 align-center" src="../_images/paraboloid_2.png" style="width: 700px;" /></a>
+<p>Finally, select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close the component interface.</p>
+<p>In your work space, the component name should have updated and a green tick should appear next to it to indicate that the component is apparently valid.
+However, if you tried to run it now, you would get error messages as we haven’t actually defined the python function Parameters and Inputs yet - see below.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Click the “Save” button in the top toolbar to save your workspace.</p>
+</div>
+</section>
+<section id="parameters">
+<h3><span class="section-number">12.2.2. </span>Parameters<a class="headerlink" href="#parameters" title="Link to this heading">#</a></h3>
+<p>Select the component again to edit it, then select the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab and copy the following JSON object into the text box. Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the edits.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="p">{</span>
+        <span class="s2">&quot;SP1&quot;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+        <span class="s2">&quot;SP2&quot;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+        <span class="s2">&quot;SP3&quot;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="s2">&quot;SP4&quot;</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="s2">&quot;SP5&quot;</span><span class="p">:</span> <span class="mi">100</span>
+    <span class="p">},</span>
+    <span class="s2">&quot;user_input_files&quot;</span><span class="p">:</span> <span class="p">[]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We define Parameters as values that the component needs to execute, but that are not Inputs from other <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a>s.
+For example, Parameters could be constant values or application related input files. For this example, we use the <code class="docutils literal notranslate"><span class="pre">Parameters</span></code> tab to define some default component input values, which are used to initialise the component in the compute function. For a more comprehensive use of Parameters see the example <a class="reference internal" href="Chaining%20component%20analyses.html"><span class="std std-doc">Chaining component analyses</span></a>.</p>
+</section>
+<section id="inputs-and-outputs">
+<h3><span class="section-number">12.2.3. </span>Inputs and Outputs<a class="headerlink" href="#inputs-and-outputs" title="Link to this heading">#</a></h3>
+<p>Open the component to edit it and add the following JSON objects into the text boxes in the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs.
+By defining <a class="reference internal" href="../Reference/Glossary.html#term-Component"><span class="xref std std-term">Component</span></a> Inputs and Outputs respectively, we can expose these values to other <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> components, such as drivers.
+We have explored this in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="std std-doc">Simple optimisation problem</span></a> tutorial.</p>
+<p>Input Handles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s2">&quot;number_of_modes.SP1&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s2">&quot;number_of_modes.SP2&quot;</span><span class="p">:</span> <span class="mi">20</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Output Handles:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+  <span class="s2">&quot;deflection_output&quot;</span><span class="p">:</span> <span class="mi">0</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>We will look at the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab in the next section.</p>
+<p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save the component and close it. You should now be able to see some input and output handles appear on the left and right of the component in the workspace. Hover over the handles with your mouse cursor to view the names of the variables.</p>
+</section>
+</section>
+<section id="component-analysis">
+<h2><span class="section-number">12.3. </span>Component analysis<a class="headerlink" href="#component-analysis" title="Link to this heading">#</a></h2>
+<p>All being well, you should now be able to launch a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> by selecting the play symbol ▶ in the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> controls interface.
+The control symbols will start to fade in and out as your <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> is sent for analysis in the Cloud, this may take a few minutes the first time.
+Eventually, the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should execute, after which you should see an alert window confirming that ‘The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> has completed successfully’.
+If you don’t get any messages, try to refresh your web browser page, or consult the <a class="reference internal" href="../Reference/FAQs.html"><span class="std std-doc">FAQ</span></a> section for troubleshooting suggestions.</p>
+<p>We can now inspect the outputs of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>.</p>
+<section id="the-run-log">
+<h3><span class="section-number">12.3.1. </span>The Run Log<a class="headerlink" href="#the-run-log" title="Link to this heading">#</a></h3>
+<p>Select <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls to view a summary of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> as a nested JSON text object.</p>
+<p>The ‘time’ entry corresponds to the time at which the Run Log file was generated, while the time stamps in the messages that appear in the ‘run_output’ and ‘sailplane-feniax’ relate to the setup and compute execution times. The inputs and outputs of the sailplane-feniax component are available under the corresponding ‘sailplane-feniax’ entries.</p>
+<p>To save a copy of the Run Log, select <code class="docutils literal notranslate"><span class="pre">Close</span></code> to return to the workspace view and then select <code class="docutils literal notranslate"><span class="pre">Download</span></code>. This should download two JSON files: the Run Log as ‘runlog.json’ and the copy of your work session as ‘dapta_input.json’.</p>
+</section>
+<section id="the-component-log">
+<h3><span class="section-number">12.3.2. </span>The Component Log<a class="headerlink" href="#the-component-log" title="Link to this heading">#</a></h3>
+<p>Select the component again and navigate to the <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab.</p>
+<p>Both the Run Log and the Component Log are updated as the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> executes, which allows us to monitor progress and view intermediary results.
+The Component Log lists events related to the component in order of time of occurrence. A ‘SETUP’ event corresponds to the execution of the component’s setup function and a ‘COMPUTE’ event corresponds to the execution of the compute function, as defined in the <code class="docutils literal notranslate"><span class="pre">setup.py</span></code> and <code class="docutils literal notranslate"><span class="pre">compute.py</span></code> modules. The event name is followed by a number, that indicates the number of times the component has been executed during the current <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. Note that the Component Log is not cleared between successive Runs, but it will clear if you refresh the page.</p>
+<p>The Component Log has another important function: if errors occur during the execution of the component, the Log will list an ‘ERROR’ event with a description of the error message and traceback information.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">Log</span></code> tab also includes a <code class="docutils literal notranslate"><span class="pre">download</span> <span class="pre">files</span> <span class="pre">snapshot</span></code> link. Select this to download a zip file that contains all input and output files as they currently exist in your workspace for this component.
+Save this data, along with the JSON formatted version of your session (‘dapta_input.json’) and a copy of the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> Log (‘runlog.json’), to allow you to re-load this example in the future, or to compare inputs and outputs with other Runs.</p>
+</section>
+</section>
+<section id="clean-up">
+<h2><span class="section-number">12.4. </span>Clean-up<a class="headerlink" href="#clean-up" title="Link to this heading">#</a></h2>
+<p>You can delete a session by creating a new session (select <code class="docutils literal notranslate"><span class="pre">New</span></code> in from the interface controls) or by loading a JSON session file from your machine (select <code class="docutils literal notranslate"><span class="pre">Open</span></code>).
+It may take a minute or so for the Cloud session to be reset.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>You should see a warning message whenever you are about to delete a <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a>. If you select to continue, then all the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> session data (Run log and component logs) will be permanently deleted.</p>
+</div>
+</section>
+<section id="references">
+<h2><span class="section-number">12.5. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p><a class="reference external" href="https://github.com/ostodieck/FENIAX/blob/master/docs/documentation/examples/SailPlane/sailplane_nb.md">FENIAX Sailplane Example</a></p>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./Tutorials"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">11. </span>A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../Reference/The%20dashboard.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">The dashboard</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-description">12.1. Component description</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-component">12.2. Create the component</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#properties">12.2.1. Properties</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#parameters">12.2.2. Parameters</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inputs-and-outputs">12.2.3. Inputs and Outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#component-analysis">12.3. Component analysis</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-run-log">12.3.1. The Run Log</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-component-log">12.3.2. The Component Log</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-up">12.4. Clean-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">12.5. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Dapta Ltd
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

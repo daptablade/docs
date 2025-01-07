@@ -1,120 +1,180 @@
 
 <!DOCTYPE html>
 
-<html lang="en">
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>5. Automating the design optimisation of the composite wing model &#8212; dapta docs</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!--
+    this give us a css class that will be invisible only if js is disabled
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=36754332"></script>
+    <script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KD6ZCS0VXN');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){ dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', 'G-KD6ZCS0VXN');
+            </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'Tutorials/Automating design optimisations';</script>
     <link rel="canonical" href="https://daptadocs.com/index.com/Tutorials/Automating design optimisations.html" />
-    <link rel="shortcut icon" href="../_static/favicon.png"/>
+    <link rel="icon" href="../_static/favicon.png"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="6. Working with spreadsheets" href="Working%20with%20spreadsheets.html" />
     <link rel="prev" title="4. Automating the composite wing model parametric study" href="Automating%20parametric%20studies.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en">
-    
-
-    <!-- Google Analytics -->
-    
-<script async="" src="https://www.googletagmanager.com/gtag/js?id=G-KD6ZCS0VXN"></script>
-<script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){ dataLayer.push(arguments); }
-                    gtag('js', new Date());
-                    gtag('config', 'G-KD6ZCS0VXN');
-                </script>
-
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">dapta docs</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="dapta docs - Home"/>
+    <img src="../_static/logo.png" class="logo__image only-dark pst-js-only" alt="dapta docs - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
@@ -123,406 +183,262 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Tutorials
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Tutorials</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="Simple%20component%20analysis.html">
-   1. Simple component analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Simple%20optimisation%20problem.html">
-   2. Simple optimisation problem
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Chaining%20component%20analyses.html">
-   3. Chaining component analyses
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Automating%20parametric%20studies.html">
-   4. Automating the composite wing model parametric study
-  </a>
- </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   5. Automating the design optimisation of the composite wing model
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Working%20with%20spreadsheets.html">
-   6. Working with spreadsheets
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">
-   7. Example of a variable stiffness plate in compression
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">
-   8. Using OpenVSP for aircraft performance analysis
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="A%20simple%20Rescale%20simulation%20example.html">
-   9. A simple Rescale simulation example
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">
-   10. A structure-structure interaction simulation with preCICE and CalculiX
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html">
-   11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="Simple%20component%20analysis.html">1. Simple component analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Simple%20optimisation%20problem.html">2. Simple optimisation problem</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Chaining%20component%20analyses.html">3. Chaining component analyses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Automating%20parametric%20studies.html">4. Automating the composite wing model parametric study</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">5. Automating the design optimisation of the composite wing model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Working%20with%20spreadsheets.html">6. Working with spreadsheets</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example%20of%20a%20variable%20stiffness%20plate%20in%20compression.html">7. Example of a variable stiffness plate in compression</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Using%20OpenVSP%20for%20aircraft%20performance%20analysis.html">8. Using OpenVSP for aircraft performance analysis</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20simple%20Rescale%20simulation%20example.html">9. A simple Rescale simulation example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20structure-structure%20interaction%20simulation%20with%20preCICE.html">10. A structure-structure interaction simulation with preCICE and CalculiX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20fluid-structure%20interaction%20simulation%20with%20preCICE.html">11. A fluid-structure interaction simulation with preCICE, OpenFOAM and CalculiX</a></li>
+<li class="toctree-l1"><a class="reference internal" href="A%20nonlinear%20sailplane%20wing%20model%20with%20FENIAX.html">12. A nonlinear sailplane wing model with FENIAX</a></li>
 </ul>
-<p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Reference Guide
- </span>
-</p>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Reference Guide</span></p>
 <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../Reference/The%20dashboard.html">
-   The dashboard
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Reference/FAQs.html">
-   FAQs
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Reference/Glossary.html">
-   Glossary
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../Reference/Support.html">
-   Support
-  </a>
- </li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/The%20dashboard.html">The dashboard</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/FAQs.html">FAQs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/Glossary.html">Glossary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Reference/Support.html">Support</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
+  </div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/daptablade/docs" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Automating design optimisations.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
 </div>
 
 
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
 
 
 
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/Tutorials/Automating design optimisations.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
   </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-repository-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Source repositories">
-      <i class="fab fa-github"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://github.com/daptablade/docs"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Source repository"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fab fa-github"></i>
-  </span>
-<span class="headerbtn__text-container">repository</span>
-</a>
 
-      </li>
-      
-      <li>
-        <a href="https://github.com/daptablade/docs/issues/new?title=Issue%20on%20page%20%2FTutorials/Automating design optimisations.html&body=Your%20issue%20content%20here."
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Open an issue"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-lightbulb"></i>
-  </span>
-<span class="headerbtn__text-container">open issue</span>
-</a>
-
-      </li>
-      
-    </ul>
-  </div>
-</div>
-
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/Tutorials/Automating design optimisations.md"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.md</span>
-</a>
-
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#opening-a-saved-session">
-   5.1. Opening a saved session
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#automating-a-design-optimisation-study">
-   5.2. Automating a design optimisation study
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-driver-component">
-     5.2.1. The driver component
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#add-design-variables-and-connections">
-     5.2.2. Add design variables and connections
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#execute-the-workflow">
-     5.2.3. Execute the workflow
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inspect-the-outputs">
-     5.2.4. Inspect the outputs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clean-up">
-   5.3. Clean-up
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   5.4. References
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>Automating the design optimisation of the composite wing model</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#opening-a-saved-session">
-   5.1. Opening a saved session
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#automating-a-design-optimisation-study">
-   5.2. Automating a design optimisation study
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#the-driver-component">
-     5.2.1. The driver component
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#add-design-variables-and-connections">
-     5.2.2. Add design variables and connections
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#execute-the-workflow">
-     5.2.3. Execute the workflow
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#inspect-the-outputs">
-     5.2.4. Inspect the outputs
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#clean-up">
-   5.3. Clean-up
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#references">
-   5.4. References
-  </a>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Automating the design optimisation of the composite wing model</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-a-saved-session">5.1. Opening a saved session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-a-design-optimisation-study">5.2. Automating a design optimisation study</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-driver-component">5.2.1. The driver component</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-design-variables-and-connections">5.2.2. Add design variables and connections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-the-workflow">5.2.3. Execute the workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-the-outputs">5.2.4. Inspect the outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-up">5.3. Clean-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">5.4. References</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="automating-the-design-optimisation-of-the-composite-wing-model">
-<h1><span class="section-number">5. </span>Automating the design optimisation of the composite wing model<a class="headerlink" href="#automating-the-design-optimisation-of-the-composite-wing-model" title="Permalink to this headline">#</a></h1>
-<p><a class="reference external" href="https://app.daptaflow.com/tutorial/5"><img alt="dapta" height="25px" src="../_images/Dapta-Brandmark-RGB.svg" width="25px" /> Load tutorial into dapta app</a>.
-<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model"><img alt="github" height="25px" src="../_images/github.svg" width="25px" /> View files on Github</a>.</p>
+<h1><span class="section-number">5. </span>Automating the design optimisation of the composite wing model<a class="headerlink" href="#automating-the-design-optimisation-of-the-composite-wing-model" title="Link to this heading">#</a></h1>
+<p><a class="reference external" href="https://app.daptaflow.com/tutorial/5"><img alt="dapta" src="../_images/Dapta-Brandmark-RGB.svg" style="width: 25px; height: 25px;" /> Load tutorial into dapta app</a>.
+<a class="reference external" href="https://github.com/daptablade/docs/tree/master/mynewbook/Tutorials/parametric_wing_model"><img alt="github" src="../_images/github.svg" style="width: 25px; height: 25px;" /> View files on Github</a>.</p>
 <p><strong>Duration: 15 min</strong></p>
 <p>Driver components can be used to automate complex analysis workflows.</p>
 <p>In the previous example, we performed a parametric study on a single variable.
-In this tutorial we go one step further by re-using the OpenMDAO optimisation component from the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example to optimise the wing design for minimum wing incidence at the tip.</p>
+In this tutorial we go one step further by re-using the OpenMDAO optimisation component from the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="std std-doc">Simple optimisation problem</span></a> example to optimise the wing design for minimum wing incidence at the tip.</p>
 <a class="bg-primary mb-1 reference internal image-reference" href="../_images/open-mdao-parametric-model-1.png"><img alt="chained process with optimiser" class="bg-primary mb-1 align-center" src="../_images/open-mdao-parametric-model-1.png" style="width: 700px;" /></a>
 <section id="opening-a-saved-session">
-<h2><span class="section-number">5.1. </span>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.1. </span>Opening a saved session<a class="headerlink" href="#opening-a-saved-session" title="Link to this heading">#</a></h2>
 <p>Follow the process outlined in the previous example for <a class="reference internal" href="Automating%20parametric%20studies.html#tutorials-automating-parametric-studies-opening-a-saved-session"><span class="std std-ref">Opening a saved session</span></a>.</p>
 </section>
 <section id="automating-a-design-optimisation-study">
-<h2><span class="section-number">5.2. </span>Automating a design optimisation study<a class="headerlink" href="#automating-a-design-optimisation-study" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.2. </span>Automating a design optimisation study<a class="headerlink" href="#automating-a-design-optimisation-study" title="Link to this heading">#</a></h2>
 <p>The aim is to determine which composite fibre angle minimises the deflected wing incidence (“Ry”), whilst satisfying the design constraint on the maximum allowable vertical deflection (“Uz”) of 6 cm maximum.</p>
 <p>To answer this question, we can perform a design optimisation study.
 This example is based on the pure python implementation in <a class="reference internal" href="#tutorials-automating-design-optimisations-references"><span class="std std-ref">Reference 1</span></a>.</p>
 <section id="the-driver-component">
-<h3><span class="section-number">5.2.1. </span>The driver component<a class="headerlink" href="#the-driver-component" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.1. </span>The driver component<a class="headerlink" href="#the-driver-component" title="Link to this heading">#</a></h3>
 <p>As in the previous example, the variable of interest is the <code class="docutils literal notranslate"><span class="pre">calculix-fea</span></code> input variable <code class="docutils literal notranslate"><span class="pre">fibre_rotation_angle.ORI_0.1</span></code>.
-The driver component is identical to the OpenMDAO optimisation component used in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="doc std std-doc">Simple optimisation problem</span></a> example, except for the driver parameters, which have been adjusted for the wing optimisation problem:</p>
+The driver component is identical to the OpenMDAO optimisation component used in the <a class="reference internal" href="Simple%20optimisation%20problem.html"><span class="std std-doc">Simple optimisation problem</span></a> example, except for the driver parameters, which have been adjusted for the wing optimisation problem:</p>
 <ul class="simple">
 <li><p>The “input_variables” and “output_variables” parameters set the optimisation variables, objective and constraint functions.</p></li>
 <li><p>The calculation of total derivatives across the chained components (using finite differencing) is requested by setting <code class="docutils literal notranslate"><span class="pre">&quot;approx_totals&quot;:</span> <span class="pre">true</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;fd_step&quot;:</span> <span class="pre">1.0</span></code> in the driver parameters.</p></li>
@@ -541,14 +457,14 @@ Then upload it under the <code class="docutils literal notranslate"><span class=
 <li><p>Select <code class="docutils literal notranslate"><span class="pre">Save</span> <span class="pre">data</span></code> to save and close the component.</p></li>
 </ul>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="3d002997-ccad-4e82-ac7a-466f53324870" name="da408555-089c-4bc2-b62a-0cb0442209d9" type="radio">
-</input><label class="sd-tab-label" for="3d002997-ccad-4e82-ac7a-466f53324870">
+<input checked="checked" id="sd-tab-item-0" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-0">
 setup</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
 
 
-<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span>
     <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="n">parameters</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span>
@@ -557,7 +473,7 @@ setup</label><div class="sd-tab-content docutils">
         <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Editable setup function.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="s2">&quot;driver&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
         <span class="c1"># assume we want to run an optimisation with default settings</span>
@@ -569,22 +485,22 @@ setup</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="0ad1e1b9-1bbe-4725-a78e-5d95afe2de47" name="da408555-089c-4bc2-b62a-0cb0442209d9" type="radio">
-</input><label class="sd-tab-label" for="0ad1e1b9-1bbe-4725-a78e-5d95afe2de47">
+<input id="sd-tab-item-1" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-1">
 compute</label><div class="sd-tab-content docutils">
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
-<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
-<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">redirect_stdout</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">json</span>
-<span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-<span class="kn">from</span> <span class="nn">concurrent.futures</span> <span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">contextlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">redirect_stdout</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span>
 
-<span class="kn">import</span> <span class="nn">openmdao.api</span> <span class="k">as</span> <span class="nn">om</span>
-<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>  <span class="c1"># type: ignore</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openmdao.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">om</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">pyplot</span> <span class="k">as</span> <span class="n">plt</span>  <span class="c1"># type: ignore</span>
 
-<span class="kn">from</span> <span class="nn">om_component</span> <span class="kn">import</span> <span class="n">OMexplicitComp</span><span class="p">,</span> <span class="n">OMimplicitComp</span>  <span class="c1"># type: ignore</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">om_component</span><span class="w"> </span><span class="kn">import</span> <span class="n">OMexplicitComp</span><span class="p">,</span> <span class="n">OMimplicitComp</span>  <span class="c1"># type: ignore</span>
 
 <span class="n">OPENMDAO_REPORTS</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -600,7 +516,7 @@ compute</label><div class="sd-tab-content docutils">
 <span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">compute</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span>
     <span class="n">inputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="n">outputs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;implicit&quot;</span><span class="p">:</span> <span class="p">{},</span> <span class="s2">&quot;setup&quot;</span><span class="p">:</span> <span class="p">{}},</span>
     <span class="n">partials</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="p">{},</span>
@@ -611,7 +527,7 @@ compute</label><div class="sd-tab-content docutils">
         <span class="s2">&quot;outputs_folder_path&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">},</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Editable compute function.&quot;&quot;&quot;</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;OpenMDAO problem setup started.&quot;</span><span class="p">)</span>
 
@@ -657,7 +573,7 @@ compute</label><div class="sd-tab-content docutils">
                                 <span class="n">solver_obj</span><span class="o">.</span><span class="n">options</span><span class="p">[</span><span class="n">option</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
     <span class="c1"># add components</span>
-    <span class="k">def</span> <span class="nf">get_comp_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">objs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_comp_by_name</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">objs</span><span class="p">:</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="n">comp_type_lookup</span> <span class="o">=</span> <span class="p">{</span>
             <span class="s2">&quot;ExplicitComponents&quot;</span><span class="p">:</span> <span class="n">OMexplicitComp</span><span class="p">,</span>
             <span class="s2">&quot;ImplicitComponents&quot;</span><span class="p">:</span> <span class="n">OMimplicitComp</span><span class="p">,</span>
@@ -711,7 +627,7 @@ compute</label><div class="sd-tab-content docutils">
             <span class="p">)</span>
 
     <span class="c1"># 2) define the component connections</span>
-    <span class="k">def</span> <span class="nf">get_var_str</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_var_str</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">for</span> <span class="n">connection</span> <span class="ow">in</span> <span class="n">all_connections</span><span class="p">:</span>
@@ -761,7 +677,7 @@ compute</label><div class="sd-tab-content docutils">
             <span class="k">if</span> <span class="s2">&quot;component&quot;</span> <span class="ow">in</span> <span class="n">var</span><span class="p">:</span>
                 <span class="n">comp_obj</span> <span class="o">=</span> <span class="n">reformat_compname</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;component&quot;</span><span class="p">])</span>
                 <span class="n">prob</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">add_design_var</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp_obj</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp_obj</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span>
                     <span class="n">lower</span><span class="o">=</span><span class="n">lower</span><span class="p">,</span>
                     <span class="n">upper</span><span class="o">=</span><span class="n">upper</span><span class="p">,</span>
                 <span class="p">)</span>
@@ -778,7 +694,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="k">if</span> <span class="s2">&quot;output_variables&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;output_variables&quot;</span><span class="p">]:</span>
             <span class="n">comp_obj</span> <span class="o">=</span> <span class="n">reformat_compname</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="s2">&quot;component&quot;</span><span class="p">])</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp_obj</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp_obj</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
 
             <span class="c1"># set scaling from parameter input file</span>
             <span class="n">scaler</span> <span class="o">=</span> <span class="n">var</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;scaler&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
@@ -835,7 +751,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="p">:</span> <span class="n">message</span><span class="p">,</span> <span class="s2">&quot;outputs&quot;</span><span class="p">:</span> <span class="n">outputs</span><span class="p">}</span>
 
 
-<span class="k">def</span> <span class="nf">run_optimisation</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_optimisation</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">):</span>
     <span class="c1"># 6) add a data recorder to the optimisation problem</span>
     <span class="n">r_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span>
         <span class="n">run_folder</span>
@@ -903,7 +819,7 @@ compute</label><div class="sd-tab-content docutils">
         <span class="k">if</span> <span class="s2">&quot;component&quot;</span> <span class="ow">in</span> <span class="n">var</span><span class="p">:</span>
             <span class="n">comp</span> <span class="o">=</span> <span class="n">var</span><span class="p">[</span><span class="s2">&quot;component&quot;</span><span class="p">]</span>
             <span class="n">opt_output</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">get_val</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">opt_output</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">get_val</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
@@ -917,7 +833,7 @@ compute</label><div class="sd-tab-content docutils">
         <span class="c1">#     + &quot; &quot;</span>
         <span class="c1"># )</span>
         <span class="n">opt_output</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">comp</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">prob</span><span class="o">.</span><span class="n">get_val</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">comp</span><span class="p">)</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
     <span class="c1"># print(&quot;)&quot;)</span>
 
@@ -929,9 +845,9 @@ compute</label><div class="sd-tab-content docutils">
     <span class="k">return</span> <span class="n">opt_output</span>
 
 
-<span class="k">def</span> <span class="nf">run_doe</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">,</span> <span class="n">nb_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">run_doe</span><span class="p">(</span><span class="n">prob</span><span class="p">,</span> <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">,</span> <span class="n">nb_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
     <span class="c1"># 7) execute the driver in parallel</span>
-    <span class="k">def</span> <span class="nf">run_cases_thread</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run_cases_thread</span><span class="p">(</span><span class="n">color</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Starting thread </span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">.&quot;</span><span class="p">)</span>
         <span class="n">prob_copy</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">prob</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;problem id for color </span><span class="si">{</span><span class="n">color</span><span class="si">}</span><span class="s2">: &quot;</span><span class="p">,</span> <span class="nb">id</span><span class="p">(</span><span class="n">prob_copy</span><span class="p">))</span>
@@ -959,7 +875,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;completed all threads&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="s2">&quot;visualise&quot;</span> <span class="ow">in</span> <span class="n">parameters</span> <span class="ow">and</span> <span class="s2">&quot;plot_history&quot;</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;visualise&quot;</span><span class="p">]:</span>
-        <span class="kn">from</span> <span class="nn">post</span> <span class="kn">import</span> <span class="n">post_process_doe</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">post</span><span class="w"> </span><span class="kn">import</span> <span class="n">post_process_doe</span>
 
         <span class="n">post_process_doe</span><span class="p">(</span>
             <span class="n">parameters</span><span class="p">,</span>
@@ -970,12 +886,12 @@ compute</label><div class="sd-tab-content docutils">
     <span class="k">return</span> <span class="p">{}</span>
 
 
-<span class="k">def</span> <span class="nf">reformat_compname</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reformat_compname</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
     <span class="c1"># openmdao doesn&#39;t allow &quot;-&quot; character in component names</span>
     <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;_&quot;</span><span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">post_process_optimisation</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">post_process_optimisation</span><span class="p">(</span>
     <span class="n">parameters</span><span class="p">,</span> <span class="n">run_folder</span><span class="p">,</span> <span class="n">r_name</span><span class="p">,</span> <span class="n">only_plot_major_iter</span><span class="o">=</span><span class="kc">True</span>
 <span class="p">):</span>
     <span class="c1"># read database</span>
@@ -988,14 +904,14 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">inputs_history</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">key</span><span class="p">:</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;input_variables&quot;</span><span class="p">]</span>
         <span class="p">]</span>
     <span class="p">}</span>
     <span class="n">outputs_history</span> <span class="o">=</span> <span class="p">{</span>
         <span class="n">key</span><span class="p">:</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">reformat_compname</span><span class="p">(</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;component&#39;</span><span class="p">])</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">var</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;-&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
             <span class="k">for</span> <span class="n">var</span> <span class="ow">in</span> <span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;output_variables&quot;</span><span class="p">]</span>
         <span class="p">]</span>
     <span class="p">}</span>
@@ -1017,7 +933,7 @@ compute</label><div class="sd-tab-content docutils">
     <span class="p">)</span>
 
 
-<span class="k">def</span> <span class="nf">_plot_iteration_histories</span><span class="p">(</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_plot_iteration_histories</span><span class="p">(</span>
     <span class="n">inputs_history</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">outputs_history</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">run_folder</span><span class="o">=</span><span class="kc">None</span>
 <span class="p">):</span>
     <span class="c1"># plot input histories</span>
@@ -1049,8 +965,8 @@ compute</label><div class="sd-tab-content docutils">
     <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 
-<span class="k">class</span> <span class="nc">DOEDriver</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">DOEDriver</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">DOEDriver</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">DOEDriver</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">generator</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">reset_vars</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1068,8 +984,8 @@ compute</label><div class="sd-tab-content docutils">
         <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">generator</span><span class="o">=</span><span class="n">generator</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate cases and run the model for each set of generated input values.</span>
 
 <span class="sd">        Returns</span>
@@ -1106,12 +1022,12 @@ compute</label><div class="sd-tab-content docutils">
 
         <span class="k">return</span> <span class="kc">False</span>
 
-    <span class="k">def</span> <span class="nf">_custom_reset_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_custom_reset_variables</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># reset the initial variable guesses</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_vars</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_problem</span><span class="p">()[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
 
-    <span class="k">def</span> <span class="nf">_custom_store_to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_custom_store_to_json</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># store the outputs to the json database</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cases_store</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="p">{</span>
@@ -1127,8 +1043,8 @@ compute</label><div class="sd-tab-content docutils">
         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">run_folder</span> <span class="o">/</span> <span class="n">fname</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cases_store</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_parallel_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">design_vars</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_parallel_generator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">design_vars</span><span class="p">,</span> <span class="n">model</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generate case for this thread.</span>
 
 <span class="sd">        Parameters</span>
@@ -1184,8 +1100,8 @@ compute</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="605d7be1-02d8-4b35-961e-f94e3d53ae33" name="da408555-089c-4bc2-b62a-0cb0442209d9" type="radio">
-</input><label class="sd-tab-label" for="605d7be1-02d8-4b35-961e-f94e3d53ae33">
+<input id="sd-tab-item-2" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-2">
 requirements</label><div class="sd-tab-content docutils">
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.23.5
 openmdao==3.28.0
@@ -1195,89 +1111,89 @@ pandas==1.5.3
 </pre></div>
 </div>
 </div>
-<input id="a4f2f319-0176-48c2-a7e5-9bef3c8e7604" name="da408555-089c-4bc2-b62a-0cb0442209d9" type="radio">
-</input><label class="sd-tab-label" for="a4f2f319-0176-48c2-a7e5-9bef3c8e7604">
+<input id="sd-tab-item-3" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-3">
 parameters</label><div class="sd-tab-content docutils">
-<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;max_iter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;tol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1e-8</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;disp&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;debug_print&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;desvars&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;ln_cons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;nl_cons&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;objs&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;totals&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;approx_totals&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;fd_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;ExplicitComponents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;parametric-model&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;calculix-fea&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;input_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;calculix-fea&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fibre_rotation_angle.ORI_0.1&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-50</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;output_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;objective&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ry&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="w"></span>
-<span class="w">    </span><span class="p">},</span><span class="w"></span>
-<span class="w">    </span><span class="p">{</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;constraint&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Uz&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.06</span><span class="p">,</span><span class="w"></span>
-<span class="w">      </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span><span class="w"></span>
-<span class="w">    </span><span class="p">}</span><span class="w"></span>
-<span class="w">  </span><span class="p">],</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;optimisation&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">},</span><span class="w"></span>
-<span class="w">  </span><span class="nt">&quot;visualise&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;n2_diagram&quot;</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="s2">&quot;plot_history&quot;</span><span class="w"></span>
-<span class="w">  </span><span class="p">]</span><span class="w"></span>
-<span class="p">}</span><span class="w"></span>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;optimizer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;SLSQP&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;max_iter&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tol&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1e-8</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;disp&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;debug_print&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;desvars&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;ln_cons&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;nl_cons&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;objs&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;totals&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;approx_totals&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;fd_step&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">1.0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;ExplicitComponents&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;parametric-model&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;calculix-fea&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;has_compute_partials&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;input_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;calculix-fea&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fibre_rotation_angle.ORI_0.1&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">-50</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;output_variables&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;objective&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Ry&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;component&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;fea-results-processor&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;constraint&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Uz&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;value&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.0</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;lower&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">-0.06</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;upper&quot;</span><span class="p">:</span><span class="w"> </span><span class="mf">0.06</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">],</span>
+<span class="w">  </span><span class="nt">&quot;driver&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;optimisation&quot;</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="nt">&quot;visualise&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;n2_diagram&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;plot_history&quot;</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
 </pre></div>
 </div>
 </div>
-<input id="00cc001b-5860-4732-93ad-fc5faf56cd75" name="da408555-089c-4bc2-b62a-0cb0442209d9" type="radio">
-</input><label class="sd-tab-label" for="00cc001b-5860-4732-93ad-fc5faf56cd75">
+<input id="sd-tab-item-4" name="sd-tab-set-0" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-4">
 om_component</label><div class="sd-tab-content docutils">
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot; Optimisation Component classes for OpenMDAO and associated utilities.&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">openmdao.api</span> <span class="k">as</span> <span class="nn">om</span>  <span class="c1"># type: ignore</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">openmdao.api</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">om</span>  <span class="c1"># type: ignore</span>
 
-<span class="kn">from</span> <span class="nn">component_api2</span> <span class="kn">import</span> <span class="n">call_compute</span><span class="p">,</span> <span class="n">call_setup</span>
-<span class="kn">import</span> <span class="nn">traceback</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">component_api2</span><span class="w"> </span><span class="kn">import</span> <span class="n">call_compute</span><span class="p">,</span> <span class="n">call_setup</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">traceback</span>
 
 
-<span class="k">class</span> <span class="nc">OMexplicitComp</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">ExplicitComponent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;standard component that follows the OM conventions&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OMexplicitComp</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">ExplicitComponent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;standard component that follows the OM conventions&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compname</span><span class="p">,</span> <span class="n">fd_step</span><span class="p">,</span> <span class="n">has_compute_partials</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compname</span><span class="p">,</span> <span class="n">fd_step</span><span class="p">,</span> <span class="n">has_compute_partials</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compname</span> <span class="o">=</span> <span class="n">compname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_grads</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1286,7 +1202,7 @@ om_component</label><div class="sd-tab-content docutils">
         <span class="bp">self</span><span class="o">.</span><span class="n">fd_step</span> <span class="o">=</span> <span class="n">fd_step</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_has_compute_partials</span> <span class="o">=</span> <span class="n">has_compute_partials</span>  <span class="c1"># overrides parent class attribute with user defined parameter</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">compname</span><span class="p">}</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">component_dict</span> <span class="o">=</span> <span class="n">call_setup</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -1303,7 +1219,7 @@ om_component</label><div class="sd-tab-content docutils">
             <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span> <span class="n">val</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">variable</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">setup_partials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_partials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># Get the component partial derivative information</span>
 
         <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">compname</span><span class="p">}</span>
@@ -1320,7 +1236,7 @@ om_component</label><div class="sd-tab-content docutils">
             <span class="c1"># calculate all paritials using finite differencing</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">declare_partials</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;fd&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fd_step</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">discrete_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">discrete_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">discrete_inputs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">discrete_outputs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calling compute.&quot;</span><span class="p">)</span>
         <span class="c1"># calculate the outputs</span>
@@ -1354,8 +1270,8 @@ om_component</label><div class="sd-tab-content docutils">
         <span class="k">for</span> <span class="n">output</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
             <span class="n">outputs</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_outputs</span><span class="p">[</span><span class="n">output</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)]</span>
 
-    <span class="k">def</span> <span class="nf">compute_partials</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">J</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Jacobian of partial derivatives.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compute_partials</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">J</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Jacobian of partial derivatives.&quot;&quot;&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Calling compute_partials.&quot;</span><span class="p">)</span>
 
@@ -1397,10 +1313,10 @@ om_component</label><div class="sd-tab-content docutils">
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Component </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">compname</span><span class="si">}</span><span class="s2"> has no Jacobian defined.&quot;</span><span class="p">)</span>
 
 
-<span class="k">class</span> <span class="nc">OMimplicitComp</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">ImplicitComponent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;standard implicit component that follows the OM conventions&quot;&quot;&quot;</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">OMimplicitComp</span><span class="p">(</span><span class="n">om</span><span class="o">.</span><span class="n">ImplicitComponent</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;standard implicit component that follows the OM conventions&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compname</span><span class="p">,</span> <span class="n">fd_step</span><span class="p">,</span> <span class="n">has_compute_partials</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">compname</span><span class="p">,</span> <span class="n">fd_step</span><span class="p">,</span> <span class="n">has_compute_partials</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">compname</span> <span class="o">=</span> <span class="n">compname</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">get_grads</span> <span class="o">=</span> <span class="kc">False</span>
@@ -1408,7 +1324,7 @@ om_component</label><div class="sd-tab-content docutils">
         <span class="bp">self</span><span class="o">.</span><span class="n">partial_dict</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fd_step</span> <span class="o">=</span> <span class="n">fd_step</span>
 
-    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">compname</span><span class="p">}</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">component_dict</span> <span class="o">=</span> <span class="n">call_setup</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -1425,7 +1341,7 @@ om_component</label><div class="sd-tab-content docutils">
             <span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">outputs</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add_output</span><span class="p">(</span><span class="n">variable</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;-&quot;</span><span class="p">),</span> <span class="n">val</span><span class="o">=</span><span class="n">outputs</span><span class="p">[</span><span class="n">variable</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">setup_partials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_partials</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 
         <span class="n">message</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;component&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">compname</span><span class="p">}</span>
         <span class="n">_</span><span class="p">,</span> <span class="n">component_dict</span> <span class="o">=</span> <span class="n">call_setup</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
@@ -1441,7 +1357,7 @@ om_component</label><div class="sd-tab-content docutils">
             <span class="c1"># calculate all paritials using finite differencing</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">declare_partials</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;fd&quot;</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">fd_step</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">apply_nonlinear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">residuals</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">apply_nonlinear</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="p">,</span> <span class="n">residuals</span><span class="p">):</span>
 
         <span class="n">input_dict</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;design&quot;</span><span class="p">:</span> <span class="n">reformat_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">_copy_views</span><span class="p">())}</span>
 
@@ -1471,7 +1387,7 @@ om_component</label><div class="sd-tab-content docutils">
             <span class="n">residuals</span><span class="p">[</span><span class="n">output</span><span class="p">]</span> <span class="o">=</span> <span class="n">val_outputs</span><span class="p">[</span><span class="n">output</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)]</span>
 
 
-<span class="k">def</span> <span class="nf">reformat_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">reformat_inputs</span><span class="p">(</span><span class="n">inputs</span><span class="p">):</span>
     <span class="n">input_dict</span> <span class="o">=</span> <span class="n">inputs</span>
     <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">[</span><span class="o">*</span><span class="n">input_dict</span><span class="o">.</span><span class="n">keys</span><span class="p">()]:</span>
         <span class="n">new_key</span> <span class="o">=</span> <span class="n">key</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">)</span>
@@ -1485,15 +1401,15 @@ om_component</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="add-design-variables-and-connections">
-<h3><span class="section-number">5.2.2. </span>Add design variables and connections<a class="headerlink" href="#add-design-variables-and-connections" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.2. </span>Add design variables and connections<a class="headerlink" href="#add-design-variables-and-connections" title="Link to this heading">#</a></h3>
 <p>Despite all the components seeming valid, we would encounter errors if we tried to launch the Run now.</p>
 <p>By inspecting the driver compute function, we can see that OpenMDAO is only aware of design variable inputs, outputs and connections (<code class="docutils literal notranslate"><span class="pre">connection[&quot;type&quot;]</span> <span class="pre">==</span> <span class="pre">&quot;design&quot;</span></code>).
 The design variable connections in particular are used by OpenMDAO to determine the order of component execution.</p>
 <p>It is necessary to define the following artificial design variables and connections before we can launch the Run.</p>
 <p>Select the <strong>parametric-model</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="5c86f1f1-a5b9-47f1-83e6-1bf5b8aef246" name="fa22eacd-6755-4a11-804d-02b7b718f5ce" type="radio">
-</input><label class="sd-tab-label" for="5c86f1f1-a5b9-47f1-83e6-1bf5b8aef246">
+<input checked="checked" id="sd-tab-item-5" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-5">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
     <span class="s2">&quot;input_0&quot;</span><span class="p">:</span> <span class="mf">0.1</span>
@@ -1501,8 +1417,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="68e0e1d7-e81b-49b4-a086-922c3521ee17" name="fa22eacd-6755-4a11-804d-02b7b718f5ce" type="radio">
-</input><label class="sd-tab-label" for="68e0e1d7-e81b-49b4-a086-922c3521ee17">
+<input id="sd-tab-item-6" name="sd-tab-set-1" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-6">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1514,8 +1430,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>calculix-fea</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> and <code class="docutils literal notranslate"><span class="pre">Outputs</span></code> tabs:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c415d177-cb89-4f7d-af1f-b0877023c1c3" name="89bf4a41-0d83-44d5-97f6-7b91160ebd8b" type="radio">
-</input><label class="sd-tab-label" for="c415d177-cb89-4f7d-af1f-b0877023c1c3">
+<input checked="checked" id="sd-tab-item-7" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-7">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.cgx_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1525,8 +1441,8 @@ Inputs</label><div class="sd-tab-content docutils">
 </pre></div>
 </div>
 </div>
-<input id="214dca7e-ad6e-45c2-bc8c-80cf7e026166" name="89bf4a41-0d83-44d5-97f6-7b91160ebd8b" type="radio">
-</input><label class="sd-tab-label" for="214dca7e-ad6e-45c2-bc8c-80cf7e026166">
+<input id="sd-tab-item-8" name="sd-tab-set-2" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-8">
 Outputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1540,8 +1456,8 @@ Outputs</label><div class="sd-tab-content docutils">
 </div>
 <p>Select the <strong>fea-results-processor</strong> component and update the <code class="docutils literal notranslate"><span class="pre">Inputs</span></code> tab only:</p>
 <div class="sd-tab-set docutils">
-<input checked="checked" id="c80b4125-8e6f-4dc5-beb2-6dc1dd98561d" name="e39f3d95-6156-4d65-a336-6d0a979dd3a5" type="radio">
-</input><label class="sd-tab-label" for="c80b4125-8e6f-4dc5-beb2-6dc1dd98561d">
+<input checked="checked" id="sd-tab-item-9" name="sd-tab-set-3" type="radio">
+<label class="sd-tab-label" for="sd-tab-item-9">
 Inputs</label><div class="sd-tab-content docutils">
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
   <span class="s2">&quot;files.analysis_output_file&quot;</span><span class="p">:</span> <span class="s2">&quot;default&quot;</span><span class="p">,</span>
@@ -1554,13 +1470,13 @@ Inputs</label><div class="sd-tab-content docutils">
 </div>
 </div>
 <p>Next, create two design variable connections:</p>
-<ol class="simple">
+<ol class="arabic simple">
 <li><p>from the ‘output_0’ output handle of the parametric-model component to the ‘output_0’ input handle of the calculix-fea component.</p></li>
 <li><p>from the ‘output_1’ output handle of the calculix-fea component to the ‘output_1’ input handle of the fea-results-processor component.</p></li>
 </ol>
 </section>
 <section id="execute-the-workflow">
-<h3><span class="section-number">5.2.3. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.3. </span>Execute the workflow<a class="headerlink" href="#execute-the-workflow" title="Link to this heading">#</a></h3>
 <p>We can now execute the design optimisation by selecting the play symbol ▶ in the Run controls interface.</p>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> should complete after 23 iterations of the chained components (1 iteration of the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component).</p>
 <div class="admonition note">
@@ -1569,7 +1485,7 @@ Inputs</label><div class="sd-tab-content docutils">
 </div>
 </section>
 <section id="inspect-the-outputs">
-<h3><span class="section-number">5.2.4. </span>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">5.2.4. </span>Inspect the outputs<a class="headerlink" href="#inspect-the-outputs" title="Link to this heading">#</a></h3>
 <p>The <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log summarises the output of the components. Open the log by selecting <code class="docutils literal notranslate"><span class="pre">View</span> <span class="pre">Log</span></code> in the interface controls.
 The “run_output” entry (at the end of the log) should state that the “OpenMDAO compute completed”.</p>
 <p>Next, close the <a class="reference internal" href="../Reference/Glossary.html#term-Run"><span class="xref std std-term">Run</span></a> log and select the <code class="docutils literal notranslate"><span class="pre">open-mdao</span></code> component.
@@ -1615,7 +1531,7 @@ We can also inspect the convergence history plots of the design variable, object
 </section>
 </section>
 <section id="clean-up">
-<h2><span class="section-number">5.3. </span>Clean-up<a class="headerlink" href="#clean-up" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">5.3. </span>Clean-up<a class="headerlink" href="#clean-up" title="Link to this heading">#</a></h2>
 <p>Delete your session by selecting <code class="docutils literal notranslate"><span class="pre">New</span></code> in the interface.
 It may take a minute or so for the Cloud session to be reset.</p>
 <div class="admonition warning">
@@ -1624,8 +1540,8 @@ It may take a minute or so for the Cloud session to be reset.</p>
 </div>
 </section>
 <section id="references">
-<span id="tutorials-automating-design-optimisations-references"></span><h2><span class="section-number">5.4. </span>References<a class="headerlink" href="#references" title="Permalink to this headline">#</a></h2>
-<ol class="simple">
+<span id="tutorials-automating-design-optimisations-references"></span><h2><span class="section-number">5.4. </span>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<ol class="arabic simple">
 <li><p><a class="reference external" href="https://www.dapta.com/design-optimisation-in-practice-with-python-openmdao-and-scipy/">Design optimisation in practice with Python, OpenMDAO and Scipy</a></p></li>
 </ol>
 </section>
@@ -1643,7 +1559,7 @@ It may take a minute or so for the Cloud session to be reset.</p>
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./Tutorials"
         },
         predefinedOutput: true
@@ -1651,50 +1567,113 @@ It may take a minute or so for the Cloud session to be reset.</p>
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="Automating%20parametric%20studies.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">4. </span>Automating the composite wing model parametric study</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Automating%20parametric%20studies.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>Automating the composite wing model parametric study</p>
+      </div>
     </a>
-    <a class='right-next' id="next-link" href="Working%20with%20spreadsheets.html" title="next page">
-    <div class="prev-next-info">
+    <a class="right-next"
+       href="Working%20with%20spreadsheets.html"
+       title="next page">
+      <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title"><span class="section-number">6. </span>Working with spreadsheets</p>
-    </div>
-    <i class="fas fa-angle-right"></i>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#opening-a-saved-session">5.1. Opening a saved session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#automating-a-design-optimisation-study">5.2. Automating a design optimisation study</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#the-driver-component">5.2.1. The driver component</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#add-design-variables-and-connections">5.2.2. Add design variables and connections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#execute-the-workflow">5.2.3. Execute the workflow</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#inspect-the-outputs">5.2.4. Inspect the outputs</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#clean-up">5.3. Clean-up</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">5.4. References</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By Dapta Ltd<br/>
-  
-      &copy; Copyright 2023.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By Dapta Ltd
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
