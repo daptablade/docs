@@ -44,7 +44,7 @@ Fill in a component name, `sailplane-feniax`, and select the `feniax-comp:latest
 
 Press the tab key or click within the component interface to validate the selected API. This triggers the display of a list of API input files, as shown below.
 
-```{image} media/paraboloid_1.png
+```{image} media/feniax_1.png
 :alt: properties-tab-empty
 :class: bg-primary mb-1
 :width: 700px
@@ -91,7 +91,7 @@ Next, select `setup.py` in the component interface to upload the corresponding f
 
 Check the boxes next to the `Start Node` and `End Node` options (since we only have one component in this {term}`Run`), as shown below. 
 
-```{image} media/paraboloid_2.png
+```{image} media/feniax_2.png
 :alt: properties-tab-completed
 :class: bg-primary mb-1
 :width: 700px
